@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "bfy": "browserify --t hbsfy public/js/main.js -o public/js/bundle.js -v",
+    "bfy": "browserify --t hbsfy public/js/main.js -o public/js/bundle.js",
     "wfy": "watchify --t hbsfy public/js/main.js -o public/js/bundle.js -v"
   },
   "author": "winedrones",
