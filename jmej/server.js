@@ -26,3 +26,15 @@ fs.readdirSync(partials).forEach(function (file) {
 
   Handlebars.registerPartial(partial, source);
 });
+
+// express routes
+
+app.get('/', function (req, res) {
+  res.render('./index.html');
+});
+
+app.set('port', process.env.PORT || 3000);
+
+app.listen(app.get('port'), function() {
+  console.log('Express server listening on port # ' + app.get('port'));
+});
