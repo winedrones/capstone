@@ -8,14 +8,24 @@ Backbone.$ = $;
 
 var htmlTemplate = require('../../templates/main.hbs');
 
-
-
-
 var MainView = Backbone.View.extend({
+  el: '#my-app',
+  initialize: function () {
+
+  },
+  render: function () {
+    $(this.el).html(htmlTemplate);
+  }
+
+});
+
+
+/*var MainView = Backbone.View.extend({
   el: '#my-app',
   initialize: function () {
   },
   render: function (user) {
+  	$(this.el).html(htmlTemplate);
   	var wantList = {}; // this gets filled with the full discogs JSON wantlist data
 	var pages = 1; //need to implement pagination later
 	var currentPage = 1;
@@ -41,8 +51,9 @@ var MainView = Backbone.View.extend({
     		if (vids){
     		records.push({youtube:vids.videos[0].uri.slice(-11), discogs:item}); //this adds objects for everything fetched from discogs to the records array
     		}
-    		var template = Handlebars.compile(htmlTemplate); //probably doing this wrong.. not working. maybe template file is the prob..
-    		$(this.el).html(compiledTemplate); 
+    		//var template = Handlebars.compile(htmlTemplate); //probably doing this wrong.. not working. maybe template file is the prob..
+    		
+    		console.log(records); 
 		});		
 	});
 };
@@ -55,6 +66,6 @@ getIds(getVids);
 
   }
 
-});
+});*/
 
 module.exports = MainView;
