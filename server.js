@@ -6,7 +6,6 @@ var bodyParser = require('body-parser');
 var config = require('./config.js');
 var consolidate = require('consolidate');
 var Handlebars = require('handlebars');
-var discogs = require('discogs');
 
 var db = require('orchestrate')(config.dbKey);
 
