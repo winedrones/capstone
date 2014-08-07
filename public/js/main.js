@@ -10,7 +10,7 @@ var Router = Backbone.Router.extend({
   },
   main: function () {
     this.MainView = new MainView();
-    this.MainView.render(); //passes username to discogs functions in main-view.js
+    this.MainView.render(); 
   }
 });
 
