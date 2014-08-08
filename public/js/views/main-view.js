@@ -24,39 +24,38 @@ var MainView = Backbone.View.extend({
     var userName = $usernameInput.val();
     this.discogs(userName);
 },
-  records: [],
+
+  records: {entries:[]},
 
   initialize: function () {
-
   },
 
   discogs: function(user){
+    var self = this;
   	var wantList = {};
   	var pages = 1; //need to implement pagination later
 	var currentPage = 1;
-	//var client = discogs({api_key: 'foo4711'});  //that api key came from the discogs node module. need to replace.
 
-	var getIds = function(callback){
-	$.getJSON('http://api.discogs.com/users/'+user+'/wants?page='+currentPage+'?callback=?', function(data){
-	//client.get('users/'+user+'/wants?page='+currentPage, function(err, data) {
+
+	var getIds = function(callback){ //gets every release id in users wantlist and passes as an array to getVids function
+	$.getJSON('http://api.discogs.com/users/'+user+'/wants?page='+currentPage+'&callback=?').done(function(data){ //this returns JSONP handled in a callback. Need to traverse an extra data. property to get to the stuff we care about
 		var wantArr = [];
-	    wantList = data;  // this is the full discogs JSON wantlist data
-	    pages = wantList.pagination.pages;
-	    wantList.wants.forEach(function (item, index){ //this grabs the discogs id of every release in the discogs wantlist
+	    wantList = data; 
+	    pages = wantList.data.pagination.pages;
+	    wantList.data.wants.forEach(function (item, index){ //this grabs the discogs id of every release in the discogs wantlist
 	    	wantArr.push(item.id);
 	    	});
 	     callback(wantArr);
 	});
 }
 
-	var getVids = function(arr){
+	var getVids = function(arr){  //grabs youtube video per release in wantArr from getIds fn
 		arr.forEach(function (item, index){
-			$.getJSON('http://api.discogs.com/releases/'+item+'?callback=?', function(data){
-			//client.get('/releases/'+item, function(err, vids) { //this grabs the youtube link from the releases part of the discogs db api    		)
-    		if (vids){
-    		records.push({youtube:vids.videos[0].uri.slice(-11), discogs:item}); //this adds objects for everything fetched from discogs to the records array
-    		}
-    		this.render();
+			$.getJSON('http://api.discogs.com/releases/'+item+'?callback=?').done(function(vids){
+    		if (vids.data.videos){
+    		self.records.entries.push({youtube:vids.data.videos[0].uri.slice(-11), discogs:item}); //this adds objects for everything fetched from discogs to the records array
+    		};
+        if (item == arr.length){self.render();}; //render the view when the last entry in the records array has been processed
 		});		
 	});
 };
@@ -66,6 +65,7 @@ var MainView = Backbone.View.extend({
   },
 
   render: function () {
+    console.log(this.records);
     $(this.el).html(htmlTemplate(this.records));
 
    // $(this.el).html(myTemplate({entries:[{youtube: data, discogs: data},{...}]}))
