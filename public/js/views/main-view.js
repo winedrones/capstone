@@ -20,12 +20,14 @@ var MainView = Backbone.View.extend({
 
   addUsername: function () {
     var $usernameInput = $('.form-group').find('#add-username');
-    this.records = {entries:[]}
+    this.records = {entries:[]};
     var userName = $usernameInput.val();
     this.discogs(userName);
 },
 
   records: {entries:[]},
+
+  testThing: {entries:[{discogs: 5719574, youtube: "QLnTRwpmCGs"}, {discogs: 4368235, youtube: "zH1VeQFBfW8"}]},
 
   initialize: function () {
   },
@@ -55,10 +57,9 @@ var MainView = Backbone.View.extend({
     		if (vids.data.videos){
     		self.records.entries.push({youtube:vids.data.videos[0].uri.slice(-11), discogs:item}); //this adds objects for everything fetched from discogs to the records array
        };
+       if (index == arr.length-1){
+       self.render();}
 		});	
-        if (index == arr.length-1){
-        console.log("rendering videos...")
-        self.render();}; //render the view when the last entry in the records array has been processed
 	});
 };
 
@@ -67,7 +68,6 @@ var MainView = Backbone.View.extend({
   },
 
   render: function () {
-    console.log(this.records);
     $(this.el).html(htmlTemplate(this.records));
 
    // $(this.el).html(myTemplate({entries:[{youtube: data, discogs: data},{...}]}))
