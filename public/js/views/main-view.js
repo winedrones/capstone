@@ -20,7 +20,7 @@ var MainView = Backbone.View.extend({
 
   addUsername: function () {
     var $usernameInput = $('.form-group').find('#add-username');
-
+    this.records = {entries:[]}
     var userName = $usernameInput.val();
     this.discogs(userName);
 },
@@ -54,9 +54,11 @@ var MainView = Backbone.View.extend({
 			$.getJSON('http://api.discogs.com/releases/'+item+'?callback=?').done(function(vids){
     		if (vids.data.videos){
     		self.records.entries.push({youtube:vids.data.videos[0].uri.slice(-11), discogs:item}); //this adds objects for everything fetched from discogs to the records array
-    		};
-        if (item == arr.length){self.render();}; //render the view when the last entry in the records array has been processed
-		});		
+       };
+		});	
+        if (index == arr.length-1){
+        console.log("rendering videos...")
+        self.render();}; //render the view when the last entry in the records array has been processed
 	});
 };
 
