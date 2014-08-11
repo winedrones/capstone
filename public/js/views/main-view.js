@@ -20,13 +20,13 @@ var MainView = Backbone.View.extend({
 
   addUsername: function () {
     var $usernameInput = $('.form-group').find('#add-username');
-    this.records = {entries:[], collection:[]};
+    this.records = {wants:[], collection:[]};
     var userName = $usernameInput.val();
     this.discogs(userName);
     this.discollection(userName);
 },
 
-  records: {entries:[], collection:[]},
+  records: {wants:[], collection:[]},
 
   //testThing: {entries:[{discogs: 5719574, youtube: "QLnTRwpmCGs"}, {discogs: 4368235, youtube: "zH1VeQFBfW8"}]},
 
@@ -56,7 +56,7 @@ var MainView = Backbone.View.extend({
 		arr.forEach(function (item, index){
 			$.getJSON('http://api.discogs.com/releases/'+item+'?callback=?').done(function(vids){
     		if (vids.data.videos){
-    		self.records.entries.push({youtube:vids.data.videos[0].uri.slice(-11), discogs:item}); //this adds objects for everything fetched from discogs to the records array
+    		self.records.wants.push({youtube:vids.data.videos[0].uri.slice(-11), discogs:item}); //this adds objects for everything fetched from discogs to the records array
        };
        if (index == arr.length-1){
        self.render();}
