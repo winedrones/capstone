@@ -26,7 +26,7 @@ var MainView = Backbone.View.extend({
     this.discollection(userName);
 },
 
-  records: {wants:[], collection:[]},
+  records: {wants:[{youtube:'MI0GJj_NoI0', discogs:'1503102'}], collection:[{youtube:'MI0GJj_NoI0', discogs:'1503102'}]},
 
   //testThing: {entries:[{discogs: 5719574, youtube: "QLnTRwpmCGs"}, {discogs: 4368235, youtube: "zH1VeQFBfW8"}]},
 
@@ -37,19 +37,21 @@ var MainView = Backbone.View.extend({
     var self = this;
   	var wantList = {};
   	var pages = 1; //need to implement pagination later
-	var currentPage = 1;
+	  var currentPage = 1;
 
 
 	var getIds = function(callback){ //gets every release id in users wantlist and passes as an array to getVids function
 	$.getJSON('http://api.discogs.com/users/'+user+'/wants?page='+currentPage+'&callback=?').done(function(data){ //this returns JSONP handled in a callback. Need to traverse an extra data. property to get to the stuff we care about
-		var wantArr = [];
+      var wantArr = [];
 	    wantList = data; 
 	    pages = wantList.data.pagination.pages;
 	    wantList.data.wants.forEach(function (item, index){ //this grabs the discogs id of every release in the discogs wantlist
 	    	wantArr.push(item.id);
 	    	});
 	     callback(wantArr);
-	});
+	}).fail(function() {
+console.log( "get page "+currentPage+" of "+user+"'s wantlist from discogs failed" );
+});
 }
 
 	var getVids = function(arr){  //grabs youtube video per release in wantArr from getIds fn
@@ -59,7 +61,8 @@ var MainView = Backbone.View.extend({
     		self.records.wants.push({youtube:vids.data.videos[0].uri.slice(-11), discogs:item}); //this adds objects for everything fetched from discogs to the records array
        };
        if (index == arr.length-1){
-       self.render();}
+       self.render();
+       console.log('wtf');}
 		});	
 	});
 };
@@ -76,7 +79,7 @@ var MainView = Backbone.View.extend({
   var currentPage = 1;
 
 
-  var getIds = function(callback){ //gets every release id in users all collections folder and passes as an array to getVids function
+  var getIds = function(callback){//gets every release id in users all collections folder and passes as an array to getVids function
   $.getJSON('http://api.discogs.com/users/'+user+'/collection/folders/0/releases?page='+currentPage+'&callback=?').done(function(data){ //this returns JSONP handled in a callback. Need to traverse an extra data. property to get to the stuff we care about
     var colArr = [];
       list = data; 
@@ -95,7 +98,8 @@ var MainView = Backbone.View.extend({
         self.records.collection.push({youtube:vids.data.videos[0].uri.slice(-11), discogs:item}); //this adds objects for everything fetched from discogs to the records array
        };
        if (index == arr.length-1){
-       self.render();}
+       self.render();
+       }
     }); 
   });
 };
