@@ -1,5 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Wine Drones</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <!-- Fonts Go Below -->
+    <link href='http://fonts.googleapis.com/css?family=Nunito' rel='stylesheet' type='text/css'>
+    
+    <link rel="stylesheet" href="css/style.css" type="text/css" media="screen">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
   <body>
-    <div class="container" id="my-app">
+    <div class="container">
       <header>
         
         <div class="row" style="margin-bottom:5%;">
@@ -88,29 +109,4 @@
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
   </body>
-
-
-
-<h2>a few jams</h2>
-<div class="form-group">
-  <label for="add-username">Enter Discogs Username</label>
-  <input id="add-username" class="form-control" type="text">
-  <br>
-
-  <button id="username-submit" class="btn btn-success">Submit</button>
-  <br>
-</div>
-
-<div class="main">
-<div class="row">
-  <div class="col-md-6">{{#each wants}}
-  <ul><li><iframe width="420" height="315" src="//www.youtube.com/embed/{{youtube}}"frameborder="0" allowfullscreen></iframe></li><li><a href="http://www.discogs.com/release/{{discogs}}">click here for discogs release page</a></ul>
-{{/each}}</div>
-
-  <div class="col-md-6">{{#each collection}}
-  <ul><li><iframe width="420" height="315" src="//www.youtube.com/embed/{{youtube}}"frameborder="0" allowfullscreen></iframe></li><li><a href="http://www.discogs.com/release/{{discogs}}">click here for discogs release page</a></ul>
-{{/each}}</div>
- 
-</div>
-
-</div>
+</html>
