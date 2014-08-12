@@ -11278,7 +11278,5974 @@ return jQuery;
 
 }));
 
-},{}],"/Users/jmej/pcs/capstone/capstone/node_modules/underscore/underscore.js":[function(require,module,exports){
+},{}],"/Users/jmej/pcs/capstone/capstone/node_modules/request/index.js":[function(require,module,exports){
+(function (process){
+// Copyright 2010-2012 Mikeal Rogers
+//
+//    Licensed under the Apache License, Version 2.0 (the "License");
+//    you may not use this file except in compliance with the License.
+//    You may obtain a copy of the License at
+//
+//        http://www.apache.org/licenses/LICENSE-2.0
+//
+//    Unless required by applicable law or agreed to in writing, software
+//    distributed under the License is distributed on an "AS IS" BASIS,
+//    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//    See the License for the specific language governing permissions and
+//    limitations under the License.
+
+var cookies = require('./lib/cookies')
+  , copy = require('./lib/copy')
+  , Request = require('./request')
+  , util = require('util')
+  ;
+
+
+
+// organize params for patch, post, put, head, del
+function initParams(uri, options, callback) {
+  var opts;
+  if ((typeof options === 'function') && !callback) callback = options
+  if (options && typeof options === 'object') {
+    opts = util._extend({}, options);
+    opts.uri = uri
+  } else if (typeof uri === 'string') {
+    opts = {uri:uri}
+  } else {
+    opts = util._extend({}, uri);
+    uri = opts.uri
+  }
+
+  return { uri: uri, options: opts, callback: callback }
+}
+
+function request (uri, options, callback) {
+  var opts;
+  if (typeof uri === 'undefined') throw new Error('undefined is not a valid uri or options object.')
+  if ((typeof options === 'function') && !callback) callback = options
+  if (options && typeof options === 'object') {
+    opts = util._extend({}, options);
+    opts.uri = uri
+  } else if (typeof uri === 'string') {
+    opts = {uri:uri}
+  } else {
+    opts = util._extend({}, uri);
+  }
+
+  if (callback) opts.callback = callback
+  var r = new Request(opts)
+  return r
+}
+
+module.exports = request
+
+request.Request = Request;
+
+request.debug = process.env.NODE_DEBUG && /request/.test(process.env.NODE_DEBUG)
+
+request.initParams = initParams
+
+request.defaults = function (options, requester) {
+  var def = function (method) {
+    var d = function (uri, opts, callback) {
+      var params = initParams(uri, opts, callback)
+      Object.keys(options).forEach(function (key) {
+        if (key !== 'headers' && params.options[key] === undefined) {
+          params.options[key] = options[key]
+        }
+      })
+      if (options.headers) {
+        var headers = {}
+        util._extend(headers, options.headers)
+        util._extend(headers, params.options.headers)
+        params.options.headers = headers
+      }
+      if(typeof requester === 'function') {
+        if(method === request) {
+          method = requester
+        } else {
+          params.options._requester = requester
+        }
+      }
+      return method(params.options, params.callback)
+    }
+    return d
+  }
+  var de = def(request)
+  de.get = def(request.get)
+  de.patch = def(request.patch)
+  de.post = def(request.post)
+  de.put = def(request.put)
+  de.head = def(request.head)
+  de.del = def(request.del)
+  de.cookie = def(request.cookie)
+  de.jar = request.jar
+  return de
+}
+
+function requester(params) {
+  if(typeof params.options._requester === 'function') {
+    return params.options._requester
+  } else {
+    return request
+  }
+}
+
+request.forever = function (agentOptions, optionsArg) {
+  var options = {}
+  if (optionsArg) {
+    for (var option in optionsArg) {
+      options[option] = optionsArg[option]
+    }
+  }
+  if (agentOptions) options.agentOptions = agentOptions
+  options.forever = true
+  return request.defaults(options)
+}
+
+request.get = function (uri, options, callback) {
+  var params = initParams(uri, options, callback)
+  params.options.method = 'GET'
+  return requester(params)(params.uri || null, params.options, params.callback)
+}
+request.post = function (uri, options, callback) {
+  var params = initParams(uri, options, callback)
+  params.options.method = 'POST'
+  return requester(params)(params.uri || null, params.options, params.callback)
+}
+request.put = function (uri, options, callback) {
+  var params = initParams(uri, options, callback)
+  params.options.method = 'PUT'
+  return requester(params)(params.uri || null, params.options, params.callback)
+}
+request.patch = function (uri, options, callback) {
+  var params = initParams(uri, options, callback)
+  params.options.method = 'PATCH'
+  return requester(params)(params.uri || null, params.options, params.callback)
+}
+request.head = function (uri, options, callback) {
+  var params = initParams(uri, options, callback)
+  params.options.method = 'HEAD'
+  if (params.options.body ||
+      params.options.requestBodyStream ||
+      (params.options.json && typeof params.options.json !== 'boolean') ||
+      params.options.multipart) {
+    throw new Error("HTTP HEAD requests MUST NOT include a request body.")
+  }
+
+  return requester(params)(params.uri || null, params.options, params.callback)
+}
+request.del = function (uri, options, callback) {
+  var params = initParams(uri, options, callback)
+  params.options.method = 'DELETE'
+  return requester(params)(params.uri || null, params.options, params.callback)
+}
+request.jar = function () {
+  return cookies.jar();
+}
+request.cookie = function (str) {
+  return cookies.parse(str);
+}
+
+}).call(this,require('_process'))
+},{"./lib/cookies":"/Users/jmej/pcs/capstone/capstone/node_modules/request/lib/cookies.js","./lib/copy":"/Users/jmej/pcs/capstone/capstone/node_modules/request/lib/copy.js","./request":"/Users/jmej/pcs/capstone/capstone/node_modules/request/request.js","_process":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js","util":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/util/util.js"}],"/Users/jmej/pcs/capstone/capstone/node_modules/request/lib/cookies.js":[function(require,module,exports){
+var optional = require('./optional')
+  , tough = optional('tough-cookie')
+  , Cookie = tough && tough.Cookie
+  , CookieJar = tough && tough.CookieJar
+  ;
+
+exports.parse = function(str) {
+  if (str && str.uri) str = str.uri
+  if (typeof str !== 'string') throw new Error("The cookie function only accepts STRING as param")
+  if (!Cookie) {
+    return null;
+  }
+  return Cookie.parse(str)
+};
+
+// Adapt the sometimes-Async api of tough.CookieJar to our requirements
+function RequestJar() {
+  this._jar = new CookieJar();
+}
+RequestJar.prototype.setCookie = function(cookieOrStr, uri, options) {
+  return this._jar.setCookieSync(cookieOrStr, uri, options || {});
+};
+RequestJar.prototype.getCookieString = function(uri) {
+  return this._jar.getCookieStringSync(uri);
+};
+RequestJar.prototype.getCookies = function(uri) {
+  return this._jar.getCookiesSync(uri);
+};
+
+exports.jar = function() {
+  if (!CookieJar) {
+    // tough-cookie not loaded, return a stub object:
+    return {
+      setCookie: function(){},
+      getCookieString: function(){},
+      getCookies: function(){}
+    };
+  }
+  return new RequestJar();
+};
+
+},{"./optional":"/Users/jmej/pcs/capstone/capstone/node_modules/request/lib/optional.js"}],"/Users/jmej/pcs/capstone/capstone/node_modules/request/lib/copy.js":[function(require,module,exports){
+module.exports =
+function copy (obj) {
+  var o = {}
+  Object.keys(obj).forEach(function (i) {
+    o[i] = obj[i]
+  })
+  return o
+}
+},{}],"/Users/jmej/pcs/capstone/capstone/node_modules/request/lib/debug.js":[function(require,module,exports){
+(function (process){
+var util = require('util')
+
+module.exports =
+function debug () {
+  if (/\brequest\b/.test(process.env.NODE_DEBUG))
+    console.error('REQUEST %s', util.format.apply(util, arguments))
+}
+
+}).call(this,require('_process'))
+},{"_process":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js","util":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/util/util.js"}],"/Users/jmej/pcs/capstone/capstone/node_modules/request/lib/getSafe.js":[function(require,module,exports){
+// Safe toJSON
+module.exports =
+function getSafe (self, uuid) {
+  if (typeof self === 'object' || typeof self === 'function') var safe = {}
+  if (Array.isArray(self)) var safe = []
+
+  var recurse = []
+
+  Object.defineProperty(self, uuid, {})
+
+  var attrs = Object.keys(self).filter(function (i) {
+    if (i === uuid) return false
+    if ( (typeof self[i] !== 'object' && typeof self[i] !== 'function') || self[i] === null) return true
+    return !(Object.getOwnPropertyDescriptor(self[i], uuid))
+  })
+
+
+  for (var i=0;i<attrs.length;i++) {
+    if ( (typeof self[attrs[i]] !== 'object' && typeof self[attrs[i]] !== 'function') ||
+          self[attrs[i]] === null
+        ) {
+      safe[attrs[i]] = self[attrs[i]]
+    } else {
+      recurse.push(attrs[i])
+      Object.defineProperty(self[attrs[i]], uuid, {})
+    }
+  }
+
+  for (var i=0;i<recurse.length;i++) {
+    safe[recurse[i]] = getSafe(self[recurse[i]], uuid)
+  }
+
+  return safe
+}
+},{}],"/Users/jmej/pcs/capstone/capstone/node_modules/request/lib/optional.js":[function(require,module,exports){
+module.exports = function(module) {
+  try {
+    return require(module);
+  } catch (e) {}
+};
+
+},{}],"/Users/jmej/pcs/capstone/capstone/node_modules/request/node_modules/forever-agent/index.js":[function(require,module,exports){
+module.exports = ForeverAgent
+ForeverAgent.SSL = ForeverAgentSSL
+
+var util = require('util')
+  , Agent = require('http').Agent
+  , net = require('net')
+  , tls = require('tls')
+  , AgentSSL = require('https').Agent
+
+function ForeverAgent(options) {
+  var self = this
+  self.options = options || {}
+  self.requests = {}
+  self.sockets = {}
+  self.freeSockets = {}
+  self.maxSockets = self.options.maxSockets || Agent.defaultMaxSockets
+  self.minSockets = self.options.minSockets || ForeverAgent.defaultMinSockets
+  self.on('free', function(socket, host, port) {
+    var name = host + ':' + port
+    if (self.requests[name] && self.requests[name].length) {
+      self.requests[name].shift().onSocket(socket)
+    } else if (self.sockets[name].length < self.minSockets) {
+      if (!self.freeSockets[name]) self.freeSockets[name] = []
+      self.freeSockets[name].push(socket)
+      
+      // if an error happens while we don't use the socket anyway, meh, throw the socket away
+      var onIdleError = function() {
+        socket.destroy()
+      }
+      socket._onIdleError = onIdleError
+      socket.on('error', onIdleError)
+    } else {
+      // If there are no pending requests just destroy the
+      // socket and it will get removed from the pool. This
+      // gets us out of timeout issues and allows us to
+      // default to Connection:keep-alive.
+      socket.destroy()
+    }
+  })
+
+}
+util.inherits(ForeverAgent, Agent)
+
+ForeverAgent.defaultMinSockets = 5
+
+
+ForeverAgent.prototype.createConnection = net.createConnection
+ForeverAgent.prototype.addRequestNoreuse = Agent.prototype.addRequest
+ForeverAgent.prototype.addRequest = function(req, host, port) {
+  var name = host + ':' + port
+  if (this.freeSockets[name] && this.freeSockets[name].length > 0 && !req.useChunkedEncodingByDefault) {
+    var idleSocket = this.freeSockets[name].pop()
+    idleSocket.removeListener('error', idleSocket._onIdleError)
+    delete idleSocket._onIdleError
+    req._reusedSocket = true
+    req.onSocket(idleSocket)
+  } else {
+    this.addRequestNoreuse(req, host, port)
+  }
+}
+
+ForeverAgent.prototype.removeSocket = function(s, name, host, port) {
+  if (this.sockets[name]) {
+    var index = this.sockets[name].indexOf(s)
+    if (index !== -1) {
+      this.sockets[name].splice(index, 1)
+    }
+  } else if (this.sockets[name] && this.sockets[name].length === 0) {
+    // don't leak
+    delete this.sockets[name]
+    delete this.requests[name]
+  }
+  
+  if (this.freeSockets[name]) {
+    var index = this.freeSockets[name].indexOf(s)
+    if (index !== -1) {
+      this.freeSockets[name].splice(index, 1)
+      if (this.freeSockets[name].length === 0) {
+        delete this.freeSockets[name]
+      }
+    }
+  }
+
+  if (this.requests[name] && this.requests[name].length) {
+    // If we have pending requests and a socket gets closed a new one
+    // needs to be created to take over in the pool for the one that closed.
+    this.createSocket(name, host, port).emit('free')
+  }
+}
+
+function ForeverAgentSSL (options) {
+  ForeverAgent.call(this, options)
+}
+util.inherits(ForeverAgentSSL, ForeverAgent)
+
+ForeverAgentSSL.prototype.createConnection = createConnectionSSL
+ForeverAgentSSL.prototype.addRequestNoreuse = AgentSSL.prototype.addRequest
+
+function createConnectionSSL (port, host, options) {
+  if (typeof port === 'object') {
+    options = port;
+  } else if (typeof host === 'object') {
+    options = host;
+  } else if (typeof options === 'object') {
+    options = options;
+  } else {
+    options = {};
+  }
+
+  if (typeof port === 'number') {
+    options.port = port;
+  }
+
+  if (typeof host === 'string') {
+    options.host = host;
+  }
+
+  return tls.connect(options);
+}
+
+},{"http":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/http-browserify/index.js","https":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/https-browserify/index.js","net":"/usr/local/lib/node_modules/watchify/node_modules/browserify/lib/_empty.js","tls":"/usr/local/lib/node_modules/watchify/node_modules/browserify/lib/_empty.js","util":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/util/util.js"}],"/Users/jmej/pcs/capstone/capstone/node_modules/request/node_modules/json-stringify-safe/stringify.js":[function(require,module,exports){
+module.exports = stringify;
+
+function getSerialize (fn, decycle) {
+  var seen = [], keys = [];
+  decycle = decycle || function(key, value) {
+    return '[Circular ' + getPath(value, seen, keys) + ']'
+  };
+  return function(key, value) {
+    var ret = value;
+    if (typeof value === 'object' && value) {
+      if (seen.indexOf(value) !== -1)
+        ret = decycle(key, value);
+      else {
+        seen.push(value);
+        keys.push(key);
+      }
+    }
+    if (fn) ret = fn(key, ret);
+    return ret;
+  }
+}
+
+function getPath (value, seen, keys) {
+  var index = seen.indexOf(value);
+  var path = [ keys[index] ];
+  for (index--; index >= 0; index--) {
+    if (seen[index][ path[0] ] === value) {
+      value = seen[index];
+      path.unshift(keys[index]);
+    }
+  }
+  return '~' + path.join('.');
+}
+
+function stringify(obj, fn, spaces, decycle) {
+  return JSON.stringify(obj, getSerialize(fn, decycle), spaces);
+}
+
+stringify.getSerialize = getSerialize;
+
+},{}],"/Users/jmej/pcs/capstone/capstone/node_modules/request/node_modules/mime-types/lib/custom.json":[function(require,module,exports){
+module.exports={
+  "text/jade": [
+    "jade"
+  ],
+  "text/stylus": [
+    "stylus",
+    "styl"
+  ],
+  "text/less": [
+    "less"
+  ],
+  "text/x-sass": [
+    "sass"
+  ],
+  "text/x-scss": [
+    "scss"
+  ],
+  "text/coffeescript": [
+    "coffee"
+  ],
+  "text/x-handlebars-template": [
+    "hbs"
+  ],
+  "text/jsx": [
+    "jsx"
+  ]
+}
+
+},{}],"/Users/jmej/pcs/capstone/capstone/node_modules/request/node_modules/mime-types/lib/index.js":[function(require,module,exports){
+
+// types[extension] = type
+exports.types = Object.create(null)
+// extensions[type] = [extensions]
+exports.extensions = Object.create(null)
+// define more mime types
+exports.define = define
+
+// store the json files
+exports.json = {
+  mime: require('./mime.json'),
+  node: require('./node.json'),
+  custom: require('./custom.json'),
+}
+
+exports.lookup = function (string) {
+  if (!string || typeof string !== "string") return false
+  string = string.replace(/.*[\.\/\\]/, '').toLowerCase()
+  if (!string) return false
+  return exports.types[string] || false
+}
+
+exports.extension = function (type) {
+  if (!type || typeof type !== "string") return false
+  type = type.match(/^\s*([^;\s]*)(?:;|\s|$)/)
+  if (!type) return false
+  var exts = exports.extensions[type[1].toLowerCase()]
+  if (!exts || !exts.length) return false
+  return exts[0]
+}
+
+// type has to be an exact mime type
+exports.charset = function (type) {
+  // special cases
+  switch (type) {
+    case 'application/json': return 'UTF-8'
+    case 'application/javascript': return 'UTF-8'
+  }
+
+  // default text/* to utf-8
+  if (/^text\//.test(type)) return 'UTF-8'
+
+  return false
+}
+
+// backwards compatibility
+exports.charsets = {
+  lookup: exports.charset
+}
+
+exports.contentType = function (type) {
+  if (!type || typeof type !== "string") return false
+  if (!~type.indexOf('/')) type = exports.lookup(type)
+  if (!type) return false
+  if (!~type.indexOf('charset')) {
+    var charset = exports.charset(type)
+    if (charset) type += '; charset=' + charset.toLowerCase()
+  }
+  return type
+}
+
+define(exports.json.mime)
+define(exports.json.node)
+define(exports.json.custom)
+
+function define(json) {
+  Object.keys(json).forEach(function (type) {
+    var exts = json[type] || []
+    exports.extensions[type] = exports.extensions[type] || []
+    exts.forEach(function (ext) {
+      if (!~exports.extensions[type].indexOf(ext)) exports.extensions[type].push(ext)
+      exports.types[ext] = type
+    })
+  })
+}
+
+},{"./custom.json":"/Users/jmej/pcs/capstone/capstone/node_modules/request/node_modules/mime-types/lib/custom.json","./mime.json":"/Users/jmej/pcs/capstone/capstone/node_modules/request/node_modules/mime-types/lib/mime.json","./node.json":"/Users/jmej/pcs/capstone/capstone/node_modules/request/node_modules/mime-types/lib/node.json"}],"/Users/jmej/pcs/capstone/capstone/node_modules/request/node_modules/mime-types/lib/mime.json":[function(require,module,exports){
+module.exports={
+  "application/1d-interleaved-parityfec": [],
+  "application/3gpp-ims+xml": [],
+  "application/activemessage": [],
+  "application/andrew-inset": [
+    "ez"
+  ],
+  "application/applefile": [],
+  "application/applixware": [
+    "aw"
+  ],
+  "application/atom+xml": [
+    "atom"
+  ],
+  "application/atomcat+xml": [
+    "atomcat"
+  ],
+  "application/atomicmail": [],
+  "application/atomsvc+xml": [
+    "atomsvc"
+  ],
+  "application/auth-policy+xml": [],
+  "application/batch-smtp": [],
+  "application/beep+xml": [],
+  "application/calendar+xml": [],
+  "application/cals-1840": [],
+  "application/ccmp+xml": [],
+  "application/ccxml+xml": [
+    "ccxml"
+  ],
+  "application/cdmi-capability": [
+    "cdmia"
+  ],
+  "application/cdmi-container": [
+    "cdmic"
+  ],
+  "application/cdmi-domain": [
+    "cdmid"
+  ],
+  "application/cdmi-object": [
+    "cdmio"
+  ],
+  "application/cdmi-queue": [
+    "cdmiq"
+  ],
+  "application/cea-2018+xml": [],
+  "application/cellml+xml": [],
+  "application/cfw": [],
+  "application/cnrp+xml": [],
+  "application/commonground": [],
+  "application/conference-info+xml": [],
+  "application/cpl+xml": [],
+  "application/csta+xml": [],
+  "application/cstadata+xml": [],
+  "application/cu-seeme": [
+    "cu"
+  ],
+  "application/cybercash": [],
+  "application/davmount+xml": [
+    "davmount"
+  ],
+  "application/dca-rft": [],
+  "application/dec-dx": [],
+  "application/dialog-info+xml": [],
+  "application/dicom": [],
+  "application/dns": [],
+  "application/docbook+xml": [
+    "dbk"
+  ],
+  "application/dskpp+xml": [],
+  "application/dssc+der": [
+    "dssc"
+  ],
+  "application/dssc+xml": [
+    "xdssc"
+  ],
+  "application/dvcs": [],
+  "application/ecmascript": [
+    "ecma"
+  ],
+  "application/edi-consent": [],
+  "application/edi-x12": [],
+  "application/edifact": [],
+  "application/emma+xml": [
+    "emma"
+  ],
+  "application/epp+xml": [],
+  "application/epub+zip": [
+    "epub"
+  ],
+  "application/eshop": [],
+  "application/example": [],
+  "application/exi": [
+    "exi"
+  ],
+  "application/fastinfoset": [],
+  "application/fastsoap": [],
+  "application/fits": [],
+  "application/font-tdpfr": [
+    "pfr"
+  ],
+  "application/framework-attributes+xml": [],
+  "application/gml+xml": [
+    "gml"
+  ],
+  "application/gpx+xml": [
+    "gpx"
+  ],
+  "application/gxf": [
+    "gxf"
+  ],
+  "application/h224": [],
+  "application/held+xml": [],
+  "application/http": [],
+  "application/hyperstudio": [
+    "stk"
+  ],
+  "application/ibe-key-request+xml": [],
+  "application/ibe-pkg-reply+xml": [],
+  "application/ibe-pp-data": [],
+  "application/iges": [],
+  "application/im-iscomposing+xml": [],
+  "application/index": [],
+  "application/index.cmd": [],
+  "application/index.obj": [],
+  "application/index.response": [],
+  "application/index.vnd": [],
+  "application/inkml+xml": [
+    "ink",
+    "inkml"
+  ],
+  "application/iotp": [],
+  "application/ipfix": [
+    "ipfix"
+  ],
+  "application/ipp": [],
+  "application/isup": [],
+  "application/java-archive": [
+    "jar"
+  ],
+  "application/java-serialized-object": [
+    "ser"
+  ],
+  "application/java-vm": [
+    "class"
+  ],
+  "application/javascript": [
+    "js"
+  ],
+  "application/json": [
+    "json"
+  ],
+  "application/jsonml+json": [
+    "jsonml"
+  ],
+  "application/kpml-request+xml": [],
+  "application/kpml-response+xml": [],
+  "application/lost+xml": [
+    "lostxml"
+  ],
+  "application/mac-binhex40": [
+    "hqx"
+  ],
+  "application/mac-compactpro": [
+    "cpt"
+  ],
+  "application/macwriteii": [],
+  "application/mads+xml": [
+    "mads"
+  ],
+  "application/marc": [
+    "mrc"
+  ],
+  "application/marcxml+xml": [
+    "mrcx"
+  ],
+  "application/mathematica": [
+    "ma",
+    "nb",
+    "mb"
+  ],
+  "application/mathml-content+xml": [],
+  "application/mathml-presentation+xml": [],
+  "application/mathml+xml": [
+    "mathml"
+  ],
+  "application/mbms-associated-procedure-description+xml": [],
+  "application/mbms-deregister+xml": [],
+  "application/mbms-envelope+xml": [],
+  "application/mbms-msk+xml": [],
+  "application/mbms-msk-response+xml": [],
+  "application/mbms-protection-description+xml": [],
+  "application/mbms-reception-report+xml": [],
+  "application/mbms-register+xml": [],
+  "application/mbms-register-response+xml": [],
+  "application/mbms-user-service-description+xml": [],
+  "application/mbox": [
+    "mbox"
+  ],
+  "application/media_control+xml": [],
+  "application/mediaservercontrol+xml": [
+    "mscml"
+  ],
+  "application/metalink+xml": [
+    "metalink"
+  ],
+  "application/metalink4+xml": [
+    "meta4"
+  ],
+  "application/mets+xml": [
+    "mets"
+  ],
+  "application/mikey": [],
+  "application/mods+xml": [
+    "mods"
+  ],
+  "application/moss-keys": [],
+  "application/moss-signature": [],
+  "application/mosskey-data": [],
+  "application/mosskey-request": [],
+  "application/mp21": [
+    "m21",
+    "mp21"
+  ],
+  "application/mp4": [
+    "mp4s"
+  ],
+  "application/mpeg4-generic": [],
+  "application/mpeg4-iod": [],
+  "application/mpeg4-iod-xmt": [],
+  "application/msc-ivr+xml": [],
+  "application/msc-mixer+xml": [],
+  "application/msword": [
+    "doc",
+    "dot"
+  ],
+  "application/mxf": [
+    "mxf"
+  ],
+  "application/nasdata": [],
+  "application/news-checkgroups": [],
+  "application/news-groupinfo": [],
+  "application/news-transmission": [],
+  "application/nss": [],
+  "application/ocsp-request": [],
+  "application/ocsp-response": [],
+  "application/octet-stream": [
+    "bin",
+    "dms",
+    "lrf",
+    "mar",
+    "so",
+    "dist",
+    "distz",
+    "pkg",
+    "bpk",
+    "dump",
+    "elc",
+    "deploy"
+  ],
+  "application/oda": [
+    "oda"
+  ],
+  "application/oebps-package+xml": [
+    "opf"
+  ],
+  "application/ogg": [
+    "ogx"
+  ],
+  "application/omdoc+xml": [
+    "omdoc"
+  ],
+  "application/onenote": [
+    "onetoc",
+    "onetoc2",
+    "onetmp",
+    "onepkg"
+  ],
+  "application/oxps": [
+    "oxps"
+  ],
+  "application/parityfec": [],
+  "application/patch-ops-error+xml": [
+    "xer"
+  ],
+  "application/pdf": [
+    "pdf"
+  ],
+  "application/pgp-encrypted": [
+    "pgp"
+  ],
+  "application/pgp-keys": [],
+  "application/pgp-signature": [
+    "asc",
+    "sig"
+  ],
+  "application/pics-rules": [
+    "prf"
+  ],
+  "application/pidf+xml": [],
+  "application/pidf-diff+xml": [],
+  "application/pkcs10": [
+    "p10"
+  ],
+  "application/pkcs7-mime": [
+    "p7m",
+    "p7c"
+  ],
+  "application/pkcs7-signature": [
+    "p7s"
+  ],
+  "application/pkcs8": [
+    "p8"
+  ],
+  "application/pkix-attr-cert": [
+    "ac"
+  ],
+  "application/pkix-cert": [
+    "cer"
+  ],
+  "application/pkix-crl": [
+    "crl"
+  ],
+  "application/pkix-pkipath": [
+    "pkipath"
+  ],
+  "application/pkixcmp": [
+    "pki"
+  ],
+  "application/pls+xml": [
+    "pls"
+  ],
+  "application/poc-settings+xml": [],
+  "application/postscript": [
+    "ai",
+    "eps",
+    "ps"
+  ],
+  "application/prs.alvestrand.titrax-sheet": [],
+  "application/prs.cww": [
+    "cww"
+  ],
+  "application/prs.nprend": [],
+  "application/prs.plucker": [],
+  "application/prs.rdf-xml-crypt": [],
+  "application/prs.xsf+xml": [],
+  "application/pskc+xml": [
+    "pskcxml"
+  ],
+  "application/qsig": [],
+  "application/rdf+xml": [
+    "rdf"
+  ],
+  "application/reginfo+xml": [
+    "rif"
+  ],
+  "application/relax-ng-compact-syntax": [
+    "rnc"
+  ],
+  "application/remote-printing": [],
+  "application/resource-lists+xml": [
+    "rl"
+  ],
+  "application/resource-lists-diff+xml": [
+    "rld"
+  ],
+  "application/riscos": [],
+  "application/rlmi+xml": [],
+  "application/rls-services+xml": [
+    "rs"
+  ],
+  "application/rpki-ghostbusters": [
+    "gbr"
+  ],
+  "application/rpki-manifest": [
+    "mft"
+  ],
+  "application/rpki-roa": [
+    "roa"
+  ],
+  "application/rpki-updown": [],
+  "application/rsd+xml": [
+    "rsd"
+  ],
+  "application/rss+xml": [
+    "rss"
+  ],
+  "application/rtf": [
+    "rtf"
+  ],
+  "application/rtx": [],
+  "application/samlassertion+xml": [],
+  "application/samlmetadata+xml": [],
+  "application/sbml+xml": [
+    "sbml"
+  ],
+  "application/scvp-cv-request": [
+    "scq"
+  ],
+  "application/scvp-cv-response": [
+    "scs"
+  ],
+  "application/scvp-vp-request": [
+    "spq"
+  ],
+  "application/scvp-vp-response": [
+    "spp"
+  ],
+  "application/sdp": [
+    "sdp"
+  ],
+  "application/set-payment": [],
+  "application/set-payment-initiation": [
+    "setpay"
+  ],
+  "application/set-registration": [],
+  "application/set-registration-initiation": [
+    "setreg"
+  ],
+  "application/sgml": [],
+  "application/sgml-open-catalog": [],
+  "application/shf+xml": [
+    "shf"
+  ],
+  "application/sieve": [],
+  "application/simple-filter+xml": [],
+  "application/simple-message-summary": [],
+  "application/simplesymbolcontainer": [],
+  "application/slate": [],
+  "application/smil": [],
+  "application/smil+xml": [
+    "smi",
+    "smil"
+  ],
+  "application/soap+fastinfoset": [],
+  "application/soap+xml": [],
+  "application/sparql-query": [
+    "rq"
+  ],
+  "application/sparql-results+xml": [
+    "srx"
+  ],
+  "application/spirits-event+xml": [],
+  "application/srgs": [
+    "gram"
+  ],
+  "application/srgs+xml": [
+    "grxml"
+  ],
+  "application/sru+xml": [
+    "sru"
+  ],
+  "application/ssdl+xml": [
+    "ssdl"
+  ],
+  "application/ssml+xml": [
+    "ssml"
+  ],
+  "application/tamp-apex-update": [],
+  "application/tamp-apex-update-confirm": [],
+  "application/tamp-community-update": [],
+  "application/tamp-community-update-confirm": [],
+  "application/tamp-error": [],
+  "application/tamp-sequence-adjust": [],
+  "application/tamp-sequence-adjust-confirm": [],
+  "application/tamp-status-query": [],
+  "application/tamp-status-response": [],
+  "application/tamp-update": [],
+  "application/tamp-update-confirm": [],
+  "application/tei+xml": [
+    "tei",
+    "teicorpus"
+  ],
+  "application/thraud+xml": [
+    "tfi"
+  ],
+  "application/timestamp-query": [],
+  "application/timestamp-reply": [],
+  "application/timestamped-data": [
+    "tsd"
+  ],
+  "application/tve-trigger": [],
+  "application/ulpfec": [],
+  "application/vcard+xml": [],
+  "application/vemmi": [],
+  "application/vividence.scriptfile": [],
+  "application/vnd.3gpp.bsf+xml": [],
+  "application/vnd.3gpp.pic-bw-large": [
+    "plb"
+  ],
+  "application/vnd.3gpp.pic-bw-small": [
+    "psb"
+  ],
+  "application/vnd.3gpp.pic-bw-var": [
+    "pvb"
+  ],
+  "application/vnd.3gpp.sms": [],
+  "application/vnd.3gpp2.bcmcsinfo+xml": [],
+  "application/vnd.3gpp2.sms": [],
+  "application/vnd.3gpp2.tcap": [
+    "tcap"
+  ],
+  "application/vnd.3m.post-it-notes": [
+    "pwn"
+  ],
+  "application/vnd.accpac.simply.aso": [
+    "aso"
+  ],
+  "application/vnd.accpac.simply.imp": [
+    "imp"
+  ],
+  "application/vnd.acucobol": [
+    "acu"
+  ],
+  "application/vnd.acucorp": [
+    "atc",
+    "acutc"
+  ],
+  "application/vnd.adobe.air-application-installer-package+zip": [
+    "air"
+  ],
+  "application/vnd.adobe.formscentral.fcdt": [
+    "fcdt"
+  ],
+  "application/vnd.adobe.fxp": [
+    "fxp",
+    "fxpl"
+  ],
+  "application/vnd.adobe.partial-upload": [],
+  "application/vnd.adobe.xdp+xml": [
+    "xdp"
+  ],
+  "application/vnd.adobe.xfdf": [
+    "xfdf"
+  ],
+  "application/vnd.aether.imp": [],
+  "application/vnd.ah-barcode": [],
+  "application/vnd.ahead.space": [
+    "ahead"
+  ],
+  "application/vnd.airzip.filesecure.azf": [
+    "azf"
+  ],
+  "application/vnd.airzip.filesecure.azs": [
+    "azs"
+  ],
+  "application/vnd.amazon.ebook": [
+    "azw"
+  ],
+  "application/vnd.americandynamics.acc": [
+    "acc"
+  ],
+  "application/vnd.amiga.ami": [
+    "ami"
+  ],
+  "application/vnd.amundsen.maze+xml": [],
+  "application/vnd.android.package-archive": [
+    "apk"
+  ],
+  "application/vnd.anser-web-certificate-issue-initiation": [
+    "cii"
+  ],
+  "application/vnd.anser-web-funds-transfer-initiation": [
+    "fti"
+  ],
+  "application/vnd.antix.game-component": [
+    "atx"
+  ],
+  "application/vnd.apple.installer+xml": [
+    "mpkg"
+  ],
+  "application/vnd.apple.mpegurl": [
+    "m3u8"
+  ],
+  "application/vnd.arastra.swi": [],
+  "application/vnd.aristanetworks.swi": [
+    "swi"
+  ],
+  "application/vnd.astraea-software.iota": [
+    "iota"
+  ],
+  "application/vnd.audiograph": [
+    "aep"
+  ],
+  "application/vnd.autopackage": [],
+  "application/vnd.avistar+xml": [],
+  "application/vnd.blueice.multipass": [
+    "mpm"
+  ],
+  "application/vnd.bluetooth.ep.oob": [],
+  "application/vnd.bmi": [
+    "bmi"
+  ],
+  "application/vnd.businessobjects": [
+    "rep"
+  ],
+  "application/vnd.cab-jscript": [],
+  "application/vnd.canon-cpdl": [],
+  "application/vnd.canon-lips": [],
+  "application/vnd.cendio.thinlinc.clientconf": [],
+  "application/vnd.chemdraw+xml": [
+    "cdxml"
+  ],
+  "application/vnd.chipnuts.karaoke-mmd": [
+    "mmd"
+  ],
+  "application/vnd.cinderella": [
+    "cdy"
+  ],
+  "application/vnd.cirpack.isdn-ext": [],
+  "application/vnd.claymore": [
+    "cla"
+  ],
+  "application/vnd.cloanto.rp9": [
+    "rp9"
+  ],
+  "application/vnd.clonk.c4group": [
+    "c4g",
+    "c4d",
+    "c4f",
+    "c4p",
+    "c4u"
+  ],
+  "application/vnd.cluetrust.cartomobile-config": [
+    "c11amc"
+  ],
+  "application/vnd.cluetrust.cartomobile-config-pkg": [
+    "c11amz"
+  ],
+  "application/vnd.collection+json": [],
+  "application/vnd.commerce-battelle": [],
+  "application/vnd.commonspace": [
+    "csp"
+  ],
+  "application/vnd.contact.cmsg": [
+    "cdbcmsg"
+  ],
+  "application/vnd.cosmocaller": [
+    "cmc"
+  ],
+  "application/vnd.crick.clicker": [
+    "clkx"
+  ],
+  "application/vnd.crick.clicker.keyboard": [
+    "clkk"
+  ],
+  "application/vnd.crick.clicker.palette": [
+    "clkp"
+  ],
+  "application/vnd.crick.clicker.template": [
+    "clkt"
+  ],
+  "application/vnd.crick.clicker.wordbank": [
+    "clkw"
+  ],
+  "application/vnd.criticaltools.wbs+xml": [
+    "wbs"
+  ],
+  "application/vnd.ctc-posml": [
+    "pml"
+  ],
+  "application/vnd.ctct.ws+xml": [],
+  "application/vnd.cups-pdf": [],
+  "application/vnd.cups-postscript": [],
+  "application/vnd.cups-ppd": [
+    "ppd"
+  ],
+  "application/vnd.cups-raster": [],
+  "application/vnd.cups-raw": [],
+  "application/vnd.curl": [],
+  "application/vnd.curl.car": [
+    "car"
+  ],
+  "application/vnd.curl.pcurl": [
+    "pcurl"
+  ],
+  "application/vnd.cybank": [],
+  "application/vnd.dart": [
+    "dart"
+  ],
+  "application/vnd.data-vision.rdz": [
+    "rdz"
+  ],
+  "application/vnd.dece.data": [
+    "uvf",
+    "uvvf",
+    "uvd",
+    "uvvd"
+  ],
+  "application/vnd.dece.ttml+xml": [
+    "uvt",
+    "uvvt"
+  ],
+  "application/vnd.dece.unspecified": [
+    "uvx",
+    "uvvx"
+  ],
+  "application/vnd.dece.zip": [
+    "uvz",
+    "uvvz"
+  ],
+  "application/vnd.denovo.fcselayout-link": [
+    "fe_launch"
+  ],
+  "application/vnd.dir-bi.plate-dl-nosuffix": [],
+  "application/vnd.dna": [
+    "dna"
+  ],
+  "application/vnd.dolby.mlp": [
+    "mlp"
+  ],
+  "application/vnd.dolby.mobile.1": [],
+  "application/vnd.dolby.mobile.2": [],
+  "application/vnd.dpgraph": [
+    "dpg"
+  ],
+  "application/vnd.dreamfactory": [
+    "dfac"
+  ],
+  "application/vnd.ds-keypoint": [
+    "kpxx"
+  ],
+  "application/vnd.dvb.ait": [
+    "ait"
+  ],
+  "application/vnd.dvb.dvbj": [],
+  "application/vnd.dvb.esgcontainer": [],
+  "application/vnd.dvb.ipdcdftnotifaccess": [],
+  "application/vnd.dvb.ipdcesgaccess": [],
+  "application/vnd.dvb.ipdcesgaccess2": [],
+  "application/vnd.dvb.ipdcesgpdd": [],
+  "application/vnd.dvb.ipdcroaming": [],
+  "application/vnd.dvb.iptv.alfec-base": [],
+  "application/vnd.dvb.iptv.alfec-enhancement": [],
+  "application/vnd.dvb.notif-aggregate-root+xml": [],
+  "application/vnd.dvb.notif-container+xml": [],
+  "application/vnd.dvb.notif-generic+xml": [],
+  "application/vnd.dvb.notif-ia-msglist+xml": [],
+  "application/vnd.dvb.notif-ia-registration-request+xml": [],
+  "application/vnd.dvb.notif-ia-registration-response+xml": [],
+  "application/vnd.dvb.notif-init+xml": [],
+  "application/vnd.dvb.pfr": [],
+  "application/vnd.dvb.service": [
+    "svc"
+  ],
+  "application/vnd.dxr": [],
+  "application/vnd.dynageo": [
+    "geo"
+  ],
+  "application/vnd.easykaraoke.cdgdownload": [],
+  "application/vnd.ecdis-update": [],
+  "application/vnd.ecowin.chart": [
+    "mag"
+  ],
+  "application/vnd.ecowin.filerequest": [],
+  "application/vnd.ecowin.fileupdate": [],
+  "application/vnd.ecowin.series": [],
+  "application/vnd.ecowin.seriesrequest": [],
+  "application/vnd.ecowin.seriesupdate": [],
+  "application/vnd.emclient.accessrequest+xml": [],
+  "application/vnd.enliven": [
+    "nml"
+  ],
+  "application/vnd.eprints.data+xml": [],
+  "application/vnd.epson.esf": [
+    "esf"
+  ],
+  "application/vnd.epson.msf": [
+    "msf"
+  ],
+  "application/vnd.epson.quickanime": [
+    "qam"
+  ],
+  "application/vnd.epson.salt": [
+    "slt"
+  ],
+  "application/vnd.epson.ssf": [
+    "ssf"
+  ],
+  "application/vnd.ericsson.quickcall": [],
+  "application/vnd.eszigno3+xml": [
+    "es3",
+    "et3"
+  ],
+  "application/vnd.etsi.aoc+xml": [],
+  "application/vnd.etsi.cug+xml": [],
+  "application/vnd.etsi.iptvcommand+xml": [],
+  "application/vnd.etsi.iptvdiscovery+xml": [],
+  "application/vnd.etsi.iptvprofile+xml": [],
+  "application/vnd.etsi.iptvsad-bc+xml": [],
+  "application/vnd.etsi.iptvsad-cod+xml": [],
+  "application/vnd.etsi.iptvsad-npvr+xml": [],
+  "application/vnd.etsi.iptvservice+xml": [],
+  "application/vnd.etsi.iptvsync+xml": [],
+  "application/vnd.etsi.iptvueprofile+xml": [],
+  "application/vnd.etsi.mcid+xml": [],
+  "application/vnd.etsi.overload-control-policy-dataset+xml": [],
+  "application/vnd.etsi.sci+xml": [],
+  "application/vnd.etsi.simservs+xml": [],
+  "application/vnd.etsi.tsl+xml": [],
+  "application/vnd.etsi.tsl.der": [],
+  "application/vnd.eudora.data": [],
+  "application/vnd.ezpix-album": [
+    "ez2"
+  ],
+  "application/vnd.ezpix-package": [
+    "ez3"
+  ],
+  "application/vnd.f-secure.mobile": [],
+  "application/vnd.fdf": [
+    "fdf"
+  ],
+  "application/vnd.fdsn.mseed": [
+    "mseed"
+  ],
+  "application/vnd.fdsn.seed": [
+    "seed",
+    "dataless"
+  ],
+  "application/vnd.ffsns": [],
+  "application/vnd.fints": [],
+  "application/vnd.flographit": [
+    "gph"
+  ],
+  "application/vnd.fluxtime.clip": [
+    "ftc"
+  ],
+  "application/vnd.font-fontforge-sfd": [],
+  "application/vnd.framemaker": [
+    "fm",
+    "frame",
+    "maker",
+    "book"
+  ],
+  "application/vnd.frogans.fnc": [
+    "fnc"
+  ],
+  "application/vnd.frogans.ltf": [
+    "ltf"
+  ],
+  "application/vnd.fsc.weblaunch": [
+    "fsc"
+  ],
+  "application/vnd.fujitsu.oasys": [
+    "oas"
+  ],
+  "application/vnd.fujitsu.oasys2": [
+    "oa2"
+  ],
+  "application/vnd.fujitsu.oasys3": [
+    "oa3"
+  ],
+  "application/vnd.fujitsu.oasysgp": [
+    "fg5"
+  ],
+  "application/vnd.fujitsu.oasysprs": [
+    "bh2"
+  ],
+  "application/vnd.fujixerox.art-ex": [],
+  "application/vnd.fujixerox.art4": [],
+  "application/vnd.fujixerox.hbpl": [],
+  "application/vnd.fujixerox.ddd": [
+    "ddd"
+  ],
+  "application/vnd.fujixerox.docuworks": [
+    "xdw"
+  ],
+  "application/vnd.fujixerox.docuworks.binder": [
+    "xbd"
+  ],
+  "application/vnd.fut-misnet": [],
+  "application/vnd.fuzzysheet": [
+    "fzs"
+  ],
+  "application/vnd.genomatix.tuxedo": [
+    "txd"
+  ],
+  "application/vnd.geocube+xml": [],
+  "application/vnd.geogebra.file": [
+    "ggb"
+  ],
+  "application/vnd.geogebra.tool": [
+    "ggt"
+  ],
+  "application/vnd.geometry-explorer": [
+    "gex",
+    "gre"
+  ],
+  "application/vnd.geonext": [
+    "gxt"
+  ],
+  "application/vnd.geoplan": [
+    "g2w"
+  ],
+  "application/vnd.geospace": [
+    "g3w"
+  ],
+  "application/vnd.globalplatform.card-content-mgt": [],
+  "application/vnd.globalplatform.card-content-mgt-response": [],
+  "application/vnd.gmx": [
+    "gmx"
+  ],
+  "application/vnd.google-earth.kml+xml": [
+    "kml"
+  ],
+  "application/vnd.google-earth.kmz": [
+    "kmz"
+  ],
+  "application/vnd.grafeq": [
+    "gqf",
+    "gqs"
+  ],
+  "application/vnd.gridmp": [],
+  "application/vnd.groove-account": [
+    "gac"
+  ],
+  "application/vnd.groove-help": [
+    "ghf"
+  ],
+  "application/vnd.groove-identity-message": [
+    "gim"
+  ],
+  "application/vnd.groove-injector": [
+    "grv"
+  ],
+  "application/vnd.groove-tool-message": [
+    "gtm"
+  ],
+  "application/vnd.groove-tool-template": [
+    "tpl"
+  ],
+  "application/vnd.groove-vcard": [
+    "vcg"
+  ],
+  "application/vnd.hal+json": [],
+  "application/vnd.hal+xml": [
+    "hal"
+  ],
+  "application/vnd.handheld-entertainment+xml": [
+    "zmm"
+  ],
+  "application/vnd.hbci": [
+    "hbci"
+  ],
+  "application/vnd.hcl-bireports": [],
+  "application/vnd.hhe.lesson-player": [
+    "les"
+  ],
+  "application/vnd.hp-hpgl": [
+    "hpgl"
+  ],
+  "application/vnd.hp-hpid": [
+    "hpid"
+  ],
+  "application/vnd.hp-hps": [
+    "hps"
+  ],
+  "application/vnd.hp-jlyt": [
+    "jlt"
+  ],
+  "application/vnd.hp-pcl": [
+    "pcl"
+  ],
+  "application/vnd.hp-pclxl": [
+    "pclxl"
+  ],
+  "application/vnd.httphone": [],
+  "application/vnd.hzn-3d-crossword": [],
+  "application/vnd.ibm.afplinedata": [],
+  "application/vnd.ibm.electronic-media": [],
+  "application/vnd.ibm.minipay": [
+    "mpy"
+  ],
+  "application/vnd.ibm.modcap": [
+    "afp",
+    "listafp",
+    "list3820"
+  ],
+  "application/vnd.ibm.rights-management": [
+    "irm"
+  ],
+  "application/vnd.ibm.secure-container": [
+    "sc"
+  ],
+  "application/vnd.iccprofile": [
+    "icc",
+    "icm"
+  ],
+  "application/vnd.igloader": [
+    "igl"
+  ],
+  "application/vnd.immervision-ivp": [
+    "ivp"
+  ],
+  "application/vnd.immervision-ivu": [
+    "ivu"
+  ],
+  "application/vnd.informedcontrol.rms+xml": [],
+  "application/vnd.informix-visionary": [],
+  "application/vnd.infotech.project": [],
+  "application/vnd.infotech.project+xml": [],
+  "application/vnd.innopath.wamp.notification": [],
+  "application/vnd.insors.igm": [
+    "igm"
+  ],
+  "application/vnd.intercon.formnet": [
+    "xpw",
+    "xpx"
+  ],
+  "application/vnd.intergeo": [
+    "i2g"
+  ],
+  "application/vnd.intertrust.digibox": [],
+  "application/vnd.intertrust.nncp": [],
+  "application/vnd.intu.qbo": [
+    "qbo"
+  ],
+  "application/vnd.intu.qfx": [
+    "qfx"
+  ],
+  "application/vnd.iptc.g2.conceptitem+xml": [],
+  "application/vnd.iptc.g2.knowledgeitem+xml": [],
+  "application/vnd.iptc.g2.newsitem+xml": [],
+  "application/vnd.iptc.g2.newsmessage+xml": [],
+  "application/vnd.iptc.g2.packageitem+xml": [],
+  "application/vnd.iptc.g2.planningitem+xml": [],
+  "application/vnd.ipunplugged.rcprofile": [
+    "rcprofile"
+  ],
+  "application/vnd.irepository.package+xml": [
+    "irp"
+  ],
+  "application/vnd.is-xpr": [
+    "xpr"
+  ],
+  "application/vnd.isac.fcs": [
+    "fcs"
+  ],
+  "application/vnd.jam": [
+    "jam"
+  ],
+  "application/vnd.japannet-directory-service": [],
+  "application/vnd.japannet-jpnstore-wakeup": [],
+  "application/vnd.japannet-payment-wakeup": [],
+  "application/vnd.japannet-registration": [],
+  "application/vnd.japannet-registration-wakeup": [],
+  "application/vnd.japannet-setstore-wakeup": [],
+  "application/vnd.japannet-verification": [],
+  "application/vnd.japannet-verification-wakeup": [],
+  "application/vnd.jcp.javame.midlet-rms": [
+    "rms"
+  ],
+  "application/vnd.jisp": [
+    "jisp"
+  ],
+  "application/vnd.joost.joda-archive": [
+    "joda"
+  ],
+  "application/vnd.kahootz": [
+    "ktz",
+    "ktr"
+  ],
+  "application/vnd.kde.karbon": [
+    "karbon"
+  ],
+  "application/vnd.kde.kchart": [
+    "chrt"
+  ],
+  "application/vnd.kde.kformula": [
+    "kfo"
+  ],
+  "application/vnd.kde.kivio": [
+    "flw"
+  ],
+  "application/vnd.kde.kontour": [
+    "kon"
+  ],
+  "application/vnd.kde.kpresenter": [
+    "kpr",
+    "kpt"
+  ],
+  "application/vnd.kde.kspread": [
+    "ksp"
+  ],
+  "application/vnd.kde.kword": [
+    "kwd",
+    "kwt"
+  ],
+  "application/vnd.kenameaapp": [
+    "htke"
+  ],
+  "application/vnd.kidspiration": [
+    "kia"
+  ],
+  "application/vnd.kinar": [
+    "kne",
+    "knp"
+  ],
+  "application/vnd.koan": [
+    "skp",
+    "skd",
+    "skt",
+    "skm"
+  ],
+  "application/vnd.kodak-descriptor": [
+    "sse"
+  ],
+  "application/vnd.las.las+xml": [
+    "lasxml"
+  ],
+  "application/vnd.liberty-request+xml": [],
+  "application/vnd.llamagraphics.life-balance.desktop": [
+    "lbd"
+  ],
+  "application/vnd.llamagraphics.life-balance.exchange+xml": [
+    "lbe"
+  ],
+  "application/vnd.lotus-1-2-3": [
+    "123"
+  ],
+  "application/vnd.lotus-approach": [
+    "apr"
+  ],
+  "application/vnd.lotus-freelance": [
+    "pre"
+  ],
+  "application/vnd.lotus-notes": [
+    "nsf"
+  ],
+  "application/vnd.lotus-organizer": [
+    "org"
+  ],
+  "application/vnd.lotus-screencam": [
+    "scm"
+  ],
+  "application/vnd.lotus-wordpro": [
+    "lwp"
+  ],
+  "application/vnd.macports.portpkg": [
+    "portpkg"
+  ],
+  "application/vnd.marlin.drm.actiontoken+xml": [],
+  "application/vnd.marlin.drm.conftoken+xml": [],
+  "application/vnd.marlin.drm.license+xml": [],
+  "application/vnd.marlin.drm.mdcf": [],
+  "application/vnd.mcd": [
+    "mcd"
+  ],
+  "application/vnd.medcalcdata": [
+    "mc1"
+  ],
+  "application/vnd.mediastation.cdkey": [
+    "cdkey"
+  ],
+  "application/vnd.meridian-slingshot": [],
+  "application/vnd.mfer": [
+    "mwf"
+  ],
+  "application/vnd.mfmp": [
+    "mfm"
+  ],
+  "application/vnd.micrografx.flo": [
+    "flo"
+  ],
+  "application/vnd.micrografx.igx": [
+    "igx"
+  ],
+  "application/vnd.mif": [
+    "mif"
+  ],
+  "application/vnd.minisoft-hp3000-save": [],
+  "application/vnd.mitsubishi.misty-guard.trustweb": [],
+  "application/vnd.mobius.daf": [
+    "daf"
+  ],
+  "application/vnd.mobius.dis": [
+    "dis"
+  ],
+  "application/vnd.mobius.mbk": [
+    "mbk"
+  ],
+  "application/vnd.mobius.mqy": [
+    "mqy"
+  ],
+  "application/vnd.mobius.msl": [
+    "msl"
+  ],
+  "application/vnd.mobius.plc": [
+    "plc"
+  ],
+  "application/vnd.mobius.txf": [
+    "txf"
+  ],
+  "application/vnd.mophun.application": [
+    "mpn"
+  ],
+  "application/vnd.mophun.certificate": [
+    "mpc"
+  ],
+  "application/vnd.motorola.flexsuite": [],
+  "application/vnd.motorola.flexsuite.adsi": [],
+  "application/vnd.motorola.flexsuite.fis": [],
+  "application/vnd.motorola.flexsuite.gotap": [],
+  "application/vnd.motorola.flexsuite.kmr": [],
+  "application/vnd.motorola.flexsuite.ttc": [],
+  "application/vnd.motorola.flexsuite.wem": [],
+  "application/vnd.motorola.iprm": [],
+  "application/vnd.mozilla.xul+xml": [
+    "xul"
+  ],
+  "application/vnd.ms-artgalry": [
+    "cil"
+  ],
+  "application/vnd.ms-asf": [],
+  "application/vnd.ms-cab-compressed": [
+    "cab"
+  ],
+  "application/vnd.ms-color.iccprofile": [],
+  "application/vnd.ms-excel": [
+    "xls",
+    "xlm",
+    "xla",
+    "xlc",
+    "xlt",
+    "xlw"
+  ],
+  "application/vnd.ms-excel.addin.macroenabled.12": [
+    "xlam"
+  ],
+  "application/vnd.ms-excel.sheet.binary.macroenabled.12": [
+    "xlsb"
+  ],
+  "application/vnd.ms-excel.sheet.macroenabled.12": [
+    "xlsm"
+  ],
+  "application/vnd.ms-excel.template.macroenabled.12": [
+    "xltm"
+  ],
+  "application/vnd.ms-fontobject": [
+    "eot"
+  ],
+  "application/vnd.ms-htmlhelp": [
+    "chm"
+  ],
+  "application/vnd.ms-ims": [
+    "ims"
+  ],
+  "application/vnd.ms-lrm": [
+    "lrm"
+  ],
+  "application/vnd.ms-office.activex+xml": [],
+  "application/vnd.ms-officetheme": [
+    "thmx"
+  ],
+  "application/vnd.ms-opentype": [],
+  "application/vnd.ms-package.obfuscated-opentype": [],
+  "application/vnd.ms-pki.seccat": [
+    "cat"
+  ],
+  "application/vnd.ms-pki.stl": [
+    "stl"
+  ],
+  "application/vnd.ms-playready.initiator+xml": [],
+  "application/vnd.ms-powerpoint": [
+    "ppt",
+    "pps",
+    "pot"
+  ],
+  "application/vnd.ms-powerpoint.addin.macroenabled.12": [
+    "ppam"
+  ],
+  "application/vnd.ms-powerpoint.presentation.macroenabled.12": [
+    "pptm"
+  ],
+  "application/vnd.ms-powerpoint.slide.macroenabled.12": [
+    "sldm"
+  ],
+  "application/vnd.ms-powerpoint.slideshow.macroenabled.12": [
+    "ppsm"
+  ],
+  "application/vnd.ms-powerpoint.template.macroenabled.12": [
+    "potm"
+  ],
+  "application/vnd.ms-printing.printticket+xml": [],
+  "application/vnd.ms-project": [
+    "mpp",
+    "mpt"
+  ],
+  "application/vnd.ms-tnef": [],
+  "application/vnd.ms-wmdrm.lic-chlg-req": [],
+  "application/vnd.ms-wmdrm.lic-resp": [],
+  "application/vnd.ms-wmdrm.meter-chlg-req": [],
+  "application/vnd.ms-wmdrm.meter-resp": [],
+  "application/vnd.ms-word.document.macroenabled.12": [
+    "docm"
+  ],
+  "application/vnd.ms-word.template.macroenabled.12": [
+    "dotm"
+  ],
+  "application/vnd.ms-works": [
+    "wps",
+    "wks",
+    "wcm",
+    "wdb"
+  ],
+  "application/vnd.ms-wpl": [
+    "wpl"
+  ],
+  "application/vnd.ms-xpsdocument": [
+    "xps"
+  ],
+  "application/vnd.mseq": [
+    "mseq"
+  ],
+  "application/vnd.msign": [],
+  "application/vnd.multiad.creator": [],
+  "application/vnd.multiad.creator.cif": [],
+  "application/vnd.music-niff": [],
+  "application/vnd.musician": [
+    "mus"
+  ],
+  "application/vnd.muvee.style": [
+    "msty"
+  ],
+  "application/vnd.mynfc": [
+    "taglet"
+  ],
+  "application/vnd.ncd.control": [],
+  "application/vnd.ncd.reference": [],
+  "application/vnd.nervana": [],
+  "application/vnd.netfpx": [],
+  "application/vnd.neurolanguage.nlu": [
+    "nlu"
+  ],
+  "application/vnd.nitf": [
+    "ntf",
+    "nitf"
+  ],
+  "application/vnd.noblenet-directory": [
+    "nnd"
+  ],
+  "application/vnd.noblenet-sealer": [
+    "nns"
+  ],
+  "application/vnd.noblenet-web": [
+    "nnw"
+  ],
+  "application/vnd.nokia.catalogs": [],
+  "application/vnd.nokia.conml+wbxml": [],
+  "application/vnd.nokia.conml+xml": [],
+  "application/vnd.nokia.isds-radio-presets": [],
+  "application/vnd.nokia.iptv.config+xml": [],
+  "application/vnd.nokia.landmark+wbxml": [],
+  "application/vnd.nokia.landmark+xml": [],
+  "application/vnd.nokia.landmarkcollection+xml": [],
+  "application/vnd.nokia.n-gage.ac+xml": [],
+  "application/vnd.nokia.n-gage.data": [
+    "ngdat"
+  ],
+  "application/vnd.nokia.ncd": [],
+  "application/vnd.nokia.pcd+wbxml": [],
+  "application/vnd.nokia.pcd+xml": [],
+  "application/vnd.nokia.radio-preset": [
+    "rpst"
+  ],
+  "application/vnd.nokia.radio-presets": [
+    "rpss"
+  ],
+  "application/vnd.novadigm.edm": [
+    "edm"
+  ],
+  "application/vnd.novadigm.edx": [
+    "edx"
+  ],
+  "application/vnd.novadigm.ext": [
+    "ext"
+  ],
+  "application/vnd.ntt-local.file-transfer": [],
+  "application/vnd.ntt-local.sip-ta_remote": [],
+  "application/vnd.ntt-local.sip-ta_tcp_stream": [],
+  "application/vnd.oasis.opendocument.chart": [
+    "odc"
+  ],
+  "application/vnd.oasis.opendocument.chart-template": [
+    "otc"
+  ],
+  "application/vnd.oasis.opendocument.database": [
+    "odb"
+  ],
+  "application/vnd.oasis.opendocument.formula": [
+    "odf"
+  ],
+  "application/vnd.oasis.opendocument.formula-template": [
+    "odft"
+  ],
+  "application/vnd.oasis.opendocument.graphics": [
+    "odg"
+  ],
+  "application/vnd.oasis.opendocument.graphics-template": [
+    "otg"
+  ],
+  "application/vnd.oasis.opendocument.image": [
+    "odi"
+  ],
+  "application/vnd.oasis.opendocument.image-template": [
+    "oti"
+  ],
+  "application/vnd.oasis.opendocument.presentation": [
+    "odp"
+  ],
+  "application/vnd.oasis.opendocument.presentation-template": [
+    "otp"
+  ],
+  "application/vnd.oasis.opendocument.spreadsheet": [
+    "ods"
+  ],
+  "application/vnd.oasis.opendocument.spreadsheet-template": [
+    "ots"
+  ],
+  "application/vnd.oasis.opendocument.text": [
+    "odt"
+  ],
+  "application/vnd.oasis.opendocument.text-master": [
+    "odm"
+  ],
+  "application/vnd.oasis.opendocument.text-template": [
+    "ott"
+  ],
+  "application/vnd.oasis.opendocument.text-web": [
+    "oth"
+  ],
+  "application/vnd.obn": [],
+  "application/vnd.oftn.l10n+json": [],
+  "application/vnd.oipf.contentaccessdownload+xml": [],
+  "application/vnd.oipf.contentaccessstreaming+xml": [],
+  "application/vnd.oipf.cspg-hexbinary": [],
+  "application/vnd.oipf.dae.svg+xml": [],
+  "application/vnd.oipf.dae.xhtml+xml": [],
+  "application/vnd.oipf.mippvcontrolmessage+xml": [],
+  "application/vnd.oipf.pae.gem": [],
+  "application/vnd.oipf.spdiscovery+xml": [],
+  "application/vnd.oipf.spdlist+xml": [],
+  "application/vnd.oipf.ueprofile+xml": [],
+  "application/vnd.oipf.userprofile+xml": [],
+  "application/vnd.olpc-sugar": [
+    "xo"
+  ],
+  "application/vnd.oma-scws-config": [],
+  "application/vnd.oma-scws-http-request": [],
+  "application/vnd.oma-scws-http-response": [],
+  "application/vnd.oma.bcast.associated-procedure-parameter+xml": [],
+  "application/vnd.oma.bcast.drm-trigger+xml": [],
+  "application/vnd.oma.bcast.imd+xml": [],
+  "application/vnd.oma.bcast.ltkm": [],
+  "application/vnd.oma.bcast.notification+xml": [],
+  "application/vnd.oma.bcast.provisioningtrigger": [],
+  "application/vnd.oma.bcast.sgboot": [],
+  "application/vnd.oma.bcast.sgdd+xml": [],
+  "application/vnd.oma.bcast.sgdu": [],
+  "application/vnd.oma.bcast.simple-symbol-container": [],
+  "application/vnd.oma.bcast.smartcard-trigger+xml": [],
+  "application/vnd.oma.bcast.sprov+xml": [],
+  "application/vnd.oma.bcast.stkm": [],
+  "application/vnd.oma.cab-address-book+xml": [],
+  "application/vnd.oma.cab-feature-handler+xml": [],
+  "application/vnd.oma.cab-pcc+xml": [],
+  "application/vnd.oma.cab-user-prefs+xml": [],
+  "application/vnd.oma.dcd": [],
+  "application/vnd.oma.dcdc": [],
+  "application/vnd.oma.dd2+xml": [
+    "dd2"
+  ],
+  "application/vnd.oma.drm.risd+xml": [],
+  "application/vnd.oma.group-usage-list+xml": [],
+  "application/vnd.oma.pal+xml": [],
+  "application/vnd.oma.poc.detailed-progress-report+xml": [],
+  "application/vnd.oma.poc.final-report+xml": [],
+  "application/vnd.oma.poc.groups+xml": [],
+  "application/vnd.oma.poc.invocation-descriptor+xml": [],
+  "application/vnd.oma.poc.optimized-progress-report+xml": [],
+  "application/vnd.oma.push": [],
+  "application/vnd.oma.scidm.messages+xml": [],
+  "application/vnd.oma.xcap-directory+xml": [],
+  "application/vnd.omads-email+xml": [],
+  "application/vnd.omads-file+xml": [],
+  "application/vnd.omads-folder+xml": [],
+  "application/vnd.omaloc-supl-init": [],
+  "application/vnd.openofficeorg.extension": [
+    "oxt"
+  ],
+  "application/vnd.openxmlformats-officedocument.custom-properties+xml": [],
+  "application/vnd.openxmlformats-officedocument.customxmlproperties+xml": [],
+  "application/vnd.openxmlformats-officedocument.drawing+xml": [],
+  "application/vnd.openxmlformats-officedocument.drawingml.chart+xml": [],
+  "application/vnd.openxmlformats-officedocument.drawingml.chartshapes+xml": [],
+  "application/vnd.openxmlformats-officedocument.drawingml.diagramcolors+xml": [],
+  "application/vnd.openxmlformats-officedocument.drawingml.diagramdata+xml": [],
+  "application/vnd.openxmlformats-officedocument.drawingml.diagramlayout+xml": [],
+  "application/vnd.openxmlformats-officedocument.drawingml.diagramstyle+xml": [],
+  "application/vnd.openxmlformats-officedocument.extended-properties+xml": [],
+  "application/vnd.openxmlformats-officedocument.presentationml.commentauthors+xml": [],
+  "application/vnd.openxmlformats-officedocument.presentationml.comments+xml": [],
+  "application/vnd.openxmlformats-officedocument.presentationml.handoutmaster+xml": [],
+  "application/vnd.openxmlformats-officedocument.presentationml.notesmaster+xml": [],
+  "application/vnd.openxmlformats-officedocument.presentationml.notesslide+xml": [],
+  "application/vnd.openxmlformats-officedocument.presentationml.presentation": [
+    "pptx"
+  ],
+  "application/vnd.openxmlformats-officedocument.presentationml.presentation.main+xml": [],
+  "application/vnd.openxmlformats-officedocument.presentationml.presprops+xml": [],
+  "application/vnd.openxmlformats-officedocument.presentationml.slide": [
+    "sldx"
+  ],
+  "application/vnd.openxmlformats-officedocument.presentationml.slide+xml": [],
+  "application/vnd.openxmlformats-officedocument.presentationml.slidelayout+xml": [],
+  "application/vnd.openxmlformats-officedocument.presentationml.slidemaster+xml": [],
+  "application/vnd.openxmlformats-officedocument.presentationml.slideshow": [
+    "ppsx"
+  ],
+  "application/vnd.openxmlformats-officedocument.presentationml.slideshow.main+xml": [],
+  "application/vnd.openxmlformats-officedocument.presentationml.slideupdateinfo+xml": [],
+  "application/vnd.openxmlformats-officedocument.presentationml.tablestyles+xml": [],
+  "application/vnd.openxmlformats-officedocument.presentationml.tags+xml": [],
+  "application/vnd.openxmlformats-officedocument.presentationml.template": [
+    "potx"
+  ],
+  "application/vnd.openxmlformats-officedocument.presentationml.template.main+xml": [],
+  "application/vnd.openxmlformats-officedocument.presentationml.viewprops+xml": [],
+  "application/vnd.openxmlformats-officedocument.spreadsheetml.calcchain+xml": [],
+  "application/vnd.openxmlformats-officedocument.spreadsheetml.chartsheet+xml": [],
+  "application/vnd.openxmlformats-officedocument.spreadsheetml.comments+xml": [],
+  "application/vnd.openxmlformats-officedocument.spreadsheetml.connections+xml": [],
+  "application/vnd.openxmlformats-officedocument.spreadsheetml.dialogsheet+xml": [],
+  "application/vnd.openxmlformats-officedocument.spreadsheetml.externallink+xml": [],
+  "application/vnd.openxmlformats-officedocument.spreadsheetml.pivotcachedefinition+xml": [],
+  "application/vnd.openxmlformats-officedocument.spreadsheetml.pivotcacherecords+xml": [],
+  "application/vnd.openxmlformats-officedocument.spreadsheetml.pivottable+xml": [],
+  "application/vnd.openxmlformats-officedocument.spreadsheetml.querytable+xml": [],
+  "application/vnd.openxmlformats-officedocument.spreadsheetml.revisionheaders+xml": [],
+  "application/vnd.openxmlformats-officedocument.spreadsheetml.revisionlog+xml": [],
+  "application/vnd.openxmlformats-officedocument.spreadsheetml.sharedstrings+xml": [],
+  "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": [
+    "xlsx"
+  ],
+  "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml": [],
+  "application/vnd.openxmlformats-officedocument.spreadsheetml.sheetmetadata+xml": [],
+  "application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml": [],
+  "application/vnd.openxmlformats-officedocument.spreadsheetml.table+xml": [],
+  "application/vnd.openxmlformats-officedocument.spreadsheetml.tablesinglecells+xml": [],
+  "application/vnd.openxmlformats-officedocument.spreadsheetml.template": [
+    "xltx"
+  ],
+  "application/vnd.openxmlformats-officedocument.spreadsheetml.template.main+xml": [],
+  "application/vnd.openxmlformats-officedocument.spreadsheetml.usernames+xml": [],
+  "application/vnd.openxmlformats-officedocument.spreadsheetml.volatiledependencies+xml": [],
+  "application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml": [],
+  "application/vnd.openxmlformats-officedocument.theme+xml": [],
+  "application/vnd.openxmlformats-officedocument.themeoverride+xml": [],
+  "application/vnd.openxmlformats-officedocument.vmldrawing": [],
+  "application/vnd.openxmlformats-officedocument.wordprocessingml.comments+xml": [],
+  "application/vnd.openxmlformats-officedocument.wordprocessingml.document": [
+    "docx"
+  ],
+  "application/vnd.openxmlformats-officedocument.wordprocessingml.document.glossary+xml": [],
+  "application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml": [],
+  "application/vnd.openxmlformats-officedocument.wordprocessingml.endnotes+xml": [],
+  "application/vnd.openxmlformats-officedocument.wordprocessingml.fonttable+xml": [],
+  "application/vnd.openxmlformats-officedocument.wordprocessingml.footer+xml": [],
+  "application/vnd.openxmlformats-officedocument.wordprocessingml.footnotes+xml": [],
+  "application/vnd.openxmlformats-officedocument.wordprocessingml.numbering+xml": [],
+  "application/vnd.openxmlformats-officedocument.wordprocessingml.settings+xml": [],
+  "application/vnd.openxmlformats-officedocument.wordprocessingml.styles+xml": [],
+  "application/vnd.openxmlformats-officedocument.wordprocessingml.template": [
+    "dotx"
+  ],
+  "application/vnd.openxmlformats-officedocument.wordprocessingml.template.main+xml": [],
+  "application/vnd.openxmlformats-officedocument.wordprocessingml.websettings+xml": [],
+  "application/vnd.openxmlformats-package.core-properties+xml": [],
+  "application/vnd.openxmlformats-package.digital-signature-xmlsignature+xml": [],
+  "application/vnd.openxmlformats-package.relationships+xml": [],
+  "application/vnd.quobject-quoxdocument": [],
+  "application/vnd.osa.netdeploy": [],
+  "application/vnd.osgeo.mapguide.package": [
+    "mgp"
+  ],
+  "application/vnd.osgi.bundle": [],
+  "application/vnd.osgi.dp": [
+    "dp"
+  ],
+  "application/vnd.osgi.subsystem": [
+    "esa"
+  ],
+  "application/vnd.otps.ct-kip+xml": [],
+  "application/vnd.palm": [
+    "pdb",
+    "pqa",
+    "oprc"
+  ],
+  "application/vnd.paos.xml": [],
+  "application/vnd.pawaafile": [
+    "paw"
+  ],
+  "application/vnd.pg.format": [
+    "str"
+  ],
+  "application/vnd.pg.osasli": [
+    "ei6"
+  ],
+  "application/vnd.piaccess.application-licence": [],
+  "application/vnd.picsel": [
+    "efif"
+  ],
+  "application/vnd.pmi.widget": [
+    "wg"
+  ],
+  "application/vnd.poc.group-advertisement+xml": [],
+  "application/vnd.pocketlearn": [
+    "plf"
+  ],
+  "application/vnd.powerbuilder6": [
+    "pbd"
+  ],
+  "application/vnd.powerbuilder6-s": [],
+  "application/vnd.powerbuilder7": [],
+  "application/vnd.powerbuilder7-s": [],
+  "application/vnd.powerbuilder75": [],
+  "application/vnd.powerbuilder75-s": [],
+  "application/vnd.preminet": [],
+  "application/vnd.previewsystems.box": [
+    "box"
+  ],
+  "application/vnd.proteus.magazine": [
+    "mgz"
+  ],
+  "application/vnd.publishare-delta-tree": [
+    "qps"
+  ],
+  "application/vnd.pvi.ptid1": [
+    "ptid"
+  ],
+  "application/vnd.pwg-multiplexed": [],
+  "application/vnd.pwg-xhtml-print+xml": [],
+  "application/vnd.qualcomm.brew-app-res": [],
+  "application/vnd.quark.quarkxpress": [
+    "qxd",
+    "qxt",
+    "qwd",
+    "qwt",
+    "qxl",
+    "qxb"
+  ],
+  "application/vnd.radisys.moml+xml": [],
+  "application/vnd.radisys.msml+xml": [],
+  "application/vnd.radisys.msml-audit+xml": [],
+  "application/vnd.radisys.msml-audit-conf+xml": [],
+  "application/vnd.radisys.msml-audit-conn+xml": [],
+  "application/vnd.radisys.msml-audit-dialog+xml": [],
+  "application/vnd.radisys.msml-audit-stream+xml": [],
+  "application/vnd.radisys.msml-conf+xml": [],
+  "application/vnd.radisys.msml-dialog+xml": [],
+  "application/vnd.radisys.msml-dialog-base+xml": [],
+  "application/vnd.radisys.msml-dialog-fax-detect+xml": [],
+  "application/vnd.radisys.msml-dialog-fax-sendrecv+xml": [],
+  "application/vnd.radisys.msml-dialog-group+xml": [],
+  "application/vnd.radisys.msml-dialog-speech+xml": [],
+  "application/vnd.radisys.msml-dialog-transform+xml": [],
+  "application/vnd.rainstor.data": [],
+  "application/vnd.rapid": [],
+  "application/vnd.realvnc.bed": [
+    "bed"
+  ],
+  "application/vnd.recordare.musicxml": [
+    "mxl"
+  ],
+  "application/vnd.recordare.musicxml+xml": [
+    "musicxml"
+  ],
+  "application/vnd.renlearn.rlprint": [],
+  "application/vnd.rig.cryptonote": [
+    "cryptonote"
+  ],
+  "application/vnd.rim.cod": [
+    "cod"
+  ],
+  "application/vnd.rn-realmedia": [
+    "rm"
+  ],
+  "application/vnd.rn-realmedia-vbr": [
+    "rmvb"
+  ],
+  "application/vnd.route66.link66+xml": [
+    "link66"
+  ],
+  "application/vnd.rs-274x": [],
+  "application/vnd.ruckus.download": [],
+  "application/vnd.s3sms": [],
+  "application/vnd.sailingtracker.track": [
+    "st"
+  ],
+  "application/vnd.sbm.cid": [],
+  "application/vnd.sbm.mid2": [],
+  "application/vnd.scribus": [],
+  "application/vnd.sealed.3df": [],
+  "application/vnd.sealed.csf": [],
+  "application/vnd.sealed.doc": [],
+  "application/vnd.sealed.eml": [],
+  "application/vnd.sealed.mht": [],
+  "application/vnd.sealed.net": [],
+  "application/vnd.sealed.ppt": [],
+  "application/vnd.sealed.tiff": [],
+  "application/vnd.sealed.xls": [],
+  "application/vnd.sealedmedia.softseal.html": [],
+  "application/vnd.sealedmedia.softseal.pdf": [],
+  "application/vnd.seemail": [
+    "see"
+  ],
+  "application/vnd.sema": [
+    "sema"
+  ],
+  "application/vnd.semd": [
+    "semd"
+  ],
+  "application/vnd.semf": [
+    "semf"
+  ],
+  "application/vnd.shana.informed.formdata": [
+    "ifm"
+  ],
+  "application/vnd.shana.informed.formtemplate": [
+    "itp"
+  ],
+  "application/vnd.shana.informed.interchange": [
+    "iif"
+  ],
+  "application/vnd.shana.informed.package": [
+    "ipk"
+  ],
+  "application/vnd.simtech-mindmapper": [
+    "twd",
+    "twds"
+  ],
+  "application/vnd.smaf": [
+    "mmf"
+  ],
+  "application/vnd.smart.notebook": [],
+  "application/vnd.smart.teacher": [
+    "teacher"
+  ],
+  "application/vnd.software602.filler.form+xml": [],
+  "application/vnd.software602.filler.form-xml-zip": [],
+  "application/vnd.solent.sdkm+xml": [
+    "sdkm",
+    "sdkd"
+  ],
+  "application/vnd.spotfire.dxp": [
+    "dxp"
+  ],
+  "application/vnd.spotfire.sfs": [
+    "sfs"
+  ],
+  "application/vnd.sss-cod": [],
+  "application/vnd.sss-dtf": [],
+  "application/vnd.sss-ntf": [],
+  "application/vnd.stardivision.calc": [
+    "sdc"
+  ],
+  "application/vnd.stardivision.draw": [
+    "sda"
+  ],
+  "application/vnd.stardivision.impress": [
+    "sdd"
+  ],
+  "application/vnd.stardivision.math": [
+    "smf"
+  ],
+  "application/vnd.stardivision.writer": [
+    "sdw",
+    "vor"
+  ],
+  "application/vnd.stardivision.writer-global": [
+    "sgl"
+  ],
+  "application/vnd.stepmania.package": [
+    "smzip"
+  ],
+  "application/vnd.stepmania.stepchart": [
+    "sm"
+  ],
+  "application/vnd.street-stream": [],
+  "application/vnd.sun.xml.calc": [
+    "sxc"
+  ],
+  "application/vnd.sun.xml.calc.template": [
+    "stc"
+  ],
+  "application/vnd.sun.xml.draw": [
+    "sxd"
+  ],
+  "application/vnd.sun.xml.draw.template": [
+    "std"
+  ],
+  "application/vnd.sun.xml.impress": [
+    "sxi"
+  ],
+  "application/vnd.sun.xml.impress.template": [
+    "sti"
+  ],
+  "application/vnd.sun.xml.math": [
+    "sxm"
+  ],
+  "application/vnd.sun.xml.writer": [
+    "sxw"
+  ],
+  "application/vnd.sun.xml.writer.global": [
+    "sxg"
+  ],
+  "application/vnd.sun.xml.writer.template": [
+    "stw"
+  ],
+  "application/vnd.sun.wadl+xml": [],
+  "application/vnd.sus-calendar": [
+    "sus",
+    "susp"
+  ],
+  "application/vnd.svd": [
+    "svd"
+  ],
+  "application/vnd.swiftview-ics": [],
+  "application/vnd.symbian.install": [
+    "sis",
+    "sisx"
+  ],
+  "application/vnd.syncml+xml": [
+    "xsm"
+  ],
+  "application/vnd.syncml.dm+wbxml": [
+    "bdm"
+  ],
+  "application/vnd.syncml.dm+xml": [
+    "xdm"
+  ],
+  "application/vnd.syncml.dm.notification": [],
+  "application/vnd.syncml.ds.notification": [],
+  "application/vnd.tao.intent-module-archive": [
+    "tao"
+  ],
+  "application/vnd.tcpdump.pcap": [
+    "pcap",
+    "cap",
+    "dmp"
+  ],
+  "application/vnd.tmobile-livetv": [
+    "tmo"
+  ],
+  "application/vnd.trid.tpt": [
+    "tpt"
+  ],
+  "application/vnd.triscape.mxs": [
+    "mxs"
+  ],
+  "application/vnd.trueapp": [
+    "tra"
+  ],
+  "application/vnd.truedoc": [],
+  "application/vnd.ubisoft.webplayer": [],
+  "application/vnd.ufdl": [
+    "ufd",
+    "ufdl"
+  ],
+  "application/vnd.uiq.theme": [
+    "utz"
+  ],
+  "application/vnd.umajin": [
+    "umj"
+  ],
+  "application/vnd.unity": [
+    "unityweb"
+  ],
+  "application/vnd.uoml+xml": [
+    "uoml"
+  ],
+  "application/vnd.uplanet.alert": [],
+  "application/vnd.uplanet.alert-wbxml": [],
+  "application/vnd.uplanet.bearer-choice": [],
+  "application/vnd.uplanet.bearer-choice-wbxml": [],
+  "application/vnd.uplanet.cacheop": [],
+  "application/vnd.uplanet.cacheop-wbxml": [],
+  "application/vnd.uplanet.channel": [],
+  "application/vnd.uplanet.channel-wbxml": [],
+  "application/vnd.uplanet.list": [],
+  "application/vnd.uplanet.list-wbxml": [],
+  "application/vnd.uplanet.listcmd": [],
+  "application/vnd.uplanet.listcmd-wbxml": [],
+  "application/vnd.uplanet.signal": [],
+  "application/vnd.vcx": [
+    "vcx"
+  ],
+  "application/vnd.vd-study": [],
+  "application/vnd.vectorworks": [],
+  "application/vnd.verimatrix.vcas": [],
+  "application/vnd.vidsoft.vidconference": [],
+  "application/vnd.visio": [
+    "vsd",
+    "vst",
+    "vss",
+    "vsw"
+  ],
+  "application/vnd.visionary": [
+    "vis"
+  ],
+  "application/vnd.vividence.scriptfile": [],
+  "application/vnd.vsf": [
+    "vsf"
+  ],
+  "application/vnd.wap.sic": [],
+  "application/vnd.wap.slc": [],
+  "application/vnd.wap.wbxml": [
+    "wbxml"
+  ],
+  "application/vnd.wap.wmlc": [
+    "wmlc"
+  ],
+  "application/vnd.wap.wmlscriptc": [
+    "wmlsc"
+  ],
+  "application/vnd.webturbo": [
+    "wtb"
+  ],
+  "application/vnd.wfa.wsc": [],
+  "application/vnd.wmc": [],
+  "application/vnd.wmf.bootstrap": [],
+  "application/vnd.wolfram.mathematica": [],
+  "application/vnd.wolfram.mathematica.package": [],
+  "application/vnd.wolfram.player": [
+    "nbp"
+  ],
+  "application/vnd.wordperfect": [
+    "wpd"
+  ],
+  "application/vnd.wqd": [
+    "wqd"
+  ],
+  "application/vnd.wrq-hp3000-labelled": [],
+  "application/vnd.wt.stf": [
+    "stf"
+  ],
+  "application/vnd.wv.csp+wbxml": [],
+  "application/vnd.wv.csp+xml": [],
+  "application/vnd.wv.ssp+xml": [],
+  "application/vnd.xara": [
+    "xar"
+  ],
+  "application/vnd.xfdl": [
+    "xfdl"
+  ],
+  "application/vnd.xfdl.webform": [],
+  "application/vnd.xmi+xml": [],
+  "application/vnd.xmpie.cpkg": [],
+  "application/vnd.xmpie.dpkg": [],
+  "application/vnd.xmpie.plan": [],
+  "application/vnd.xmpie.ppkg": [],
+  "application/vnd.xmpie.xlim": [],
+  "application/vnd.yamaha.hv-dic": [
+    "hvd"
+  ],
+  "application/vnd.yamaha.hv-script": [
+    "hvs"
+  ],
+  "application/vnd.yamaha.hv-voice": [
+    "hvp"
+  ],
+  "application/vnd.yamaha.openscoreformat": [
+    "osf"
+  ],
+  "application/vnd.yamaha.openscoreformat.osfpvg+xml": [
+    "osfpvg"
+  ],
+  "application/vnd.yamaha.remote-setup": [],
+  "application/vnd.yamaha.smaf-audio": [
+    "saf"
+  ],
+  "application/vnd.yamaha.smaf-phrase": [
+    "spf"
+  ],
+  "application/vnd.yamaha.through-ngn": [],
+  "application/vnd.yamaha.tunnel-udpencap": [],
+  "application/vnd.yellowriver-custom-menu": [
+    "cmp"
+  ],
+  "application/vnd.zul": [
+    "zir",
+    "zirz"
+  ],
+  "application/vnd.zzazz.deck+xml": [
+    "zaz"
+  ],
+  "application/voicexml+xml": [
+    "vxml"
+  ],
+  "application/vq-rtcpxr": [],
+  "application/watcherinfo+xml": [],
+  "application/whoispp-query": [],
+  "application/whoispp-response": [],
+  "application/widget": [
+    "wgt"
+  ],
+  "application/winhlp": [
+    "hlp"
+  ],
+  "application/wita": [],
+  "application/wordperfect5.1": [],
+  "application/wsdl+xml": [
+    "wsdl"
+  ],
+  "application/wspolicy+xml": [
+    "wspolicy"
+  ],
+  "application/x-7z-compressed": [
+    "7z"
+  ],
+  "application/x-abiword": [
+    "abw"
+  ],
+  "application/x-ace-compressed": [
+    "ace"
+  ],
+  "application/x-amf": [],
+  "application/x-apple-diskimage": [
+    "dmg"
+  ],
+  "application/x-authorware-bin": [
+    "aab",
+    "x32",
+    "u32",
+    "vox"
+  ],
+  "application/x-authorware-map": [
+    "aam"
+  ],
+  "application/x-authorware-seg": [
+    "aas"
+  ],
+  "application/x-bcpio": [
+    "bcpio"
+  ],
+  "application/x-bittorrent": [
+    "torrent"
+  ],
+  "application/x-blorb": [
+    "blb",
+    "blorb"
+  ],
+  "application/x-bzip": [
+    "bz"
+  ],
+  "application/x-bzip2": [
+    "bz2",
+    "boz"
+  ],
+  "application/x-cbr": [
+    "cbr",
+    "cba",
+    "cbt",
+    "cbz",
+    "cb7"
+  ],
+  "application/x-cdlink": [
+    "vcd"
+  ],
+  "application/x-cfs-compressed": [
+    "cfs"
+  ],
+  "application/x-chat": [
+    "chat"
+  ],
+  "application/x-chess-pgn": [
+    "pgn"
+  ],
+  "application/x-conference": [
+    "nsc"
+  ],
+  "application/x-compress": [],
+  "application/x-cpio": [
+    "cpio"
+  ],
+  "application/x-csh": [
+    "csh"
+  ],
+  "application/x-debian-package": [
+    "deb",
+    "udeb"
+  ],
+  "application/x-dgc-compressed": [
+    "dgc"
+  ],
+  "application/x-director": [
+    "dir",
+    "dcr",
+    "dxr",
+    "cst",
+    "cct",
+    "cxt",
+    "w3d",
+    "fgd",
+    "swa"
+  ],
+  "application/x-doom": [
+    "wad"
+  ],
+  "application/x-dtbncx+xml": [
+    "ncx"
+  ],
+  "application/x-dtbook+xml": [
+    "dtb"
+  ],
+  "application/x-dtbresource+xml": [
+    "res"
+  ],
+  "application/x-dvi": [
+    "dvi"
+  ],
+  "application/x-envoy": [
+    "evy"
+  ],
+  "application/x-eva": [
+    "eva"
+  ],
+  "application/x-font-bdf": [
+    "bdf"
+  ],
+  "application/x-font-dos": [],
+  "application/x-font-framemaker": [],
+  "application/x-font-ghostscript": [
+    "gsf"
+  ],
+  "application/x-font-libgrx": [],
+  "application/x-font-linux-psf": [
+    "psf"
+  ],
+  "application/x-font-otf": [
+    "otf"
+  ],
+  "application/x-font-pcf": [
+    "pcf"
+  ],
+  "application/x-font-snf": [
+    "snf"
+  ],
+  "application/x-font-speedo": [],
+  "application/x-font-sunos-news": [],
+  "application/x-font-ttf": [
+    "ttf",
+    "ttc"
+  ],
+  "application/x-font-type1": [
+    "pfa",
+    "pfb",
+    "pfm",
+    "afm"
+  ],
+  "application/font-woff": [
+    "woff"
+  ],
+  "application/x-font-vfont": [],
+  "application/x-freearc": [
+    "arc"
+  ],
+  "application/x-futuresplash": [
+    "spl"
+  ],
+  "application/x-gca-compressed": [
+    "gca"
+  ],
+  "application/x-glulx": [
+    "ulx"
+  ],
+  "application/x-gnumeric": [
+    "gnumeric"
+  ],
+  "application/x-gramps-xml": [
+    "gramps"
+  ],
+  "application/x-gtar": [
+    "gtar"
+  ],
+  "application/x-gzip": [],
+  "application/x-hdf": [
+    "hdf"
+  ],
+  "application/x-install-instructions": [
+    "install"
+  ],
+  "application/x-iso9660-image": [
+    "iso"
+  ],
+  "application/x-java-jnlp-file": [
+    "jnlp"
+  ],
+  "application/x-latex": [
+    "latex"
+  ],
+  "application/x-lzh-compressed": [
+    "lzh",
+    "lha"
+  ],
+  "application/x-mie": [
+    "mie"
+  ],
+  "application/x-mobipocket-ebook": [
+    "prc",
+    "mobi"
+  ],
+  "application/x-ms-application": [
+    "application"
+  ],
+  "application/x-ms-shortcut": [
+    "lnk"
+  ],
+  "application/x-ms-wmd": [
+    "wmd"
+  ],
+  "application/x-ms-wmz": [
+    "wmz"
+  ],
+  "application/x-ms-xbap": [
+    "xbap"
+  ],
+  "application/x-msaccess": [
+    "mdb"
+  ],
+  "application/x-msbinder": [
+    "obd"
+  ],
+  "application/x-mscardfile": [
+    "crd"
+  ],
+  "application/x-msclip": [
+    "clp"
+  ],
+  "application/x-msdownload": [
+    "exe",
+    "dll",
+    "com",
+    "bat",
+    "msi"
+  ],
+  "application/x-msmediaview": [
+    "mvb",
+    "m13",
+    "m14"
+  ],
+  "application/x-msmetafile": [
+    "wmf",
+    "wmz",
+    "emf",
+    "emz"
+  ],
+  "application/x-msmoney": [
+    "mny"
+  ],
+  "application/x-mspublisher": [
+    "pub"
+  ],
+  "application/x-msschedule": [
+    "scd"
+  ],
+  "application/x-msterminal": [
+    "trm"
+  ],
+  "application/x-mswrite": [
+    "wri"
+  ],
+  "application/x-netcdf": [
+    "nc",
+    "cdf"
+  ],
+  "application/x-nzb": [
+    "nzb"
+  ],
+  "application/x-pkcs12": [
+    "p12",
+    "pfx"
+  ],
+  "application/x-pkcs7-certificates": [
+    "p7b",
+    "spc"
+  ],
+  "application/x-pkcs7-certreqresp": [
+    "p7r"
+  ],
+  "application/x-rar-compressed": [
+    "rar"
+  ],
+  "application/x-research-info-systems": [
+    "ris"
+  ],
+  "application/x-sh": [
+    "sh"
+  ],
+  "application/x-shar": [
+    "shar"
+  ],
+  "application/x-shockwave-flash": [
+    "swf"
+  ],
+  "application/x-silverlight-app": [
+    "xap"
+  ],
+  "application/x-sql": [
+    "sql"
+  ],
+  "application/x-stuffit": [
+    "sit"
+  ],
+  "application/x-stuffitx": [
+    "sitx"
+  ],
+  "application/x-subrip": [
+    "srt"
+  ],
+  "application/x-sv4cpio": [
+    "sv4cpio"
+  ],
+  "application/x-sv4crc": [
+    "sv4crc"
+  ],
+  "application/x-t3vm-image": [
+    "t3"
+  ],
+  "application/x-tads": [
+    "gam"
+  ],
+  "application/x-tar": [
+    "tar"
+  ],
+  "application/x-tcl": [
+    "tcl"
+  ],
+  "application/x-tex": [
+    "tex"
+  ],
+  "application/x-tex-tfm": [
+    "tfm"
+  ],
+  "application/x-texinfo": [
+    "texinfo",
+    "texi"
+  ],
+  "application/x-tgif": [
+    "obj"
+  ],
+  "application/x-ustar": [
+    "ustar"
+  ],
+  "application/x-wais-source": [
+    "src"
+  ],
+  "application/x-x509-ca-cert": [
+    "der",
+    "crt"
+  ],
+  "application/x-xfig": [
+    "fig"
+  ],
+  "application/x-xliff+xml": [
+    "xlf"
+  ],
+  "application/x-xpinstall": [
+    "xpi"
+  ],
+  "application/x-xz": [
+    "xz"
+  ],
+  "application/x-zmachine": [
+    "z1",
+    "z2",
+    "z3",
+    "z4",
+    "z5",
+    "z6",
+    "z7",
+    "z8"
+  ],
+  "application/x400-bp": [],
+  "application/xaml+xml": [
+    "xaml"
+  ],
+  "application/xcap-att+xml": [],
+  "application/xcap-caps+xml": [],
+  "application/xcap-diff+xml": [
+    "xdf"
+  ],
+  "application/xcap-el+xml": [],
+  "application/xcap-error+xml": [],
+  "application/xcap-ns+xml": [],
+  "application/xcon-conference-info-diff+xml": [],
+  "application/xcon-conference-info+xml": [],
+  "application/xenc+xml": [
+    "xenc"
+  ],
+  "application/xhtml+xml": [
+    "xhtml",
+    "xht"
+  ],
+  "application/xhtml-voice+xml": [],
+  "application/xml": [
+    "xml",
+    "xsl"
+  ],
+  "application/xml-dtd": [
+    "dtd"
+  ],
+  "application/xml-external-parsed-entity": [],
+  "application/xmpp+xml": [],
+  "application/xop+xml": [
+    "xop"
+  ],
+  "application/xproc+xml": [
+    "xpl"
+  ],
+  "application/xslt+xml": [
+    "xslt"
+  ],
+  "application/xspf+xml": [
+    "xspf"
+  ],
+  "application/xv+xml": [
+    "mxml",
+    "xhvml",
+    "xvml",
+    "xvm"
+  ],
+  "application/yang": [
+    "yang"
+  ],
+  "application/yin+xml": [
+    "yin"
+  ],
+  "application/zip": [
+    "zip"
+  ],
+  "audio/1d-interleaved-parityfec": [],
+  "audio/32kadpcm": [],
+  "audio/3gpp": [],
+  "audio/3gpp2": [],
+  "audio/ac3": [],
+  "audio/adpcm": [
+    "adp"
+  ],
+  "audio/amr": [],
+  "audio/amr-wb": [],
+  "audio/amr-wb+": [],
+  "audio/asc": [],
+  "audio/atrac-advanced-lossless": [],
+  "audio/atrac-x": [],
+  "audio/atrac3": [],
+  "audio/basic": [
+    "au",
+    "snd"
+  ],
+  "audio/bv16": [],
+  "audio/bv32": [],
+  "audio/clearmode": [],
+  "audio/cn": [],
+  "audio/dat12": [],
+  "audio/dls": [],
+  "audio/dsr-es201108": [],
+  "audio/dsr-es202050": [],
+  "audio/dsr-es202211": [],
+  "audio/dsr-es202212": [],
+  "audio/dv": [],
+  "audio/dvi4": [],
+  "audio/eac3": [],
+  "audio/evrc": [],
+  "audio/evrc-qcp": [],
+  "audio/evrc0": [],
+  "audio/evrc1": [],
+  "audio/evrcb": [],
+  "audio/evrcb0": [],
+  "audio/evrcb1": [],
+  "audio/evrcwb": [],
+  "audio/evrcwb0": [],
+  "audio/evrcwb1": [],
+  "audio/example": [],
+  "audio/fwdred": [],
+  "audio/g719": [],
+  "audio/g722": [],
+  "audio/g7221": [],
+  "audio/g723": [],
+  "audio/g726-16": [],
+  "audio/g726-24": [],
+  "audio/g726-32": [],
+  "audio/g726-40": [],
+  "audio/g728": [],
+  "audio/g729": [],
+  "audio/g7291": [],
+  "audio/g729d": [],
+  "audio/g729e": [],
+  "audio/gsm": [],
+  "audio/gsm-efr": [],
+  "audio/gsm-hr-08": [],
+  "audio/ilbc": [],
+  "audio/ip-mr_v2.5": [],
+  "audio/isac": [],
+  "audio/l16": [],
+  "audio/l20": [],
+  "audio/l24": [],
+  "audio/l8": [],
+  "audio/lpc": [],
+  "audio/midi": [
+    "mid",
+    "midi",
+    "kar",
+    "rmi"
+  ],
+  "audio/mobile-xmf": [],
+  "audio/mp4": [
+    "mp4a"
+  ],
+  "audio/mp4a-latm": [],
+  "audio/mpa": [],
+  "audio/mpa-robust": [],
+  "audio/mpeg": [
+    "mpga",
+    "mp2",
+    "mp2a",
+    "mp3",
+    "m2a",
+    "m3a"
+  ],
+  "audio/mpeg4-generic": [],
+  "audio/musepack": [],
+  "audio/ogg": [
+    "oga",
+    "ogg",
+    "spx"
+  ],
+  "audio/opus": [],
+  "audio/parityfec": [],
+  "audio/pcma": [],
+  "audio/pcma-wb": [],
+  "audio/pcmu-wb": [],
+  "audio/pcmu": [],
+  "audio/prs.sid": [],
+  "audio/qcelp": [],
+  "audio/red": [],
+  "audio/rtp-enc-aescm128": [],
+  "audio/rtp-midi": [],
+  "audio/rtx": [],
+  "audio/s3m": [
+    "s3m"
+  ],
+  "audio/silk": [
+    "sil"
+  ],
+  "audio/smv": [],
+  "audio/smv0": [],
+  "audio/smv-qcp": [],
+  "audio/sp-midi": [],
+  "audio/speex": [],
+  "audio/t140c": [],
+  "audio/t38": [],
+  "audio/telephone-event": [],
+  "audio/tone": [],
+  "audio/uemclip": [],
+  "audio/ulpfec": [],
+  "audio/vdvi": [],
+  "audio/vmr-wb": [],
+  "audio/vnd.3gpp.iufp": [],
+  "audio/vnd.4sb": [],
+  "audio/vnd.audiokoz": [],
+  "audio/vnd.celp": [],
+  "audio/vnd.cisco.nse": [],
+  "audio/vnd.cmles.radio-events": [],
+  "audio/vnd.cns.anp1": [],
+  "audio/vnd.cns.inf1": [],
+  "audio/vnd.dece.audio": [
+    "uva",
+    "uvva"
+  ],
+  "audio/vnd.digital-winds": [
+    "eol"
+  ],
+  "audio/vnd.dlna.adts": [],
+  "audio/vnd.dolby.heaac.1": [],
+  "audio/vnd.dolby.heaac.2": [],
+  "audio/vnd.dolby.mlp": [],
+  "audio/vnd.dolby.mps": [],
+  "audio/vnd.dolby.pl2": [],
+  "audio/vnd.dolby.pl2x": [],
+  "audio/vnd.dolby.pl2z": [],
+  "audio/vnd.dolby.pulse.1": [],
+  "audio/vnd.dra": [
+    "dra"
+  ],
+  "audio/vnd.dts": [
+    "dts"
+  ],
+  "audio/vnd.dts.hd": [
+    "dtshd"
+  ],
+  "audio/vnd.dvb.file": [],
+  "audio/vnd.everad.plj": [],
+  "audio/vnd.hns.audio": [],
+  "audio/vnd.lucent.voice": [
+    "lvp"
+  ],
+  "audio/vnd.ms-playready.media.pya": [
+    "pya"
+  ],
+  "audio/vnd.nokia.mobile-xmf": [],
+  "audio/vnd.nortel.vbk": [],
+  "audio/vnd.nuera.ecelp4800": [
+    "ecelp4800"
+  ],
+  "audio/vnd.nuera.ecelp7470": [
+    "ecelp7470"
+  ],
+  "audio/vnd.nuera.ecelp9600": [
+    "ecelp9600"
+  ],
+  "audio/vnd.octel.sbc": [],
+  "audio/vnd.qcelp": [],
+  "audio/vnd.rhetorex.32kadpcm": [],
+  "audio/vnd.rip": [
+    "rip"
+  ],
+  "audio/vnd.sealedmedia.softseal.mpeg": [],
+  "audio/vnd.vmx.cvsd": [],
+  "audio/vorbis": [],
+  "audio/vorbis-config": [],
+  "audio/webm": [
+    "weba"
+  ],
+  "audio/x-aac": [
+    "aac"
+  ],
+  "audio/x-aiff": [
+    "aif",
+    "aiff",
+    "aifc"
+  ],
+  "audio/x-caf": [
+    "caf"
+  ],
+  "audio/x-flac": [
+    "flac"
+  ],
+  "audio/x-matroska": [
+    "mka"
+  ],
+  "audio/x-mpegurl": [
+    "m3u"
+  ],
+  "audio/x-ms-wax": [
+    "wax"
+  ],
+  "audio/x-ms-wma": [
+    "wma"
+  ],
+  "audio/x-pn-realaudio": [
+    "ram",
+    "ra"
+  ],
+  "audio/x-pn-realaudio-plugin": [
+    "rmp"
+  ],
+  "audio/x-tta": [],
+  "audio/x-wav": [
+    "wav"
+  ],
+  "audio/xm": [
+    "xm"
+  ],
+  "chemical/x-cdx": [
+    "cdx"
+  ],
+  "chemical/x-cif": [
+    "cif"
+  ],
+  "chemical/x-cmdf": [
+    "cmdf"
+  ],
+  "chemical/x-cml": [
+    "cml"
+  ],
+  "chemical/x-csml": [
+    "csml"
+  ],
+  "chemical/x-pdb": [],
+  "chemical/x-xyz": [
+    "xyz"
+  ],
+  "image/bmp": [
+    "bmp"
+  ],
+  "image/cgm": [
+    "cgm"
+  ],
+  "image/example": [],
+  "image/fits": [],
+  "image/g3fax": [
+    "g3"
+  ],
+  "image/gif": [
+    "gif"
+  ],
+  "image/ief": [
+    "ief"
+  ],
+  "image/jp2": [],
+  "image/jpeg": [
+    "jpeg",
+    "jpg",
+    "jpe"
+  ],
+  "image/jpm": [],
+  "image/jpx": [],
+  "image/ktx": [
+    "ktx"
+  ],
+  "image/naplps": [],
+  "image/png": [
+    "png"
+  ],
+  "image/prs.btif": [
+    "btif"
+  ],
+  "image/prs.pti": [],
+  "image/sgi": [
+    "sgi"
+  ],
+  "image/svg+xml": [
+    "svg",
+    "svgz"
+  ],
+  "image/t38": [],
+  "image/tiff": [
+    "tiff",
+    "tif"
+  ],
+  "image/tiff-fx": [],
+  "image/vnd.adobe.photoshop": [
+    "psd"
+  ],
+  "image/vnd.cns.inf2": [],
+  "image/vnd.dece.graphic": [
+    "uvi",
+    "uvvi",
+    "uvg",
+    "uvvg"
+  ],
+  "image/vnd.dvb.subtitle": [
+    "sub"
+  ],
+  "image/vnd.djvu": [
+    "djvu",
+    "djv"
+  ],
+  "image/vnd.dwg": [
+    "dwg"
+  ],
+  "image/vnd.dxf": [
+    "dxf"
+  ],
+  "image/vnd.fastbidsheet": [
+    "fbs"
+  ],
+  "image/vnd.fpx": [
+    "fpx"
+  ],
+  "image/vnd.fst": [
+    "fst"
+  ],
+  "image/vnd.fujixerox.edmics-mmr": [
+    "mmr"
+  ],
+  "image/vnd.fujixerox.edmics-rlc": [
+    "rlc"
+  ],
+  "image/vnd.globalgraphics.pgb": [],
+  "image/vnd.microsoft.icon": [],
+  "image/vnd.mix": [],
+  "image/vnd.ms-modi": [
+    "mdi"
+  ],
+  "image/vnd.ms-photo": [
+    "wdp"
+  ],
+  "image/vnd.net-fpx": [
+    "npx"
+  ],
+  "image/vnd.radiance": [],
+  "image/vnd.sealed.png": [],
+  "image/vnd.sealedmedia.softseal.gif": [],
+  "image/vnd.sealedmedia.softseal.jpg": [],
+  "image/vnd.svf": [],
+  "image/vnd.wap.wbmp": [
+    "wbmp"
+  ],
+  "image/vnd.xiff": [
+    "xif"
+  ],
+  "image/webp": [
+    "webp"
+  ],
+  "image/x-3ds": [
+    "3ds"
+  ],
+  "image/x-cmu-raster": [
+    "ras"
+  ],
+  "image/x-cmx": [
+    "cmx"
+  ],
+  "image/x-freehand": [
+    "fh",
+    "fhc",
+    "fh4",
+    "fh5",
+    "fh7"
+  ],
+  "image/x-icon": [
+    "ico"
+  ],
+  "image/x-mrsid-image": [
+    "sid"
+  ],
+  "image/x-pcx": [
+    "pcx"
+  ],
+  "image/x-pict": [
+    "pic",
+    "pct"
+  ],
+  "image/x-portable-anymap": [
+    "pnm"
+  ],
+  "image/x-portable-bitmap": [
+    "pbm"
+  ],
+  "image/x-portable-graymap": [
+    "pgm"
+  ],
+  "image/x-portable-pixmap": [
+    "ppm"
+  ],
+  "image/x-rgb": [
+    "rgb"
+  ],
+  "image/x-tga": [
+    "tga"
+  ],
+  "image/x-xbitmap": [
+    "xbm"
+  ],
+  "image/x-xpixmap": [
+    "xpm"
+  ],
+  "image/x-xwindowdump": [
+    "xwd"
+  ],
+  "message/cpim": [],
+  "message/delivery-status": [],
+  "message/disposition-notification": [],
+  "message/example": [],
+  "message/external-body": [],
+  "message/feedback-report": [],
+  "message/global": [],
+  "message/global-delivery-status": [],
+  "message/global-disposition-notification": [],
+  "message/global-headers": [],
+  "message/http": [],
+  "message/imdn+xml": [],
+  "message/news": [],
+  "message/partial": [],
+  "message/rfc822": [
+    "eml",
+    "mime"
+  ],
+  "message/s-http": [],
+  "message/sip": [],
+  "message/sipfrag": [],
+  "message/tracking-status": [],
+  "message/vnd.si.simp": [],
+  "model/example": [],
+  "model/iges": [
+    "igs",
+    "iges"
+  ],
+  "model/mesh": [
+    "msh",
+    "mesh",
+    "silo"
+  ],
+  "model/vnd.collada+xml": [
+    "dae"
+  ],
+  "model/vnd.dwf": [
+    "dwf"
+  ],
+  "model/vnd.flatland.3dml": [],
+  "model/vnd.gdl": [
+    "gdl"
+  ],
+  "model/vnd.gs-gdl": [],
+  "model/vnd.gs.gdl": [],
+  "model/vnd.gtw": [
+    "gtw"
+  ],
+  "model/vnd.moml+xml": [],
+  "model/vnd.mts": [
+    "mts"
+  ],
+  "model/vnd.parasolid.transmit.binary": [],
+  "model/vnd.parasolid.transmit.text": [],
+  "model/vnd.vtu": [
+    "vtu"
+  ],
+  "model/vrml": [
+    "wrl",
+    "vrml"
+  ],
+  "model/x3d+binary": [
+    "x3db",
+    "x3dbz"
+  ],
+  "model/x3d+vrml": [
+    "x3dv",
+    "x3dvz"
+  ],
+  "model/x3d+xml": [
+    "x3d",
+    "x3dz"
+  ],
+  "multipart/alternative": [],
+  "multipart/appledouble": [],
+  "multipart/byteranges": [],
+  "multipart/digest": [],
+  "multipart/encrypted": [],
+  "multipart/example": [],
+  "multipart/form-data": [],
+  "multipart/header-set": [],
+  "multipart/mixed": [],
+  "multipart/parallel": [],
+  "multipart/related": [],
+  "multipart/report": [],
+  "multipart/signed": [],
+  "multipart/voice-message": [],
+  "text/1d-interleaved-parityfec": [],
+  "text/cache-manifest": [
+    "appcache"
+  ],
+  "text/calendar": [
+    "ics",
+    "ifb"
+  ],
+  "text/css": [
+    "css"
+  ],
+  "text/csv": [
+    "csv"
+  ],
+  "text/directory": [],
+  "text/dns": [],
+  "text/ecmascript": [],
+  "text/enriched": [],
+  "text/example": [],
+  "text/fwdred": [],
+  "text/html": [
+    "html",
+    "htm"
+  ],
+  "text/javascript": [],
+  "text/n3": [
+    "n3"
+  ],
+  "text/parityfec": [],
+  "text/plain": [
+    "txt",
+    "text",
+    "conf",
+    "def",
+    "list",
+    "log",
+    "in"
+  ],
+  "text/prs.fallenstein.rst": [],
+  "text/prs.lines.tag": [
+    "dsc"
+  ],
+  "text/vnd.radisys.msml-basic-layout": [],
+  "text/red": [],
+  "text/rfc822-headers": [],
+  "text/richtext": [
+    "rtx"
+  ],
+  "text/rtf": [],
+  "text/rtp-enc-aescm128": [],
+  "text/rtx": [],
+  "text/sgml": [
+    "sgml",
+    "sgm"
+  ],
+  "text/t140": [],
+  "text/tab-separated-values": [
+    "tsv"
+  ],
+  "text/troff": [
+    "t",
+    "tr",
+    "roff",
+    "man",
+    "me",
+    "ms"
+  ],
+  "text/turtle": [
+    "ttl"
+  ],
+  "text/ulpfec": [],
+  "text/uri-list": [
+    "uri",
+    "uris",
+    "urls"
+  ],
+  "text/vcard": [
+    "vcard"
+  ],
+  "text/vnd.abc": [],
+  "text/vnd.curl": [
+    "curl"
+  ],
+  "text/vnd.curl.dcurl": [
+    "dcurl"
+  ],
+  "text/vnd.curl.scurl": [
+    "scurl"
+  ],
+  "text/vnd.curl.mcurl": [
+    "mcurl"
+  ],
+  "text/vnd.dmclientscript": [],
+  "text/vnd.dvb.subtitle": [
+    "sub"
+  ],
+  "text/vnd.esmertec.theme-descriptor": [],
+  "text/vnd.fly": [
+    "fly"
+  ],
+  "text/vnd.fmi.flexstor": [
+    "flx"
+  ],
+  "text/vnd.graphviz": [
+    "gv"
+  ],
+  "text/vnd.in3d.3dml": [
+    "3dml"
+  ],
+  "text/vnd.in3d.spot": [
+    "spot"
+  ],
+  "text/vnd.iptc.newsml": [],
+  "text/vnd.iptc.nitf": [],
+  "text/vnd.latex-z": [],
+  "text/vnd.motorola.reflex": [],
+  "text/vnd.ms-mediapackage": [],
+  "text/vnd.net2phone.commcenter.command": [],
+  "text/vnd.si.uricatalogue": [],
+  "text/vnd.sun.j2me.app-descriptor": [
+    "jad"
+  ],
+  "text/vnd.trolltech.linguist": [],
+  "text/vnd.wap.si": [],
+  "text/vnd.wap.sl": [],
+  "text/vnd.wap.wml": [
+    "wml"
+  ],
+  "text/vnd.wap.wmlscript": [
+    "wmls"
+  ],
+  "text/x-asm": [
+    "s",
+    "asm"
+  ],
+  "text/x-c": [
+    "c",
+    "cc",
+    "cxx",
+    "cpp",
+    "h",
+    "hh",
+    "dic"
+  ],
+  "text/x-fortran": [
+    "f",
+    "for",
+    "f77",
+    "f90"
+  ],
+  "text/x-java-source": [
+    "java"
+  ],
+  "text/x-opml": [
+    "opml"
+  ],
+  "text/x-pascal": [
+    "p",
+    "pas"
+  ],
+  "text/x-nfo": [
+    "nfo"
+  ],
+  "text/x-setext": [
+    "etx"
+  ],
+  "text/x-sfv": [
+    "sfv"
+  ],
+  "text/x-uuencode": [
+    "uu"
+  ],
+  "text/x-vcalendar": [
+    "vcs"
+  ],
+  "text/x-vcard": [
+    "vcf"
+  ],
+  "text/xml": [],
+  "text/xml-external-parsed-entity": [],
+  "video/1d-interleaved-parityfec": [],
+  "video/3gpp": [
+    "3gp"
+  ],
+  "video/3gpp-tt": [],
+  "video/3gpp2": [
+    "3g2"
+  ],
+  "video/bmpeg": [],
+  "video/bt656": [],
+  "video/celb": [],
+  "video/dv": [],
+  "video/example": [],
+  "video/h261": [
+    "h261"
+  ],
+  "video/h263": [
+    "h263"
+  ],
+  "video/h263-1998": [],
+  "video/h263-2000": [],
+  "video/h264": [
+    "h264"
+  ],
+  "video/h264-rcdo": [],
+  "video/h264-svc": [],
+  "video/jpeg": [
+    "jpgv"
+  ],
+  "video/jpeg2000": [],
+  "video/jpm": [
+    "jpm",
+    "jpgm"
+  ],
+  "video/mj2": [
+    "mj2",
+    "mjp2"
+  ],
+  "video/mp1s": [],
+  "video/mp2p": [],
+  "video/mp2t": [],
+  "video/mp4": [
+    "mp4",
+    "mp4v",
+    "mpg4"
+  ],
+  "video/mp4v-es": [],
+  "video/mpeg": [
+    "mpeg",
+    "mpg",
+    "mpe",
+    "m1v",
+    "m2v"
+  ],
+  "video/mpeg4-generic": [],
+  "video/mpv": [],
+  "video/nv": [],
+  "video/ogg": [
+    "ogv"
+  ],
+  "video/parityfec": [],
+  "video/pointer": [],
+  "video/quicktime": [
+    "qt",
+    "mov"
+  ],
+  "video/raw": [],
+  "video/rtp-enc-aescm128": [],
+  "video/rtx": [],
+  "video/smpte292m": [],
+  "video/ulpfec": [],
+  "video/vc1": [],
+  "video/vnd.cctv": [],
+  "video/vnd.dece.hd": [
+    "uvh",
+    "uvvh"
+  ],
+  "video/vnd.dece.mobile": [
+    "uvm",
+    "uvvm"
+  ],
+  "video/vnd.dece.mp4": [],
+  "video/vnd.dece.pd": [
+    "uvp",
+    "uvvp"
+  ],
+  "video/vnd.dece.sd": [
+    "uvs",
+    "uvvs"
+  ],
+  "video/vnd.dece.video": [
+    "uvv",
+    "uvvv"
+  ],
+  "video/vnd.directv.mpeg": [],
+  "video/vnd.directv.mpeg-tts": [],
+  "video/vnd.dlna.mpeg-tts": [],
+  "video/vnd.dvb.file": [
+    "dvb"
+  ],
+  "video/vnd.fvt": [
+    "fvt"
+  ],
+  "video/vnd.hns.video": [],
+  "video/vnd.iptvforum.1dparityfec-1010": [],
+  "video/vnd.iptvforum.1dparityfec-2005": [],
+  "video/vnd.iptvforum.2dparityfec-1010": [],
+  "video/vnd.iptvforum.2dparityfec-2005": [],
+  "video/vnd.iptvforum.ttsavc": [],
+  "video/vnd.iptvforum.ttsmpeg2": [],
+  "video/vnd.motorola.video": [],
+  "video/vnd.motorola.videop": [],
+  "video/vnd.mpegurl": [
+    "mxu",
+    "m4u"
+  ],
+  "video/vnd.ms-playready.media.pyv": [
+    "pyv"
+  ],
+  "video/vnd.nokia.interleaved-multimedia": [],
+  "video/vnd.nokia.videovoip": [],
+  "video/vnd.objectvideo": [],
+  "video/vnd.sealed.mpeg1": [],
+  "video/vnd.sealed.mpeg4": [],
+  "video/vnd.sealed.swf": [],
+  "video/vnd.sealedmedia.softseal.mov": [],
+  "video/vnd.uvvu.mp4": [
+    "uvu",
+    "uvvu"
+  ],
+  "video/vnd.vivo": [
+    "viv"
+  ],
+  "video/webm": [
+    "webm"
+  ],
+  "video/x-f4v": [
+    "f4v"
+  ],
+  "video/x-fli": [
+    "fli"
+  ],
+  "video/x-flv": [
+    "flv"
+  ],
+  "video/x-m4v": [
+    "m4v"
+  ],
+  "video/x-matroska": [
+    "mkv",
+    "mk3d",
+    "mks"
+  ],
+  "video/x-mng": [
+    "mng"
+  ],
+  "video/x-ms-asf": [
+    "asf",
+    "asx"
+  ],
+  "video/x-ms-vob": [
+    "vob"
+  ],
+  "video/x-ms-wm": [
+    "wm"
+  ],
+  "video/x-ms-wmv": [
+    "wmv"
+  ],
+  "video/x-ms-wmx": [
+    "wmx"
+  ],
+  "video/x-ms-wvx": [
+    "wvx"
+  ],
+  "video/x-msvideo": [
+    "avi"
+  ],
+  "video/x-sgi-movie": [
+    "movie"
+  ],
+  "video/x-smv": [
+    "smv"
+  ],
+  "x-conference/x-cooltalk": [
+    "ice"
+  ]
+}
+
+},{}],"/Users/jmej/pcs/capstone/capstone/node_modules/request/node_modules/mime-types/lib/node.json":[function(require,module,exports){
+module.exports={
+  "text/vtt": [
+    "vtt"
+  ],
+  "application/x-chrome-extension": [
+    "crx"
+  ],
+  "text/x-component": [
+    "htc"
+  ],
+  "text/cache-manifest": [
+    "manifest"
+  ],
+  "application/octet-stream": [
+    "buffer"
+  ],
+  "application/mp4": [
+    "m4p"
+  ],
+  "audio/mp4": [
+    "m4a"
+  ],
+  "video/MP2T": [
+    "ts"
+  ],
+  "application/x-web-app-manifest+json": [
+    "webapp"
+  ],
+  "text/x-lua": [
+    "lua"
+  ],
+  "application/x-lua-bytecode": [
+    "luac"
+  ],
+  "text/x-markdown": [
+    "markdown",
+    "md",
+    "mkd"
+  ],
+  "text/plain": [
+    "ini"
+  ],
+  "application/dash+xml": [
+    "mdp"
+  ],
+  "font/opentype": [
+    "otf"
+  ],
+  "application/json": [
+    "map"
+  ],
+  "application/xml": [
+    "xsd"
+  ]
+}
+
+},{}],"/Users/jmej/pcs/capstone/capstone/node_modules/request/node_modules/node-uuid/uuid.js":[function(require,module,exports){
+(function (Buffer){
+//     uuid.js
+//
+//     Copyright (c) 2010-2012 Robert Kieffer
+//     MIT License - http://opensource.org/licenses/mit-license.php
+
+(function() {
+  var _global = this;
+
+  // Unique ID creation requires a high quality random # generator.  We feature
+  // detect to determine the best RNG source, normalizing to a function that
+  // returns 128-bits of randomness, since that's what's usually required
+  var _rng;
+
+  // Node.js crypto-based RNG - http://nodejs.org/docs/v0.6.2/api/crypto.html
+  //
+  // Moderately fast, high quality
+  if (typeof(require) == 'function') {
+    try {
+      var _rb = require('crypto').randomBytes;
+      _rng = _rb && function() {return _rb(16);};
+    } catch(e) {}
+  }
+
+  if (!_rng && _global.crypto && crypto.getRandomValues) {
+    // WHATWG crypto-based RNG - http://wiki.whatwg.org/wiki/Crypto
+    //
+    // Moderately fast, high quality
+    var _rnds8 = new Uint8Array(16);
+    _rng = function whatwgRNG() {
+      crypto.getRandomValues(_rnds8);
+      return _rnds8;
+    };
+  }
+
+  if (!_rng) {
+    // Math.random()-based (RNG)
+    //
+    // If all else fails, use Math.random().  It's fast, but is of unspecified
+    // quality.
+    var  _rnds = new Array(16);
+    _rng = function() {
+      for (var i = 0, r; i < 16; i++) {
+        if ((i & 0x03) === 0) r = Math.random() * 0x100000000;
+        _rnds[i] = r >>> ((i & 0x03) << 3) & 0xff;
+      }
+
+      return _rnds;
+    };
+  }
+
+  // Buffer class to use
+  var BufferClass = typeof(Buffer) == 'function' ? Buffer : Array;
+
+  // Maps for number <-> hex string conversion
+  var _byteToHex = [];
+  var _hexToByte = {};
+  for (var i = 0; i < 256; i++) {
+    _byteToHex[i] = (i + 0x100).toString(16).substr(1);
+    _hexToByte[_byteToHex[i]] = i;
+  }
+
+  // **`parse()` - Parse a UUID into it's component bytes**
+  function parse(s, buf, offset) {
+    var i = (buf && offset) || 0, ii = 0;
+
+    buf = buf || [];
+    s.toLowerCase().replace(/[0-9a-f]{2}/g, function(oct) {
+      if (ii < 16) { // Don't overflow!
+        buf[i + ii++] = _hexToByte[oct];
+      }
+    });
+
+    // Zero out remaining bytes if string was short
+    while (ii < 16) {
+      buf[i + ii++] = 0;
+    }
+
+    return buf;
+  }
+
+  // **`unparse()` - Convert UUID byte array (ala parse()) into a string**
+  function unparse(buf, offset) {
+    var i = offset || 0, bth = _byteToHex;
+    return  bth[buf[i++]] + bth[buf[i++]] +
+            bth[buf[i++]] + bth[buf[i++]] + '-' +
+            bth[buf[i++]] + bth[buf[i++]] + '-' +
+            bth[buf[i++]] + bth[buf[i++]] + '-' +
+            bth[buf[i++]] + bth[buf[i++]] + '-' +
+            bth[buf[i++]] + bth[buf[i++]] +
+            bth[buf[i++]] + bth[buf[i++]] +
+            bth[buf[i++]] + bth[buf[i++]];
+  }
+
+  // **`v1()` - Generate time-based UUID**
+  //
+  // Inspired by https://github.com/LiosK/UUID.js
+  // and http://docs.python.org/library/uuid.html
+
+  // random #'s we need to init node and clockseq
+  var _seedBytes = _rng();
+
+  // Per 4.5, create and 48-bit node id, (47 random bits + multicast bit = 1)
+  var _nodeId = [
+    _seedBytes[0] | 0x01,
+    _seedBytes[1], _seedBytes[2], _seedBytes[3], _seedBytes[4], _seedBytes[5]
+  ];
+
+  // Per 4.2.2, randomize (14 bit) clockseq
+  var _clockseq = (_seedBytes[6] << 8 | _seedBytes[7]) & 0x3fff;
+
+  // Previous uuid creation time
+  var _lastMSecs = 0, _lastNSecs = 0;
+
+  // See https://github.com/broofa/node-uuid for API details
+  function v1(options, buf, offset) {
+    var i = buf && offset || 0;
+    var b = buf || [];
+
+    options = options || {};
+
+    var clockseq = options.clockseq != null ? options.clockseq : _clockseq;
+
+    // UUID timestamps are 100 nano-second units since the Gregorian epoch,
+    // (1582-10-15 00:00).  JSNumbers aren't precise enough for this, so
+    // time is handled internally as 'msecs' (integer milliseconds) and 'nsecs'
+    // (100-nanoseconds offset from msecs) since unix epoch, 1970-01-01 00:00.
+    var msecs = options.msecs != null ? options.msecs : new Date().getTime();
+
+    // Per 4.2.1.2, use count of uuid's generated during the current clock
+    // cycle to simulate higher resolution clock
+    var nsecs = options.nsecs != null ? options.nsecs : _lastNSecs + 1;
+
+    // Time since last uuid creation (in msecs)
+    var dt = (msecs - _lastMSecs) + (nsecs - _lastNSecs)/10000;
+
+    // Per 4.2.1.2, Bump clockseq on clock regression
+    if (dt < 0 && options.clockseq == null) {
+      clockseq = clockseq + 1 & 0x3fff;
+    }
+
+    // Reset nsecs if clock regresses (new clockseq) or we've moved onto a new
+    // time interval
+    if ((dt < 0 || msecs > _lastMSecs) && options.nsecs == null) {
+      nsecs = 0;
+    }
+
+    // Per 4.2.1.2 Throw error if too many uuids are requested
+    if (nsecs >= 10000) {
+      throw new Error('uuid.v1(): Can\'t create more than 10M uuids/sec');
+    }
+
+    _lastMSecs = msecs;
+    _lastNSecs = nsecs;
+    _clockseq = clockseq;
+
+    // Per 4.1.4 - Convert from unix epoch to Gregorian epoch
+    msecs += 12219292800000;
+
+    // `time_low`
+    var tl = ((msecs & 0xfffffff) * 10000 + nsecs) % 0x100000000;
+    b[i++] = tl >>> 24 & 0xff;
+    b[i++] = tl >>> 16 & 0xff;
+    b[i++] = tl >>> 8 & 0xff;
+    b[i++] = tl & 0xff;
+
+    // `time_mid`
+    var tmh = (msecs / 0x100000000 * 10000) & 0xfffffff;
+    b[i++] = tmh >>> 8 & 0xff;
+    b[i++] = tmh & 0xff;
+
+    // `time_high_and_version`
+    b[i++] = tmh >>> 24 & 0xf | 0x10; // include version
+    b[i++] = tmh >>> 16 & 0xff;
+
+    // `clock_seq_hi_and_reserved` (Per 4.2.2 - include variant)
+    b[i++] = clockseq >>> 8 | 0x80;
+
+    // `clock_seq_low`
+    b[i++] = clockseq & 0xff;
+
+    // `node`
+    var node = options.node || _nodeId;
+    for (var n = 0; n < 6; n++) {
+      b[i + n] = node[n];
+    }
+
+    return buf ? buf : unparse(b);
+  }
+
+  // **`v4()` - Generate random UUID**
+
+  // See https://github.com/broofa/node-uuid for API details
+  function v4(options, buf, offset) {
+    // Deprecated - 'format' argument, as supported in v1.2
+    var i = buf && offset || 0;
+
+    if (typeof(options) == 'string') {
+      buf = options == 'binary' ? new BufferClass(16) : null;
+      options = null;
+    }
+    options = options || {};
+
+    var rnds = options.random || (options.rng || _rng)();
+
+    // Per 4.4, set bits for version and `clock_seq_hi_and_reserved`
+    rnds[6] = (rnds[6] & 0x0f) | 0x40;
+    rnds[8] = (rnds[8] & 0x3f) | 0x80;
+
+    // Copy bytes to buffer, if provided
+    if (buf) {
+      for (var ii = 0; ii < 16; ii++) {
+        buf[i + ii] = rnds[ii];
+      }
+    }
+
+    return buf || unparse(rnds);
+  }
+
+  // Export public API
+  var uuid = v4;
+  uuid.v1 = v1;
+  uuid.v4 = v4;
+  uuid.parse = parse;
+  uuid.unparse = unparse;
+  uuid.BufferClass = BufferClass;
+
+  if (typeof define === 'function' && define.amd) {
+    // Publish as AMD module
+    define(function() {return uuid;});
+  } else if (typeof(module) != 'undefined' && module.exports) {
+    // Publish as node.js module
+    module.exports = uuid;
+  } else {
+    // Publish as global (in browsers)
+    var _previousRoot = _global.uuid;
+
+    // **`noConflict()` - (browser only) to reset global 'uuid' var**
+    uuid.noConflict = function() {
+      _global.uuid = _previousRoot;
+      return uuid;
+    };
+
+    _global.uuid = uuid;
+  }
+}).call(this);
+
+}).call(this,require("buffer").Buffer)
+},{"buffer":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/buffer/index.js","crypto":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/crypto-browserify/index.js"}],"/Users/jmej/pcs/capstone/capstone/node_modules/request/node_modules/qs/index.js":[function(require,module,exports){
+/**
+ * Object#toString() ref for stringify().
+ */
+
+var toString = Object.prototype.toString;
+
+/**
+ * Object#hasOwnProperty ref
+ */
+
+var hasOwnProperty = Object.prototype.hasOwnProperty;
+
+/**
+ * Array#indexOf shim.
+ */
+
+var indexOf = typeof Array.prototype.indexOf === 'function'
+  ? function(arr, el) { return arr.indexOf(el); }
+  : function(arr, el) {
+      for (var i = 0; i < arr.length; i++) {
+        if (arr[i] === el) return i;
+      }
+      return -1;
+    };
+
+/**
+ * Array.isArray shim.
+ */
+
+var isArray = Array.isArray || function(arr) {
+  return toString.call(arr) == '[object Array]';
+};
+
+/**
+ * Object.keys shim.
+ */
+
+var objectKeys = Object.keys || function(obj) {
+  var ret = [];
+  for (var key in obj) {
+    if (obj.hasOwnProperty(key)) {
+      ret.push(key);
+    }
+  }
+  return ret;
+};
+
+/**
+ * Array#forEach shim.
+ */
+
+var forEach = typeof Array.prototype.forEach === 'function'
+  ? function(arr, fn) { return arr.forEach(fn); }
+  : function(arr, fn) {
+      for (var i = 0; i < arr.length; i++) fn(arr[i]);
+    };
+
+/**
+ * Array#reduce shim.
+ */
+
+var reduce = function(arr, fn, initial) {
+  if (typeof arr.reduce === 'function') return arr.reduce(fn, initial);
+  var res = initial;
+  for (var i = 0; i < arr.length; i++) res = fn(res, arr[i]);
+  return res;
+};
+
+/**
+ * Cache non-integer test regexp.
+ */
+
+var isint = /^[0-9]+$/;
+
+function promote(parent, key) {
+  if (parent[key].length == 0) return parent[key] = {}
+  var t = {};
+  for (var i in parent[key]) {
+    if (hasOwnProperty.call(parent[key], i)) {
+      t[i] = parent[key][i];
+    }
+  }
+  parent[key] = t;
+  return t;
+}
+
+function parse(parts, parent, key, val) {
+  var part = parts.shift();
+  
+  // illegal
+  if (Object.getOwnPropertyDescriptor(Object.prototype, key)) return;
+  
+  // end
+  if (!part) {
+    if (isArray(parent[key])) {
+      parent[key].push(val);
+    } else if ('object' == typeof parent[key]) {
+      parent[key] = val;
+    } else if ('undefined' == typeof parent[key]) {
+      parent[key] = val;
+    } else {
+      parent[key] = [parent[key], val];
+    }
+    // array
+  } else {
+    var obj = parent[key] = parent[key] || [];
+    if (']' == part) {
+      if (isArray(obj)) {
+        if ('' != val) obj.push(val);
+      } else if ('object' == typeof obj) {
+        obj[objectKeys(obj).length] = val;
+      } else {
+        obj = parent[key] = [parent[key], val];
+      }
+      // prop
+    } else if (~indexOf(part, ']')) {
+      part = part.substr(0, part.length - 1);
+      if (!isint.test(part) && isArray(obj)) obj = promote(parent, key);
+      parse(parts, obj, part, val);
+      // key
+    } else {
+      if (!isint.test(part) && isArray(obj)) obj = promote(parent, key);
+      parse(parts, obj, part, val);
+    }
+  }
+}
+
+/**
+ * Merge parent key/val pair.
+ */
+
+function merge(parent, key, val){
+  if (~indexOf(key, ']')) {
+    var parts = key.split('[')
+      , len = parts.length
+      , last = len - 1;
+    parse(parts, parent, 'base', val);
+    // optimize
+  } else {
+    if (!isint.test(key) && isArray(parent.base)) {
+      var t = {};
+      for (var k in parent.base) t[k] = parent.base[k];
+      parent.base = t;
+    }
+    set(parent.base, key, val);
+  }
+
+  return parent;
+}
+
+/**
+ * Compact sparse arrays.
+ */
+
+function compact(obj) {
+  if ('object' != typeof obj) return obj;
+
+  if (isArray(obj)) {
+    var ret = [];
+
+    for (var i in obj) {
+      if (hasOwnProperty.call(obj, i)) {
+        ret.push(obj[i]);
+      }
+    }
+
+    return ret;
+  }
+
+  for (var key in obj) {
+    obj[key] = compact(obj[key]);
+  }
+
+  return obj;
+}
+
+/**
+ * Parse the given obj.
+ */
+
+function parseObject(obj){
+  var ret = { base: {} };
+
+  forEach(objectKeys(obj), function(name){
+    merge(ret, name, obj[name]);
+  });
+
+  return compact(ret.base);
+}
+
+/**
+ * Parse the given str.
+ */
+
+function parseString(str){
+  var ret = reduce(String(str).split('&'), function(ret, pair){
+    var eql = indexOf(pair, '=')
+      , brace = lastBraceInKey(pair)
+      , key = pair.substr(0, brace || eql)
+      , val = pair.substr(brace || eql, pair.length)
+      , val = val.substr(indexOf(val, '=') + 1, val.length);
+
+    // ?foo
+    if ('' == key) key = pair, val = '';
+    if ('' == key) return ret;
+
+    return merge(ret, decode(key), decode(val));
+  }, { base: {} }).base;
+
+  return compact(ret);
+}
+
+/**
+ * Parse the given query `str` or `obj`, returning an object.
+ *
+ * @param {String} str | {Object} obj
+ * @return {Object}
+ * @api public
+ */
+
+exports.parse = function(str){
+  if (null == str || '' == str) return {};
+  return 'object' == typeof str
+    ? parseObject(str)
+    : parseString(str);
+};
+
+/**
+ * Turn the given `obj` into a query string
+ *
+ * @param {Object} obj
+ * @return {String}
+ * @api public
+ */
+
+var stringify = exports.stringify = function(obj, prefix) {
+  if (isArray(obj)) {
+    return stringifyArray(obj, prefix);
+  } else if ('[object Object]' == toString.call(obj)) {
+    return stringifyObject(obj, prefix);
+  } else if ('string' == typeof obj) {
+    return stringifyString(obj, prefix);
+  } else {
+    return prefix + '=' + encodeURIComponent(String(obj));
+  }
+};
+
+/**
+ * Stringify the given `str`.
+ *
+ * @param {String} str
+ * @param {String} prefix
+ * @return {String}
+ * @api private
+ */
+
+function stringifyString(str, prefix) {
+  if (!prefix) throw new TypeError('stringify expects an object');
+  return prefix + '=' + encodeURIComponent(str);
+}
+
+/**
+ * Stringify the given `arr`.
+ *
+ * @param {Array} arr
+ * @param {String} prefix
+ * @return {String}
+ * @api private
+ */
+
+function stringifyArray(arr, prefix) {
+  var ret = [];
+  if (!prefix) throw new TypeError('stringify expects an object');
+  for (var i = 0; i < arr.length; i++) {
+    ret.push(stringify(arr[i], prefix + '[' + i + ']'));
+  }
+  return ret.join('&');
+}
+
+/**
+ * Stringify the given `obj`.
+ *
+ * @param {Object} obj
+ * @param {String} prefix
+ * @return {String}
+ * @api private
+ */
+
+function stringifyObject(obj, prefix) {
+  var ret = []
+    , keys = objectKeys(obj)
+    , key;
+
+  for (var i = 0, len = keys.length; i < len; ++i) {
+    key = keys[i];
+    if ('' == key) continue;
+    if (null == obj[key]) {
+      ret.push(encodeURIComponent(key) + '=');
+    } else {
+      ret.push(stringify(obj[key], prefix
+        ? prefix + '[' + encodeURIComponent(key) + ']'
+        : encodeURIComponent(key)));
+    }
+  }
+
+  return ret.join('&');
+}
+
+/**
+ * Set `obj`'s `key` to `val` respecting
+ * the weird and wonderful syntax of a qs,
+ * where "foo=bar&foo=baz" becomes an array.
+ *
+ * @param {Object} obj
+ * @param {String} key
+ * @param {String} val
+ * @api private
+ */
+
+function set(obj, key, val) {
+  var v = obj[key];
+  if (Object.getOwnPropertyDescriptor(Object.prototype, key)) return;
+  if (undefined === v) {
+    obj[key] = val;
+  } else if (isArray(v)) {
+    v.push(val);
+  } else {
+    obj[key] = [v, val];
+  }
+}
+
+/**
+ * Locate last brace in `str` within the key.
+ *
+ * @param {String} str
+ * @return {Number}
+ * @api private
+ */
+
+function lastBraceInKey(str) {
+  var len = str.length
+    , brace
+    , c;
+  for (var i = 0; i < len; ++i) {
+    c = str[i];
+    if (']' == c) brace = false;
+    if ('[' == c) brace = true;
+    if ('=' == c && !brace) return i;
+  }
+}
+
+/**
+ * Decode `str`.
+ *
+ * @param {String} str
+ * @return {String}
+ * @api private
+ */
+
+function decode(str) {
+  try {
+    return decodeURIComponent(str.replace(/\+/g, ' '));
+  } catch (err) {
+    return str;
+  }
+}
+
+},{}],"/Users/jmej/pcs/capstone/capstone/node_modules/request/request.js":[function(require,module,exports){
+(function (process,Buffer){
+var optional = require('./lib/optional')
+  , http = require('http')
+  , https = optional('https')
+  , tls = optional('tls')
+  , url = require('url')
+  , util = require('util')
+  , stream = require('stream')
+  , qs = require('qs')
+  , querystring = require('querystring')
+  , crypto = require('crypto')
+  , zlib = require('zlib')
+
+  , oauth = optional('oauth-sign')
+  , hawk = optional('hawk')
+  , aws = optional('aws-sign2')
+  , httpSignature = optional('http-signature')
+  , uuid = require('node-uuid')
+  , mime = require('mime-types')
+  , tunnel = optional('tunnel-agent')
+  , _safeStringify = require('json-stringify-safe')
+  , stringstream = optional('stringstream')
+
+  , ForeverAgent = require('forever-agent')
+  , FormData = optional('form-data')
+
+  , cookies = require('./lib/cookies')
+  , globalCookieJar = cookies.jar()
+
+  , copy = require('./lib/copy')
+  , debug = require('./lib/debug')
+  , getSafe = require('./lib/getSafe')
+  , net = require('net')
+  ;
+
+function safeStringify (obj) {
+  var ret
+  try { ret = JSON.stringify(obj) }
+  catch (e) { ret = _safeStringify(obj) }
+  return ret
+}
+
+var globalPool = {}
+var isUrl = /^https?:|^unix:/
+
+
+// Hacky fix for pre-0.4.4 https
+if (https && !https.Agent) {
+  https.Agent = function (options) {
+    http.Agent.call(this, options)
+  }
+  util.inherits(https.Agent, http.Agent)
+  https.Agent.prototype._getConnection = function (host, port, cb) {
+    var s = tls.connect(port, host, this.options, function () {
+      // do other checks here?
+      if (cb) cb()
+    })
+    return s
+  }
+}
+
+function isReadStream (rs) {
+  return rs.readable && rs.path && rs.mode;
+}
+
+function toBase64 (str) {
+  return (new Buffer(str || "", "ascii")).toString("base64")
+}
+
+function md5 (str) {
+  return crypto.createHash('md5').update(str).digest('hex')
+}
+
+function Request (options) {
+  stream.Stream.call(this)
+  this.readable = true
+  this.writable = true
+
+  if (typeof options === 'string') {
+    options = {uri:options}
+  }
+
+  var reserved = Object.keys(Request.prototype)
+  for (var i in options) {
+    if (reserved.indexOf(i) === -1) {
+      this[i] = options[i]
+    } else {
+      if (typeof options[i] === 'function') {
+        delete options[i]
+      }
+    }
+  }
+
+  if (options.method) {
+    this.explicitMethod = true
+  }
+
+  this.canTunnel = options.tunnel !== false && tunnel;
+
+  this.init(options)
+}
+util.inherits(Request, stream.Stream)
+Request.prototype.init = function (options) {
+  // init() contains all the code to setup the request object.
+  // the actual outgoing request is not started until start() is called
+  // this function is called from both the constructor and on redirect.
+  var self = this
+  if (!options) options = {}
+
+  if (!self.method) self.method = options.method || 'GET'
+  self.localAddress = options.localAddress
+
+  debug(options)
+  if (!self.pool && self.pool !== false) self.pool = globalPool
+  self.dests = self.dests || []
+  self.__isRequestRequest = true
+
+  // Protect against double callback
+  if (!self._callback && self.callback) {
+    self._callback = self.callback
+    self.callback = function () {
+      if (self._callbackCalled) return // Print a warning maybe?
+      self._callbackCalled = true
+      self._callback.apply(self, arguments)
+    }
+    self.on('error', self.callback.bind())
+    self.on('complete', self.callback.bind(self, null))
+  }
+
+  if (self.url && !self.uri) {
+    // People use this property instead all the time so why not just support it.
+    self.uri = self.url
+    delete self.url
+  }
+
+  if (!self.uri) {
+    // this will throw if unhandled but is handleable when in a redirect
+    return self.emit('error', new Error("options.uri is a required argument"))
+  } else {
+    if (typeof self.uri == "string") self.uri = url.parse(self.uri)
+  }
+
+  if (self.strictSSL === false) {
+    self.rejectUnauthorized = false
+  }
+
+  if(!self.hasOwnProperty('proxy')) {
+    // check for HTTP(S)_PROXY environment variables
+    if(self.uri.protocol == "http:") {
+        self.proxy = process.env.HTTP_PROXY || process.env.http_proxy || null;
+    } else if(self.uri.protocol == "https:") {
+        self.proxy = process.env.HTTPS_PROXY || process.env.https_proxy || 
+                     process.env.HTTP_PROXY || process.env.http_proxy || null;
+    }
+  }
+  
+  if (self.proxy) {
+    if (typeof self.proxy == 'string') self.proxy = url.parse(self.proxy)
+
+    // do the HTTP CONNECT dance using koichik/node-tunnel
+    if (http.globalAgent && self.uri.protocol === "https:" && self.canTunnel) {
+      var tunnelFn = self.proxy.protocol === "http:"
+                   ? tunnel.httpsOverHttp : tunnel.httpsOverHttps
+
+      var tunnelOptions = { proxy: { host: self.proxy.hostname
+                                   , port: +self.proxy.port
+                                   , proxyAuth: self.proxy.auth
+                                   , headers: { Host: self.uri.hostname + ':' +
+                                        (self.uri.port || self.uri.protocol === 'https:' ? 443 : 80) }}
+                          , rejectUnauthorized: self.rejectUnauthorized
+                          , ca: this.ca
+                          , cert:this.cert
+                          , key: this.key}
+
+      self.agent = tunnelFn(tunnelOptions)
+      self.tunnel = true
+    }
+  }
+
+  if (!self.uri.pathname) {self.uri.pathname = '/'}
+
+  if (!self.uri.host && !self.protocol=='unix:') {
+    // Invalid URI: it may generate lot of bad errors, like "TypeError: Cannot call method 'indexOf' of undefined" in CookieJar
+    // Detect and reject it as soon as possible
+    var faultyUri = url.format(self.uri)
+    var message = 'Invalid URI "' + faultyUri + '"'
+    if (Object.keys(options).length === 0) {
+      // No option ? This can be the sign of a redirect
+      // As this is a case where the user cannot do anything (they didn't call request directly with this URL)
+      // they should be warned that it can be caused by a redirection (can save some hair)
+      message += '. This can be caused by a crappy redirection.'
+    }
+    self.emit('error', new Error(message))
+    return // This error was fatal
+  }
+
+  self._redirectsFollowed = self._redirectsFollowed || 0
+  self.maxRedirects = (self.maxRedirects !== undefined) ? self.maxRedirects : 10
+  self.followRedirect = (self.followRedirect !== undefined) ? self.followRedirect : true
+  self.followAllRedirects = (self.followAllRedirects !== undefined) ? self.followAllRedirects : false
+  if (self.followRedirect || self.followAllRedirects)
+    self.redirects = self.redirects || []
+
+  self.headers = self.headers ? copy(self.headers) : {}
+
+  self.setHost = false
+  if (!self.hasHeader('host')) {
+    self.setHeader('host', self.uri.hostname)
+    if (self.uri.port) {
+      if ( !(self.uri.port === 80 && self.uri.protocol === 'http:') &&
+           !(self.uri.port === 443 && self.uri.protocol === 'https:') )
+      self.setHeader('host', self.getHeader('host') + (':'+self.uri.port) )
+    }
+    self.setHost = true
+  }
+
+  self.jar(self._jar || options.jar)
+
+  if (!self.uri.port) {
+    if (self.uri.protocol == 'http:') {self.uri.port = 80}
+    else if (self.uri.protocol == 'https:') {self.uri.port = 443}
+  }
+
+  if (self.proxy && !self.tunnel) {
+    self.port = self.proxy.port
+    self.host = self.proxy.hostname
+  } else {
+    self.port = self.uri.port
+    self.host = self.uri.hostname
+  }
+
+  self.clientErrorHandler = function (error) {
+    if (self._aborted) return
+    if (self.req && self.req._reusedSocket && error.code === 'ECONNRESET'
+        && self.agent.addRequestNoreuse) {
+      self.agent = { addRequest: self.agent.addRequestNoreuse.bind(self.agent) }
+      self.start()
+      self.req.end()
+      return
+    }
+    if (self.timeout && self.timeoutTimer) {
+      clearTimeout(self.timeoutTimer)
+      self.timeoutTimer = null
+    }
+    self.emit('error', error)
+  }
+
+  self._parserErrorHandler = function (error) {
+    if (this.res) {
+      if (this.res.request) {
+        this.res.request.emit('error', error)
+      } else {
+        this.res.emit('error', error)
+      }
+    } else {
+      this._httpMessage.emit('error', error)
+    }
+  }
+
+  self._buildRequest = function(){
+    var self = this;
+
+    if (options.form) {
+      self.form(options.form)
+    }
+
+    if (options.qs) self.qs(options.qs)
+
+    if (self.uri.path) {
+      self.path = self.uri.path
+    } else {
+      self.path = self.uri.pathname + (self.uri.search || "")
+    }
+
+    if (self.path.length === 0) self.path = '/'
+
+
+    // Auth must happen last in case signing is dependent on other headers
+    if (options.oauth) {
+      self.oauth(options.oauth)
+    }
+
+    if (options.aws) {
+      self.aws(options.aws)
+    }
+
+    if (options.hawk) {
+      self.hawk(options.hawk)
+    }
+
+    if (options.httpSignature) {
+      self.httpSignature(options.httpSignature)
+    }
+
+    if (options.auth) {
+      if (Object.prototype.hasOwnProperty.call(options.auth, 'username')) options.auth.user = options.auth.username
+      if (Object.prototype.hasOwnProperty.call(options.auth, 'password')) options.auth.pass = options.auth.password
+
+      self.auth(
+        options.auth.user,
+        options.auth.pass,
+        options.auth.sendImmediately,
+        options.auth.bearer
+      )
+    }
+
+    if (self.gzip && !self.hasHeader('accept-encoding')) {
+      self.setHeader('accept-encoding', 'gzip')
+    }
+
+    if (self.uri.auth && !self.hasHeader('authorization')) {
+      var authPieces = self.uri.auth.split(':').map(function(item){ return querystring.unescape(item) })
+      self.auth(authPieces[0], authPieces.slice(1).join(':'), true)
+    }
+    if (self.proxy && self.proxy.auth && !self.hasHeader('proxy-authorization') && !self.tunnel) {
+      self.setHeader('proxy-authorization', "Basic " + toBase64(self.proxy.auth.split(':').map(function(item){ return querystring.unescape(item)}).join(':')))
+    }
+
+
+    if (self.proxy && !self.tunnel) self.path = (self.uri.protocol + '//' + self.uri.host + self.path)
+
+    if (options.json) {
+      self.json(options.json)
+    } else if (options.multipart) {
+      self.boundary = uuid()
+      self.multipart(options.multipart)
+    }
+
+    if (self.body) {
+      var length = 0
+      if (!Buffer.isBuffer(self.body)) {
+        if (Array.isArray(self.body)) {
+          for (var i = 0; i < self.body.length; i++) {
+            length += self.body[i].length
+          }
+        } else {
+          self.body = new Buffer(self.body)
+          length = self.body.length
+        }
+      } else {
+        length = self.body.length
+      }
+      if (length) {
+        if (!self.hasHeader('content-length')) self.setHeader('content-length', length)
+      } else {
+        throw new Error('Argument error, options.body.')
+      }
+    }
+
+    var protocol = self.proxy && !self.tunnel ? self.proxy.protocol : self.uri.protocol
+      , defaultModules = {'http:':http, 'https:':https, 'unix:':http}
+      , httpModules = self.httpModules || {}
+      ;
+    self.httpModule = httpModules[protocol] || defaultModules[protocol]
+
+    if (!self.httpModule) return this.emit('error', new Error("Invalid protocol: " + protocol))
+
+    if (options.ca) self.ca = options.ca
+
+    if (!self.agent) {
+      if (options.agentOptions) self.agentOptions = options.agentOptions
+
+      if (options.agentClass) {
+        self.agentClass = options.agentClass
+      } else if (options.forever) {
+        self.agentClass = protocol === 'http:' ? ForeverAgent : ForeverAgent.SSL
+      } else {
+        self.agentClass = self.httpModule.Agent
+      }
+    }
+
+    if (self.pool === false) {
+      self.agent = false
+    } else {
+      self.agent = self.agent || self.getAgent()
+      if (self.maxSockets) {
+        // Don't use our pooling if node has the refactored client
+        self.agent.maxSockets = self.maxSockets
+      }
+      if (self.pool.maxSockets) {
+        // Don't use our pooling if node has the refactored client
+        self.agent.maxSockets = self.pool.maxSockets
+      }
+    }
+
+    self.on('pipe', function (src) {
+      if (self.ntick && self._started) throw new Error("You cannot pipe to this stream after the outbound request has started.")
+      self.src = src
+      if (isReadStream(src)) {
+        if (!self.hasHeader('content-type')) self.setHeader('content-type', mime.lookup(src.path))
+      } else {
+        if (src.headers) {
+          for (var i in src.headers) {
+            if (!self.hasHeader(i)) {
+              self.setHeader(i, src.headers[i])
+            }
+          }
+        }
+        if (self._json && !self.hasHeader('content-type'))
+          self.setHeader('content-type', 'application/json')
+        if (src.method && !self.explicitMethod) {
+          self.method = src.method
+        }
+      }
+
+      // self.on('pipe', function () {
+      //   console.error("You have already piped to this stream. Pipeing twice is likely to break the request.")
+      // })
+    })
+
+    process.nextTick(function () {
+      if (self._aborted) return
+
+      var end = function () {
+        if (self._form) {
+          self._form.pipe(self)
+        }
+        if (self.body) {
+          if (Array.isArray(self.body)) {
+            self.body.forEach(function (part) {
+              self.write(part)
+            })
+          } else {
+            self.write(self.body)
+          }
+          self.end()
+        } else if (self.requestBodyStream) {
+          console.warn("options.requestBodyStream is deprecated, please pass the request object to stream.pipe.")
+          self.requestBodyStream.pipe(self)
+        } else if (!self.src) {
+          if (self.method !== 'GET' && typeof self.method !== 'undefined') {
+            self.setHeader('content-length', 0)
+          }
+          self.end()
+        }
+      }
+
+      if (self._form && !self.hasHeader('content-length')) {
+        // Before ending the request, we had to compute the length of the whole form, asyncly
+        self.setHeaders(self._form.getHeaders())
+        self._form.getLength(function (err, length) {
+          if (!err) {
+            self.setHeader('content-length', length)
+          }
+          end()
+        })
+      } else {
+        end()
+      }
+
+      self.ntick = true
+    })
+
+  } // End _buildRequest
+
+  self._handleUnixSocketURI = function(self){
+    // Parse URI and extract a socket path (tested as a valid socket using net.connect), and a http style path suffix
+    // Thus http requests can be made to a socket using the uri unix://tmp/my.socket/urlpath
+    // and a request for '/urlpath' will be sent to the unix socket at /tmp/my.socket
+
+    self.unixsocket = true;
+
+    var full_path = self.uri.href.replace(self.uri.protocol+'/', '');
+
+    var lookup = full_path.split('/');
+    var error_connecting = true;
+
+    var lookup_table = {};
+    do { lookup_table[lookup.join('/')]={} } while(lookup.pop())
+    for (r in lookup_table){
+      try_next(r);
+    }
+
+    function try_next(table_row){
+      var client = net.connect( table_row );
+      client.path = table_row
+      client.on('error', function(){ lookup_table[this.path].error_connecting=true; this.end(); });
+      client.on('connect', function(){ lookup_table[this.path].error_connecting=false; this.end(); });
+      table_row.client = client;
+    }
+
+    wait_for_socket_response();
+
+    response_counter = 0;
+
+    function wait_for_socket_response(){
+      var detach;
+      if('undefined' == typeof setImmediate ) detach = process.nextTick
+      else detach = setImmediate;
+      detach(function(){
+        // counter to prevent infinite blocking waiting for an open socket to be found.
+        response_counter++;
+        var trying = false;
+        for (r in lookup_table){
+          //console.log(r, lookup_table[r], lookup_table[r].error_connecting)
+          if('undefined' == typeof lookup_table[r].error_connecting)
+            trying = true;
+        }
+        if(trying && response_counter<1000)
+          wait_for_socket_response()
+        else
+          set_socket_properties();
+      })
+    }
+
+    function set_socket_properties(){
+      var host;
+      for (r in lookup_table){
+        if(lookup_table[r].error_connecting === false){
+          host = r
+        }
+      }
+      if(!host){
+        self.emit('error', new Error("Failed to connect to any socket in "+full_path))
+      }
+      var path = full_path.replace(host, '')
+
+      self.socketPath = host
+      self.uri.pathname = path
+      self.uri.href = path
+      self.uri.path = path
+      self.host = ''
+      self.hostname = ''
+      delete self.host
+      delete self.hostname
+      self._buildRequest();
+    }
+  }
+
+  // Intercept UNIX protocol requests to change properties to match socket
+  if(/^unix:/.test(self.uri.protocol)){
+    self._handleUnixSocketURI(self);
+  } else {
+    self._buildRequest();
+  }
+
+}
+
+// Must call this when following a redirect from https to http or vice versa
+// Attempts to keep everything as identical as possible, but update the
+// httpModule, Tunneling agent, and/or Forever Agent in use.
+Request.prototype._updateProtocol = function () {
+  var self = this
+  var protocol = self.uri.protocol
+
+  if (protocol === 'https:') {
+    // previously was doing http, now doing https
+    // if it's https, then we might need to tunnel now.
+    if (self.proxy && self.canTunnel) {
+      self.tunnel = true
+      var tunnelFn = self.proxy.protocol === 'http:'
+                   ? tunnel.httpsOverHttp : tunnel.httpsOverHttps
+      var tunnelOptions = { proxy: { host: self.proxy.hostname
+                                   , port: +self.proxy.port
+                                   , proxyAuth: self.proxy.auth }
+                          , rejectUnauthorized: self.rejectUnauthorized
+                          , ca: self.ca }
+      self.agent = tunnelFn(tunnelOptions)
+      return
+    }
+
+    self.httpModule = https
+    switch (self.agentClass) {
+      case ForeverAgent:
+        self.agentClass = ForeverAgent.SSL
+        break
+      case http.Agent:
+        self.agentClass = https.Agent
+        break
+      default:
+        // nothing we can do.  Just hope for the best.
+        return
+    }
+
+    // if there's an agent, we need to get a new one.
+    if (self.agent) self.agent = self.getAgent()
+
+  } else {
+    // previously was doing https, now doing http
+    // stop any tunneling.
+    if (self.tunnel) self.tunnel = false
+    self.httpModule = http
+    switch (self.agentClass) {
+      case ForeverAgent.SSL:
+        self.agentClass = ForeverAgent
+        break
+      case https.Agent:
+        self.agentClass = http.Agent
+        break
+      default:
+        // nothing we can do.  just hope for the best
+        return
+    }
+
+    // if there's an agent, then get a new one.
+    if (self.agent) {
+      self.agent = null
+      self.agent = self.getAgent()
+    }
+  }
+}
+
+Request.prototype.getAgent = function () {
+  var Agent = this.agentClass
+  var options = {}
+  if (this.agentOptions) {
+    for (var i in this.agentOptions) {
+      options[i] = this.agentOptions[i]
+    }
+  }
+  if (this.ca) options.ca = this.ca
+  if (this.ciphers) options.ciphers = this.ciphers
+  if (this.secureProtocol) options.secureProtocol = this.secureProtocol
+  if (this.secureOptions) options.secureOptions = this.secureOptions
+  if (typeof this.rejectUnauthorized !== 'undefined') options.rejectUnauthorized = this.rejectUnauthorized
+
+  if (this.cert && this.key) {
+    options.key = this.key
+    options.cert = this.cert
+  }
+
+  var poolKey = ''
+
+  // different types of agents are in different pools
+  if (Agent !== this.httpModule.Agent) {
+    poolKey += Agent.name
+  }
+
+  if (!this.httpModule.globalAgent) {
+    // node 0.4.x
+    options.host = this.host
+    options.port = this.port
+    if (poolKey) poolKey += ':'
+    poolKey += this.host + ':' + this.port
+  }
+
+  // ca option is only relevant if proxy or destination are https
+  var proxy = this.proxy
+  if (typeof proxy === 'string') proxy = url.parse(proxy)
+  var isHttps = (proxy && proxy.protocol === 'https:') || this.uri.protocol === 'https:'
+  if (isHttps) {
+    if (options.ca) {
+      if (poolKey) poolKey += ':'
+      poolKey += options.ca
+    }
+
+    if (typeof options.rejectUnauthorized !== 'undefined') {
+      if (poolKey) poolKey += ':'
+      poolKey += options.rejectUnauthorized
+    }
+
+    if (options.cert)
+      poolKey += options.cert.toString('ascii') + options.key.toString('ascii')
+
+    if (options.ciphers) {
+      if (poolKey) poolKey += ':'
+      poolKey += options.ciphers
+    }
+
+    if (options.secureProtocol) {
+      if (poolKey) poolKey += ':'
+      poolKey += options.secureProtocol
+    }
+
+    if (options.secureOptions) {
+      if (poolKey) poolKey += ':'
+      poolKey += options.secureOptions
+    }
+  }
+
+  if (this.pool === globalPool && !poolKey && Object.keys(options).length === 0 && this.httpModule.globalAgent) {
+    // not doing anything special.  Use the globalAgent
+    return this.httpModule.globalAgent
+  }
+
+  // we're using a stored agent.  Make sure it's protocol-specific
+  poolKey = this.uri.protocol + poolKey
+
+  // already generated an agent for this setting
+  if (this.pool[poolKey]) return this.pool[poolKey]
+
+  return this.pool[poolKey] = new Agent(options)
+}
+
+Request.prototype.start = function () {
+  // start() is called once we are ready to send the outgoing HTTP request.
+  // this is usually called on the first write(), end() or on nextTick()
+  var self = this
+
+  if (self._aborted) return
+
+  self._started = true
+  self.method = self.method || 'GET'
+  self.href = self.uri.href
+
+  if (self.src && self.src.stat && self.src.stat.size && !self.hasHeader('content-length')) {
+    self.setHeader('content-length', self.src.stat.size)
+  }
+  if (self._aws) {
+    self.aws(self._aws, true)
+  }
+
+  // We have a method named auth, which is completely different from the http.request
+  // auth option.  If we don't remove it, we're gonna have a bad time.
+  var reqOptions = copy(self)
+  delete reqOptions.auth
+
+  debug('make request', self.uri.href)
+  self.req = self.httpModule.request(reqOptions, self.onResponse.bind(self))
+
+  if (self.timeout && !self.timeoutTimer) {
+    self.timeoutTimer = setTimeout(function () {
+      self.req.abort()
+      var e = new Error("ETIMEDOUT")
+      e.code = "ETIMEDOUT"
+      self.emit("error", e)
+    }, self.timeout)
+
+    // Set additional timeout on socket - in case if remote
+    // server freeze after sending headers
+    if (self.req.setTimeout) { // only works on node 0.6+
+      self.req.setTimeout(self.timeout, function () {
+        if (self.req) {
+          self.req.abort()
+          var e = new Error("ESOCKETTIMEDOUT")
+          e.code = "ESOCKETTIMEDOUT"
+          self.emit("error", e)
+        }
+      })
+    }
+  }
+
+  self.req.on('error', self.clientErrorHandler)
+  self.req.on('drain', function() {
+    self.emit('drain')
+  })
+  self.on('end', function() {
+    if ( self.req.connection ) self.req.connection.removeListener('error', self._parserErrorHandler)
+  })
+  self.emit('request', self.req)
+}
+Request.prototype.onResponse = function (response) {
+  var self = this
+  debug('onResponse', self.uri.href, response.statusCode, response.headers)
+  response.on('end', function() {
+    debug('response end', self.uri.href, response.statusCode, response.headers)
+  });
+
+  // The check on response.connection is a workaround for browserify.
+  if (response.connection && response.connection.listeners('error').indexOf(self._parserErrorHandler) === -1) {
+    response.connection.setMaxListeners(0)
+    response.connection.once('error', self._parserErrorHandler)
+  }
+  if (self._aborted) {
+    debug('aborted', self.uri.href)
+    response.resume()
+    return
+  }
+  if (self._paused) response.pause()
+  // Check that response.resume is defined. Workaround for browserify.
+  else response.resume && response.resume()
+
+  self.response = response
+  response.request = self
+  response.toJSON = toJSON
+
+  // XXX This is different on 0.10, because SSL is strict by default
+  if (self.httpModule === https &&
+      self.strictSSL &&
+      !response.client.authorized) {
+    debug('strict ssl error', self.uri.href)
+    var sslErr = response.client.authorizationError
+    self.emit('error', new Error('SSL Error: '+ sslErr))
+    return
+  }
+
+  if (self.setHost && self.hasHeader('host')) delete self.headers[self.hasHeader('host')]
+  if (self.timeout && self.timeoutTimer) {
+    clearTimeout(self.timeoutTimer)
+    self.timeoutTimer = null
+  }
+
+  var targetCookieJar = (self._jar && self._jar.setCookie)?self._jar:globalCookieJar;
+  var addCookie = function (cookie) {
+    //set the cookie if it's domain in the href's domain.
+    try {
+      targetCookieJar.setCookie(cookie, self.uri.href, {ignoreError: true});
+    } catch (e) {
+      self.emit('error', e);
+    }
+  }
+
+  if (hasHeader('set-cookie', response.headers) && (!self._disableCookies)) {
+    var headerName = hasHeader('set-cookie', response.headers)
+    if (Array.isArray(response.headers[headerName])) response.headers[headerName].forEach(addCookie)
+    else addCookie(response.headers[headerName])
+  }
+
+  var redirectTo = null
+  if (response.statusCode >= 300 && response.statusCode < 400 && hasHeader('location', response.headers)) {
+    var location = response.headers[hasHeader('location', response.headers)]
+    debug('redirect', location)
+
+    if (self.followAllRedirects) {
+      redirectTo = location
+    } else if (self.followRedirect) {
+      switch (self.method) {
+        case 'PATCH':
+        case 'PUT':
+        case 'POST':
+        case 'DELETE':
+          // Do not follow redirects
+          break
+        default:
+          redirectTo = location
+          break
+      }
+    }
+  } else if (response.statusCode == 401 && self._hasAuth && !self._sentAuth) {
+    var authHeader = response.headers[hasHeader('www-authenticate', response.headers)]
+    var authVerb = authHeader && authHeader.split(' ')[0].toLowerCase()
+    debug('reauth', authVerb)
+
+    switch (authVerb) {
+      case 'basic':
+        self.auth(self._user, self._pass, true)
+        redirectTo = self.uri
+        break
+
+      case 'bearer':
+        self.auth(null, null, true, self._bearer)
+        redirectTo = self.uri
+        break
+
+      case 'digest':
+        // TODO: More complete implementation of RFC 2617.
+        //   - check challenge.algorithm
+        //   - support algorithm="MD5-sess"
+        //   - handle challenge.domain
+        //   - support qop="auth-int" only
+        //   - handle Authentication-Info (not necessarily?)
+        //   - check challenge.stale (not necessarily?)
+        //   - increase nc (not necessarily?)
+        // For reference:
+        // http://tools.ietf.org/html/rfc2617#section-3
+        // https://github.com/bagder/curl/blob/master/lib/http_digest.c
+
+        var challenge = {}
+        var re = /([a-z0-9_-]+)=(?:"([^"]+)"|([a-z0-9_-]+))/gi
+        for (;;) {
+          var match = re.exec(authHeader)
+          if (!match) break
+          challenge[match[1]] = match[2] || match[3];
+        }
+
+        var ha1 = md5(self._user + ':' + challenge.realm + ':' + self._pass)
+        var ha2 = md5(self.method + ':' + self.uri.path)
+        var qop = /(^|,)\s*auth\s*($|,)/.test(challenge.qop) && 'auth'
+        var nc = qop && '00000001'
+        var cnonce = qop && uuid().replace(/-/g, '')
+        var digestResponse = qop ? md5(ha1 + ':' + challenge.nonce + ':' + nc + ':' + cnonce + ':' + qop + ':' + ha2) : md5(ha1 + ':' + challenge.nonce + ':' + ha2)
+        var authValues = {
+          username: self._user,
+          realm: challenge.realm,
+          nonce: challenge.nonce,
+          uri: self.uri.path,
+          qop: qop,
+          response: digestResponse,
+          nc: nc,
+          cnonce: cnonce,
+          algorithm: challenge.algorithm,
+          opaque: challenge.opaque
+        }
+
+        authHeader = []
+        for (var k in authValues) {
+          if (!authValues[k]) {
+            //ignore
+          } else if (k === 'qop' || k === 'nc' || k === 'algorithm') {
+            authHeader.push(k + '=' + authValues[k])
+          } else {
+            authHeader.push(k + '="' + authValues[k] + '"')
+          }
+        }
+        authHeader = 'Digest ' + authHeader.join(', ')
+        self.setHeader('authorization', authHeader)
+        self._sentAuth = true
+
+        redirectTo = self.uri
+        break
+    }
+  }
+
+  if (redirectTo) {
+    debug('redirect to', redirectTo)
+
+    // ignore any potential response body.  it cannot possibly be useful
+    // to us at this point.
+    if (self._paused) response.resume()
+
+    if (self._redirectsFollowed >= self.maxRedirects) {
+      self.emit('error', new Error("Exceeded maxRedirects. Probably stuck in a redirect loop "+self.uri.href))
+      return
+    }
+    self._redirectsFollowed += 1
+
+    if (!isUrl.test(redirectTo)) {
+      redirectTo = url.resolve(self.uri.href, redirectTo)
+    }
+
+    var uriPrev = self.uri
+    self.uri = url.parse(redirectTo)
+
+    // handle the case where we change protocol from https to http or vice versa
+    if (self.uri.protocol !== uriPrev.protocol) {
+      self._updateProtocol()
+    }
+
+    self.redirects.push(
+      { statusCode : response.statusCode
+      , redirectUri: redirectTo
+      }
+    )
+    if (self.followAllRedirects && response.statusCode != 401 && response.statusCode != 307) self.method = 'GET'
+    // self.method = 'GET' // Force all redirects to use GET || commented out fixes #215
+    delete self.src
+    delete self.req
+    delete self.agent
+    delete self._started
+    if (response.statusCode != 401 && response.statusCode != 307) {
+      // Remove parameters from the previous response, unless this is the second request
+      // for a server that requires digest authentication.
+      delete self.body
+      delete self._form
+      if (self.headers) {
+        if (self.hasHeader('host')) delete self.headers[self.hasHeader('host')]
+        if (self.hasHeader('content-type')) delete self.headers[self.hasHeader('content-type')]
+        if (self.hasHeader('content-length')) delete self.headers[self.hasHeader('content-length')]
+      }
+    }
+
+    self.emit('redirect');
+
+    self.init()
+    return // Ignore the rest of the response
+  } else {
+    self._redirectsFollowed = self._redirectsFollowed || 0
+    // Be a good stream and emit end when the response is finished.
+    // Hack to emit end on close because of a core bug that never fires end
+    response.on('close', function () {
+      if (!self._ended) self.response.emit('end')
+    })
+
+    var dataStream
+    if (self.gzip) {
+      var contentEncoding = response.headers["content-encoding"] || "identity"
+      contentEncoding = contentEncoding.trim().toLowerCase()
+
+      if (contentEncoding === "gzip") {
+        dataStream = zlib.createGunzip()
+        response.pipe(dataStream)
+      } else {
+        // Since previous versions didn't check for Content-Encoding header,
+        // ignore any invalid values to preserve backwards-compatibility
+        if (contentEncoding !== "identity") {
+          debug("ignoring unrecognized Content-Encoding " + contentEncoding)
+        }
+        dataStream = response
+      }
+    } else {
+      dataStream = response
+    }
+
+    if (self.encoding) {
+      if (self.dests.length !== 0) {
+        console.error("Ignoring encoding parameter as this stream is being piped to another stream which makes the encoding option invalid.")
+      } else if (dataStream.setEncoding) {
+        dataStream.setEncoding(self.encoding)
+      } else {
+        // Should only occur on node pre-v0.9.4 (joyent/node@9b5abe5) with
+        // zlib streams.
+        // If/When support for 0.9.4 is dropped, this should be unnecessary.
+        dataStream = dataStream.pipe(stringstream(self.encoding))
+      }
+    }
+
+    self.emit('response', response)
+
+    self.dests.forEach(function (dest) {
+      self.pipeDest(dest)
+    })
+
+    dataStream.on("data", function (chunk) {
+      self._destdata = true
+      self.emit("data", chunk)
+    })
+    dataStream.on("end", function (chunk) {
+      self._ended = true
+      self.emit("end", chunk)
+    })
+    dataStream.on("close", function () {self.emit("close")})
+
+    if (self.callback) {
+      var buffer = []
+      var bodyLen = 0
+      self.on("data", function (chunk) {
+        buffer.push(chunk)
+        bodyLen += chunk.length
+      })
+      self.on("end", function () {
+        debug('end event', self.uri.href)
+        if (self._aborted) {
+          debug('aborted', self.uri.href)
+          return
+        }
+
+        if (buffer.length && Buffer.isBuffer(buffer[0])) {
+          debug('has body', self.uri.href, bodyLen)
+          var body = new Buffer(bodyLen)
+          var i = 0
+          buffer.forEach(function (chunk) {
+            chunk.copy(body, i, 0, chunk.length)
+            i += chunk.length
+          })
+          if (self.encoding === null) {
+            response.body = body
+          } else {
+            response.body = body.toString(self.encoding)
+          }
+        } else if (buffer.length) {
+          // The UTF8 BOM [0xEF,0xBB,0xBF] is converted to [0xFE,0xFF] in the JS UTC16/UCS2 representation.
+          // Strip this value out when the encoding is set to 'utf8', as upstream consumers won't expect it and it breaks JSON.parse().
+          if (self.encoding === 'utf8' && buffer[0].length > 0 && buffer[0][0] === "\uFEFF") {
+            buffer[0] = buffer[0].substring(1)
+          }
+          response.body = buffer.join('')
+        }
+
+        if (self._json) {
+          try {
+            response.body = JSON.parse(response.body)
+          } catch (e) {}
+        }
+        debug('emitting complete', self.uri.href)
+        if(response.body == undefined && !self._json) {
+          response.body = "";
+        }
+        self.emit('complete', response, response.body)
+      })
+    }
+    //if no callback
+    else{
+      self.on("end", function () {
+        if (self._aborted) {
+          debug('aborted', self.uri.href)
+          return
+        }
+        self.emit('complete', response);
+      });
+    }
+  }
+  debug('finish init function', self.uri.href)
+}
+
+Request.prototype.abort = function () {
+  this._aborted = true
+
+  if (this.req) {
+    this.req.abort()
+  }
+  else if (this.response) {
+    this.response.abort()
+  }
+
+  this.emit("abort")
+}
+
+Request.prototype.pipeDest = function (dest) {
+  var response = this.response
+  // Called after the response is received
+  if (dest.headers && !dest.headersSent) {
+    if (hasHeader('content-type', response.headers)) {
+      var ctname = hasHeader('content-type', response.headers)
+      if (dest.setHeader) dest.setHeader(ctname, response.headers[ctname])
+      else dest.headers[ctname] = response.headers[ctname]
+    }
+
+    if (hasHeader('content-length', response.headers)) {
+      var clname = hasHeader('content-length', response.headers)
+      if (dest.setHeader) dest.setHeader(clname, response.headers[clname])
+      else dest.headers[clname] = response.headers[clname]
+    }
+  }
+  if (dest.setHeader && !dest.headersSent) {
+    for (var i in response.headers) {
+      // If the response content is being decoded, the Content-Encoding header
+      // of the response doesn't represent the piped content, so don't pass it.
+      if (!this.gzip || i !== 'content-encoding') {
+        dest.setHeader(i, response.headers[i])
+      }
+    }
+    dest.statusCode = response.statusCode
+  }
+  if (this.pipefilter) this.pipefilter(response, dest)
+}
+
+// Composable API
+Request.prototype.setHeader = function (name, value, clobber) {
+  if (clobber === undefined) clobber = true
+  if (clobber || !this.hasHeader(name)) this.headers[name] = value
+  else this.headers[this.hasHeader(name)] += ',' + value
+  return this
+}
+Request.prototype.setHeaders = function (headers) {
+  for (var i in headers) {this.setHeader(i, headers[i])}
+  return this
+}
+Request.prototype.hasHeader = function (header, headers) {
+  var headers = Object.keys(headers || this.headers)
+    , lheaders = headers.map(function (h) {return h.toLowerCase()})
+    ;
+  header = header.toLowerCase()
+  for (var i=0;i<lheaders.length;i++) {
+    if (lheaders[i] === header) return headers[i]
+  }
+  return false
+}
+
+var hasHeader = Request.prototype.hasHeader
+
+Request.prototype.qs = function (q, clobber) {
+  var base
+  if (!clobber && this.uri.query) base = qs.parse(this.uri.query)
+  else base = {}
+
+  for (var i in q) {
+    base[i] = q[i]
+  }
+
+  if (qs.stringify(base) === ''){
+    return this
+  }
+
+  this.uri = url.parse(this.uri.href.split('?')[0] + '?' + qs.stringify(base))
+  this.url = this.uri
+  this.path = this.uri.path
+
+  return this
+}
+Request.prototype.form = function (form) {
+  if (form) {
+    this.setHeader('content-type', 'application/x-www-form-urlencoded; charset=utf-8')
+    this.body = (typeof form === 'string') ? form.toString('utf8') : qs.stringify(form).toString('utf8')
+    return this
+  }
+  // create form-data object
+  this._form = new FormData()
+  return this._form
+}
+Request.prototype.multipart = function (multipart) {
+  var self = this
+  self.body = []
+
+  if (!self.hasHeader('content-type')) {
+    self.setHeader('content-type', 'multipart/related; boundary=' + self.boundary)
+  } else {
+    var headerName = self.hasHeader('content-type');
+    self.setHeader(headerName, self.headers[headerName].split(';')[0] + '; boundary=' + self.boundary)
+  }
+
+  if (!multipart.forEach) throw new Error('Argument error, options.multipart.')
+
+  if (self.preambleCRLF) {
+    self.body.push(new Buffer('\r\n'))
+  }
+
+  multipart.forEach(function (part) {
+    var body = part.body
+    if(body == null) throw Error('Body attribute missing in multipart.')
+    delete part.body
+    var preamble = '--' + self.boundary + '\r\n'
+    Object.keys(part).forEach(function (key) {
+      preamble += key + ': ' + part[key] + '\r\n'
+    })
+    preamble += '\r\n'
+    self.body.push(new Buffer(preamble))
+    self.body.push(new Buffer(body))
+    self.body.push(new Buffer('\r\n'))
+  })
+  self.body.push(new Buffer('--' + self.boundary + '--'))
+  return self
+}
+Request.prototype.json = function (val) {
+  var self = this
+
+  if (!self.hasHeader('accept')) self.setHeader('accept', 'application/json')
+
+  this._json = true
+  if (typeof val === 'boolean') {
+    if (typeof this.body === 'object') {
+      this.body = safeStringify(this.body)
+      if (!self.hasHeader('content-type'))
+        self.setHeader('content-type', 'application/json')
+    }
+  } else {
+    this.body = safeStringify(val)
+    if (!self.hasHeader('content-type'))
+      self.setHeader('content-type', 'application/json')
+  }
+
+  return this
+}
+Request.prototype.getHeader = function (name, headers) {
+  var result, re, match
+  if (!headers) headers = this.headers
+  Object.keys(headers).forEach(function (key) {
+    if (key.length !== name.length) return
+    re = new RegExp(name, 'i')
+    match = key.match(re)
+    if (match) result = headers[key]
+  })
+  return result
+}
+var getHeader = Request.prototype.getHeader
+
+Request.prototype.auth = function (user, pass, sendImmediately, bearer) {
+  if (bearer !== undefined) {
+    this._bearer = bearer
+    this._hasAuth = true
+    if (sendImmediately || typeof sendImmediately == 'undefined') {
+      if (typeof bearer === 'function') {
+        bearer = bearer()
+      }
+      this.setHeader('authorization', 'Bearer ' + bearer)
+      this._sentAuth = true
+    }
+    return this
+  }
+  if (typeof user !== 'string' || (pass !== undefined && typeof pass !== 'string')) {
+    throw new Error('auth() received invalid user or password')
+  }
+  this._user = user
+  this._pass = pass
+  this._hasAuth = true
+  var header = typeof pass !== 'undefined' ? user + ':' + pass : user
+  if (sendImmediately || typeof sendImmediately == 'undefined') {
+    this.setHeader('authorization', 'Basic ' + toBase64(header))
+    this._sentAuth = true
+  }
+  return this
+}
+Request.prototype.aws = function (opts, now) {
+  if (!now) {
+    this._aws = opts
+    return this
+  }
+  var date = new Date()
+  this.setHeader('date', date.toUTCString())
+  var auth =
+    { key: opts.key
+    , secret: opts.secret
+    , verb: this.method.toUpperCase()
+    , date: date
+    , contentType: this.getHeader('content-type') || ''
+    , md5: this.getHeader('content-md5') || ''
+    , amazonHeaders: aws.canonicalizeHeaders(this.headers)
+    }
+  if (opts.bucket && this.path) {
+    auth.resource = '/' + opts.bucket + this.path
+  } else if (opts.bucket && !this.path) {
+    auth.resource = '/' + opts.bucket
+  } else if (!opts.bucket && this.path) {
+    auth.resource = this.path
+  } else if (!opts.bucket && !this.path) {
+    auth.resource = '/'
+  }
+  auth.resource = aws.canonicalizeResource(auth.resource)
+  this.setHeader('authorization', aws.authorization(auth))
+
+  return this
+}
+Request.prototype.httpSignature = function (opts) {
+  var req = this
+  httpSignature.signRequest({
+    getHeader: function(header) {
+      return getHeader(header, req.headers)
+    },
+    setHeader: function(header, value) {
+      req.setHeader(header, value)
+    },
+    method: this.method,
+    path: this.path
+  }, opts)
+  debug('httpSignature authorization', this.getHeader('authorization'))
+
+  return this
+}
+
+Request.prototype.hawk = function (opts) {
+  this.setHeader('Authorization', hawk.client.header(this.uri, this.method, opts).field)
+}
+
+Request.prototype.oauth = function (_oauth) {
+  var form
+  if (this.hasHeader('content-type') &&
+      this.getHeader('content-type').slice(0, 'application/x-www-form-urlencoded'.length) ===
+        'application/x-www-form-urlencoded'
+     ) {
+    form = qs.parse(this.body)
+  }
+  if (this.uri.query) {
+    form = qs.parse(this.uri.query)
+  }
+  if (!form) form = {}
+  var oa = {}
+  for (var i in form) oa[i] = form[i]
+  for (var i in _oauth) oa['oauth_'+i] = _oauth[i]
+  if (!oa.oauth_version) oa.oauth_version = '1.0'
+  if (!oa.oauth_timestamp) oa.oauth_timestamp = Math.floor( Date.now() / 1000 ).toString()
+  if (!oa.oauth_nonce) oa.oauth_nonce = uuid().replace(/-/g, '')
+
+  oa.oauth_signature_method = 'HMAC-SHA1'
+
+  var consumer_secret = oa.oauth_consumer_secret
+  delete oa.oauth_consumer_secret
+  var token_secret = oa.oauth_token_secret
+  delete oa.oauth_token_secret
+  var timestamp = oa.oauth_timestamp
+
+  var baseurl = this.uri.protocol + '//' + this.uri.host + this.uri.pathname
+  var signature = oauth.hmacsign(this.method, baseurl, oa, consumer_secret, token_secret)
+
+  // oa.oauth_signature = signature
+  for (var i in form) {
+    if ( i.slice(0, 'oauth_') in _oauth) {
+      // skip
+    } else {
+      delete oa['oauth_'+i]
+      if (i !== 'x_auth_mode') delete oa[i]
+    }
+  }
+  oa.oauth_timestamp = timestamp
+  var authHeader = 'OAuth '+Object.keys(oa).sort().map(function (i) {return i+'="'+oauth.rfc3986(oa[i])+'"'}).join(',')
+  authHeader += ',oauth_signature="' + oauth.rfc3986(signature) + '"'
+  this.setHeader('Authorization', authHeader)
+  return this
+}
+Request.prototype.jar = function (jar) {
+  var cookies
+
+  if (this._redirectsFollowed === 0) {
+    this.originalCookieHeader = this.getHeader('cookie')
+  }
+
+  if (!jar) {
+    // disable cookies
+    cookies = false
+    this._disableCookies = true
+  } else {
+    var targetCookieJar = (jar && jar.getCookieString)?jar:globalCookieJar;
+    var urihref = this.uri.href
+    //fetch cookie in the Specified host
+    if (targetCookieJar) {
+      cookies = targetCookieJar.getCookieString(urihref);
+    }
+  }
+
+  //if need cookie and cookie is not empty
+  if (cookies && cookies.length) {
+    if (this.originalCookieHeader) {
+      // Don't overwrite existing Cookie header
+      this.setHeader('cookie', this.originalCookieHeader + '; ' + cookies)
+    } else {
+      this.setHeader('cookie', cookies)
+    }
+  }
+  this._jar = jar
+  return this
+}
+
+
+// Stream API
+Request.prototype.pipe = function (dest, opts) {
+  if (this.response) {
+    if (this._destdata) {
+      throw new Error("You cannot pipe after data has been emitted from the response.")
+    } else if (this._ended) {
+      throw new Error("You cannot pipe after the response has been ended.")
+    } else {
+      stream.Stream.prototype.pipe.call(this, dest, opts)
+      this.pipeDest(dest)
+      return dest
+    }
+  } else {
+    this.dests.push(dest)
+    stream.Stream.prototype.pipe.call(this, dest, opts)
+    return dest
+  }
+}
+Request.prototype.write = function () {
+  if (!this._started) this.start()
+  return this.req.write.apply(this.req, arguments)
+}
+Request.prototype.end = function (chunk) {
+  if (chunk) this.write(chunk)
+  if (!this._started) this.start()
+  this.req.end()
+}
+Request.prototype.pause = function () {
+  if (!this.response) this._paused = true
+  else this.response.pause.apply(this.response, arguments)
+}
+Request.prototype.resume = function () {
+  if (!this.response) this._paused = false
+  else this.response.resume.apply(this.response, arguments)
+}
+Request.prototype.destroy = function () {
+  if (!this._ended) this.end()
+  else if (this.response) this.response.destroy()
+}
+
+function toJSON () {
+  return getSafe(this, '__' + (((1+Math.random())*0x10000)|0).toString(16))
+}
+
+Request.prototype.toJSON = toJSON
+
+
+module.exports = Request
+
+}).call(this,require('_process'),require("buffer").Buffer)
+},{"./lib/cookies":"/Users/jmej/pcs/capstone/capstone/node_modules/request/lib/cookies.js","./lib/copy":"/Users/jmej/pcs/capstone/capstone/node_modules/request/lib/copy.js","./lib/debug":"/Users/jmej/pcs/capstone/capstone/node_modules/request/lib/debug.js","./lib/getSafe":"/Users/jmej/pcs/capstone/capstone/node_modules/request/lib/getSafe.js","./lib/optional":"/Users/jmej/pcs/capstone/capstone/node_modules/request/lib/optional.js","_process":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js","buffer":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/buffer/index.js","crypto":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/crypto-browserify/index.js","forever-agent":"/Users/jmej/pcs/capstone/capstone/node_modules/request/node_modules/forever-agent/index.js","http":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/http-browserify/index.js","json-stringify-safe":"/Users/jmej/pcs/capstone/capstone/node_modules/request/node_modules/json-stringify-safe/stringify.js","mime-types":"/Users/jmej/pcs/capstone/capstone/node_modules/request/node_modules/mime-types/lib/index.js","net":"/usr/local/lib/node_modules/watchify/node_modules/browserify/lib/_empty.js","node-uuid":"/Users/jmej/pcs/capstone/capstone/node_modules/request/node_modules/node-uuid/uuid.js","qs":"/Users/jmej/pcs/capstone/capstone/node_modules/request/node_modules/qs/index.js","querystring":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/querystring-es3/index.js","stream":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/stream-browserify/index.js","url":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/url/url.js","util":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/util/util.js","zlib":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/browserify-zlib/src/index.js"}],"/Users/jmej/pcs/capstone/capstone/node_modules/underscore/underscore.js":[function(require,module,exports){
 //     Underscore.js 1.6.0
 //     http://underscorejs.org
 //     (c) 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
