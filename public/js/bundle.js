@@ -12699,14 +12699,14 @@ var MainView = Backbone.View.extend({
 	}).fail(function() {
 console.log( "get page "+currentPage+" of "+user+"'s wantlist from discogs failed" );
 });
-}
+};
 
 	var getVids = function(arr){  //grabs youtube video per release in wantArr from getIds fn
 		arr.forEach(function (item, index){
 			$.getJSON('http://api.discogs.com/releases/'+item+'?callback=?').done(function(vids){
     		if (vids.data.videos){
     		self.records.wants.push({youtube:vids.data.videos[0].uri.slice(-11), discogs:item}); //this adds objects for everything fetched from discogs to the records array
-       };
+       }
        if (index == arr.length-1){
        self.render();
        console.log('wtf');}
@@ -12736,14 +12736,14 @@ console.log( "get page "+currentPage+" of "+user+"'s wantlist from discogs faile
         });
        callback(colArr);
   });
-}
+};
 
   var getVids = function(arr){  //grabs youtube video per release in wantArr from getIds fn
     arr.forEach(function (item, index){
       $.getJSON('http://api.discogs.com/releases/'+item+'?callback=?').done(function(vids){
         if (vids.data.videos){
         self.records.collection.push({youtube:vids.data.videos[0].uri.slice(-11), discogs:item}); //this adds objects for everything fetched from discogs to the records array
-       };
+       }
        if (index == arr.length-1){
        self.render();
        }
