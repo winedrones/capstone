@@ -1,6 +1,6 @@
 var $ = require('jquery');
 var Backbone = require('backbone');
-//var http = require('http');
+var http = require('http');
 //var url = require('url');
 //var discogs = require('discogs');
 //var request = require('request');
