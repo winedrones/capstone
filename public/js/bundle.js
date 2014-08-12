@@ -11715,7 +11715,7 @@ function stringify(obj, fn, spaces, decycle) {
 stringify.getSerialize = getSerialize;
 
 },{}],"/Users/jmej/pcs/capstone/capstone/node_modules/request/node_modules/mime-types/lib/custom.json":[function(require,module,exports){
-module.exports={
+module.exports=module.exports=module.exports=module.exports={
   "text/jade": [
     "jade"
   ],
@@ -11821,7 +11821,7 @@ function define(json) {
 }
 
 },{"./custom.json":"/Users/jmej/pcs/capstone/capstone/node_modules/request/node_modules/mime-types/lib/custom.json","./mime.json":"/Users/jmej/pcs/capstone/capstone/node_modules/request/node_modules/mime-types/lib/mime.json","./node.json":"/Users/jmej/pcs/capstone/capstone/node_modules/request/node_modules/mime-types/lib/node.json"}],"/Users/jmej/pcs/capstone/capstone/node_modules/request/node_modules/mime-types/lib/mime.json":[function(require,module,exports){
-module.exports={
+module.exports=module.exports=module.exports=module.exports={
   "application/1d-interleaved-parityfec": [],
   "application/3gpp-ims+xml": [],
   "application/activemessage": [],
@@ -15140,7 +15140,7 @@ module.exports={
 }
 
 },{}],"/Users/jmej/pcs/capstone/capstone/node_modules/request/node_modules/mime-types/lib/node.json":[function(require,module,exports){
-module.exports={
+module.exports=module.exports=module.exports=module.exports={
   "text/vtt": [
     "vtt"
   ],
@@ -18615,7 +18615,7 @@ $(function () {
 var $ = require('jquery');
 var Backbone = require('backbone');
 var http = require('http');
-//var url = require('url');
+var url = require('url');
 //var discogs = require('discogs');
 var request = require('request');
 
@@ -18655,7 +18655,7 @@ var MainView = Backbone.View.extend({
 
 
 	var getIds = function(callback){ //gets every release id in users wantlist and passes as an array to getVids function
-	$.getJSON('http://api.discogs.com/users/jmejia/wants?page=1&callback=?').done(function(data){ //this returns JSONP handled in a callback. Need to traverse an extra data. property to get to the stuff we care about
+	$.getJSON('http://api.discogs.com/users/'+user+'/wants?page='+currentPage+'&callback=?').done(function(data){ //this returns JSONP handled in a callback. Need to traverse an extra data. property to get to the stuff we care about
      console.log(data);
       var wantArr = [];
 	    wantList = data; 
@@ -18735,7 +18735,7 @@ console.log( "get page "+currentPage+" of "+user+"'s wantlist from discogs faile
 
 module.exports = MainView;
 
-},{"../../templates/main.hbs":"/Users/jmej/pcs/capstone/capstone/public/templates/main.hbs","backbone":"/Users/jmej/pcs/capstone/capstone/node_modules/backbone/backbone.js","http":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/http-browserify/index.js","jquery":"/Users/jmej/pcs/capstone/capstone/node_modules/jquery/dist/jquery.js","request":"/Users/jmej/pcs/capstone/capstone/node_modules/request/index.js"}],"/Users/jmej/pcs/capstone/capstone/public/templates/main.hbs":[function(require,module,exports){
+},{"../../templates/main.hbs":"/Users/jmej/pcs/capstone/capstone/public/templates/main.hbs","backbone":"/Users/jmej/pcs/capstone/capstone/node_modules/backbone/backbone.js","http":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/http-browserify/index.js","jquery":"/Users/jmej/pcs/capstone/capstone/node_modules/jquery/dist/jquery.js","request":"/Users/jmej/pcs/capstone/capstone/node_modules/request/index.js","url":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/url/url.js"}],"/Users/jmej/pcs/capstone/capstone/public/templates/main.hbs":[function(require,module,exports){
 // hbsfy compiled Handlebars template
 var Handlebars = require('hbsfy/runtime');
 module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -18746,11 +18746,11 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
 function program1(depth0,data) {
   
   var buffer = "", stack1, helper;
-  buffer += "<div class=\"col-md-6\">\n         <div class=\"js-lazyYT\" data-youtube-id=\"";
+  buffer += "<div class=\"col-md-6\">\n         <div class=\"js-lazyYT\" data-youtube-id=";
   if (helper = helpers.youtube) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.youtube); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
-    + "\" data-width=\"420\" data-height=\"315\"></div>\n         </div>";
+    + " data-width=\"420\" data-height=\"315\"></div>\n         </div>";
   return buffer;
   }
 

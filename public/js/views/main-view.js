@@ -1,7 +1,7 @@
 var $ = require('jquery');
 var Backbone = require('backbone');
 var http = require('http');
-//var url = require('url');
+var url = require('url');
 //var discogs = require('discogs');
 var request = require('request');
 
@@ -41,7 +41,7 @@ var MainView = Backbone.View.extend({
 
 
 	var getIds = function(callback){ //gets every release id in users wantlist and passes as an array to getVids function
-	$.getJSON('http://api.discogs.com/users/jmejia/wants?page=1&callback=?').done(function(data){ //this returns JSONP handled in a callback. Need to traverse an extra data. property to get to the stuff we care about
+	$.getJSON('http://api.discogs.com/users/'+user+'/wants?page='+currentPage+'&callback=?').done(function(data){ //this returns JSONP handled in a callback. Need to traverse an extra data. property to get to the stuff we care about
      console.log(data);
       var wantArr = [];
 	    wantList = data; 
