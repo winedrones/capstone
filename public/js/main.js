@@ -1,20 +1,104 @@
+var htmlTemplate = require('../templates/main.hbs');
 var $ = require('jquery');
-var Backbone = require('backbone');
-Backbone.$ = $;
 
-var MainView = require('./views/main-view');
+(function(){
+console.log("iffy");
+var records = {wants:[{youtube:'MI0GJj_NoI0', discogs:'1503102'}], collection:[{youtube:'MI0GJj_NoI0', discogs:'1503102'}]};
 
-var Router = Backbone.Router.extend({
-  routes: {
-    '': 'main'
-  },
-  main: function () {
-    this.MainView = new MainView();
-    this.MainView.render(); 
-  }
+$( "#username-submit" ).click(function() {
+    var $usernameInput = $('.form-group').find('#add-username');
+    records = {wants:[], collection:[]};
+    var userName = $usernameInput.val();
+    discogs(userName);
+    discollection(userName);
+
 });
 
-$(function () {
-  window.app = new Router();
-  Backbone.history.start();
-});
+
+ var discogs = function(user){
+    var self = this;
+  	var wantList = {};
+  	var pages = 1; //need to implement pagination later
+	  var currentPage = 1;
+
+
+  	var getIds = function(callback){ //gets every release id in users wantlist and passes as an array to getVids function
+  	$.getJSON('http://api.discogs.com/users/'+user+'/wants?page='+currentPage+'&callback=?').done(function(data){ //this returns JSONP handled in a callback. Need to traverse an extra data. property to get to the stuff we care about
+       console.log(data);
+        var wantArr = [];
+  	    wantList = data; 
+  	    pages = wantList.data.pagination.pages;
+  	    wantList.data.wants.forEach(function (item, index){ //this grabs the discogs id of every release in the discogs wantlist
+  	    	wantArr.push(item.id);
+  	    	});
+  	     callback(wantArr);
+  	}).fail(function() {
+    console.log( "get page "+currentPage+" of "+user+"'s wantlist from discogs failed" );
+    });
+    };
+
+  	var getVids = function(arr){  //grabs youtube video per release in wantArr from getIds fn
+  		arr.forEach(function (item, index){
+  			$.getJSON('http://api.discogs.com/releases/'+item+'?callback=?').done(function(vids){
+      		if (vids.data.videos){
+      		self.records.wants.push({youtube:vids.data.videos[0].uri.slice(-11), discogs:item}); //this adds objects for everything fetched from discogs to the records array
+         }
+         if (index == arr.length-1){
+         self.render();
+         }
+    		});	
+    	});
+    };
+
+
+	getIds(getVids);
+  };
+
+  var discollection = function(user){
+
+    var self = this;
+    var list = {};
+    var pages = 1; //need to implement pagination later
+  var currentPage = 1;
+
+
+    var getIds = function(callback){//gets every release id in users all collections folder and passes as an array to getVids function
+    $.getJSON('http://api.discogs.com/users/'+user+'/collection/folders/0/releases?page='+currentPage+'&callback=?').done(function(data){ //this returns JSONP handled in a callback. Need to traverse an extra data. property to get to the stuff we care about
+      var colArr = [];
+        list = data; 
+        pages = list.data.pagination.pages;
+        list.data.releases.forEach(function (item, index){ //this grabs the discogs id of every release in the discogs wantlist
+          colArr.push(item.id);
+          });
+         callback(colArr);
+    });
+  };
+
+      var getVids = function(arr){  //grabs youtube video per release in wantArr from getIds fn
+        arr.forEach(function (item, index){
+          $.getJSON('http://api.discogs.com/releases/'+item+'?callback=?').done(function(vids){
+            if (vids.data.videos){
+            self.records.collection.push({youtube:vids.data.videos[0].uri.slice(-11), discogs:item}); //this adds objects for everything fetched from discogs to the records array
+           }
+           if (index == arr.length-1){
+           render();
+           }
+        }); 
+      });
+    };
+
+
+    getIds(getVids);
+    };
+      
+
+  var render = function () {
+    $(this.el).html(htmlTemplate(this.records));
+
+   // $(this.el).html(myTemplate({entries:[{youtube: data, discogs: data},{...}]}))
+  };
+
+}());
+
+
+//module.exports = MainView;
