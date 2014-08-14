@@ -51,7 +51,7 @@ var MainView = Backbone.View.extend({
 
 
     var getIds = function(callback){ //gets every release id in users wantlist and passes as an array to getVids function
-      $.getJSON('http://api.discogs.com/users/jmejia/wants?page=1&callback=?')
+      $.getJSON('http://api.discogs.com/users/'+user+'/wants?page=1&callback=?')
         .done(function(data){ //this returns JSONP handled in a callback. Need to traverse an extra data. property to get to the stuff we care about
           console.log(data);
           var wantArr = [];
@@ -68,9 +68,9 @@ var MainView = Backbone.View.extend({
 
   	var getVids = function(arr){  //grabs youtube video per release in wantArr from getIds fn
   		arr.forEach(function (item, index){
-  			$.getJSON('http://api.discogs.com/releases/'+item+'?callback=?').done(function(vids){
-      		if (vids.data.videos){
-      		self.records.wants.push({youtube:vids.data.videos[0].uri.slice(-11), discogs:item}); //this adds objects for everything fetched from discogs to the records array
+  			$.getJSON('http://api.discogs.com/releases/'+item+'?callback=?').done(function(rels){
+      		if (rels.data.videos){
+      		self.records.wants.push({youtube:rels.data.videos[0].uri.slice(-11), discogs:item, artist:rels.data.artists[0].name, title:rels.data.title}); //this adds objects for everything fetched from discogs to the records array
          }
          if (index == arr.length-1){
          self.render({array:self.records.wants});
@@ -105,9 +105,9 @@ var MainView = Backbone.View.extend({
 
   var getVids = function(arr){  //grabs youtube video per release in wantArr from getIds fn
     arr.forEach(function (item, index){
-      $.getJSON('http://api.discogs.com/releases/'+item+'?callback=?').done(function(vids){
-        if (vids.data.videos){
-        self.records.collection.push({youtube:vids.data.videos[0].uri.slice(-11), discogs:item}); //this adds objects for everything fetched from discogs to the records array
+      $.getJSON('http://api.discogs.com/releases/'+item+'?callback=?').done(function(rels){
+        if (rels.data.videos){
+        self.records.collection.push({youtube:rels.data.videos[0].uri.slice(-11), discogs:item, artist:rels.data.artists[0].name, title:rels.data.title}); //this adds objects for everything fetched from discogs to the records array
        }
        if (index == arr.length-1){
        self.render({array:self.records.collection});
