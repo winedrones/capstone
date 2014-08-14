@@ -9,6 +9,7 @@ var htmlTemplate = require('../../templates/main.hbs');
 
 
 
+
 var MainView = Backbone.View.extend({
   el: '#my-app',
 
@@ -19,11 +20,11 @@ var MainView = Backbone.View.extend({
   },
 
   renderWants: function(){
-    this.discogs(this.userName);
+    this.discogs(this.userName, 1);
   },
 
   renderCollection: function(){
-    this.discollection(this.userName);
+    this.discollection(this.userName, 1);
   },
 
 
@@ -31,7 +32,7 @@ var MainView = Backbone.View.extend({
     var $usernameInput = $('.form-group').find('#add-username');
     this.records = {wants:[], collection:[]};
     this.userName = $usernameInput.val();
-    this.discogs(this.userName);
+    this.discogs(this.userName, 1);
     this.records.wants.username = this.userName;
     this.records.collection.username = this.userName;
 },
@@ -43,26 +44,29 @@ var MainView = Backbone.View.extend({
   initialize: function () {
   },
 
-  discogs: function(user){
+  discogs: function(user, page){
     var self = this;
   	var wantList = {};
-  	var pages = 1; //need to implement pagination later
-	  var currentPage = 1;
+  	var pages = 1;
+    var wantArr = [];
 
 
-    var getIds = function(callback){ //gets every release id in users wantlist and passes as an array to getVids function
-      $.getJSON('http://api.discogs.com/users/'+user+'/wants?page=1&callback=?')
+    var getIds = function(callback, page){ //gets every release id in users wantlist and passes as an array to getVids function
+      $.getJSON('http://api.discogs.com/users/'+user+'/wants?page='+page+'&callback=?')
         .done(function(data){ //this returns JSONP handled in a callback. Need to traverse an extra data. property to get to the stuff we care about
           console.log(data);
-          var wantArr = [];
+          var nextPage = page+1;
           wantList = data; 
           pages = wantList.data.pagination.pages;
           wantList.data.wants.forEach(function (item, index){ //this grabs the discogs id of every release in the discogs wantlist
             wantArr.push(item.id);
           });
-  	      callback(wantArr);
+          if (nextPage != pages+1)
+            {getIds(getVids, nextPage);}
+          else
+  	       callback(wantArr);
   	    }).fail(function() {
-          console.log( "get page "+currentPage+" of "+user+"'s wantlist from discogs failed" );
+          console.log( "get page "+page+" of "+user+"'s wantlist from discogs failed" );
         });
     };
 
@@ -80,25 +84,29 @@ var MainView = Backbone.View.extend({
   };
 
 
-	getIds(getVids);
+	getIds(getVids, page);
   },
 
-  discollection: function(user){
+  discollection: function(user, page){
 
     var self = this;
     var list = {};
-    var pages = 1; //need to implement pagination later
-    var currentPage = 1;
-
-
-  var getIds = function(callback){//gets every release id in users all collections folder and passes as an array to getVids function
-  $.getJSON('http://api.discogs.com/users/'+user+'/collection/folders/0/releases?page='+currentPage+'&callback=?').done(function(data){ //this returns JSONP handled in a callback. Need to traverse an extra data. property to get to the stuff we care about
+    var pages = 1;
     var colArr = [];
+
+
+  var getIds = function(callback, page){//gets every release id in users all collections folder and passes as an array to getVids function
+  $.getJSON('http://api.discogs.com/users/'+user+'/collection/folders/0/releases?page='+page+'&callback=?').done(function(data){ //this returns JSONP handled in a callback. Need to traverse an extra data. property to get to the stuff we care about
+    var nextPage = page+1;
       list = data; 
       pages = list.data.pagination.pages;
       list.data.releases.forEach(function (item, index){ //this grabs the discogs id of every release in the discogs wantlist
         colArr.push(item.id);
         });
+      //console.log(page+" of "+pages+" next page is "+nextPage);
+      if (nextPage != pages+1)
+        {getIds(getVids, nextPage);}
+      else
        callback(colArr);
   });
 };
@@ -117,7 +125,7 @@ var MainView = Backbone.View.extend({
 };
 
 
-  getIds(getVids);
+  getIds(getVids, page);
   },
     
 
