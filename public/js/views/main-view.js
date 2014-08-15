@@ -6,6 +6,7 @@ var request = require('request');
 Backbone.$ = $;
 
 var htmlTemplate = require('../../templates/main.hbs');
+var loginHTML = require('../../templates/login.hbs');
 
 
 
@@ -17,6 +18,7 @@ var MainView = Backbone.View.extend({
     'click #username-submit': 'addUsername',
     'click #wantlist' : 'renderWants',
     'click #collection' : 'renderCollection',
+    'click #init-username-submit' : 'authenticate'
   },
 
   renderWants: function(){
@@ -39,11 +41,31 @@ var MainView = Backbone.View.extend({
     this.records.collection.username = this.userName;
 },
 
-  records: {wants:[{youtube:'MI0GJj_NoI0', discogs:'1503102'}], collection:[{youtube:'MI0GJj_NoI0', discogs:'1503102'}]},
+  records: {wants:[], collection:[]},
 
-  //testThing: {entries:[{discogs: 5719574, youtube: "QLnTRwpmCGs"}, {discogs: 4368235, youtube: "zH1VeQFBfW8"}]},
+  //testThing: {wants:[{discogs: 5719574, youtube: "QLnTRwpmCGs"}, {discogs: 4368235, youtube: "zH1VeQFBfW8"}]},
+
+  authenticate: function() {
+      var self = this;
+      var $user = $('.login-form').find('#username');
+      this.userName = $user.val();
+      $.getJSON('http://api.discogs.com/users/'+this.userName+'/wants?page=1&callback=?')
+        .done(function(data){
+          console.log("success");
+          if (data.meta.status == 200){
+            self.discogs(self.userName, 1);
+            self.records.wants.username = self.userName;
+            self.records.collection.username = self.userName;
+          }
+        }).fail(function() {
+          $("error").html("You must have your wantlist set to public - this thing is about sharing - please respect that!");
+        });
+  },
 
   initialize: function () {
+
+  $(this.el).html(loginHTML());
+
   },
 
   discogs: function(user, page){

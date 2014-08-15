@@ -9,7 +9,7 @@ var Router = Backbone.Router.extend({
   },
   main: function () {
     this.mainView = new MainView();
-    this.mainView.render(); 
+    //this.mainView.render(); 
   }
 });
 
