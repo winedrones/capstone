@@ -6,6 +6,7 @@ var request = require('request');
 Backbone.$ = $;
 
 var htmlTemplate = require('../../templates/main.hbs');
+var loginHTML = require('../../templates/login.hbs');
 
 
 
@@ -17,6 +18,7 @@ var MainView = Backbone.View.extend({
     'click #username-submit': 'addUsername',
     'click #wantlist' : 'renderWants',
     'click #collection' : 'renderCollection',
+    'click #init-username-submit' : 'authenticate'
   },
 
   renderWants: function(){
@@ -37,11 +39,31 @@ var MainView = Backbone.View.extend({
     this.records.collection.username = this.userName;
 },
 
-  records: {wants:[{youtube:'MI0GJj_NoI0', discogs:'1503102'}], collection:[{youtube:'MI0GJj_NoI0', discogs:'1503102'}]},
+  records: {wants:[], collection:[]},
 
-  //testThing: {entries:[{discogs: 5719574, youtube: "QLnTRwpmCGs"}, {discogs: 4368235, youtube: "zH1VeQFBfW8"}]},
+  //testThing: {wants:[{discogs: 5719574, youtube: "QLnTRwpmCGs"}, {discogs: 4368235, youtube: "zH1VeQFBfW8"}]},
+
+  authenticate: function() {
+      var self = this;
+      var $user = $('.login-form').find('#username');
+      this.userName = $user.val();
+      $.getJSON('http://api.discogs.com/users/'+this.userName+'/wants?page=1&callback=?')
+        .done(function(data){
+          console.log("success");
+          if (data.meta.status == 200){
+            self.discogs(self.userName, 1);
+            self.records.wants.username = self.userName;
+            self.records.collection.username = self.userName;
+          }
+        }).fail(function() {
+          console.log("discogs username failed");
+        });
+  },
 
   initialize: function () {
+
+  $(this.el).html(loginHTML());
+
   },
 
   discogs: function(user, page){
@@ -49,7 +71,8 @@ var MainView = Backbone.View.extend({
   	var wantList = {};
   	var pages = 1;
     var wantArr = [];
-
+    var animationHtml = "<div class='spinner'></div><div>Please wait while we grab a bunch of jams...</div>";
+    $("#youtube-vids").replaceWith(animationHtml); //loading status thing
 
     var getIds = function(callback, page){ //gets every release id in users wantlist and passes as an array to getVids function
       $.getJSON('http://api.discogs.com/users/'+user+'/wants?page='+page+'&callback=?')
@@ -93,7 +116,8 @@ var MainView = Backbone.View.extend({
     var list = {};
     var pages = 1;
     var colArr = [];
-
+    var animationHtml = "<div class='spinner'>Please wait while we grab a bunch of jams...</div><div>Please wait while we grab a bunch of jams...</div>";
+    $("#youtube-vids").replaceWith(animationHtml); //loading status thing
 
   var getIds = function(callback, page){//gets every release id in users all collections folder and passes as an array to getVids function
   $.getJSON('http://api.discogs.com/users/'+user+'/collection/folders/0/releases?page='+page+'&callback=?').done(function(data){ //this returns JSONP handled in a callback. Need to traverse an extra data. property to get to the stuff we care about
