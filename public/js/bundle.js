@@ -2523,7 +2523,7 @@ function stringify(obj, fn, spaces, decycle) {
 stringify.getSerialize = getSerialize;
 
 },{}],"/Users/ac/pcs/capstone/node_modules/request/node_modules/mime-types/lib/custom.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
+module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
   "text/jade": [
     "jade"
   ],
@@ -2629,7 +2629,7 @@ function define(json) {
 }
 
 },{"./custom.json":"/Users/ac/pcs/capstone/node_modules/request/node_modules/mime-types/lib/custom.json","./mime.json":"/Users/ac/pcs/capstone/node_modules/request/node_modules/mime-types/lib/mime.json","./node.json":"/Users/ac/pcs/capstone/node_modules/request/node_modules/mime-types/lib/node.json"}],"/Users/ac/pcs/capstone/node_modules/request/node_modules/mime-types/lib/mime.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
+module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
   "application/1d-interleaved-parityfec": [],
   "application/3gpp-ims+xml": [],
   "application/activemessage": [],
@@ -5948,7 +5948,7 @@ module.exports=module.exports=module.exports=module.exports=module.exports=modul
 }
 
 },{}],"/Users/ac/pcs/capstone/node_modules/request/node_modules/mime-types/lib/node.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
+module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
   "text/vtt": [
     "vtt"
   ],
@@ -24242,12 +24242,10 @@ var MainView = Backbone.View.extend({
   },
 
   renderWants: function(){
-    $("youtube-vids").html("please wait while we load a bunch of jams");
     this.discogs(this.userName, 1);
   },
 
   renderCollection: function(){
-    $("youtube-vids").html("please wait while we load a bunch of jams");
     this.discollection(this.userName, 1);
   },
 
@@ -24278,7 +24276,7 @@ var MainView = Backbone.View.extend({
             self.records.collection.username = self.userName;
           }
         }).fail(function() {
-          $("error").html("You must have your wantlist set to public - this thing is about sharing - please respect that!");
+          console.log("discogs username failed");
         });
   },
 
@@ -24293,7 +24291,8 @@ var MainView = Backbone.View.extend({
   	var wantList = {};
   	var pages = 1;
     var wantArr = [];
-
+    var animationHtml = "<div class='spinner'></div><div>Please wait while we grab a bunch of jams...</div>";
+    $("#youtube-vids").replaceWith(animationHtml); //loading status thing
 
     var getIds = function(callback, page){ //gets every release id in users wantlist and passes as an array to getVids function
       $.getJSON('http://api.discogs.com/users/'+user+'/wants?page='+page+'&callback=?')
@@ -24337,7 +24336,8 @@ var MainView = Backbone.View.extend({
     var list = {};
     var pages = 1;
     var colArr = [];
-
+    var animationHtml = "<div class='spinner'>Please wait while we grab a bunch of jams...</div><div>Please wait while we grab a bunch of jams...</div>";
+    $("#youtube-vids").replaceWith(animationHtml); //loading status thing
 
   var getIds = function(callback, page){//gets every release id in users all collections folder and passes as an array to getVids function
   $.getJSON('http://api.discogs.com/users/'+user+'/collection/folders/0/releases?page='+page+'&callback=?').done(function(data){ //this returns JSONP handled in a callback. Need to traverse an extra data. property to get to the stuff we care about
@@ -24394,7 +24394,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   
 
 
-  return "<body>\n      <header>\n        \n        <div class=\"row\" style=\"margin-bottom:5%;\">\n          <h1 class=\"text-center\">Record Pool</h1>\n        </div>\n\n        <div class=\"row\">\n          \n          <div class=\"col-md-3\">\n            <div>\n              <div class=\"login-form\">\n                <label for=\"user-id-input\">Your Discogs Username</label>\n                <input type=\"user-id\" id=\"username\" class=\"form-control\" placeholder=\"Enter Discogs Username\">\n              </div>\n              <button id=\"init-username-submit\" class=\"btn btn-default\">Submit</button>\n            </div>\n            <div id=\"error\">Log in to get started</div>\n          </div>\n\n          \n          <div class=\"col-md-6\">\n            <h4 class=\"text-center\"></h4> \n            <div class=\"text-center\">\n              <ul class=\"nav nav-pills center-pills\">\n              </ul>\n            </div>\n          </div>\n          \n          <div class=\"col-md-3\" style=\"margin-top:7%;\">\n            <h4 class=\"text-center\">Notes</h4>\n          </div>\n        </div>\n\n      </header>\n\n      <section>\n        <div class=\"row\">\n         \n         <div id=\"userlist\"class=\"col-md-3\">\n          <ul class=\"nav nav-pills\">\n            <li class=\"dropdown\">\n              <a class=\"dropdown-toggle\" data-toggle=\"dropdown\" href=\"#\" style=\"margin-top:50%;\">\n                Other collections will appear here after you log in!<span class=\"caret\"></span>\n              </a>\n              <ul class=\"dropdown-menu\" role=\"menu\">\n                <li>Christian</li>\n                <li>Jesse</li>\n                <li>Kyle</li>\n              </ul>\n            </li>\n          </ul>\n         </div>\n\n         <div class=\"col-md-6\" id=\"content\">\n         <div>This page renders the Discogs collections and wantlists of anyone who keeps those lists public.<br /><br />\n         In order to access these lists - type your own Discogs username into the box on the left.<br /><br />\n         You will only get access if your own lists are public. This site is about sharing. <br /><br />\n         Please respect these intentions.<br /><br />\n         Share generously, dig deeply, these are everyone's jams.<br /><br />\n         </div>\n         <div class=\"link\"><a href=\"http://www.discogs.com/release/249504\"><3 Discogs</a></div>\n         </div>\n\n         <div class=\"col-md-3\">\n          <div class=\"panel panel-default\">\n            <!-- Default panel contents -->\n            <div class=\"panel-heading\">User Comments</div>\n            <div class=\"panel-body\">\n              <p>...</p>\n            </div>\n\n            <!-- List group -->\n            <ul class=\"list-group\">\n              <li class=\"list-group-item\">Great track</li>\n              <li class=\"list-group-item\">Catchy hook</li>\n              <li class=\"list-group-item\">Sick riffs</li>   \n              <li class=\"list-group-item\">I want to live in this song!</li>\n            </ul>\n          </div>\n          <textarea class=\"form-control\" rows=\"3\"></textarea>\n          <button type=\"submit\" class=\"btn btn-default\">Submit Comments</button>\n         </div>\n        </div>\n      </section>\n\n</div>";
+  return "<body>\n      <header>\n        \n        <div class=\"row\" style=\"margin-bottom:5%;\">\n          <h1 class=\"text-center\">Record Pool</h1>\n        </div>\n\n        <div class=\"row\">\n          \n          <div class=\"col-md-3\">\n            <div>\n              <div class=\"login-form\">\n                <label for=\"user-id-input\">Your Discogs Username</label>\n                <input type=\"user-id\" id=\"username\" class=\"form-control\" placeholder=\"Enter Discogs Username\">\n              </div>\n              <button id=\"init-username-submit\" class=\"btn btn-default\">Submit</button>\n            </div>\n          </div>\n\n          \n          <div class=\"col-md-6\">\n            <h4 class=\"text-center\"></h4> \n            <div class=\"text-center\">\n              <ul class=\"nav nav-pills center-pills\">\n              </ul>\n            </div>\n          </div>\n          \n          <div class=\"col-md-3\" style=\"margin-top:7%;\">\n            <h4 class=\"text-center\">Notes</h4>\n          </div>\n        </div>\n\n      </header>\n\n      <section>\n        <div class=\"row\">\n         \n         <div id=\"userlist\"class=\"col-md-3\">\n          <ul class=\"nav nav-pills\">\n            <li class=\"dropdown\">\n              <a class=\"dropdown-toggle\" data-toggle=\"dropdown\" href=\"#\" style=\"margin-top:50%;\">\n                Other collections will appear here after you log in!<span class=\"caret\"></span>\n              </a>\n              <ul class=\"dropdown-menu\" role=\"menu\">\n                <li>Christian</li>\n                <li>Jesse</li>\n                <li>Kyle</li>\n              </ul>\n            </li>\n          </ul>\n         </div>\n\n         <div class=\"col-md-6\" id=\"youtube-vids\">\n         <div id=\"status\">\n         This page renders the Discogs collections and wantlists of anyone who keeps those lists public.<br /><br />\n         In order to access these lists - type your own Discogs username into the box on the left.<br /><br />\n         You will only get access if your own lists are public. This site is about sharing. <br /><br />\n         Please respect these intentions.<br /><br />\n         Share generously, dig deeply, these are everyone's jams.<br /><br />\n         <div class=\"link\"><a href=\"http://www.discogs.com/release/249504\"><3 Discogs</a></div>\n         </div>\n         \n         </div>\n\n         <div class=\"col-md-3\">\n          <div class=\"panel panel-default\">\n            <!-- Default panel contents -->\n            <div class=\"panel-heading\">User Comments</div>\n            <div class=\"panel-body\">\n              <p>...</p>\n            </div>\n\n            <!-- List group -->\n            <ul class=\"list-group\">\n              <li class=\"list-group-item\">Great track</li>\n              <li class=\"list-group-item\">Catchy hook</li>\n              <li class=\"list-group-item\">Sick riffs</li>   \n              <li class=\"list-group-item\">I want to live in this song!</li>\n            </ul>\n          </div>\n          <textarea class=\"form-control\" rows=\"3\"></textarea>\n          <button type=\"submit\" class=\"btn btn-default\">Submit Comments</button>\n         </div>\n        </div>\n      </section>\n\n</div>";
   });
 
 },{"hbsfy/runtime":"/Users/ac/pcs/capstone/node_modules/hbsfy/runtime.js"}],"/Users/ac/pcs/capstone/public/templates/main.hbs":[function(require,module,exports){

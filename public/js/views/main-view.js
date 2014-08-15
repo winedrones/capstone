@@ -22,12 +22,10 @@ var MainView = Backbone.View.extend({
   },
 
   renderWants: function(){
-    $("youtube-vids").html("please wait while we load a bunch of jams");
     this.discogs(this.userName, 1);
   },
 
   renderCollection: function(){
-    $("youtube-vids").html("please wait while we load a bunch of jams");
     this.discollection(this.userName, 1);
   },
 
@@ -58,7 +56,7 @@ var MainView = Backbone.View.extend({
             self.records.collection.username = self.userName;
           }
         }).fail(function() {
-          $("error").html("You must have your wantlist set to public - this thing is about sharing - please respect that!");
+          console.log("discogs username failed");
         });
   },
 
@@ -73,7 +71,8 @@ var MainView = Backbone.View.extend({
   	var wantList = {};
   	var pages = 1;
     var wantArr = [];
-
+    var animationHtml = "<div class='spinner'></div><div>Please wait while we grab a bunch of jams...</div>";
+    $("#youtube-vids").replaceWith(animationHtml); //loading status thing
 
     var getIds = function(callback, page){ //gets every release id in users wantlist and passes as an array to getVids function
       $.getJSON('http://api.discogs.com/users/'+user+'/wants?page='+page+'&callback=?')
@@ -117,7 +116,8 @@ var MainView = Backbone.View.extend({
     var list = {};
     var pages = 1;
     var colArr = [];
-
+    var animationHtml = "<div class='spinner'>Please wait while we grab a bunch of jams...</div><div>Please wait while we grab a bunch of jams...</div>";
+    $("#youtube-vids").replaceWith(animationHtml); //loading status thing
 
   var getIds = function(callback, page){//gets every release id in users all collections folder and passes as an array to getVids function
   $.getJSON('http://api.discogs.com/users/'+user+'/collection/folders/0/releases?page='+page+'&callback=?').done(function(data){ //this returns JSONP handled in a callback. Need to traverse an extra data. property to get to the stuff we care about
