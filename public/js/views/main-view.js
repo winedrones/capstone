@@ -20,10 +20,12 @@ var MainView = Backbone.View.extend({
   },
 
   renderWants: function(){
+    $("youtube-vids").html("please wait while we load a bunch of jams");
     this.discogs(this.userName, 1);
   },
 
   renderCollection: function(){
+    $("youtube-vids").html("please wait while we load a bunch of jams");
     this.discollection(this.userName, 1);
   },
 
