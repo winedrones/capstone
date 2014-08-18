@@ -1,4 +1,3 @@
-var $ = require('jquery');
 var Backbone = require('backbone');
 Backbone.$ = $;
 
@@ -9,8 +8,8 @@ var Router = Backbone.Router.extend({
     '': 'main'
   },
   main: function () {
-    this.MainView = new MainView();
-    this.MainView.render(); 
+    this.mainView = new MainView();
+    //this.mainView.render(); 
   }
 });
 
