@@ -1,0 +1,82 @@
+      <header>
+        
+        <div class="row" style="margin-bottom:5%;">
+          <h1 class="text-center">Record Pool</h1>
+        </div>
+
+        <div class="row">
+          
+          <div class="col-md-3">
+            <div>
+              <div class="form-group">
+                <label for="user-id-input">Discogs Username</label>
+                <input type="user-id" id="add-username" class="form-control" placeholder="Enter Discogs Username">
+              </div>
+              <button id="username-submit" class="btn btn-default">Submit</button>
+            </div>
+          </div>
+          
+          <div class="col-md-6">
+            <h4 class="text-center">Viewing {{array.username}}'s selections</h4> 
+            <div class="text-center">
+              <ul class="nav nav-pills center-pills">
+                <li><a href="#" id="wantlist">wantlist</a></li>
+                <li><a href="#" id="collection">collection</a></li>
+              </ul>
+            </div>
+          </div>
+          
+          <div class="col-md-3" style="margin-top:7%;">
+            <h4 class="text-center">Notes</h4>
+          </div>
+        </div>
+
+      </header>
+
+      <section>
+        <div class="row">
+         
+         <div id="userlist"class="col-md-3">
+          <ul class="nav nav-pills">
+            <li class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="margin-top:50%;">
+                Users<span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu" role="menu">
+                <li>Christian</li>
+                <li>Jesse</li>
+                <li>Kyle</li>
+              </ul>
+            </li>
+          </ul>
+         </div>
+
+         <div class="col-md-6" id="youtube-vids">
+         {{#each array}}
+         <div class="js-lazyYT" data-youtube-id={{youtube}} data-width="420" data-height="315"></div>
+         <div class="link"><a href="http://www.discogs.com/release/{{discogs}}">{{title}} by {{artist}}</a></div>
+         {{/each}}</div>
+
+         <div class="col-md-3">
+          <div class="panel panel-default">
+            <!-- Default panel contents -->
+            <div class="panel-heading">User Comments</div>
+            <div class="panel-body">
+              <p>...</p>
+            </div>
+
+            <!-- List group -->
+            <ul class="list-group">
+              <li class="list-group-item">Great track</li>
+              <li class="list-group-item">Catchy hook</li>
+              <li class="list-group-item">Sick riffs</li>   
+              <li class="list-group-item">I want to live in this song!</li>
+            </ul>
+          </div>
+          <textarea class="form-control" rows="3"></textarea>
+          <button type="submit" class="btn btn-default">Submit Comments</button>
+         </div>
+        </div>
+      </section>
+
+</div>

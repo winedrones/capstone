@@ -1,28 +1,27 @@
       <header>
         
         <div class="row" style="margin-bottom:5%;">
-          <h1 class="text-center">Wine Drones</h1>
+          <h1 class="text-center">Record Pool</h1>
         </div>
 
         <div class="row">
           
           <div class="col-md-3">
-            <form role="form">
+            <div>
               <div class="form-group">
-                <label for="user-id-input">User ID</label>
-                <input type="user-id" class="form-control" id="user-id-input" placeholder="Enter User ID">
+                <label for="user-id-input">Discogs Username</label>
+                <input type="user-id" id="add-username" class="form-control" placeholder="Enter Discogs Username">
               </div>
-              <button type="submit" class="btn btn-default">Submit</button>
-            </form>
+              <button id="username-submit" class="btn btn-default">Submit</button>
+            </div>
           </div>
           
           <div class="col-md-6">
-            <h4 class="text-center">Sort By</h4> 
+            <h4 class="text-center">Viewing {{array.username}}'s selections</h4> 
             <div class="text-center">
               <ul class="nav nav-pills center-pills">
-                <li><a href="#">Artist</a></li>
-                <li><a href="#">Year</a></li>
-                <li><a href="#">Date Added</a></li>
+                <li><a href="#" id="wantlist">wantlist</a></li>
+                <li><a href="#" id="collection">collection</a></li>
               </ul>
             </div>
           </div>
@@ -52,11 +51,11 @@
           </ul>
          </div>
 
-         <div class="col-md-6">
-          <a href="#" class="thumbnail">
-            <img data-src="holder.js/100%x180" alt="youtube thumbnail">
-          </a>
-         </div>
+         <div class="col-md-6" id="youtube-vids">
+         {{#each array}}
+         <div class="js-lazyYT" data-youtube-id={{youtube}} data-width="420" data-height="315"></div>
+         <div class="link"><a href="http://www.discogs.com/release/{{discogs}}">{{title}} by {{artist}}</a></div>
+         {{/each}}</div>
 
          <div class="col-md-3">
           <div class="panel panel-default">
@@ -79,3 +78,5 @@
          </div>
         </div>
       </section>
+
+</div>
