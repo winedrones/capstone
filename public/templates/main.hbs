@@ -23,6 +23,13 @@
                 <li><a href="#" id="wantlist">wantlist</a></li>
                 <li><a href="#" id="collection">collection</a></li>
               </ul>
+              <ul class="pagination">
+                <li><a href="#">&laquo;</a></li>
+                {{#each pages}}
+                <li><a href="#" id="page{{.}}">{{.}}</a></li>
+                {{/each}}
+                <li><a href="#">&raquo;</a></li>
+              </ul>
             </div>
           </div>
           
@@ -55,7 +62,10 @@
          {{#each array}}
          <div class="js-lazyYT" data-youtube-id={{youtube}} data-width="420" data-height="315"></div>
          <div class="link"><a href="http://www.discogs.com/release/{{discogs}}">{{title}} by {{artist}}</a></div>
-         {{/each}}</div>
+         {{/each}}
+              <ul class="pagination">
+              </ul>
+       </div>
 
          <div class="col-md-3">
           <div class="panel panel-default">

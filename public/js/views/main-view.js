@@ -21,12 +21,13 @@ var MainView = Backbone.View.extend({
     'click #init-username-submit' : 'authenticate'
   },
 
-  renderWants: function(){
-    this.discogs(this.userName, 1);
-  },
-
-  renderCollection: function(){
-    this.discollection(this.userName, 1);
+  renderPage: function(list, page){
+    if (list == wants){
+      this.renderWants(page);
+    }
+    if (list == collection){
+      this.renderCollection(page);
+    }
   },
 
 
@@ -67,6 +68,8 @@ var MainView = Backbone.View.extend({
   },
 
   discogs: function(user, page){
+    this.records.wants = [];
+    this.records.wantPages=[];
     var self = this;
   	var wantList = {};
   	var pages = 1;
@@ -75,19 +78,21 @@ var MainView = Backbone.View.extend({
     $("#youtube-vids").replaceWith(animationHtml); //loading status thing
 
     var getIds = function(callback, page){ //gets every release id in users wantlist and passes as an array to getVids function
+
       $.getJSON('http://api.discogs.com/users/'+user+'/wants?page='+page+'&callback=?')
         .done(function(data){ //this returns JSONP handled in a callback. Need to traverse an extra data. property to get to the stuff we care about
           console.log(data);
-          var nextPage = page+1;
           wantList = data; 
           pages = wantList.data.pagination.pages;
           wantList.data.wants.forEach(function (item, index){ //this grabs the discogs id of every release in the discogs wantlist
             wantArr.push(item.id);
           });
-          if (nextPage != pages+1)
-            {getIds(getVids, nextPage);}
-          else
-  	       callback(wantArr);
+          for (var i = 0; i<pages; i++){ //fills the pages array with the api returned pagination numbers
+            self.records.wantPages.push(i+1);
+            //self.events["click #page"+i+1] = "self.discogs(user,i+1)";
+          };
+            callback(wantArr);
+  	       
   	    }).fail(function() {
           console.log( "get page "+page+" of "+user+"'s wantlist from discogs failed" );
         });
@@ -100,7 +105,7 @@ var MainView = Backbone.View.extend({
       		self.records.wants.push({youtube:rels.data.videos[0].uri.slice(-11), discogs:item, artist:rels.data.artists[0].name, title:rels.data.title}); //this adds objects for everything fetched from discogs to the records array
          }
          if (index == arr.length-1){
-         self.render({array:self.records.wants});
+         self.render({array:self.records.wants, pages:self.records.wantPages});
          }
   		});	
   	});
@@ -111,12 +116,13 @@ var MainView = Backbone.View.extend({
   },
 
   discollection: function(user, page){
-
+    this.records.collection = [];
+    this.records.colPages=[];
     var self = this;
     var list = {};
     var pages = 1;
     var colArr = [];
-    var animationHtml = "<div class='spinner'>Please wait while we grab a bunch of jams...</div><div>Please wait while we grab a bunch of jams...</div>";
+    var animationHtml = "<div class='spinner'></div><div>Please wait while we grab a bunch of jams...</div>";
     $("#youtube-vids").replaceWith(animationHtml); //loading status thing
 
   var getIds = function(callback, page){//gets every release id in users all collections folder and passes as an array to getVids function
@@ -127,10 +133,9 @@ var MainView = Backbone.View.extend({
       list.data.releases.forEach(function (item, index){ //this grabs the discogs id of every release in the discogs wantlist
         colArr.push(item.id);
         });
-      //console.log(page+" of "+pages+" next page is "+nextPage);
-      if (nextPage != pages+1)
-        {getIds(getVids, nextPage);}
-      else
+        for (var i = 0; i<pages; i++){ //fills the pages array with the api returned pagination numbers
+        self.records.colPages.push(i+1);
+        };
        callback(colArr);
   });
 };
@@ -142,7 +147,7 @@ var MainView = Backbone.View.extend({
         self.records.collection.push({youtube:rels.data.videos[0].uri.slice(-11), discogs:item, artist:rels.data.artists[0].name, title:rels.data.title}); //this adds objects for everything fetched from discogs to the records array
        }
        if (index == arr.length-1){
-       self.render({array:self.records.collection});
+       self.render({array:self.records.collection, pages:self.records.colPages});
        }
     }); 
   });
