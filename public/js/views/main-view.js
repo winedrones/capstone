@@ -22,11 +22,13 @@ var MainView = Backbone.View.extend({
   },
 
   renderWants: function(){
-    this.discogs(this.userName, 1);
+    this.wants(this.userName, 1);
+    this.currentList = this.wants;
   },
 
   renderCollection: function(){
     this.discollection(this.userName, 1);
+    this.currentList = this.discollection;
   },
 
 
@@ -51,9 +53,10 @@ var MainView = Backbone.View.extend({
         .done(function(data){
           console.log("success");
           if (data.meta.status == 200){
-            self.discogs(self.userName, 1);
+            self.wants(self.userName, 1);
             self.records.wants.username = self.userName;
             self.records.collection.username = self.userName;
+            self.currentList = self.wants;
           }
         }).fail(function() {
           console.log("discogs username failed");
@@ -66,28 +69,38 @@ var MainView = Backbone.View.extend({
 
   },
 
-  discogs: function(user, page){
+  wants: function(user, page){
+    this.records.wants = [];
+    this.records.wantPages=[];
     var self = this;
   	var wantList = {};
   	var pages = 1;
     var wantArr = [];
-    var animationHtml = "<div class='spinner'></div><div>Please wait while we grab a bunch of jams...</div>";
+    var animationHtml = "<div class='spinner'></div>";
     $("#youtube-vids").replaceWith(animationHtml); //loading status thing
 
     var getIds = function(callback, page){ //gets every release id in users wantlist and passes as an array to getVids function
+      self.currentPage = page;
       $.getJSON('http://api.discogs.com/users/'+user+'/wants?page='+page+'&callback=?')
         .done(function(data){ //this returns JSONP handled in a callback. Need to traverse an extra data. property to get to the stuff we care about
           console.log(data);
-          var nextPage = page+1;
           wantList = data; 
           pages = wantList.data.pagination.pages;
           wantList.data.wants.forEach(function (item, index){ //this grabs the discogs id of every release in the discogs wantlist
             wantArr.push(item.id);
           });
-          if (nextPage != pages+1)
-            {getIds(getVids, nextPage);}
-          else
-  	       callback(wantArr);
+          for (var i = 0; i<pages; i++){ //fills the pages array with the api returned pagination numbers
+            self.records.wantPages.push(i+1);
+            //self.events["click #page"+i+1] = "self.discogs(user,i+1)";
+          };
+            if (page == pages){
+              self.nextPage = pages;
+            }else{self.nextPage = self.currentPage +1;
+            }if (page>=2){
+              self.prevPage = page-1;
+            }else{self.prevPage = 1;}
+            callback(wantArr);
+  	       
   	    }).fail(function() {
           console.log( "get page "+page+" of "+user+"'s wantlist from discogs failed" );
         });
@@ -100,7 +113,7 @@ var MainView = Backbone.View.extend({
       		self.records.wants.push({youtube:rels.data.videos[0].uri.slice(-11), discogs:item, artist:rels.data.artists[0].name, title:rels.data.title}); //this adds objects for everything fetched from discogs to the records array
          }
          if (index == arr.length-1){
-         self.render({array:self.records.wants});
+         self.render({array:self.records.wants, pages:self.records.wantPages});
          }
   		});	
   	});
@@ -111,15 +124,17 @@ var MainView = Backbone.View.extend({
   },
 
   discollection: function(user, page){
-
+    this.records.collection = [];
+    this.records.colPages=[];
     var self = this;
     var list = {};
     var pages = 1;
     var colArr = [];
-    var animationHtml = "<div class='spinner'>Please wait while we grab a bunch of jams...</div><div>Please wait while we grab a bunch of jams...</div>";
+    var animationHtml = "<div class='spinner'></div>";
     $("#youtube-vids").replaceWith(animationHtml); //loading status thing
 
   var getIds = function(callback, page){//gets every release id in users all collections folder and passes as an array to getVids function
+  this.currentPage = page;
   $.getJSON('http://api.discogs.com/users/'+user+'/collection/folders/0/releases?page='+page+'&callback=?').done(function(data){ //this returns JSONP handled in a callback. Need to traverse an extra data. property to get to the stuff we care about
     var nextPage = page+1;
       list = data; 
@@ -127,10 +142,9 @@ var MainView = Backbone.View.extend({
       list.data.releases.forEach(function (item, index){ //this grabs the discogs id of every release in the discogs wantlist
         colArr.push(item.id);
         });
-      //console.log(page+" of "+pages+" next page is "+nextPage);
-      if (nextPage != pages+1)
-        {getIds(getVids, nextPage);}
-      else
+        for (var i = 0; i<pages; i++){ //fills the pages array with the api returned pagination numbers
+        self.records.colPages.push(i+1);
+        };
        callback(colArr);
   });
 };
@@ -142,7 +156,7 @@ var MainView = Backbone.View.extend({
         self.records.collection.push({youtube:rels.data.videos[0].uri.slice(-11), discogs:item, artist:rels.data.artists[0].name, title:rels.data.title}); //this adds objects for everything fetched from discogs to the records array
        }
        if (index == arr.length-1){
-       self.render({array:self.records.collection});
+       self.render({array:self.records.collection, pages:self.records.colPages});
        }
     }); 
   });
@@ -156,7 +170,6 @@ var MainView = Backbone.View.extend({
   render: function (template) {
     $(this.el).html(htmlTemplate(template));
     $('.js-lazyYT').lazyYT(); 
-    console.log("viewing "+this.records.wants.username+"'s selections");
    // $(this.el).html(myTemplate({entries:[{youtube: data, discogs: data},{...}]}))
   }
 

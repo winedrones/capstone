@@ -2523,7 +2523,7 @@ function stringify(obj, fn, spaces, decycle) {
 stringify.getSerialize = getSerialize;
 
 },{}],"/Users/ac/pcs/capstone/node_modules/request/node_modules/mime-types/lib/custom.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
+module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
   "text/jade": [
     "jade"
   ],
@@ -2629,7 +2629,7 @@ function define(json) {
 }
 
 },{"./custom.json":"/Users/ac/pcs/capstone/node_modules/request/node_modules/mime-types/lib/custom.json","./mime.json":"/Users/ac/pcs/capstone/node_modules/request/node_modules/mime-types/lib/mime.json","./node.json":"/Users/ac/pcs/capstone/node_modules/request/node_modules/mime-types/lib/node.json"}],"/Users/ac/pcs/capstone/node_modules/request/node_modules/mime-types/lib/mime.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
+module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
   "application/1d-interleaved-parityfec": [],
   "application/3gpp-ims+xml": [],
   "application/activemessage": [],
@@ -5948,7 +5948,7 @@ module.exports=module.exports=module.exports=module.exports=module.exports=modul
 }
 
 },{}],"/Users/ac/pcs/capstone/node_modules/request/node_modules/mime-types/lib/node.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
+module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
   "text/vtt": [
     "vtt"
   ],
@@ -24242,11 +24242,13 @@ var MainView = Backbone.View.extend({
   },
 
   renderWants: function(){
-    this.discogs(this.userName, 1);
+    this.wants(this.userName, 1);
+    this.currentList = this.wants;
   },
 
   renderCollection: function(){
     this.discollection(this.userName, 1);
+    this.currentList = this.discollection;
   },
 
 
@@ -24271,9 +24273,10 @@ var MainView = Backbone.View.extend({
         .done(function(data){
           console.log("success");
           if (data.meta.status == 200){
-            self.discogs(self.userName, 1);
+            self.wants(self.userName, 1);
             self.records.wants.username = self.userName;
             self.records.collection.username = self.userName;
+            self.currentList = self.wants;
           }
         }).fail(function() {
           console.log("discogs username failed");
@@ -24286,28 +24289,38 @@ var MainView = Backbone.View.extend({
 
   },
 
-  discogs: function(user, page){
+  wants: function(user, page){
+    this.records.wants = [];
+    this.records.wantPages=[];
     var self = this;
   	var wantList = {};
   	var pages = 1;
     var wantArr = [];
-    var animationHtml = "<div class='spinner'></div><div>Please wait while we grab a bunch of jams...</div>";
+    var animationHtml = "<div class='spinner'></div>";
     $("#youtube-vids").replaceWith(animationHtml); //loading status thing
 
     var getIds = function(callback, page){ //gets every release id in users wantlist and passes as an array to getVids function
+      self.currentPage = page;
       $.getJSON('http://api.discogs.com/users/'+user+'/wants?page='+page+'&callback=?')
         .done(function(data){ //this returns JSONP handled in a callback. Need to traverse an extra data. property to get to the stuff we care about
           console.log(data);
-          var nextPage = page+1;
           wantList = data; 
           pages = wantList.data.pagination.pages;
           wantList.data.wants.forEach(function (item, index){ //this grabs the discogs id of every release in the discogs wantlist
             wantArr.push(item.id);
           });
-          if (nextPage != pages+1)
-            {getIds(getVids, nextPage);}
-          else
-  	       callback(wantArr);
+          for (var i = 0; i<pages; i++){ //fills the pages array with the api returned pagination numbers
+            self.records.wantPages.push(i+1);
+            //self.events["click #page"+i+1] = "self.discogs(user,i+1)";
+          };
+            if (page == pages){
+              self.nextPage = pages;
+            }else{self.nextPage = self.currentPage +1;
+            }if (page>=2){
+              self.prevPage = page-1;
+            }else{self.prevPage = 1;}
+            callback(wantArr);
+  	       
   	    }).fail(function() {
           console.log( "get page "+page+" of "+user+"'s wantlist from discogs failed" );
         });
@@ -24320,7 +24333,7 @@ var MainView = Backbone.View.extend({
       		self.records.wants.push({youtube:rels.data.videos[0].uri.slice(-11), discogs:item, artist:rels.data.artists[0].name, title:rels.data.title}); //this adds objects for everything fetched from discogs to the records array
          }
          if (index == arr.length-1){
-         self.render({array:self.records.wants});
+         self.render({array:self.records.wants, pages:self.records.wantPages});
          }
   		});	
   	});
@@ -24331,15 +24344,17 @@ var MainView = Backbone.View.extend({
   },
 
   discollection: function(user, page){
-
+    this.records.collection = [];
+    this.records.colPages=[];
     var self = this;
     var list = {};
     var pages = 1;
     var colArr = [];
-    var animationHtml = "<div class='spinner'>Please wait while we grab a bunch of jams...</div><div>Please wait while we grab a bunch of jams...</div>";
+    var animationHtml = "<div class='spinner'></div>";
     $("#youtube-vids").replaceWith(animationHtml); //loading status thing
 
   var getIds = function(callback, page){//gets every release id in users all collections folder and passes as an array to getVids function
+  this.currentPage = page;
   $.getJSON('http://api.discogs.com/users/'+user+'/collection/folders/0/releases?page='+page+'&callback=?').done(function(data){ //this returns JSONP handled in a callback. Need to traverse an extra data. property to get to the stuff we care about
     var nextPage = page+1;
       list = data; 
@@ -24347,10 +24362,9 @@ var MainView = Backbone.View.extend({
       list.data.releases.forEach(function (item, index){ //this grabs the discogs id of every release in the discogs wantlist
         colArr.push(item.id);
         });
-      //console.log(page+" of "+pages+" next page is "+nextPage);
-      if (nextPage != pages+1)
-        {getIds(getVids, nextPage);}
-      else
+        for (var i = 0; i<pages; i++){ //fills the pages array with the api returned pagination numbers
+        self.records.colPages.push(i+1);
+        };
        callback(colArr);
   });
 };
@@ -24362,7 +24376,7 @@ var MainView = Backbone.View.extend({
         self.records.collection.push({youtube:rels.data.videos[0].uri.slice(-11), discogs:item, artist:rels.data.artists[0].name, title:rels.data.title}); //this adds objects for everything fetched from discogs to the records array
        }
        if (index == arr.length-1){
-       self.render({array:self.records.collection});
+       self.render({array:self.records.collection, pages:self.records.colPages});
        }
     }); 
   });
@@ -24376,7 +24390,6 @@ var MainView = Backbone.View.extend({
   render: function (template) {
     $(this.el).html(htmlTemplate(template));
     $('.js-lazyYT').lazyYT(); 
-    console.log("viewing "+this.records.wants.username+"'s selections");
    // $(this.el).html(myTemplate({entries:[{youtube: data, discogs: data},{...}]}))
   }
 
@@ -24394,7 +24407,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   
 
 
-  return "<body>\n      <header>\n        \n        <div class=\"row\" style=\"margin-bottom:5%;\">\n          <h1 class=\"text-center\">Record Pool</h1>\n        </div>\n\n        <div class=\"row\">\n          \n          <div class=\"col-md-3\">\n            <div>\n              <div class=\"login-form\">\n                <label for=\"user-id-input\">Your Discogs Username</label>\n                <input type=\"user-id\" id=\"username\" class=\"form-control\" placeholder=\"Enter Discogs Username\">\n              </div>\n              <button id=\"init-username-submit\" class=\"btn btn-default\">Submit</button>\n            </div>\n          </div>\n\n          \n          <div class=\"col-md-6\">\n            <h4 class=\"text-center\"></h4> \n            <div class=\"text-center\">\n              <ul class=\"nav nav-pills center-pills\">\n              </ul>\n            </div>\n          </div>\n          \n          <div class=\"col-md-3\" style=\"margin-top:7%;\">\n            <h4 class=\"text-center\">Notes</h4>\n          </div>\n        </div>\n\n      </header>\n\n      <section>\n        <div class=\"row\">\n         \n         <div id=\"userlist\"class=\"col-md-3\">\n          <ul class=\"nav nav-pills\">\n            <li class=\"dropdown\">\n              <a class=\"dropdown-toggle\" data-toggle=\"dropdown\" href=\"#\" style=\"margin-top:50%;\">\n                Other collections will appear here after you log in!<span class=\"caret\"></span>\n              </a>\n              <ul class=\"dropdown-menu\" role=\"menu\">\n                <li>Christian</li>\n                <li>Jesse</li>\n                <li>Kyle</li>\n              </ul>\n            </li>\n          </ul>\n         </div>\n\n         <div class=\"col-md-6\" id=\"youtube-vids\">\n         <div id=\"status\">\n         This page renders the Discogs collections and wantlists of anyone who keeps those lists public.<br /><br />\n         In order to access these lists - type your own Discogs username into the box on the left.<br /><br />\n         You will only get access if your own lists are public. This site is about sharing. <br /><br />\n         Please respect these intentions.<br /><br />\n         Share generously, dig deeply, these are everyone's jams.<br /><br />\n         <div class=\"link\"><a href=\"http://www.discogs.com/release/249504\"><3 Discogs</a></div>\n         </div>\n         \n         </div>\n\n         <div class=\"col-md-3\">\n          <div class=\"panel panel-default\">\n            <!-- Default panel contents -->\n            <div class=\"panel-heading\">User Comments</div>\n            <div class=\"panel-body\">\n              <p>...</p>\n            </div>\n\n            <!-- List group -->\n            <ul class=\"list-group\">\n              <li class=\"list-group-item\">Great track</li>\n              <li class=\"list-group-item\">Catchy hook</li>\n              <li class=\"list-group-item\">Sick riffs</li>   \n              <li class=\"list-group-item\">I want to live in this song!</li>\n            </ul>\n          </div>\n          <textarea class=\"form-control\" rows=\"3\"></textarea>\n          <button type=\"submit\" class=\"btn btn-default\">Submit Comments</button>\n         </div>\n        </div>\n      </section>\n\n</div>";
+  return "<body>\n      <header>\n        \n        <div class=\"row\" style=\"margin-bottom:5%;\">\n          <h1 class=\"text-center\">Record Pool</h1>\n        </div>\n\n        <div class=\"row\">\n          \n          <div class=\"col-md-3\">\n            <div>\n              <div class=\"login-form\">\n                <label for=\"user-id-input\">Your Discogs Username</label>\n                <input type=\"user-id\" id=\"username\" class=\"form-control\" placeholder=\"Enter Discogs Username\">\n              </div>\n              <button id=\"init-username-submit\" class=\"btn btn-default\">Submit</button>\n            </div>\n          </div>\n\n          \n          <div class=\"col-md-6\">\n            <h4 class=\"text-center\"></h4> \n            <div class=\"text-center\">\n              <ul class=\"nav nav-pills center-pills\">\n              </ul>\n            </div>\n          </div>\n          \n          <div class=\"col-md-3\" style=\"margin-top:7%;\">\n            <h4 class=\"text-center\">Notes</h4>\n          </div>\n        </div>\n\n      </header>\n\n      <section>\n        <div class=\"row\">\n         \n         <div id=\"userlist\"class=\"col-md-3\">\n          <ul class=\"nav nav-pills\">\n            <li class=\"dropdown\">\n              <a class=\"dropdown-toggle\" data-toggle=\"dropdown\" href=\"#\" style=\"margin-top:50%;\">\n                Other collections will appear here after you log in!<span class=\"caret\"></span>\n              </a>\n              <ul class=\"dropdown-menu\" role=\"menu\">\n                <li>Christian</li>\n                <li>Jesse</li>\n                <li>Kyle</li>\n              </ul>\n            </li>\n          </ul>\n         </div>\n\n         <div class=\"col-md-6\" id=\"youtube-vids\">\n         <div id=\"status\">\n         This page renders the Discogs collections and wantlists of anyone who keeps those lists public.<br /><br />\n         In order to access these lists - type your own Discogs username into the box on the left.<br /><br />\n         You will only get access if your own lists are public. This site is about sharing. <br /><br />\n         Please respect these intentions.<br /><br />\n         Share generously, dig deeply, these are everyone's jams.<br /><br />\n         <div class=\"link\"><a href=\"http://www.discogs.com/release/249504\">Visit Discogs to manage your privacy options</a></div>\n         </div>\n         \n         </div>\n\n         <div class=\"col-md-3\">\n          <div class=\"panel panel-default\">\n            <!-- Default panel contents -->\n            <div class=\"panel-heading\">User Comments</div>\n            <div class=\"panel-body\">\n              <p>...</p>\n            </div>\n\n            <!-- List group -->\n            <ul class=\"list-group\">\n              <li class=\"list-group-item\">Great track</li>\n              <li class=\"list-group-item\">Catchy hook</li>\n              <li class=\"list-group-item\">Sick riffs</li>   \n              <li class=\"list-group-item\">I want to live in this song!</li>\n            </ul>\n          </div>\n          <textarea class=\"form-control\" rows=\"3\"></textarea>\n          <button type=\"submit\" class=\"btn btn-default\">Submit Comments</button>\n         </div>\n        </div>\n      </section>\n\n</div>";
   });
 
 },{"hbsfy/runtime":"/Users/ac/pcs/capstone/node_modules/hbsfy/runtime.js"}],"/Users/ac/pcs/capstone/public/templates/main.hbs":[function(require,module,exports){
@@ -24406,6 +24419,19 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression, self=this;
 
 function program1(depth0,data) {
+  
+  var buffer = "";
+  buffer += "\n                <li><a href=\"#\" id=\"page"
+    + escapeExpression((typeof depth0 === functionType ? depth0.apply(depth0) : depth0))
+    + "\" onclick=\"window.app.mainView.currentList(window.app.mainView.userName, "
+    + escapeExpression((typeof depth0 === functionType ? depth0.apply(depth0) : depth0))
+    + ")\">"
+    + escapeExpression((typeof depth0 === functionType ? depth0.apply(depth0) : depth0))
+    + "</a></li>\n                ";
+  return buffer;
+  }
+
+function program3(depth0,data) {
   
   var buffer = "", stack1, helper;
   buffer += "\n         <div class=\"js-lazyYT\" data-youtube-id=";
@@ -24430,10 +24456,16 @@ function program1(depth0,data) {
 
   buffer += "      <header>\n        \n        <div class=\"row\" style=\"margin-bottom:5%;\">\n          <h1 class=\"text-center\">Record Pool</h1>\n        </div>\n\n        <div class=\"row\">\n          \n          <div class=\"col-md-3\">\n            <div>\n              <div class=\"form-group\">\n                <label for=\"user-id-input\">Discogs Username</label>\n                <input type=\"user-id\" id=\"add-username\" class=\"form-control\" placeholder=\"Enter Discogs Username\">\n              </div>\n              <button id=\"username-submit\" class=\"btn btn-default\">Submit</button>\n            </div>\n          </div>\n          \n          <div class=\"col-md-6\">\n            <h4 class=\"text-center\">Viewing "
     + escapeExpression(((stack1 = ((stack1 = (depth0 && depth0.array)),stack1 == null || stack1 === false ? stack1 : stack1.username)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-    + "'s selections</h4> \n            <div class=\"text-center\">\n              <ul class=\"nav nav-pills center-pills\">\n                <li><a href=\"#\" id=\"wantlist\">wantlist</a></li>\n                <li><a href=\"#\" id=\"collection\">collection</a></li>\n              </ul>\n            </div>\n          </div>\n          \n          <div class=\"col-md-3\" style=\"margin-top:7%;\">\n            <h4 class=\"text-center\">Notes</h4>\n          </div>\n        </div>\n\n      </header>\n\n      <section>\n        <div class=\"row\">\n         \n         <div id=\"userlist\"class=\"col-md-3\">\n          <ul class=\"nav nav-pills\">\n            <li class=\"dropdown\">\n              <a class=\"dropdown-toggle\" data-toggle=\"dropdown\" href=\"#\" style=\"margin-top:50%;\">\n                Users<span class=\"caret\"></span>\n              </a>\n              <ul class=\"dropdown-menu\" role=\"menu\">\n                <li>Christian</li>\n                <li>Jesse</li>\n                <li>Kyle</li>\n              </ul>\n            </li>\n          </ul>\n         </div>\n\n         <div class=\"col-md-6\" id=\"youtube-vids\">\n         ";
-  stack1 = helpers.each.call(depth0, (depth0 && depth0.array), {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
+    + "'s selections</h4> \n            <div class=\"text-center\">\n              <ul class=\"nav nav-pills center-pills\">\n                <li><a href=\"#\" id=\"wantlist\">wantlist</a></li>\n                <li><a href=\"#\" id=\"collection\">collection</a></li>\n              </ul>\n              <ul class=\"pagination\">\n                <li><a href=\"#\" onclick=\"window.app.mainView.currentList(window.app.mainView.userName, window.app.mainView.prevPage)\">&laquo;</a></li>\n                ";
+  stack1 = helpers.each.call(depth0, (depth0 && depth0.pages), {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "</div>\n\n         <div class=\"col-md-3\">\n          <div class=\"panel panel-default\">\n            <!-- Default panel contents -->\n            <div class=\"panel-heading\">User Comments</div>\n            <div class=\"panel-body\">\n              <p>...</p>\n            </div>\n\n            <!-- List group -->\n            <ul class=\"list-group\">\n              <li class=\"list-group-item\">Great track</li>\n              <li class=\"list-group-item\">Catchy hook</li>\n              <li class=\"list-group-item\">Sick riffs</li>   \n              <li class=\"list-group-item\">I want to live in this song!</li>\n            </ul>\n          </div>\n          <textarea class=\"form-control\" rows=\"3\"></textarea>\n          <button type=\"submit\" class=\"btn btn-default\">Submit Comments</button>\n         </div>\n        </div>\n      </section>\n\n</div>";
+  buffer += "\n                <li><a href=\"#\" onclick=\"window.app.mainView.currentList(window.app.mainView.userName, window.app.mainView.nextPage)\">&raquo;</a></li>\n              </ul>\n            </div>\n          </div>\n          \n          <div class=\"col-md-3\" style=\"margin-top:7%;\">\n            <h4 class=\"text-center\">Notes</h4>\n          </div>\n        </div>\n\n      </header>\n\n      <section>\n        <div class=\"row\">\n         \n         <div id=\"userlist\"class=\"col-md-3\">\n          <ul class=\"nav nav-pills\">\n            <li class=\"dropdown\">\n              <a class=\"dropdown-toggle\" data-toggle=\"dropdown\" href=\"#\" style=\"margin-top:50%;\">\n                Users<span class=\"caret\"></span>\n              </a>\n              <ul class=\"dropdown-menu\" role=\"menu\">\n                <li>Christian</li>\n                <li>Jesse</li>\n                <li>Kyle</li>\n              </ul>\n            </li>\n          </ul>\n         </div>\n\n         <div class=\"col-md-6\" id=\"youtube-vids\">\n         ";
+  stack1 = helpers.each.call(depth0, (depth0 && depth0.array), {hash:{},inverse:self.noop,fn:self.program(3, program3, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n              </ul>\n              <ul class=\"pagination\">\n                <li><a href=\"#\" onclick=\"window.app.mainView.currentList(window.app.mainView.userName, window.app.mainView.prevPage)\">&laquo;</a></li>\n                ";
+  stack1 = helpers.each.call(depth0, (depth0 && depth0.pages), {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n                <li><a href=\"#\" onclick=\"window.app.mainView.currentList(window.app.mainView.userName, window.app.mainView.nextPage)\">&raquo;</a></li>\n              </ul>\n       </div>\n\n         <div class=\"col-md-3\">\n          <div class=\"panel panel-default\">\n            <!-- Default panel contents -->\n            <div class=\"panel-heading\">User Comments</div>\n            <div class=\"panel-body\">\n              <p>...</p>\n            </div>\n\n            <!-- List group -->\n            <ul class=\"list-group\">\n              <li class=\"list-group-item\">Great track</li>\n              <li class=\"list-group-item\">Catchy hook</li>\n              <li class=\"list-group-item\">Sick riffs</li>   \n              <li class=\"list-group-item\">I want to live in this song!</li>\n            </ul>\n          </div>\n          <textarea class=\"form-control\" rows=\"3\"></textarea>\n          <button type=\"submit\" class=\"btn btn-default\">Submit Comments</button>\n         </div>\n        </div>\n      </section>\n\n</div>";
   return buffer;
   });
 

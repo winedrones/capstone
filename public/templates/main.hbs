@@ -23,6 +23,13 @@
                 <li><a href="#" id="wantlist">wantlist</a></li>
                 <li><a href="#" id="collection">collection</a></li>
               </ul>
+              <ul class="pagination">
+                <li><a href="#" onclick="window.app.mainView.currentList(window.app.mainView.userName, window.app.mainView.prevPage)">&laquo;</a></li>
+                {{#each pages}}
+                <li><a href="#" id="page{{.}}" onclick="window.app.mainView.currentList(window.app.mainView.userName, {{.}})">{{.}}</a></li>
+                {{/each}}
+                <li><a href="#" onclick="window.app.mainView.currentList(window.app.mainView.userName, window.app.mainView.nextPage)">&raquo;</a></li>
+              </ul>
             </div>
           </div>
           
@@ -55,7 +62,16 @@
          {{#each array}}
          <div class="js-lazyYT" data-youtube-id={{youtube}} data-width="420" data-height="315"></div>
          <div class="link"><a href="http://www.discogs.com/release/{{discogs}}">{{title}} by {{artist}}</a></div>
-         {{/each}}</div>
+         {{/each}}
+              </ul>
+              <ul class="pagination">
+                <li><a href="#" onclick="window.app.mainView.currentList(window.app.mainView.userName, window.app.mainView.prevPage)">&laquo;</a></li>
+                {{#each pages}}
+                <li><a href="#" id="page{{.}}" onclick="window.app.mainView.currentList(window.app.mainView.userName, {{.}})">{{.}}</a></li>
+                {{/each}}
+                <li><a href="#" onclick="window.app.mainView.currentList(window.app.mainView.userName, window.app.mainView.nextPage)">&raquo;</a></li>
+              </ul>
+       </div>
 
          <div class="col-md-3">
           <div class="panel panel-default">
