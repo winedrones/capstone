@@ -2523,7 +2523,7 @@ function stringify(obj, fn, spaces, decycle) {
 stringify.getSerialize = getSerialize;
 
 },{}],"/Users/ac/pcs/capstone/node_modules/request/node_modules/mime-types/lib/custom.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
+module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
   "text/jade": [
     "jade"
   ],
@@ -2629,7 +2629,7 @@ function define(json) {
 }
 
 },{"./custom.json":"/Users/ac/pcs/capstone/node_modules/request/node_modules/mime-types/lib/custom.json","./mime.json":"/Users/ac/pcs/capstone/node_modules/request/node_modules/mime-types/lib/mime.json","./node.json":"/Users/ac/pcs/capstone/node_modules/request/node_modules/mime-types/lib/node.json"}],"/Users/ac/pcs/capstone/node_modules/request/node_modules/mime-types/lib/mime.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
+module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
   "application/1d-interleaved-parityfec": [],
   "application/3gpp-ims+xml": [],
   "application/activemessage": [],
@@ -5948,7 +5948,7 @@ module.exports=module.exports=module.exports=module.exports=module.exports=modul
 }
 
 },{}],"/Users/ac/pcs/capstone/node_modules/request/node_modules/mime-types/lib/node.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
+module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
   "text/vtt": [
     "vtt"
   ],
@@ -24205,11 +24205,22 @@ var MainView = require('./views/main-view');
 
 var Router = Backbone.Router.extend({
   routes: {
-    '': 'main'
+    '': 'main',
+    ':user/wants/:page' : 'wantlist',
+    ':user/collection/:page' : 'collection'
   },
-  main: function () {
-    this.mainView = new MainView();
+  	main: function () {
+    this.mainView = new MainView({user:undefined, list:"wants",page:1});
     //this.mainView.render(); 
+  },
+    wantlist: function (user, page) {
+    this.mainView = new MainView({user:user, list:"wants",page:page});
+    //this.mainView.discgs(user, "wants", page); 
+
+  },
+    collection: function (user, page) {
+    this.mainView = new MainView({user: user, list:"collection",page:page});
+    //this.mainView.discollection(user, "wants", page); 
   }
 });
 
@@ -24237,92 +24248,96 @@ var MainView = Backbone.View.extend({
   events: {
     'click #username-submit': 'addUsername',
     'click #wantlist' : 'renderWants',
-    'click #collection' : 'renderCollection',
-    'click #init-username-submit' : 'authenticate'
+    'click #collection' : 'renderCollection'
   },
 
   renderWants: function(){
-    this.wants(this.userName, 1);
-    this.currentList = this.wants;
+    this.currentPage = 1;
+    this.currentList = "wants";
+    this.discogs(this.userName, this.currentList, this.currentPage);
+    
   },
 
   renderCollection: function(){
-    this.discollection(this.userName, 1);
-    this.currentList = this.discollection;
+    this.currentPage = 1;
+    this.currentList = "collection";
+    this.discogs(this.userName, this.currentList, this.currentPage);
   },
 
 
-  addUsername: function () {
-    var $usernameInput = $('.form-group').find('#add-username');
-    this.records = {wants:[], collection:[]};
-    this.userName = $usernameInput.val();
-    this.discogs(this.userName, 1);
-    this.records.wants.username = this.userName;
-    this.records.collection.username = this.userName;
-},
-
-  records: {wants:[], collection:[]},
+  records: {releases:[], pages:[]},
 
   //testThing: {wants:[{discogs: 5719574, youtube: "QLnTRwpmCGs"}, {discogs: 4368235, youtube: "zH1VeQFBfW8"}]},
 
-  authenticate: function() {
+  addUsername: function() {
       var self = this;
-      var $user = $('.login-form').find('#username');
-      this.userName = $user.val();
-      $.getJSON('http://api.discogs.com/users/'+this.userName+'/wants?page=1&callback=?')
+      var $user = $('.username-form').find('#username');
+      var userName = $user.val();
+      $.getJSON('http://api.discogs.com/users/'+userName+'?callback=?')
         .done(function(data){
-          console.log("success");
-          if (data.meta.status == 200){
-            self.wants(self.userName, 1);
-            self.records.wants.username = self.userName;
-            self.records.collection.username = self.userName;
-            self.currentList = self.wants;
+          //console.log("success");
+          if (data.data.num_wantlist == undefined){
+            alert("Please got to discogs.com and share (and/or) populate your wantlist to use this site!");
+          }else{
+            self.userName = userName;
+            self.currentList = "wants";
+            self.currentPage = 1;
+            self.discogs(self.userName, self.currentList, self.currentPage);
           }
         }).fail(function() {
           console.log("discogs username failed");
         });
   },
 
-  initialize: function () {
-
-  $(this.el).html(loginHTML());
+  initialize: function (options) {
+    if (options.user == undefined){
+      $(this.el).html(loginHTML());
+    }else{
+      this.userName = options.user;
+      this.currentList = options.list;
+      this.currentPage = options.page;
+      this.discogs(this.userName, this.currentList, this.currentPage);
+    }
 
   },
 
-  wants: function(user, page){
-    this.records.wants = [];
-    this.records.wantPages=[];
+  discogs: function(user, list, page){ //list needs to be "wants" or "collection"
+    this.records = {releases:[], pages:[]};
+    //console.log("from discogsfn top - list = "+list);
     var self = this;
-  	var wantList = {};
-  	var pages = 1;
-    var wantArr = [];
+  	//var wantList = {};
+  	var pages = undefined;
+    var relArr = [];
     var animationHtml = "<div class='spinner'></div>";
     $("#youtube-vids").replaceWith(animationHtml); //loading status thing
 
-    var getIds = function(callback, page){ //gets every release id in users wantlist and passes as an array to getVids function
+    var getIds = function(list, callback, page){ //gets every release id in users wantlist and passes as an array to getVids function
+      if (list == "wants"){
+        var apiCall = 'http://api.discogs.com/users/'+user+'/wants?page='+page+'&callback=?';
+      }else if (list == "collection"){
+        var apiCall = 'http://api.discogs.com/users/'+user+'/collection/folders/0/releases?page='+page+'&callback=?';
+      }
       self.currentPage = page;
-      $.getJSON('http://api.discogs.com/users/'+user+'/wants?page='+page+'&callback=?')
-        .done(function(data){ //this returns JSONP handled in a callback. Need to traverse an extra data. property to get to the stuff we care about
-          console.log(data);
-          wantList = data; 
-          pages = wantList.data.pagination.pages;
-          wantList.data.wants.forEach(function (item, index){ //this grabs the discogs id of every release in the discogs wantlist
-            wantArr.push(item.id);
+      //console.log("api call = "+apiCall);
+      $.getJSON(apiCall)
+        .done(function(data){ //this returns JSONP handled in a callback. Need to traverse an extra data (data.data). property to get to the stuff we care about
+          var data = data;
+          if(list == "wants"){
+            var arr = data.data.wants;
+          }else if(list == "collection"){
+            var arr = data.data.releases;
+          } 
+          pages = data.data.pagination.pages;
+          arr.forEach(function (item, index){ //this grabs the discogs id of every release in the array
+            relArr.push(item.id);
           });
           for (var i = 0; i<pages; i++){ //fills the pages array with the api returned pagination numbers
-            self.records.wantPages.push(i+1);
-            //self.events["click #page"+i+1] = "self.discogs(user,i+1)";
+            self.records.pages.push({page:i+1, user:user, list:list});
           };
-            if (page == pages){
-              self.nextPage = pages;
-            }else{self.nextPage = self.currentPage +1;
-            }if (page>=2){
-              self.prevPage = page-1;
-            }else{self.prevPage = 1;}
-            callback(wantArr);
+            callback(relArr);
   	       
   	    }).fail(function() {
-          console.log( "get page "+page+" of "+user+"'s wantlist from discogs failed" );
+          console.log( "get page "+page+" of "+user+"'s "+list+" from discogs failed" );
         });
     };
 
@@ -24330,61 +24345,19 @@ var MainView = Backbone.View.extend({
   		arr.forEach(function (item, index){
   			$.getJSON('http://api.discogs.com/releases/'+item+'?callback=?').done(function(rels){
       		if (rels.data.videos){
-      		self.records.wants.push({youtube:rels.data.videos[0].uri.slice(-11), discogs:item, artist:rels.data.artists[0].name, title:rels.data.title}); //this adds objects for everything fetched from discogs to the records array
+      		self.records.releases.push({youtube:rels.data.videos[0].uri.slice(-11), discogs:item, artist:rels.data.artists[0].name, title:rels.data.title}); //this adds objects for everything fetched from discogs to the records array
          }
          if (index == arr.length-1){
-         self.render({array:self.records.wants, pages:self.records.wantPages});
+         self.render({releases:self.records.releases, pages:self.records.pages, user:self.userName, list:self.currentList});
          }
   		});	
   	});
   };
 
 
-	getIds(getVids, page);
+	getIds(list, getVids, page);
   },
 
-  discollection: function(user, page){
-    this.records.collection = [];
-    this.records.colPages=[];
-    var self = this;
-    var list = {};
-    var pages = 1;
-    var colArr = [];
-    var animationHtml = "<div class='spinner'></div>";
-    $("#youtube-vids").replaceWith(animationHtml); //loading status thing
-
-  var getIds = function(callback, page){//gets every release id in users all collections folder and passes as an array to getVids function
-  this.currentPage = page;
-  $.getJSON('http://api.discogs.com/users/'+user+'/collection/folders/0/releases?page='+page+'&callback=?').done(function(data){ //this returns JSONP handled in a callback. Need to traverse an extra data. property to get to the stuff we care about
-    var nextPage = page+1;
-      list = data; 
-      pages = list.data.pagination.pages;
-      list.data.releases.forEach(function (item, index){ //this grabs the discogs id of every release in the discogs wantlist
-        colArr.push(item.id);
-        });
-        for (var i = 0; i<pages; i++){ //fills the pages array with the api returned pagination numbers
-        self.records.colPages.push(i+1);
-        };
-       callback(colArr);
-  });
-};
-
-  var getVids = function(arr){  //grabs youtube video per release in wantArr from getIds fn
-    arr.forEach(function (item, index){
-      $.getJSON('http://api.discogs.com/releases/'+item+'?callback=?').done(function(rels){
-        if (rels.data.videos){
-        self.records.collection.push({youtube:rels.data.videos[0].uri.slice(-11), discogs:item, artist:rels.data.artists[0].name, title:rels.data.title}); //this adds objects for everything fetched from discogs to the records array
-       }
-       if (index == arr.length-1){
-       self.render({array:self.records.collection, pages:self.records.colPages});
-       }
-    }); 
-  });
-};
-
-
-  getIds(getVids, page);
-  },
     
 
   render: function (template) {
@@ -24407,7 +24380,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   
 
 
-  return "<body>\n      <header>\n        \n        <div class=\"row\" style=\"margin-bottom:5%;\">\n          <h1 class=\"text-center\">Record Pool</h1>\n        </div>\n\n        <div class=\"row\">\n          \n          <div class=\"col-md-3\">\n            <div>\n              <div class=\"login-form\">\n                <label for=\"user-id-input\">Your Discogs Username</label>\n                <input type=\"user-id\" id=\"username\" class=\"form-control\" placeholder=\"Enter Discogs Username\">\n              </div>\n              <button id=\"init-username-submit\" class=\"btn btn-default\">Submit</button>\n            </div>\n          </div>\n\n          \n          <div class=\"col-md-6\">\n            <h4 class=\"text-center\"></h4> \n            <div class=\"text-center\">\n              <ul class=\"nav nav-pills center-pills\">\n              </ul>\n            </div>\n          </div>\n          \n          <div class=\"col-md-3\" style=\"margin-top:7%;\">\n            <h4 class=\"text-center\">Notes</h4>\n          </div>\n        </div>\n\n      </header>\n\n      <section>\n        <div class=\"row\">\n         \n         <div id=\"userlist\"class=\"col-md-3\">\n          <ul class=\"nav nav-pills\">\n            <li class=\"dropdown\">\n              <a class=\"dropdown-toggle\" data-toggle=\"dropdown\" href=\"#\" style=\"margin-top:50%;\">\n                Other collections will appear here after you log in!<span class=\"caret\"></span>\n              </a>\n              <ul class=\"dropdown-menu\" role=\"menu\">\n                <li>Christian</li>\n                <li>Jesse</li>\n                <li>Kyle</li>\n              </ul>\n            </li>\n          </ul>\n         </div>\n\n         <div class=\"col-md-6\" id=\"youtube-vids\">\n         <div id=\"status\">\n         This page renders the Discogs collections and wantlists of anyone who keeps those lists public.<br /><br />\n         In order to access these lists - type your own Discogs username into the box on the left.<br /><br />\n         You will only get access if your own lists are public. This site is about sharing. <br /><br />\n         Please respect these intentions.<br /><br />\n         Share generously, dig deeply, these are everyone's jams.<br /><br />\n         <div class=\"link\"><a href=\"http://www.discogs.com/release/249504\">Visit Discogs to manage your privacy options</a></div>\n         </div>\n         \n         </div>\n\n         <div class=\"col-md-3\">\n          <div class=\"panel panel-default\">\n            <!-- Default panel contents -->\n            <div class=\"panel-heading\">User Comments</div>\n            <div class=\"panel-body\">\n              <p>...</p>\n            </div>\n\n            <!-- List group -->\n            <ul class=\"list-group\">\n              <li class=\"list-group-item\">Great track</li>\n              <li class=\"list-group-item\">Catchy hook</li>\n              <li class=\"list-group-item\">Sick riffs</li>   \n              <li class=\"list-group-item\">I want to live in this song!</li>\n            </ul>\n          </div>\n          <textarea class=\"form-control\" rows=\"3\"></textarea>\n          <button type=\"submit\" class=\"btn btn-default\">Submit Comments</button>\n         </div>\n        </div>\n      </section>\n\n</div>";
+  return "<body>\n      <header>\n        \n        <div class=\"row\" style=\"margin-bottom:5%;\">\n          <h1 class=\"text-center\">Record Pool</h1>\n        </div>\n\n        <div class=\"row\">\n          \n          <div class=\"col-md-3\">\n            <div>\n              <div class=\"username-form\">\n                <label for=\"user-id-input\">Your Discogs Username</label>\n                <input type=\"user-id\" id=\"username\" class=\"form-control\" placeholder=\"Enter Discogs Username\">\n              </div>\n              <button id=\"username-submit\" class=\"btn btn-default\">Submit</button>\n            </div>\n          </div>\n\n          \n          <div class=\"col-md-6\">\n            <h4 class=\"text-center\"></h4> \n            <div class=\"text-center\">\n              <ul class=\"nav nav-pills center-pills\">\n              </ul>\n            </div>\n          </div>\n          \n          <div class=\"col-md-3\" style=\"margin-top:7%;\">\n            <h4 class=\"text-center\">Notes</h4>\n          </div>\n        </div>\n\n      </header>\n\n      <section>\n        <div class=\"row\">\n         \n         <div id=\"userlist\"class=\"col-md-3\">\n          <ul class=\"nav nav-pills\">\n            <li class=\"dropdown\">\n              <a class=\"dropdown-toggle\" data-toggle=\"dropdown\" href=\"#\" style=\"margin-top:50%;\">\n                Other collections will appear here after you log in!<span class=\"caret\"></span>\n              </a>\n              <ul class=\"dropdown-menu\" role=\"menu\">\n                <li>Christian</li>\n                <li>Jesse</li>\n                <li>Kyle</li>\n              </ul>\n            </li>\n          </ul>\n         </div>\n\n         <div class=\"col-md-6\" id=\"youtube-vids\">\n         <div id=\"status\">\n         This page renders the Discogs collections and wantlists of anyone who keeps those lists public.<br /><br />\n         In order to access these lists - type your own Discogs username into the box on the left.<br /><br />\n         You will only get access if your own lists are public. This site is about sharing. <br /><br />\n         Please respect these intentions.<br /><br />\n         Share generously, dig deeply, these are everyone's jams.<br /><br />\n         <div class=\"link\"><a href=\"http://www.discogs.com/release/249504\">Visit Discogs to manage your privacy options</a></div>\n         </div>\n         \n         </div>\n\n         <div class=\"col-md-3\">\n          <div class=\"panel panel-default\">\n            <!-- Default panel contents -->\n            <div class=\"panel-heading\">User Comments</div>\n            <div class=\"panel-body\">\n              <p>...</p>\n            </div>\n\n            <!-- List group -->\n            <ul class=\"list-group\">\n              <li class=\"list-group-item\">Great track</li>\n              <li class=\"list-group-item\">Catchy hook</li>\n              <li class=\"list-group-item\">Sick riffs</li>   \n              <li class=\"list-group-item\">I want to live in this song!</li>\n            </ul>\n          </div>\n          <textarea class=\"form-control\" rows=\"3\"></textarea>\n          <button type=\"submit\" class=\"btn btn-default\">Submit Comments</button>\n         </div>\n        </div>\n      </section>\n\n</div>";
   });
 
 },{"hbsfy/runtime":"/Users/ac/pcs/capstone/node_modules/hbsfy/runtime.js"}],"/Users/ac/pcs/capstone/public/templates/main.hbs":[function(require,module,exports){
@@ -24416,17 +24389,31 @@ var Handlebars = require('hbsfy/runtime');
 module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
-  var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression, self=this;
+  var buffer = "", stack1, helper, functionType="function", escapeExpression=this.escapeExpression, self=this;
 
 function program1(depth0,data) {
   
-  var buffer = "";
-  buffer += "\n                <li><a href=\"#\" id=\"page"
-    + escapeExpression((typeof depth0 === functionType ? depth0.apply(depth0) : depth0))
-    + "\" onclick=\"window.app.mainView.currentList(window.app.mainView.userName, "
-    + escapeExpression((typeof depth0 === functionType ? depth0.apply(depth0) : depth0))
-    + ")\">"
-    + escapeExpression((typeof depth0 === functionType ? depth0.apply(depth0) : depth0))
+  var buffer = "", stack1, helper;
+  buffer += "\n                <li><a href=\"#/";
+  if (helper = helpers.user) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.user); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "/";
+  if (helper = helpers.list) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.list); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "/";
+  if (helper = helpers.page) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.page); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "\" id=\"page ";
+  if (helper = helpers.page) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.page); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "\">";
+  if (helper = helpers.page) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.page); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
     + "</a></li>\n                ";
   return buffer;
   }
@@ -24438,7 +24425,7 @@ function program3(depth0,data) {
   if (helper = helpers.youtube) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.youtube); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
-    + " data-width=\"420\" data-height=\"315\"></div>\n         <div class=\"link\"><a href=\"http://www.discogs.com/release/";
+    + " data-width=\"210\" data-height=\"157\"></div>\n         <div class=\"link\"><a href=\"http://www.discogs.com/release/";
   if (helper = helpers.discogs) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.discogs); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
@@ -24454,13 +24441,15 @@ function program3(depth0,data) {
   return buffer;
   }
 
-  buffer += "      <header>\n        \n        <div class=\"row\" style=\"margin-bottom:5%;\">\n          <h1 class=\"text-center\">Record Pool</h1>\n        </div>\n\n        <div class=\"row\">\n          \n          <div class=\"col-md-3\">\n            <div>\n              <div class=\"form-group\">\n                <label for=\"user-id-input\">Discogs Username</label>\n                <input type=\"user-id\" id=\"add-username\" class=\"form-control\" placeholder=\"Enter Discogs Username\">\n              </div>\n              <button id=\"username-submit\" class=\"btn btn-default\">Submit</button>\n            </div>\n          </div>\n          \n          <div class=\"col-md-6\">\n            <h4 class=\"text-center\">Viewing "
-    + escapeExpression(((stack1 = ((stack1 = (depth0 && depth0.array)),stack1 == null || stack1 === false ? stack1 : stack1.username)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+  buffer += "      <header>\n        \n        <div class=\"row\" style=\"margin-bottom:5%;\">\n          <h1 class=\"text-center\">Record Pool</h1>\n        </div>\n\n        <div class=\"row\">\n          \n          <div class=\"col-md-3\">\n            <div>\n              <div class=\"username-form\">\n                <label for=\"user-id-input\">Discogs Username</label>\n                <input type=\"user-id\" id=\"username\" class=\"form-control\" placeholder=\"Enter Discogs Username\">\n              </div>\n              <button id=\"username-submit\" class=\"btn btn-default\">Submit</button>\n            </div>\n          </div>\n          \n          <div class=\"col-md-6\">\n            <h4 class=\"text-center\">Viewing ";
+  if (helper = helpers.user) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.user); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
     + "'s selections</h4> \n            <div class=\"text-center\">\n              <ul class=\"nav nav-pills center-pills\">\n                <li><a href=\"#\" id=\"wantlist\">wantlist</a></li>\n                <li><a href=\"#\" id=\"collection\">collection</a></li>\n              </ul>\n              <ul class=\"pagination\">\n                <li><a href=\"#\" onclick=\"window.app.mainView.currentList(window.app.mainView.userName, window.app.mainView.prevPage)\">&laquo;</a></li>\n                ";
   stack1 = helpers.each.call(depth0, (depth0 && depth0.pages), {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n                <li><a href=\"#\" onclick=\"window.app.mainView.currentList(window.app.mainView.userName, window.app.mainView.nextPage)\">&raquo;</a></li>\n              </ul>\n            </div>\n          </div>\n          \n          <div class=\"col-md-3\" style=\"margin-top:7%;\">\n            <h4 class=\"text-center\">Notes</h4>\n          </div>\n        </div>\n\n      </header>\n\n      <section>\n        <div class=\"row\">\n         \n         <div id=\"userlist\"class=\"col-md-3\">\n          <ul class=\"nav nav-pills\">\n            <li class=\"dropdown\">\n              <a class=\"dropdown-toggle\" data-toggle=\"dropdown\" href=\"#\" style=\"margin-top:50%;\">\n                Users<span class=\"caret\"></span>\n              </a>\n              <ul class=\"dropdown-menu\" role=\"menu\">\n                <li>Christian</li>\n                <li>Jesse</li>\n                <li>Kyle</li>\n              </ul>\n            </li>\n          </ul>\n         </div>\n\n         <div class=\"col-md-6\" id=\"youtube-vids\">\n         ";
-  stack1 = helpers.each.call(depth0, (depth0 && depth0.array), {hash:{},inverse:self.noop,fn:self.program(3, program3, data),data:data});
+  stack1 = helpers.each.call(depth0, (depth0 && depth0.releases), {hash:{},inverse:self.noop,fn:self.program(3, program3, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n              </ul>\n              <ul class=\"pagination\">\n                <li><a href=\"#\" onclick=\"window.app.mainView.currentList(window.app.mainView.userName, window.app.mainView.prevPage)\">&laquo;</a></li>\n                ";
   stack1 = helpers.each.call(depth0, (depth0 && depth0.pages), {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
