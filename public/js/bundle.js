@@ -2523,7 +2523,7 @@ function stringify(obj, fn, spaces, decycle) {
 stringify.getSerialize = getSerialize;
 
 },{}],"/Users/user1/Desktop/capstone/node_modules/request/node_modules/mime-types/lib/custom.json":[function(require,module,exports){
-module.exports=module.exports={
+module.exports=module.exports=module.exports=module.exports={
   "text/jade": [
     "jade"
   ],
@@ -2629,7 +2629,7 @@ function define(json) {
 }
 
 },{"./custom.json":"/Users/user1/Desktop/capstone/node_modules/request/node_modules/mime-types/lib/custom.json","./mime.json":"/Users/user1/Desktop/capstone/node_modules/request/node_modules/mime-types/lib/mime.json","./node.json":"/Users/user1/Desktop/capstone/node_modules/request/node_modules/mime-types/lib/node.json"}],"/Users/user1/Desktop/capstone/node_modules/request/node_modules/mime-types/lib/mime.json":[function(require,module,exports){
-module.exports=module.exports={
+module.exports=module.exports=module.exports=module.exports={
   "application/1d-interleaved-parityfec": [],
   "application/3gpp-ims+xml": [],
   "application/activemessage": [],
@@ -5948,7 +5948,7 @@ module.exports=module.exports={
 }
 
 },{}],"/Users/user1/Desktop/capstone/node_modules/request/node_modules/mime-types/lib/node.json":[function(require,module,exports){
-module.exports=module.exports={
+module.exports=module.exports=module.exports=module.exports={
   "text/vtt": [
     "vtt"
   ],
@@ -24430,10 +24430,10 @@ function program1(depth0,data) {
 
   buffer += "      <header>\n        \n        <div class=\"row\" style=\"margin-bottom:5%;\">\n          <h1 class=\"text-center\">Record Pool</h1>\n        </div>\n\n        <div class=\"row\">\n            <h4 class=\"text-center\">Viewing "
     + escapeExpression(((stack1 = ((stack1 = (depth0 && depth0.array)),stack1 == null || stack1 === false ? stack1 : stack1.username)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-    + "'s selections</h4> \n            <div class=\"text-center\">\n              <ul class=\"nav nav-pills center-pills\">\n                <li><a href=\"#\" id=\"wantlist\">wantlist</a></li>\n                <li><a href=\"#\" id=\"collection\">collection</a></li>\n              </ul>\n            </div>\n        </div>\n\n        <div class=\"row\">  \n          <div class=\"col-md-3\">\n            <div>\n              <div class=\"form-group\">\n                <label for=\"user-id-input\">Discogs Username</label>\n                <input type=\"user-id\" id=\"add-username\" class=\"form-control\" placeholder=\"Enter Discogs Username\">\n              </div>\n              <button id=\"username-submit\" class=\"btn btn-default\">Submit</button>\n            </div>\n          </div>\n          \n        </div>\n\n      </header>\n\n      <section>\n        <div class=\"row\">\n\n         <div class=\"col-md-7\" id=\"youtube-vids\">\n         ";
+    + "'s selections</h4> \n        </div>\n            \n        <div class=\"row\">\n          <div class=\"col-md-8\">\n            <div class=\"text-center\">\n              <ul class=\"nav nav-pills center-pills\">\n                <li><a href=\"#\" id=\"wantlist\">wantlist</a></li>\n                <li><a href=\"#\" id=\"collection\">collection</a></li>\n              </ul>\n            </div>\n          </div>\n          <div class=\"col-md-4\">\n            <div>\n              <div class=\"form-group\">\n                <label for=\"user-id-input\">Discogs Username</label>\n                <input type=\"user-id\" id=\"add-username\" class=\"form-control\" placeholder=\"Enter Discogs Username\">\n              </div>\n              <button id=\"username-submit\" class=\"btn btn-default\">Submit</button>\n            </div>\n          </div>\n        </div>\n\n      </header>\n\n      <section>\n        <div class=\"row\">\n\n         <div class=\"col-md-8\" id=\"youtube-vids\">\n         ";
   stack1 = helpers.each.call(depth0, (depth0 && depth0.array), {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "</div>\n\n         <div id=\"userlist\"class=\"col-md-3\">\n          <ul class=\"nav nav-pills\">\n            <li class=\"dropdown\">\n              <a class=\"dropdown-toggle\" data-toggle=\"dropdown\" href=\"#\" style=\"margin-top:50%;\">\n                Users<span class=\"caret\"></span>\n              </a>\n              <ul class=\"dropdown-menu\" role=\"menu\">\n                <li>Christian</li>\n                <li>Jesse</li>\n                <li>Kyle</li>\n              </ul>\n            </li>\n          </ul>\n         </div>\n        </div>\n      </section>\n\n</div>";
+  buffer += "</div>\n\n         <div id=\"userlist\"class=\"col-md-4\">\n          <ul class=\"nav nav-pills\">\n            <li class=\"dropdown\">\n              <a class=\"dropdown-toggle\" data-toggle=\"dropdown\" href=\"#\" style=\"margin-top:50%;\">\n                Users<span class=\"caret\"></span>\n              </a>\n              <ul class=\"dropdown-menu\" role=\"menu\">\n                <li>Christian</li>\n                <li>Jesse</li>\n                <li>Kyle</li>\n              </ul>\n            </li>\n          </ul>\n         </div>\n        </div>\n      </section>\n\n</div>";
   return buffer;
   });
 

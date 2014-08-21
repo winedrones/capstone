@@ -6,16 +6,18 @@
 
         <div class="row">
             <h4 class="text-center">Viewing {{array.username}}'s selections</h4> 
+        </div>
+            
+        <div class="row">
+          <div class="col-md-8">
             <div class="text-center">
               <ul class="nav nav-pills center-pills">
                 <li><a href="#" id="wantlist">wantlist</a></li>
                 <li><a href="#" id="collection">collection</a></li>
               </ul>
             </div>
-        </div>
-
-        <div class="row">  
-          <div class="col-md-3">
+          </div>
+          <div class="col-md-4">
             <div>
               <div class="form-group">
                 <label for="user-id-input">Discogs Username</label>
@@ -24,7 +26,6 @@
               <button id="username-submit" class="btn btn-default">Submit</button>
             </div>
           </div>
-          
         </div>
 
       </header>
@@ -32,13 +33,13 @@
       <section>
         <div class="row">
 
-         <div class="col-md-7" id="youtube-vids">
+         <div class="col-md-8" id="youtube-vids">
          {{#each array}}
          <div class="js-lazyYT" data-youtube-id={{youtube}} data-width="420" data-height="315"></div>
          <div class="link"><a href="http://www.discogs.com/release/{{discogs}}">{{title}} by {{artist}}</a></div>
          {{/each}}</div>
 
-         <div id="userlist"class="col-md-3">
+         <div id="userlist"class="col-md-4">
           <ul class="nav nav-pills">
             <li class="dropdown">
               <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="margin-top:50%;">
