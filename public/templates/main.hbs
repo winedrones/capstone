@@ -26,7 +26,7 @@
               <ul class="pagination">
                 <li><a href="#" onclick="window.app.mainView.currentList(window.app.mainView.userName, window.app.mainView.prevPage)">&laquo;</a></li>
                 {{#each pages}}
-                <li><a href="#" id="page{{.}}" onclick="window.app.mainView.currentList(window.app.mainView.userName, {{.}})">{{.}}</a></li>
+                <li><a href="{{list}}/{{.}}" id="page{{.}}">{{.}}</a></li>
                 {{/each}}
                 <li><a href="#" onclick="window.app.mainView.currentList(window.app.mainView.userName, window.app.mainView.nextPage)">&raquo;</a></li>
               </ul>
@@ -60,14 +60,14 @@
 
          <div class="col-md-6" id="youtube-vids">
          {{#each array}}
-         <div class="js-lazyYT" data-youtube-id={{youtube}} data-width="420" data-height="315"></div>
+         <div class="js-lazyYT" data-youtube-id={{youtube}} data-width="210" data-height="157"></div>
          <div class="link"><a href="http://www.discogs.com/release/{{discogs}}">{{title}} by {{artist}}</a></div>
          {{/each}}
               </ul>
               <ul class="pagination">
                 <li><a href="#" onclick="window.app.mainView.currentList(window.app.mainView.userName, window.app.mainView.prevPage)">&laquo;</a></li>
                 {{#each pages}}
-                <li><a href="#" id="page{{.}}" onclick="window.app.mainView.currentList(window.app.mainView.userName, {{.}})">{{.}}</a></li>
+                <li><a href="{{list}}/{{.}}" id="page{{.}}">{{.}}</a></li>
                 {{/each}}
                 <li><a href="#" onclick="window.app.mainView.currentList(window.app.mainView.userName, window.app.mainView.nextPage)">&raquo;</a></li>
               </ul>

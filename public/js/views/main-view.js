@@ -63,8 +63,12 @@ var MainView = Backbone.View.extend({
         });
   },
 
-  initialize: function () {
-
+  initialize: function (options) {
+  //gets something like {list:"collection",page:id}
+  // if (data == !null){
+  //   this.currentPage = options.page;
+  //   this.currentList = options.records;
+  // };
   $(this.el).html(loginHTML());
 
   },
@@ -91,14 +95,7 @@ var MainView = Backbone.View.extend({
           });
           for (var i = 0; i<pages; i++){ //fills the pages array with the api returned pagination numbers
             self.records.wantPages.push(i+1);
-            //self.events["click #page"+i+1] = "self.discogs(user,i+1)";
           };
-            if (page == pages){
-              self.nextPage = pages;
-            }else{self.nextPage = self.currentPage +1;
-            }if (page>=2){
-              self.prevPage = page-1;
-            }else{self.prevPage = 1;}
             callback(wantArr);
   	       
   	    }).fail(function() {
