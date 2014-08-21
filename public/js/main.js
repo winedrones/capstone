@@ -6,20 +6,21 @@ var MainView = require('./views/main-view');
 var Router = Backbone.Router.extend({
   routes: {
     '': 'main',
-    'wantlist/:id' : 'wantlist',
-    'collections/:id' : 'collections'
+    ':user/wants/:page' : 'wantlist',
+    ':user/collection/:page' : 'collection'
   },
   	main: function () {
-    this.mainView = new MainView();
+    this.mainView = new MainView({user:undefined, list:"wants",page:1});
     //this.mainView.render(); 
   },
-    wantlist: function (id) {
-    //this.mainView = new MainView({list:"wantlist",page:id});
-    this.mainView.wants(this.mainView.userName, id); 
+    wantlist: function (user, page) {
+    this.mainView = new MainView({user:user, list:"wants",page:page});
+    //this.mainView.discgs(user, "wants", page); 
+
   },
-    collections: function (id) {
-    //this.mainView = new MainView({list:"collection",page:id});
-    this.mainView.discollection(this.mainView.userName, id); 
+    collection: function (user, page) {
+    this.mainView = new MainView({user: user, list:"collection",page:page});
+    //this.mainView.discollection(user, "wants", page); 
   }
 });
 
