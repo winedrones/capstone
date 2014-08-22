@@ -1,43 +1,49 @@
-      <header>
+<section>
+  <div class="row" style="margin-bottom:2%;">
+    <h1 class="text-center">Record Pool</h1>
+  </div>
+
+  <div class="row rec-img">
+    <img src="images/Record2.png" alt="Record Image">
+  </div>
+
+  <div class="row">
+      <h4 class="text-center">Viewing {{array.username}}'s selections</h4> 
+  </div>
+      
+  <div class="row">
+    <div class="col-xs-12 col-md-4">
+        <div>
+          <div class="form-group">
+            <label for="user-id-input">Discogs Username</label>
+            <input type="user-id" id="add-username" class="form-control" placeholder="Enter Discogs Username">
+          </div>
+          <button id="username-submit" class="btn btn-default">Submit</button>
+        </div>
+        <ul class="nav nav-pills">
+          <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="margin-top:50%;">
+              Users<span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu" role="menu">
+              <li>Christian</li>
+              <li>Jesse</li>
+              <li>Kyle</li>
+            </ul>
+          </li>
+        </ul>
+      </div>  
+      
+      <div class="col-xs-12 col-md-8">
         
-        <div class="row" style="margin-bottom:2%;">
-          <h1 class="text-center">Record Pool</h1>
+        <div class="text-center">
+          <ul class="nav nav-pills center-pills" id="want-collection">
+            <li><a href="#" id="wantlist">wantlist</a></li>
+            <li><a href="#" id="collection">collection</a></li>
+          </ul>
         </div>
 
-        <div class="row rec-img">
-          <img src="images/Record2.png" alt="Record Image">
-        </div>
-
-        <div class="row">
-            <h4 class="text-center">Viewing {{array.username}}'s selections</h4> 
-        </div>
-            
-        <div class="row">
-          <div class="col-xs-12 col-md-8">
-            <div class="text-center">
-              <ul class="nav nav-pills center-pills" id="want-collection">
-                <li><a href="#" id="wantlist">wantlist</a></li>
-                <li><a href="#" id="collection">collection</a></li>
-              </ul>
-            </div>
-          </div>
-          <div class="col-xs-12 col-md-4">
-            <div>
-              <div class="form-group">
-                <label for="user-id-input">Discogs Username</label>
-                <input type="user-id" id="add-username" class="form-control" placeholder="Enter Discogs Username">
-              </div>
-              <button id="username-submit" class="btn btn-default">Submit</button>
-            </div>
-          </div>
-        </div>
-
-      </header>
-
-      <section>
-        <div class="row">
-
-        <div class="col-xs-12 col-md-8" id="youtube-vids">
+        <div id="youtube-vids">
           <div class="row">
             <div class="col-md-4">
              {{#each array}}
@@ -56,25 +62,10 @@
              <div class="js-lazyYT" data-youtube-id={{youtube}}></div>
              <div class="link"><a href="http://www.discogs.com/release/{{discogs}}">{{title}} by {{artist}}</a></div>
              {{/each}}
-            </div>
           </div>
         </div>
-        
-         <div id="userlist"class="col-xs-12 col-md-4">
-          <ul class="nav nav-pills">
-            <li class="dropdown">
-              <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="margin-top:50%;">
-                Users<span class="caret"></span>
-              </a>
-              <ul class="dropdown-menu" role="menu">
-                <li>Christian</li>
-                <li>Jesse</li>
-                <li>Kyle</li>
-              </ul>
-            </li>
-          </ul>
-         </div>
-        </div>
-      </section>
-
-</div>
+      </div> 
+    
+    </div>
+  </div>
+</section>
