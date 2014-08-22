@@ -2,6 +2,21 @@
 	display: inline-block; 
 }*/
 
+.login-form {
+  width: 50%;
+  margin: auto;
+}
+
+.gatekeeper {
+  width: 50%;
+  margin: auto;
+  margin-top: 2%;
+  margin-bottom: 2%;
+}
+
+.rec-img {
+  margin-bottom: 2%;
+}
 
 .rec-img img {
   width: 16%;
