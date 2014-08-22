@@ -2,9 +2,21 @@
 	display: inline-block; 
 }*/
 
+
+.rec-img img {
+  width: 16%;
+  margin-left: 42%;
+  margin-right: 42%;
+}
+
 #userlist .dropdown-menu li {
 	padding-left: 10%;
 	padding-bottom: 6%;
+}
+
+#want-collection {
+  padding-top: 5%;
+  margin-bottom: 5%;
 }
 
 .spinner {
