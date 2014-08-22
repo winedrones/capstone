@@ -24,11 +24,11 @@
                 <li><a href="#" id="collection">collection</a></li>
               </ul>
               <ul class="pagination">
-                <li><a href="#" onclick="window.app.mainView.currentList(window.app.mainView.userName, window.app.mainView.prevPage)">&laquo;</a></li>
+                <li><a href="#/{{user}}/{{list}}/{{first}}">&laquo;</a></li>
                 {{#each pages}}
                 <li><a href="#/{{user}}/{{list}}/{{page}}" id="page {{page}}">{{page}}</a></li>
                 {{/each}}
-                <li><a href="#" onclick="window.app.mainView.currentList(window.app.mainView.userName, window.app.mainView.nextPage)">&raquo;</a></li>
+                <li><a href="#/{{user}}/{{list}}/{{last}}">&raquo;</a></li>
               </ul>
             </div>
           </div>
@@ -65,11 +65,11 @@
          {{/each}}
               </ul>
               <ul class="pagination">
-                <li><a href="#" onclick="window.app.mainView.currentList(window.app.mainView.userName, window.app.mainView.prevPage)">&laquo;</a></li>
+                <li><a href="#/{{user}}/{{list}}/{{first}}">&laquo;</a></li>
                 {{#each pages}}
                 <li><a href="#/{{user}}/{{list}}/{{page}}" id="page {{page}}">{{page}}</a></li>
                 {{/each}}
-                <li><a href="#" onclick="window.app.mainView.currentList(window.app.mainView.userName, window.app.mainView.nextPage)">&raquo;</a></li>
+                <li><a href="#/{{user}}/{{list}}/{{last}}">&raquo;</a></li>
               </ul>
        </div>
 
