@@ -2,6 +2,16 @@
 	display: inline-block; 
 }*/
 
+#init-username-submit {
+  width: 25%;
+  margin-top: 2%;
+}
+
+#username-submit {
+  width: 25%;
+  margin-top: 2%;
+}
+
 .login-form {
   width: 50%;
   margin: auto;
