@@ -2523,7 +2523,7 @@ function stringify(obj, fn, spaces, decycle) {
 stringify.getSerialize = getSerialize;
 
 },{}],"/Users/ac/pcs/capstone/node_modules/request/node_modules/mime-types/lib/custom.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
+module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
   "text/jade": [
     "jade"
   ],
@@ -2629,7 +2629,7 @@ function define(json) {
 }
 
 },{"./custom.json":"/Users/ac/pcs/capstone/node_modules/request/node_modules/mime-types/lib/custom.json","./mime.json":"/Users/ac/pcs/capstone/node_modules/request/node_modules/mime-types/lib/mime.json","./node.json":"/Users/ac/pcs/capstone/node_modules/request/node_modules/mime-types/lib/node.json"}],"/Users/ac/pcs/capstone/node_modules/request/node_modules/mime-types/lib/mime.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
+module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
   "application/1d-interleaved-parityfec": [],
   "application/3gpp-ims+xml": [],
   "application/activemessage": [],
@@ -5948,7 +5948,7 @@ module.exports=module.exports=module.exports=module.exports=module.exports=modul
 }
 
 },{}],"/Users/ac/pcs/capstone/node_modules/request/node_modules/mime-types/lib/node.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
+module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
   "text/vtt": [
     "vtt"
   ],
@@ -24238,6 +24238,7 @@ Backbone.$ = $;
 
 var htmlTemplate = require('../../templates/main.hbs');
 var loginHTML = require('../../templates/login.hbs');
+var vidsTemplate = require('../../templates/vids.hbs');
 
 
 
@@ -24335,7 +24336,8 @@ var MainView = Backbone.View.extend({
           });
           for (var i = 0; i<pages; i++){ //fills the pages array with the api returned pagination numbers
             self.records.pages.push({page:i+1, user:user, list:list});
-          };           
+          };
+            self.render({pages:self.records.pages, user:self.userName, list:self.currentList, first:1, last:self.records.pages.length});           
             callback(relArr);
   	       
   	    }).fail(function() {
@@ -24347,14 +24349,11 @@ var MainView = Backbone.View.extend({
   		arr.forEach(function (item, index){
   			$.getJSON('http://api.discogs.com/releases/'+item+'?callback=?').done(function(rels){
       		if (rels.data.videos){
-      		self.records.releases.push({youtube:rels.data.videos[0].uri.slice(-11), discogs:item, artist:rels.data.artists[0].name, title:rels.data.title}); //this adds objects for everything fetched from discogs to the records array
-         }
-         if (index == arr.length-1){
-         self.render({releases:self.records.releases, pages:self.records.pages, user:self.userName, list:self.currentList, first:1, last:self.records.pages.length});
-         }
-  		});	
-  	});
-  };
+      		self.renderVids({youtube:rels.data.videos[0].uri.slice(-11), discogs:item, artist:rels.data.artists[0].name, title:rels.data.title}); //this adds objects for everything fetched from discogs to the records array
+          }
+  		  });	
+  	 });
+    };
 
 
 	getIds(list, getVids, page);
@@ -24362,8 +24361,14 @@ var MainView = Backbone.View.extend({
 
     
 
-  render: function (template) {
-    $(this.el).html(htmlTemplate(template));
+  render: function (data) {
+    $(this.el).html(htmlTemplate(data));
+    //$('.js-lazyYT').lazyYT(); 
+   // $(this.el).html(myTemplate({entries:[{youtube: data, discogs: data},{...}]}))
+  },
+
+  renderVids: function (data) {
+    $("#youtube-vids").append(vidsTemplate(data));
     $('.js-lazyYT').lazyYT(); 
    // $(this.el).html(myTemplate({entries:[{youtube: data, discogs: data},{...}]}))
   }
@@ -24373,7 +24378,7 @@ var MainView = Backbone.View.extend({
 
 module.exports = MainView;
 
-},{"../../templates/login.hbs":"/Users/ac/pcs/capstone/public/templates/login.hbs","../../templates/main.hbs":"/Users/ac/pcs/capstone/public/templates/main.hbs","backbone":"/Users/ac/pcs/capstone/node_modules/backbone/backbone.js","http":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/http-browserify/index.js","request":"/Users/ac/pcs/capstone/node_modules/request/index.js","url":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/url/url.js"}],"/Users/ac/pcs/capstone/public/templates/login.hbs":[function(require,module,exports){
+},{"../../templates/login.hbs":"/Users/ac/pcs/capstone/public/templates/login.hbs","../../templates/main.hbs":"/Users/ac/pcs/capstone/public/templates/main.hbs","../../templates/vids.hbs":"/Users/ac/pcs/capstone/public/templates/vids.hbs","backbone":"/Users/ac/pcs/capstone/node_modules/backbone/backbone.js","http":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/http-browserify/index.js","request":"/Users/ac/pcs/capstone/node_modules/request/index.js","url":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/url/url.js"}],"/Users/ac/pcs/capstone/public/templates/login.hbs":[function(require,module,exports){
 // hbsfy compiled Handlebars template
 var Handlebars = require('hbsfy/runtime');
 module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -24420,29 +24425,6 @@ function program1(depth0,data) {
   return buffer;
   }
 
-function program3(depth0,data) {
-  
-  var buffer = "", stack1, helper;
-  buffer += "\n         <div class=\"js-lazyYT\" data-youtube-id=";
-  if (helper = helpers.youtube) { stack1 = helper.call(depth0, {hash:{},data:data}); }
-  else { helper = (depth0 && depth0.youtube); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
-  buffer += escapeExpression(stack1)
-    + " data-width=\"210\" data-height=\"157\"></div>\n         <div class=\"link\"><a href=\"http://www.discogs.com/release/";
-  if (helper = helpers.discogs) { stack1 = helper.call(depth0, {hash:{},data:data}); }
-  else { helper = (depth0 && depth0.discogs); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
-  buffer += escapeExpression(stack1)
-    + "\">";
-  if (helper = helpers.title) { stack1 = helper.call(depth0, {hash:{},data:data}); }
-  else { helper = (depth0 && depth0.title); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
-  buffer += escapeExpression(stack1)
-    + " by ";
-  if (helper = helpers.artist) { stack1 = helper.call(depth0, {hash:{},data:data}); }
-  else { helper = (depth0 && depth0.artist); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
-  buffer += escapeExpression(stack1)
-    + "</a></div>\n         ";
-  return buffer;
-  }
-
   buffer += "      <header>\n        \n        <div class=\"row\" style=\"margin-bottom:5%;\">\n          <h1 class=\"text-center\">Record Pool</h1>\n        </div>\n\n        <div class=\"row\">\n          \n          <div class=\"col-md-3\">\n            <div>\n              <div class=\"username-form\">\n                <label for=\"user-id-input\">Discogs Username</label>\n                <input type=\"user-id\" id=\"username\" class=\"form-control\" placeholder=\"Enter Discogs Username\">\n              </div>\n              <button id=\"username-submit\" class=\"btn btn-default\">Submit</button>\n            </div>\n          </div>\n          \n          <div class=\"col-md-6\">\n            <h4 class=\"text-center\">Viewing ";
   if (helper = helpers.user) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.user); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
@@ -24474,10 +24456,7 @@ function program3(depth0,data) {
   if (helper = helpers.last) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.last); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
-    + "\">&raquo;</a></li>\n              </ul>\n            </div>\n          </div>\n          \n          <div class=\"col-md-3\" style=\"margin-top:7%;\">\n            <h4 class=\"text-center\">Notes</h4>\n          </div>\n        </div>\n\n      </header>\n\n      <section>\n        <div class=\"row\">\n         \n         <div id=\"userlist\"class=\"col-md-3\">\n          <ul class=\"nav nav-pills\">\n            <li class=\"dropdown\">\n              <a class=\"dropdown-toggle\" data-toggle=\"dropdown\" href=\"#\" style=\"margin-top:50%;\">\n                Users<span class=\"caret\"></span>\n              </a>\n              <ul class=\"dropdown-menu\" role=\"menu\">\n                <li>Christian</li>\n                <li>Jesse</li>\n                <li>Kyle</li>\n              </ul>\n            </li>\n          </ul>\n         </div>\n\n         <div class=\"col-md-6\" id=\"youtube-vids\">\n         ";
-  stack1 = helpers.each.call(depth0, (depth0 && depth0.releases), {hash:{},inverse:self.noop,fn:self.program(3, program3, data),data:data});
-  if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n              </ul>\n              <ul class=\"pagination\">\n                <li><a href=\"#/";
+    + "\">&raquo;</a></li>\n              </ul>\n            </div>\n          </div>\n          \n          <div class=\"col-md-3\" style=\"margin-top:7%;\">\n            <h4 class=\"text-center\">Notes</h4>\n          </div>\n        </div>\n\n      </header>\n\n      <section>\n        <div class=\"row\">\n         \n         <div id=\"userlist\"class=\"col-md-3\">\n          <ul class=\"nav nav-pills\">\n            <li class=\"dropdown\">\n              <a class=\"dropdown-toggle\" data-toggle=\"dropdown\" href=\"#\" style=\"margin-top:50%;\">\n                Users<span class=\"caret\"></span>\n              </a>\n              <ul class=\"dropdown-menu\" role=\"menu\">\n                <li>Christian</li>\n                <li>Jesse</li>\n                <li>Kyle</li>\n              </ul>\n            </li>\n          </ul>\n         </div>\n\n         <div class=\"col-md-6\" id=\"youtube-vids\">\n         </div>\n         <div>\n              </ul>\n              <ul class=\"pagination\">\n                <li><a href=\"#/";
   if (helper = helpers.user) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.user); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
@@ -24504,7 +24483,36 @@ function program3(depth0,data) {
   if (helper = helpers.last) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.last); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
-    + "\">&raquo;</a></li>\n              </ul>\n       </div>\n\n         <div class=\"col-md-3\">\n          <div class=\"panel panel-default\">\n            <!-- Default panel contents -->\n            <div class=\"panel-heading\">User Comments</div>\n            <div class=\"panel-body\">\n              <p>...</p>\n            </div>\n\n            <!-- List group -->\n            <ul class=\"list-group\">\n              <li class=\"list-group-item\">Great track</li>\n              <li class=\"list-group-item\">Catchy hook</li>\n              <li class=\"list-group-item\">Sick riffs</li>   \n              <li class=\"list-group-item\">I want to live in this song!</li>\n            </ul>\n          </div>\n          <textarea class=\"form-control\" rows=\"3\"></textarea>\n          <button type=\"submit\" class=\"btn btn-default\">Submit Comments</button>\n         </div>\n        </div>\n      </section>\n\n</div>";
+    + "\">&raquo;</a></li>\n              </ul>\n          </div>\n\n         <div class=\"col-md-3\">\n          <div class=\"panel panel-default\">\n            <!-- Default panel contents -->\n            <div class=\"panel-heading\">User Comments</div>\n            <div class=\"panel-body\">\n              <p>...</p>\n            </div>\n\n            <!-- List group -->\n            <ul class=\"list-group\">\n              <li class=\"list-group-item\">Great track</li>\n              <li class=\"list-group-item\">Catchy hook</li>\n              <li class=\"list-group-item\">Sick riffs</li>   \n              <li class=\"list-group-item\">I want to live in this song!</li>\n            </ul>\n          </div>\n          <textarea class=\"form-control\" rows=\"3\"></textarea>\n          <button type=\"submit\" class=\"btn btn-default\">Submit Comments</button>\n         </div>\n        </div>\n      </section>\n\n</div>";
+  return buffer;
+  });
+
+},{"hbsfy/runtime":"/Users/ac/pcs/capstone/node_modules/hbsfy/runtime.js"}],"/Users/ac/pcs/capstone/public/templates/vids.hbs":[function(require,module,exports){
+// hbsfy compiled Handlebars template
+var Handlebars = require('hbsfy/runtime');
+module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  var buffer = "", stack1, helper, functionType="function", escapeExpression=this.escapeExpression;
+
+
+  buffer += "         <div class=\"js-lazyYT\" data-youtube-id=";
+  if (helper = helpers.youtube) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.youtube); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + " data-width=\"210\" data-height=\"157\"></div>\n         <div class=\"link\"><a href=\"http://www.discogs.com/release/";
+  if (helper = helpers.discogs) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.discogs); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "\">";
+  if (helper = helpers.title) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.title); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + " by ";
+  if (helper = helpers.artist) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.artist); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</a></div>\n";
   return buffer;
   });
 

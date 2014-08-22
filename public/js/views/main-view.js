@@ -7,6 +7,7 @@ Backbone.$ = $;
 
 var htmlTemplate = require('../../templates/main.hbs');
 var loginHTML = require('../../templates/login.hbs');
+var vidsTemplate = require('../../templates/vids.hbs');
 
 
 
@@ -104,7 +105,8 @@ var MainView = Backbone.View.extend({
           });
           for (var i = 0; i<pages; i++){ //fills the pages array with the api returned pagination numbers
             self.records.pages.push({page:i+1, user:user, list:list});
-          };           
+          };
+            self.render({pages:self.records.pages, user:self.userName, list:self.currentList, first:1, last:self.records.pages.length});           
             callback(relArr);
   	       
   	    }).fail(function() {
@@ -116,14 +118,11 @@ var MainView = Backbone.View.extend({
   		arr.forEach(function (item, index){
   			$.getJSON('http://api.discogs.com/releases/'+item+'?callback=?').done(function(rels){
       		if (rels.data.videos){
-      		self.records.releases.push({youtube:rels.data.videos[0].uri.slice(-11), discogs:item, artist:rels.data.artists[0].name, title:rels.data.title}); //this adds objects for everything fetched from discogs to the records array
-         }
-         if (index == arr.length-1){
-         self.render({releases:self.records.releases, pages:self.records.pages, user:self.userName, list:self.currentList, first:1, last:self.records.pages.length});
-         }
-  		});	
-  	});
-  };
+      		self.renderVids({youtube:rels.data.videos[0].uri.slice(-11), discogs:item, artist:rels.data.artists[0].name, title:rels.data.title}); //this adds objects for everything fetched from discogs to the records array
+          }
+  		  });	
+  	 });
+    };
 
 
 	getIds(list, getVids, page);
@@ -131,8 +130,14 @@ var MainView = Backbone.View.extend({
 
     
 
-  render: function (template) {
-    $(this.el).html(htmlTemplate(template));
+  render: function (data) {
+    $(this.el).html(htmlTemplate(data));
+    //$('.js-lazyYT').lazyYT(); 
+   // $(this.el).html(myTemplate({entries:[{youtube: data, discogs: data},{...}]}))
+  },
+
+  renderVids: function (data) {
+    $("#youtube-vids").append(vidsTemplate(data));
     $('.js-lazyYT').lazyYT(); 
    // $(this.el).html(myTemplate({entries:[{youtube: data, discogs: data},{...}]}))
   }
