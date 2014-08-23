@@ -7,7 +7,6 @@ Backbone.$ = $;
 
 var htmlTemplate = require('../../templates/main.hbs');
 var loginHTML = require('../../templates/login.hbs');
-var vidsTemplate = require('../../templates/vids.hbs');
 
 
 
@@ -62,6 +61,7 @@ var MainView = Backbone.View.extend({
   },
 
   initialize: function (options) {
+    console.log("intialize function ran");
     if (options.user == undefined){
       $(this.el).html(loginHTML());
     }else{
@@ -77,8 +77,8 @@ var MainView = Backbone.View.extend({
     this.records = {releases:[], pages:[]};
     //console.log("from discogsfn top - list = "+list);
     var self = this;
-  	//var wantList = {};
-  	var pages = undefined;
+    //var wantList = {};
+    var pages = undefined;
     var relArr = [];
     var animationHtml = "<div class='spinner'></div>";
     $("#youtube-vids").replaceWith(animationHtml); //loading status thing
@@ -105,39 +105,35 @@ var MainView = Backbone.View.extend({
           });
           for (var i = 0; i<pages; i++){ //fills the pages array with the api returned pagination numbers
             self.records.pages.push({page:i+1, user:user, list:list});
-          };
-            self.render({pages:self.records.pages, user:self.userName, list:self.currentList, first:1, last:self.records.pages.length});           
+          };           
             callback(relArr);
-  	       
-  	    }).fail(function() {
+           
+        }).fail(function() {
           console.log( "get page "+page+" of "+user+"'s "+list+" from discogs failed" );
         });
     };
 
-  	var getVids = function(arr){  //grabs youtube video per release in wantArr from getIds fn
-  		arr.forEach(function (item, index){
-  			$.getJSON('http://api.discogs.com/releases/'+item+'?callback=?').done(function(rels){
-      		if (rels.data.videos){
-      		self.renderVids({youtube:rels.data.videos[0].uri.slice(-11), discogs:item, artist:rels.data.artists[0].name, title:rels.data.title}); //this adds objects for everything fetched from discogs to the records array
-          }
-  		  });	
-  	 });
-    };
+    var getVids = function(arr){  //grabs youtube video per release in wantArr from getIds fn
+      arr.forEach(function (item, index){
+        $.getJSON('http://api.discogs.com/releases/'+item+'?callback=?').done(function(rels){
+          if (rels.data.videos){
+          self.records.releases.push({youtube:rels.data.videos[0].uri.slice(-11), discogs:item, artist:rels.data.artists[0].name, title:rels.data.title}); //this adds objects for everything fetched from discogs to the records array
+         }
+         if (index == arr.length-1){
+         self.render({releases:self.records.releases, pages:self.records.pages, user:self.userName, list:self.currentList, first:1, last:self.records.pages.length});
+         }
+      }); 
+    });
+  };
 
 
-	getIds(list, getVids, page);
+  getIds(list, getVids, page);
   },
 
     
 
-  render: function (data) {
-    $(this.el).html(htmlTemplate(data));
-    //$('.js-lazyYT').lazyYT(); 
-   // $(this.el).html(myTemplate({entries:[{youtube: data, discogs: data},{...}]}))
-  },
-
-  renderVids: function (data) {
-    $("#youtube-vids").append(vidsTemplate(data));
+  render: function (template) {
+    $(this.el).html(htmlTemplate(template));
     $('.js-lazyYT').lazyYT(); 
    // $(this.el).html(myTemplate({entries:[{youtube: data, discogs: data},{...}]}))
   }

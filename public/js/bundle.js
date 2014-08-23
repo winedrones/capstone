@@ -2523,7 +2523,7 @@ function stringify(obj, fn, spaces, decycle) {
 stringify.getSerialize = getSerialize;
 
 },{}],"/Users/jmej/pcs/capstone/capstone/node_modules/request/node_modules/mime-types/lib/custom.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports=module.exports={
+module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
   "text/jade": [
     "jade"
   ],
@@ -2629,7 +2629,7 @@ function define(json) {
 }
 
 },{"./custom.json":"/Users/jmej/pcs/capstone/capstone/node_modules/request/node_modules/mime-types/lib/custom.json","./mime.json":"/Users/jmej/pcs/capstone/capstone/node_modules/request/node_modules/mime-types/lib/mime.json","./node.json":"/Users/jmej/pcs/capstone/capstone/node_modules/request/node_modules/mime-types/lib/node.json"}],"/Users/jmej/pcs/capstone/capstone/node_modules/request/node_modules/mime-types/lib/mime.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports=module.exports={
+module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
   "application/1d-interleaved-parityfec": [],
   "application/3gpp-ims+xml": [],
   "application/activemessage": [],
@@ -5948,7 +5948,7 @@ module.exports=module.exports=module.exports=module.exports=module.exports={
 }
 
 },{}],"/Users/jmej/pcs/capstone/capstone/node_modules/request/node_modules/mime-types/lib/node.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports=module.exports={
+module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
   "text/vtt": [
     "vtt"
   ],
@@ -9439,7 +9439,6 @@ Backbone.$ = $;
 
 var htmlTemplate = require('../../templates/main.hbs');
 var loginHTML = require('../../templates/login.hbs');
-var vidsTemplate = require('../../templates/vids.hbs');
 
 
 
@@ -9494,6 +9493,7 @@ var MainView = Backbone.View.extend({
   },
 
   initialize: function (options) {
+    console.log("intialize function ran");
     if (options.user == undefined){
       $(this.el).html(loginHTML());
     }else{
@@ -9509,8 +9509,8 @@ var MainView = Backbone.View.extend({
     this.records = {releases:[], pages:[]};
     //console.log("from discogsfn top - list = "+list);
     var self = this;
-  	//var wantList = {};
-  	var pages = undefined;
+    //var wantList = {};
+    var pages = undefined;
     var relArr = [];
     var animationHtml = "<div class='spinner'></div>";
     $("#youtube-vids").replaceWith(animationHtml); //loading status thing
@@ -9537,39 +9537,35 @@ var MainView = Backbone.View.extend({
           });
           for (var i = 0; i<pages; i++){ //fills the pages array with the api returned pagination numbers
             self.records.pages.push({page:i+1, user:user, list:list});
-          };
-            self.render({pages:self.records.pages, user:self.userName, list:self.currentList, first:1, last:self.records.pages.length});           
+          };           
             callback(relArr);
-  	       
-  	    }).fail(function() {
+           
+        }).fail(function() {
           console.log( "get page "+page+" of "+user+"'s "+list+" from discogs failed" );
         });
     };
 
-  	var getVids = function(arr){  //grabs youtube video per release in wantArr from getIds fn
-  		arr.forEach(function (item, index){
-  			$.getJSON('http://api.discogs.com/releases/'+item+'?callback=?').done(function(rels){
-      		if (rels.data.videos){
-      		self.renderVids({youtube:rels.data.videos[0].uri.slice(-11), discogs:item, artist:rels.data.artists[0].name, title:rels.data.title}); //this adds objects for everything fetched from discogs to the records array
-          }
-  		  });	
-  	 });
-    };
+    var getVids = function(arr){  //grabs youtube video per release in wantArr from getIds fn
+      arr.forEach(function (item, index){
+        $.getJSON('http://api.discogs.com/releases/'+item+'?callback=?').done(function(rels){
+          if (rels.data.videos){
+          self.records.releases.push({youtube:rels.data.videos[0].uri.slice(-11), discogs:item, artist:rels.data.artists[0].name, title:rels.data.title}); //this adds objects for everything fetched from discogs to the records array
+         }
+         if (index == arr.length-1){
+         self.render({releases:self.records.releases, pages:self.records.pages, user:self.userName, list:self.currentList, first:1, last:self.records.pages.length});
+         }
+      }); 
+    });
+  };
 
 
-	getIds(list, getVids, page);
+  getIds(list, getVids, page);
   },
 
     
 
-  render: function (data) {
-    $(this.el).html(htmlTemplate(data));
-    //$('.js-lazyYT').lazyYT(); 
-   // $(this.el).html(myTemplate({entries:[{youtube: data, discogs: data},{...}]}))
-  },
-
-  renderVids: function (data) {
-    $("#youtube-vids").append(vidsTemplate(data));
+  render: function (template) {
+    $(this.el).html(htmlTemplate(template));
     $('.js-lazyYT').lazyYT(); 
    // $(this.el).html(myTemplate({entries:[{youtube: data, discogs: data},{...}]}))
   }
@@ -9578,8 +9574,7 @@ var MainView = Backbone.View.extend({
 
 
 module.exports = MainView;
-
-},{"../../templates/login.hbs":"/Users/jmej/pcs/capstone/capstone/public/templates/login.hbs","../../templates/main.hbs":"/Users/jmej/pcs/capstone/capstone/public/templates/main.hbs","../../templates/vids.hbs":"/Users/jmej/pcs/capstone/capstone/public/templates/vids.hbs","backbone":"/Users/jmej/pcs/capstone/capstone/node_modules/backbone/backbone.js","http":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/http-browserify/index.js","request":"/Users/jmej/pcs/capstone/capstone/node_modules/request/index.js","url":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/url/url.js"}],"/Users/jmej/pcs/capstone/capstone/public/templates/login.hbs":[function(require,module,exports){
+},{"../../templates/login.hbs":"/Users/jmej/pcs/capstone/capstone/public/templates/login.hbs","../../templates/main.hbs":"/Users/jmej/pcs/capstone/capstone/public/templates/main.hbs","backbone":"/Users/jmej/pcs/capstone/capstone/node_modules/backbone/backbone.js","http":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/http-browserify/index.js","request":"/Users/jmej/pcs/capstone/capstone/node_modules/request/index.js","url":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/url/url.js"}],"/Users/jmej/pcs/capstone/capstone/public/templates/login.hbs":[function(require,module,exports){
 // hbsfy compiled Handlebars template
 var Handlebars = require('hbsfy/runtime');
 module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -9602,7 +9597,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
 function program1(depth0,data) {
   
   var buffer = "", stack1, helper;
-  buffer += "\n                <li><a href=\"#/";
+  buffer += "\n            <li><a href=\"#/";
   if (helper = helpers.user) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.user); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
@@ -9622,86 +9617,18 @@ function program1(depth0,data) {
   if (helper = helpers.page) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.page); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
-    + "</a></li>\n                ";
+    + "</a></li>\n            ";
   return buffer;
   }
 
-  buffer += "      <header>\n        \n        <div class=\"row\" style=\"margin-bottom:5%;\">\n          <h1 class=\"text-center\">Record Pool</h1>\n        </div>\n\n        <div class=\"row\">\n          \n          <div class=\"col-md-3\">\n            <div>\n              <div class=\"username-form\">\n                <label for=\"user-id-input\">Discogs Username</label>\n                <input type=\"user-id\" id=\"username\" class=\"form-control\" placeholder=\"Enter Discogs Username\">\n              </div>\n              <button id=\"username-submit\" class=\"btn btn-default\">Submit</button>\n            </div>\n          </div>\n          \n          <div class=\"col-md-6\">\n            <h4 class=\"text-center\">Viewing ";
-  if (helper = helpers.user) { stack1 = helper.call(depth0, {hash:{},data:data}); }
-  else { helper = (depth0 && depth0.user); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
-  buffer += escapeExpression(stack1)
-    + "'s selections</h4> \n            <div class=\"text-center\">\n              <ul class=\"nav nav-pills center-pills\">\n                <li><a href=\"#\" id=\"wantlist\">wantlist</a></li>\n                <li><a href=\"#\" id=\"collection\">collection</a></li>\n              </ul>\n              <ul class=\"pagination\">\n                <li><a href=\"#/";
-  if (helper = helpers.user) { stack1 = helper.call(depth0, {hash:{},data:data}); }
-  else { helper = (depth0 && depth0.user); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
-  buffer += escapeExpression(stack1)
-    + "/";
-  if (helper = helpers.list) { stack1 = helper.call(depth0, {hash:{},data:data}); }
-  else { helper = (depth0 && depth0.list); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
-  buffer += escapeExpression(stack1)
-    + "/";
-  if (helper = helpers.first) { stack1 = helper.call(depth0, {hash:{},data:data}); }
-  else { helper = (depth0 && depth0.first); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
-  buffer += escapeExpression(stack1)
-    + "\">&laquo;</a></li>\n                ";
-  stack1 = helpers.each.call(depth0, (depth0 && depth0.pages), {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
-  if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n                <li><a href=\"#/";
-  if (helper = helpers.user) { stack1 = helper.call(depth0, {hash:{},data:data}); }
-  else { helper = (depth0 && depth0.user); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
-  buffer += escapeExpression(stack1)
-    + "/";
-  if (helper = helpers.list) { stack1 = helper.call(depth0, {hash:{},data:data}); }
-  else { helper = (depth0 && depth0.list); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
-  buffer += escapeExpression(stack1)
-    + "/";
-  if (helper = helpers.last) { stack1 = helper.call(depth0, {hash:{},data:data}); }
-  else { helper = (depth0 && depth0.last); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
-  buffer += escapeExpression(stack1)
-    + "\">&raquo;</a></li>\n              </ul>\n            </div>\n          </div>\n          \n          <div class=\"col-md-3\" style=\"margin-top:7%;\">\n            <h4 class=\"text-center\">Notes</h4>\n          </div>\n        </div>\n\n      </header>\n\n      <section>\n        <div class=\"row\">\n         \n         <div id=\"userlist\"class=\"col-md-3\">\n          <ul class=\"nav nav-pills\">\n            <li class=\"dropdown\">\n              <a class=\"dropdown-toggle\" data-toggle=\"dropdown\" href=\"#\" style=\"margin-top:50%;\">\n                Users<span class=\"caret\"></span>\n              </a>\n              <ul class=\"dropdown-menu\" role=\"menu\">\n                <li>Christian</li>\n                <li>Jesse</li>\n                <li>Kyle</li>\n              </ul>\n            </li>\n          </ul>\n         </div>\n\n         <div class=\"col-md-6\" id=\"youtube-vids\">\n         </div>\n         <div>\n              </ul>\n              <ul class=\"pagination\">\n                <li><a href=\"#/";
-  if (helper = helpers.user) { stack1 = helper.call(depth0, {hash:{},data:data}); }
-  else { helper = (depth0 && depth0.user); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
-  buffer += escapeExpression(stack1)
-    + "/";
-  if (helper = helpers.list) { stack1 = helper.call(depth0, {hash:{},data:data}); }
-  else { helper = (depth0 && depth0.list); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
-  buffer += escapeExpression(stack1)
-    + "/";
-  if (helper = helpers.first) { stack1 = helper.call(depth0, {hash:{},data:data}); }
-  else { helper = (depth0 && depth0.first); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
-  buffer += escapeExpression(stack1)
-    + "\">&laquo;</a></li>\n                ";
-  stack1 = helpers.each.call(depth0, (depth0 && depth0.pages), {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
-  if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n                <li><a href=\"#/";
-  if (helper = helpers.user) { stack1 = helper.call(depth0, {hash:{},data:data}); }
-  else { helper = (depth0 && depth0.user); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
-  buffer += escapeExpression(stack1)
-    + "/";
-  if (helper = helpers.list) { stack1 = helper.call(depth0, {hash:{},data:data}); }
-  else { helper = (depth0 && depth0.list); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
-  buffer += escapeExpression(stack1)
-    + "/";
-  if (helper = helpers.last) { stack1 = helper.call(depth0, {hash:{},data:data}); }
-  else { helper = (depth0 && depth0.last); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
-  buffer += escapeExpression(stack1)
-    + "\">&raquo;</a></li>\n              </ul>\n          </div>\n\n         <div class=\"col-md-3\">\n          <div class=\"panel panel-default\">\n            <!-- Default panel contents -->\n            <div class=\"panel-heading\">User Comments</div>\n            <div class=\"panel-body\">\n              <p>...</p>\n            </div>\n\n            <!-- List group -->\n            <ul class=\"list-group\">\n              <li class=\"list-group-item\">Great track</li>\n              <li class=\"list-group-item\">Catchy hook</li>\n              <li class=\"list-group-item\">Sick riffs</li>   \n              <li class=\"list-group-item\">I want to live in this song!</li>\n            </ul>\n          </div>\n          <textarea class=\"form-control\" rows=\"3\"></textarea>\n          <button type=\"submit\" class=\"btn btn-default\">Submit Comments</button>\n         </div>\n        </div>\n      </section>\n\n</div>";
-  return buffer;
-  });
-
-},{"hbsfy/runtime":"/Users/jmej/pcs/capstone/capstone/node_modules/hbsfy/runtime.js"}],"/Users/jmej/pcs/capstone/capstone/public/templates/vids.hbs":[function(require,module,exports){
-// hbsfy compiled Handlebars template
-var Handlebars = require('hbsfy/runtime');
-module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
-  this.compilerInfo = [4,'>= 1.0.0'];
-helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
-  var buffer = "", stack1, helper, functionType="function", escapeExpression=this.escapeExpression;
-
-
-  buffer += "         <div class=\"js-lazyYT\" data-youtube-id=";
+function program3(depth0,data) {
+  
+  var buffer = "", stack1, helper;
+  buffer += "\n            <div class=\"col-md-4\">\n              <div class=\"js-lazyYT\" data-youtube-id=";
   if (helper = helpers.youtube) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.youtube); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
-    + " data-width=\"210\" data-height=\"157\"></div>\n         <div class=\"link\"><a href=\"http://www.discogs.com/release/";
+    + " data-width=\"210\" data-height=\"157\"></div>\n              <div class=\"link\"><a href=\"http://www.discogs.com/release/";
   if (helper = helpers.discogs) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.discogs); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
@@ -9713,7 +9640,97 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   if (helper = helpers.artist) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.artist); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
-    + "</a></div>\n";
+    + "</a></div>\n            </div>\n            ";
+  return buffer;
+  }
+
+function program5(depth0,data) {
+  
+  var buffer = "", stack1, helper;
+  buffer += "\n              <li><a href=\"#/";
+  if (helper = helpers.user) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.user); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "/";
+  if (helper = helpers.list) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.list); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "/";
+  if (helper = helpers.page) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.page); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "\" id=\"page ";
+  if (helper = helpers.page) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.page); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "\">";
+  if (helper = helpers.page) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.page); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</a></li>\n              ";
+  return buffer;
+  }
+
+  buffer += "<section>\n  <div class=\"row\" style=\"margin-bottom:2%;\">\n    <h1 class=\"text-center\">Record Pool</h1>\n  </div>\n\n  <div class=\"row rec-img\">\n    <img src=\"images/Record2.png\" alt=\"Record Image\">\n  </div>\n\n  <div class=\"row\">\n      <h4 class=\"text-center\">Viewing "
+    + escapeExpression(((stack1 = ((stack1 = (depth0 && depth0.array)),stack1 == null || stack1 === false ? stack1 : stack1.username)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "'s selections</h4> \n  </div>\n      \n  <div class=\"row\">\n    <div class=\"col-xs-12 col-md-4\">\n        <div>\n          <div class=\"form-group\">\n            <label for=\"user-id-input\">Discogs Username</label>\n            <input type=\"user-id\" id=\"add-username\" class=\"form-control\" placeholder=\"Enter Discogs Username\">\n          </div>\n          <input type=\"image\" id=\"username-submit\" src=\"images/cassette-btn.png\" alt=\"Submit\">\n          <br>\n          <label for=\"image\">&nbsp;Submit</label>\n        </div>\n        <ul class=\"nav nav-pills\">\n          <li class=\"dropdown\">\n            <a class=\"dropdown-toggle\" data-toggle=\"dropdown\" href=\"#\" style=\"margin-top:50%;\">\n              Users<span class=\"caret\"></span>\n            </a>\n            <ul class=\"dropdown-menu\" role=\"menu\">\n              <li>Christian</li>\n              <li>Jesse</li>\n              <li>Kyle</li>\n            </ul>\n          </li>\n        </ul>\n      </div>  \n      \n      <div class=\"col-xs-12 col-md-8\">\n        \n        <div class=\"text-center\">\n          <ul class=\"nav nav-pills center-pills\" id=\"want-collection\">\n            <li><a href=\"#\" id=\"wantlist\">wantlist</a></li>\n            <li><a href=\"#\" id=\"collection\">collection</a></li>\n          </ul>\n  \n          <ul class=\"pagination\">\n            <li><a href=\"#/";
+  if (helper = helpers.user) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.user); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "/";
+  if (helper = helpers.list) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.list); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "/";
+  if (helper = helpers.first) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.first); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "\">&laquo;</a></li>\n            ";
+  stack1 = helpers.each.call(depth0, (depth0 && depth0.pages), {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n            <li><a href=\"#/";
+  if (helper = helpers.user) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.user); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "/";
+  if (helper = helpers.list) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.list); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "/";
+  if (helper = helpers.last) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.last); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "\">&raquo;</a></li>\n          </ul>\n        </div>\n\n        <div id=\"youtube-container\">\n          <div class=\"row\" id=\"youtube-vids\">\n            ";
+  stack1 = helpers.each.call(depth0, (depth0 && depth0.releases), {hash:{},inverse:self.noop,fn:self.program(3, program3, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n          </div>\n        </div>\n          <div>\n            <ul class=\"pagination\">\n              <li><a href=\"#/";
+  if (helper = helpers.user) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.user); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "/";
+  if (helper = helpers.list) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.list); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "/";
+  if (helper = helpers.first) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.first); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "\">&laquo;</a></li>\n              ";
+  stack1 = helpers.each.call(depth0, (depth0 && depth0.pages), {hash:{},inverse:self.noop,fn:self.program(5, program5, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n              <li><a href=\"#/";
+  if (helper = helpers.user) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.user); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "/";
+  if (helper = helpers.list) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.list); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "/";
+  if (helper = helpers.last) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.last); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "\">&raquo;</a></li>\n            </ul>\n          </div>\n      </div>\n    \n    </div>\n</section>\n";
   return buffer;
   });
 
