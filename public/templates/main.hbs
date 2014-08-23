@@ -48,23 +48,11 @@
 
         <div id="youtube-vids">
           <div class="row">
+            {{#each array}}
             <div class="col-md-4">
-             {{#each array}}
              <div class="js-lazyYT" data-youtube-id={{youtube}}></div>
              <div class="link"><a href="http://www.discogs.com/release/{{discogs}}">{{title}} by {{artist}}</a></div>
-             {{/each}}
-            </div>
-            <div class="col-md-4">
-             {{#each array}}
-             <div class="js-lazyYT" data-youtube-id={{youtube}}></div>
-             <div class="link"><a href="http://www.discogs.com/release/{{discogs}}">{{title}} by {{artist}}</a></div>
-             {{/each}}
-            </div>
-            <div class="col-md-4">
-             {{#each array}}
-             <div class="js-lazyYT" data-youtube-id={{youtube}}></div>
-             <div class="link"><a href="http://www.discogs.com/release/{{discogs}}">{{title}} by {{artist}}</a></div>
-             {{/each}}
+            </div>{{/each}}
           </div>
         </div>
       </div> 
