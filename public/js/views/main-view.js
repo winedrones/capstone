@@ -101,7 +101,7 @@ var MainView = Backbone.View.extend({
            
         }).fail(function() {
           console.log( "get page "+page+" of "+user+"'s "+list+" from discogs failed" );
-        });
+          });
     };
 
     var getVids = function(arr){  //grabs youtube video per release in wantArr from getIds fn
@@ -113,11 +113,9 @@ var MainView = Backbone.View.extend({
          if (index == arr.length-1){
          self.render({releases:self.records.releases, pages:self.records.pages, user:self.userName, list:self.currentList, first:1, last:self.records.pages.length});
          }
-      }); 
-    });
-  };
-
-
+        }); 
+      });
+    };
   getIds(list, getVids, page);
   },
 
