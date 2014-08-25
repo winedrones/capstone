@@ -1,96 +1,78 @@
-      <header>
+<section>
+  <div class="row" style="margin-bottom:2%;">
+    <h1 class="text-center">Record Pool</h1>
+  </div>
+
+  <div class="row rec-img">
+    <img src="images/Record2.png" alt="Record Image">
+  </div>
+
+  <div class="row">
+      <h4 class="text-center">Viewing {{user}}'s selections</h4> 
+  </div>
+      
+  <div class="row">
+    <div class="col-xs-12 col-md-4">
+        <div>
+          <div class="username-form">
+            <label for="user-id-input">Discogs Username</label>
+            <input type="user-id" id="username" class="form-control" placeholder="Enter Discogs Username">
+          </div>
+          <input type="image" id="username-submit" src="images/cassette-btn.png" alt="Submit">
+          <br>
+          <label for="image">&nbsp;Submit</label>
+        </div>
+        <ul class="nav nav-pills">
+          <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="margin-top:50%;">
+              Users<span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu" role="menu">
+              <li>Christian</li>
+              <li>Jesse</li>
+              <li>Kyle</li>
+            </ul>
+          </li>
+        </ul>
+      </div>  
+      
+      <div class="col-xs-12 col-md-8">
         
-        <div class="row" style="margin-bottom:5%;">
-          <h1 class="text-center">Record Pool</h1>
-        </div>
-
-        <div class="row">
-          
-          <div class="col-md-3">
-            <div>
-              <div class="username-form">
-                <label for="user-id-input">Discogs Username</label>
-                <input type="user-id" id="username" class="form-control" placeholder="Enter Discogs Username">
-              </div>
-              <button id="username-submit" class="btn btn-default">Submit</button>
-            </div>
-          </div>
-          
-          <div class="col-md-6">
-            <h4 class="text-center">Viewing {{user}}'s selections</h4> 
-            <div class="text-center">
-              <ul class="nav nav-pills center-pills">
-                <li><a href="#" id="wantlist">wantlist</a></li>
-                <li><a href="#" id="collection">collection</a></li>
-              </ul>
-              <ul class="pagination">
-                <li><a href="#/{{user}}/{{list}}/{{first}}">&laquo;</a></li>
-                {{#each pages}}
-                <li><a href="#/{{user}}/{{list}}/{{page}}" id="page {{page}}">{{page}}</a></li>
-                {{/each}}
-                <li><a href="#/{{user}}/{{list}}/{{last}}">&raquo;</a></li>
-              </ul>
-            </div>
-          </div>
-          
-          <div class="col-md-3" style="margin-top:7%;">
-            <h4 class="text-center">Notes</h4>
-          </div>
-        </div>
-
-      </header>
-
-      <section>
-        <div class="row">
-         
-         <div id="userlist"class="col-md-3">
-          <ul class="nav nav-pills">
-            <li class="dropdown">
-              <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="margin-top:50%;">
-                Users<span class="caret"></span>
-              </a>
-              <ul class="dropdown-menu" role="menu">
-                <li>Christian</li>
-                <li>Jesse</li>
-                <li>Kyle</li>
-              </ul>
-            </li>
+        <div class="text-center">
+          <ul class="nav nav-pills center-pills" id="want-collection">
+            <li><a href="#" id="wantlist">wantlist</a></li>
+            <li><a href="#" id="collection">collection</a></li>
           </ul>
-         </div>
+  
+          <ul class="pagination">
+            <li><a href="#/{{user}}/{{list}}/{{first}}">&laquo;</a></li>
+            {{#each pages}}
+            <li><a href="#/{{user}}/{{list}}/{{page}}" id="page {{page}}">{{page}}</a></li>
+            {{/each}}
+            <li><a href="#/{{user}}/{{list}}/{{last}}">&raquo;</a></li>
+          </ul>
+        </div>
 
-         <div class="col-md-6" id="youtube-vids">
-         </div>
-         <div>
-              </ul>
-              <ul class="pagination">
-                <li><a href="#/{{user}}/{{list}}/{{first}}">&laquo;</a></li>
-                {{#each pages}}
-                <li><a href="#/{{user}}/{{list}}/{{page}}" id="page {{page}}">{{page}}</a></li>
-                {{/each}}
-                <li><a href="#/{{user}}/{{list}}/{{last}}">&raquo;</a></li>
-              </ul>
-          </div>
-
-         <div class="col-md-3">
-          <div class="panel panel-default">
-            <!-- Default panel contents -->
-            <div class="panel-heading">User Comments</div>
-            <div class="panel-body">
-              <p>...</p>
+        <div id="youtube-container">
+          <div class="row" id="youtube-vids">
+            {{#each releases}}
+            <div class="col-md-4">
+              <div class="js-lazyYT" data-youtube-id={{youtube}} data-width="210" data-height="157"></div>
+              <div class="link"><a href="http://www.discogs.com/release/{{discogs}}">{{title}} by {{artist}}</a></div>
             </div>
-
-            <!-- List group -->
-            <ul class="list-group">
-              <li class="list-group-item">Great track</li>
-              <li class="list-group-item">Catchy hook</li>
-              <li class="list-group-item">Sick riffs</li>   
-              <li class="list-group-item">I want to live in this song!</li>
+            {{/each}}
+          </div>
+        </div>
+          <div>
+            <ul class="pagination">
+              <li><a href="#/{{user}}/{{list}}/{{first}}">&laquo;</a></li>
+              {{#each pages}}
+              <li><a href="#/{{user}}/{{list}}/{{page}}" id="page {{page}}">{{page}}</a></li>
+              {{/each}}
+              <li><a href="#/{{user}}/{{list}}/{{last}}">&raquo;</a></li>
             </ul>
           </div>
-          <textarea class="form-control" rows="3"></textarea>
-          <button type="submit" class="btn btn-default">Submit Comments</button>
-         </div>
-        </div>
-      </section>
-
-</div>
+      </div>
+    
+    </div>
+</section>

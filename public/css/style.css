@@ -1,10 +1,57 @@
-.center-pills { 
-	display: inline-block; 
+/*.center-pills { 
+  display: inline-block; 
+}*/
+
+
+#username-submit {
+  width: 25%;
+  margin-top: 2%;
+}
+
+.username-form {
+  width: 50%;
+  margin: auto;
+}
+
+.gatekeeper {
+  width: 50%;
+  margin: auto;
+  margin-top: 2%;
+  margin-bottom: 2%;
+}
+
+.pagination {
+  margin-right: 53%;
+/*  margin-top: 2%;
+  margin-bottom: 2%;*/
+}
+
+#want-collection {
+  margin-right: 53%;
+}
+
+.rec-img {
+  margin-bottom: 2%;
+}
+
+.rec-img img {
+  width: 16%;
+  margin-left: 42%;
+  margin-right: 42%;
 }
 
 #userlist .dropdown-menu li {
-	padding-left: 10%;
-	padding-bottom: 6%;
+  padding-left: 10%;
+  padding-bottom: 6%;
+}
+
+#want-collection {
+  padding-top: 5%;
+  margin-bottom: 5%;
+}
+
+#youtube-vids {
+  padding-bottom: 4%;
 }
 
 .spinner {
@@ -36,3 +83,4 @@
     opacity: 0;
   }
 }
+Status API Training Shop Blog About © 2014 GitHub, Inc. Terms Privacy Security Contact 
