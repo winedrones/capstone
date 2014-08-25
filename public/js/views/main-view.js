@@ -17,167 +17,132 @@ var MainView = Backbone.View.extend({
   events: {
     'click #username-submit': 'addUsername',
     'click #wantlist' : 'renderWants',
-    'click #collection' : 'renderCollection',
-    'click #init-username-submit' : 'addUsername'
-    //'click #init-username-submit' : 'authenticate'
+    'click #collection' : 'renderCollection'
   },
 
   renderWants: function(){
-    this.discogs(this.userName, 1);
+    this.currentPage = 1;
+    this.currentList = "wants";
+    this.discogs(this.userName, this.currentList, this.currentPage);
+    
   },
 
   renderCollection: function(){
-    this.discollection(this.userName, 1);
+    this.currentPage = 1;
+    this.currentList = "collection";
+    this.discogs(this.userName, this.currentList, this.currentPage);
   },
-
-
-  addUsername: function () {
-    console.log("addusername.this=",this);
-    var $usernameInput = $('.form-group').find('#add-username');
-    this.records = {wants:[], collection:[]};
-    this.userName = $usernameInput.val();
-    var usernameInput = $usernameInput.val();
-    this.discogs(this.userName, 1);
-    this.records.wants.username = this.userName;
-    this.records.collection.username = this.userName;
-    
-    var date = Date.now();
-    var collectionFromInput = {
-      user: usernameInput,
-      creationDate: date,
-      id: 'user' + date
-    };
-    this.collection.create( collectionFromInput, {validate: true});
-    console.log(this.collection.models);
-},
-
-  records: {wants:[], collection:[]},
-
+  records: {releases:[], pages:[]},
+  
   //testThing: {wants:[{discogs: 5719574, youtube: "QLnTRwpmCGs"}, {discogs: 4368235, youtube: "zH1VeQFBfW8"}]},
 
-  //authenticate: function() {
+  addUsername: function() {
       var self = this;
-      var $user = $('.login-form').find('#username');
-      this.userName = $user.val();
-      $.getJSON('http://api.discogs.com/users/'+this.userName+'/wants?page=1&callback=?')
+      var $user = $('.username-form').find('#username');
+      var userName = $user.val();
+      $.getJSON('http://api.discogs.com/users/'+userName+'?callback=?')
         .done(function(data){
-          console.log("success");
-          if (data.meta.status == 200){
-            self.discogs(self.userName, 1);
-            self.records.wants.username = self.userName;
-            self.records.collection.username = self.userName;
+         // console.log("success");
+        if (data.data.num_wantlist == undefined){
+            alert("Please got to discogs.com and share (and/or) populate your wantlist to use this site!");
+          }else{
+            self.userName = userName;
+            self.currentList = "wants";
+            self.currentPage = 1;
+            self.discogs(self.userName, self.currentList, self.currentPage);
+            
 
           var date = Date.now();
           var collectionFromInput = {
             user: usernameInput,
             creationDate: date,
             id: 'user' + date
-    };
-    this.collection.create( collectionFromInput, {validate: true});
-    console.log(this.collection.models);
+          };
+          this.collection.create( collectionFromInput, {validate: true});
+          console.log(this.collection.models);
           }
-        }).fail(function() {
-          console.log("discogs username failed");
+        }).fail(function(event, jqxhr, exception) {
+              if (jqxhr.status == 404) {
+              console.log("user doesn't exist");   
+              }
         });
   },
 
-  initialize: function () {
-
-  $(this.el).html(loginHTML());
+  initialize: function (options) {
+    console.log("intialize function ran");
+    if (options.user == undefined){
+      $(this.el).html(loginHTML());
+    }else{
+      this.userName = options.user;
+      this.currentList = options.list;
+      this.currentPage = options.page;
+      this.discogs(this.userName, this.currentList, this.currentPage);
+    }
 
   },
 
-  discogs: function(user, page){
+  discogs: function(user, list, page){ //list needs to be "wants" or "collection"
+    this.records = {releases:[], pages:[]};
+    //console.log("from discogsfn top - list = "+list);
     var self = this;
-  	var wantList = {};
-  	var pages = 1;
-    var wantArr = [];
-    var animationHtml = "<div class='spinner'></div><div>Please wait while we grab a bunch of jams...</div>";
+    //var wantList = {};
+    var pages = undefined;
+    var relArr = [];
+    var animationHtml = "<div class='spinner'></div>";
     $("#youtube-vids").replaceWith(animationHtml); //loading status thing
 
-    var getIds = function(callback, page){ //gets every release id in users wantlist and passes as an array to getVids function
-      $.getJSON('http://api.discogs.com/users/'+user+'/wants?page='+page+'&callback=?')
-        .done(function(data){ //this returns JSONP handled in a callback. Need to traverse an extra data. property to get to the stuff we care about
-          console.log(data);
-          var nextPage = page+1;
-          wantList = data; 
-          pages = wantList.data.pagination.pages;
-          wantList.data.wants.forEach(function (item, index){ //this grabs the discogs id of every release in the discogs wantlist
-            wantArr.push(item.id);
+    var getIds = function(list, callback, page){ //gets every release id in users wantlist and passes as an array to getVids function
+      if (list == "wants"){
+        var apiCall = 'http://api.discogs.com/users/'+user+'/wants?page='+page+'&callback=?';
+      }else if (list == "collection"){
+        var apiCall = 'http://api.discogs.com/users/'+user+'/collection/folders/0/releases?page='+page+'&callback=?';
+      }
+      self.currentPage = page;
+      //console.log("api call = "+apiCall);
+      $.getJSON(apiCall)
+        .done(function(data){ //this returns JSONP handled in a callback. Need to traverse an extra data (data.data). property to get to the stuff we care about
+          var data = data;
+          if(list == "wants"){
+            var arr = data.data.wants;
+          }else if(list == "collection"){
+            var arr = data.data.releases;
+          } 
+          pages = data.data.pagination.pages;
+          arr.forEach(function (item, index){ //this grabs the discogs id of every release in the array
+            relArr.push(item.id);
           });
-          if (nextPage != pages+1)
-            {getIds(getVids, nextPage);}
-          else
-  	       callback(wantArr);
-  	    }).fail(function() {
-          console.log( "get page "+page+" of "+user+"'s wantlist from discogs failed" );
+          for (var i = 0; i<pages; i++){ //fills the pages array with the api returned pagination numbers
+            self.records.pages.push({page:i+1, user:user, list:list});
+          };           
+            callback(relArr);
+           
+        }).fail(function() {
+          console.log( "get page "+page+" of "+user+"'s "+list+" from discogs failed" );
         });
     };
 
-  	var getVids = function(arr){  //grabs youtube video per release in wantArr from getIds fn
-  		arr.forEach(function (item, index){
-  			$.getJSON('http://api.discogs.com/releases/'+item+'?callback=?').done(function(rels){
-      		if (rels.data.videos){
-      		self.records.wants.push({youtube:rels.data.videos[0].uri.slice(-11), discogs:item, artist:rels.data.artists[0].name, title:rels.data.title}); //this adds objects for everything fetched from discogs to the records array
+    var getVids = function(arr){  //grabs youtube video per release in wantArr from getIds fn
+      arr.forEach(function (item, index){
+        $.getJSON('http://api.discogs.com/releases/'+item+'?callback=?').done(function(rels){
+          if (rels.data.videos){
+          self.records.releases.push({youtube:rels.data.videos[0].uri.slice(-11), discogs:item, artist:rels.data.artists[0].name, title:rels.data.title}); //this adds objects for everything fetched from discogs to the records array
          }
          if (index == arr.length-1){
-         self.render({array:self.records.wants});
+         self.render({releases:self.records.releases, pages:self.records.pages, user:self.userName, list:self.currentList, first:1, last:self.records.pages.length});
          }
-  		});	
-  	});
+      }); 
+    });
   };
 
 
-	getIds(getVids, page);
+  getIds(list, getVids, page);
   },
 
-  discollection: function(user, page){
-
-    var self = this;
-    var list = {};
-    var pages = 1;
-    var colArr = [];
-    var animationHtml = "<div class='spinner'>Please wait while we grab a bunch of jams...</div><div>Please wait while we grab a bunch of jams...</div>";
-    $("#youtube-vids").replaceWith(animationHtml); //loading status thing
-
-  var getIds = function(callback, page){//gets every release id in users all collections folder and passes as an array to getVids function
-  $.getJSON('http://api.discogs.com/users/'+user+'/collection/folders/0/releases?page='+page+'&callback=?').done(function(data){ //this returns JSONP handled in a callback. Need to traverse an extra data. property to get to the stuff we care about
-    var nextPage = page+1;
-      list = data; 
-      pages = list.data.pagination.pages;
-      list.data.releases.forEach(function (item, index){ //this grabs the discogs id of every release in the discogs wantlist
-        colArr.push(item.id);
-        });
-      //console.log(page+" of "+pages+" next page is "+nextPage);
-      if (nextPage != pages+1)
-        {getIds(getVids, nextPage);}
-      else
-       callback(colArr);
-  });
-};
-
-  var getVids = function(arr){  //grabs youtube video per release in wantArr from getIds fn
-    arr.forEach(function (item, index){
-      $.getJSON('http://api.discogs.com/releases/'+item+'?callback=?').done(function(rels){
-        if (rels.data.videos){
-        self.records.collection.push({youtube:rels.data.videos[0].uri.slice(-11), discogs:item, artist:rels.data.artists[0].name, title:rels.data.title}); //this adds objects for everything fetched from discogs to the records array
-       }
-       if (index == arr.length-1){
-       self.render({array:self.records.collection});
-       }
-    }); 
-  });
-};
-
-
-  getIds(getVids, page);
-  },
     
 
   render: function (template) {
     $(this.el).html(htmlTemplate(template));
     $('.js-lazyYT').lazyYT(); 
-    console.log("viewing "+this.records.wants.username+"'s selections");
    // $(this.el).html(myTemplate({entries:[{youtube: data, discogs: data},{...}]}))
   }
 
