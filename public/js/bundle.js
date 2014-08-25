@@ -2523,7 +2523,7 @@ function stringify(obj, fn, spaces, decycle) {
 stringify.getSerialize = getSerialize;
 
 },{}],"/Users/jmej/pcs/capstone/capstone/node_modules/request/node_modules/mime-types/lib/custom.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
+module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
   "text/jade": [
     "jade"
   ],
@@ -2629,7 +2629,7 @@ function define(json) {
 }
 
 },{"./custom.json":"/Users/jmej/pcs/capstone/capstone/node_modules/request/node_modules/mime-types/lib/custom.json","./mime.json":"/Users/jmej/pcs/capstone/capstone/node_modules/request/node_modules/mime-types/lib/mime.json","./node.json":"/Users/jmej/pcs/capstone/capstone/node_modules/request/node_modules/mime-types/lib/node.json"}],"/Users/jmej/pcs/capstone/capstone/node_modules/request/node_modules/mime-types/lib/mime.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
+module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
   "application/1d-interleaved-parityfec": [],
   "application/3gpp-ims+xml": [],
   "application/activemessage": [],
@@ -5948,7 +5948,7 @@ module.exports=module.exports=module.exports=module.exports=module.exports=modul
 }
 
 },{}],"/Users/jmej/pcs/capstone/capstone/node_modules/request/node_modules/mime-types/lib/node.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
+module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
   "text/vtt": [
     "vtt"
   ],
@@ -9412,16 +9412,17 @@ var Router = Backbone.Router.extend({
   },
   	main: function () {
     this.mainView = new MainView({user:undefined, list:"wants",page:1});
-    //this.mainView.render(); 
+    this.mainView.login({user:undefined, list:"wants",page:1}); 
   },
     wantlist: function (user, page) {
     this.mainView = new MainView({user:user, list:"wants",page:page});
+    this.mainView.discogs(this.mainView.userName, this.mainView.currentList, this.mainView.currentPage);
     //this.mainView.discgs(user, "wants", page); 
 
   },
     collection: function (user, page) {
     this.mainView = new MainView({user: user, list:"collection",page:page});
-    //this.mainView.discollection(user, "wants", page); 
+    this.mainView.discogs(this.mainView.userName, this.mainView.currentList, this.mainView.currentPage);
   }
 });
 
@@ -9447,23 +9448,23 @@ var MainView = Backbone.View.extend({
   el: '#my-app',
 
   events: {
-    'click #username-submit': 'addUsername',
-    'click #wantlist' : 'renderWants',
-    'click #collection' : 'renderCollection'
+    'click #username-submit': 'addUsername'
+    // 'click #wantlist' : 'renderWants',
+    // 'click #collection' : 'renderCollection'
   },
 
-  renderWants: function(){
-    this.currentPage = 1;
-    this.currentList = "wants";
-    this.discogs(this.userName, this.currentList, this.currentPage);
+  // renderWants: function(){
+  //   this.currentPage = 1;
+  //   this.currentList = "wants";
+  //   this.discogs(this.userName, this.currentList, this.currentPage);
     
-  },
+  // },
 
-  renderCollection: function(){
-    this.currentPage = 1;
-    this.currentList = "collection";
-    this.discogs(this.userName, this.currentList, this.currentPage);
-  },
+  // renderCollection: function(){
+  //   this.currentPage = 1;
+  //   this.currentList = "collection";
+  //   this.discogs(this.userName, this.currentList, this.currentPage);
+  // },
 
 
   records: {releases:[], pages:[]},
@@ -9493,7 +9494,15 @@ var MainView = Backbone.View.extend({
   },
 
   initialize: function (options) {
-    console.log("intialize function ran");
+      this.userName = options.user;
+      this.currentList = options.list;
+      this.currentPage = options.page;
+      //this.discogs(this.userName, this.currentList, this.currentPage);
+
+  },
+
+  login: function (options) {
+    console.log("login method ran");
     if (options.user == undefined){
       $(this.el).html(loginHTML());
     }else{
@@ -9675,7 +9684,23 @@ function program5(depth0,data) {
   if (helper = helpers.user) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.user); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
-    + "'s selections</h4> \n  </div>\n      \n  <div class=\"row\">\n    <div class=\"col-xs-12 col-md-4\">\n        <div>\n          <div class=\"username-form\">\n            <label for=\"user-id-input\">Discogs Username</label>\n            <input type=\"user-id\" id=\"username\" class=\"form-control\" placeholder=\"Enter Discogs Username\">\n          </div>\n          <input type=\"image\" id=\"username-submit\" src=\"images/cassette-btn.png\" alt=\"Submit\">\n          <br>\n          <label for=\"image\">&nbsp;Submit</label>\n        </div>\n        <ul class=\"nav nav-pills\">\n          <li class=\"dropdown\">\n            <a class=\"dropdown-toggle\" data-toggle=\"dropdown\" href=\"#\" style=\"margin-top:50%;\">\n              Users<span class=\"caret\"></span>\n            </a>\n            <ul class=\"dropdown-menu\" role=\"menu\">\n              <li>Christian</li>\n              <li>Jesse</li>\n              <li>Kyle</li>\n            </ul>\n          </li>\n        </ul>\n      </div>  \n      \n      <div class=\"col-xs-12 col-md-8\">\n        \n        <div class=\"text-center\">\n          <ul class=\"nav nav-pills center-pills\" id=\"want-collection\">\n            <li><a href=\"#\" id=\"wantlist\">wantlist</a></li>\n            <li><a href=\"#\" id=\"collection\">collection</a></li>\n          </ul>\n  \n          <ul class=\"pagination\">\n            <li><a href=\"#/";
+    + "'s selections</h4> \n  </div>\n      \n  <div class=\"row\">\n    <div class=\"col-xs-12 col-md-4\">\n        <div>\n          <div class=\"username-form\">\n            <label for=\"user-id-input\">Discogs Username</label>\n            <input type=\"user-id\" id=\"username\" class=\"form-control\" placeholder=\"Enter Discogs Username\">\n          </div>\n          <input type=\"image\" id=\"username-submit\" src=\"images/cassette-btn.png\" alt=\"Submit\">\n          <br>\n          <label for=\"image\">&nbsp;Submit</label>\n        </div>\n        <ul class=\"nav nav-pills\">\n          <li class=\"dropdown\">\n            <a class=\"dropdown-toggle\" data-toggle=\"dropdown\" href=\"#\" style=\"margin-top:50%;\">\n              Users<span class=\"caret\"></span>\n            </a>\n            <ul class=\"dropdown-menu\" role=\"menu\">\n              <li>Christian</li>\n              <li>Jesse</li>\n              <li>Kyle</li>\n            </ul>\n          </li>\n        </ul>\n      </div>  \n      \n      <div class=\"col-xs-12 col-md-8\">\n        \n        <div class=\"text-center\">\n          <ul class=\"nav nav-pills center-pills\" id=\"want-collection\">\n            <li><a href=\"#/";
+  if (helper = helpers.user) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.user); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "/wants/";
+  if (helper = helpers.first) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.first); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "\" id=\"wantlist\">wantlist</a></li>\n            <li><a href=\"#/";
+  if (helper = helpers.user) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.user); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "/collection/";
+  if (helper = helpers.first) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.first); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "\" id=\"collection\">collection</a></li>\n          </ul>\n  \n          <ul class=\"pagination\">\n            <li><a href=\"#/";
   if (helper = helpers.user) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.user); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)

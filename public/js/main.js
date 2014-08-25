@@ -11,16 +11,17 @@ var Router = Backbone.Router.extend({
   },
   	main: function () {
     this.mainView = new MainView({user:undefined, list:"wants",page:1});
-    //this.mainView.render(); 
+    this.mainView.login({user:undefined, list:"wants",page:1}); 
   },
     wantlist: function (user, page) {
     this.mainView = new MainView({user:user, list:"wants",page:page});
+    this.mainView.discogs(this.mainView.userName, this.mainView.currentList, this.mainView.currentPage);
     //this.mainView.discgs(user, "wants", page); 
 
   },
     collection: function (user, page) {
     this.mainView = new MainView({user: user, list:"collection",page:page});
-    //this.mainView.discollection(user, "wants", page); 
+    this.mainView.discogs(this.mainView.userName, this.mainView.currentList, this.mainView.currentPage);
   }
 });
 

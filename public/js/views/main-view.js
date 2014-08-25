@@ -15,23 +15,23 @@ var MainView = Backbone.View.extend({
   el: '#my-app',
 
   events: {
-    'click #username-submit': 'addUsername',
-    'click #wantlist' : 'renderWants',
-    'click #collection' : 'renderCollection'
+    'click #username-submit': 'addUsername'
+    // 'click #wantlist' : 'renderWants',
+    // 'click #collection' : 'renderCollection'
   },
 
-  renderWants: function(){
-    this.currentPage = 1;
-    this.currentList = "wants";
-    this.discogs(this.userName, this.currentList, this.currentPage);
+  // renderWants: function(){
+  //   this.currentPage = 1;
+  //   this.currentList = "wants";
+  //   this.discogs(this.userName, this.currentList, this.currentPage);
     
-  },
+  // },
 
-  renderCollection: function(){
-    this.currentPage = 1;
-    this.currentList = "collection";
-    this.discogs(this.userName, this.currentList, this.currentPage);
-  },
+  // renderCollection: function(){
+  //   this.currentPage = 1;
+  //   this.currentList = "collection";
+  //   this.discogs(this.userName, this.currentList, this.currentPage);
+  // },
 
 
   records: {releases:[], pages:[]},
@@ -61,7 +61,15 @@ var MainView = Backbone.View.extend({
   },
 
   initialize: function (options) {
-    console.log("intialize function ran");
+      this.userName = options.user;
+      this.currentList = options.list;
+      this.currentPage = options.page;
+      //this.discogs(this.userName, this.currentList, this.currentPage);
+
+  },
+
+  login: function (options) {
+    console.log("login method ran");
     if (options.user == undefined){
       $(this.el).html(loginHTML());
     }else{
