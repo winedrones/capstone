@@ -1,4 +1,4 @@
-(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({"/Users/jmej/pcs/capstone/capstone/node_modules/backbone/backbone.js":[function(require,module,exports){
+(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({"/Users/user1/Desktop/capstone/node_modules/backbone/backbone.js":[function(require,module,exports){
 //     Backbone.js 1.1.2
 
 //     (c) 2010-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
@@ -1608,7 +1608,7 @@
 
 }));
 
-},{"underscore":"/Users/jmej/pcs/capstone/capstone/node_modules/underscore/underscore.js"}],"/Users/jmej/pcs/capstone/capstone/node_modules/handlebars/dist/cjs/handlebars.runtime.js":[function(require,module,exports){
+},{"underscore":"/Users/user1/Desktop/capstone/node_modules/underscore/underscore.js"}],"/Users/user1/Desktop/capstone/node_modules/handlebars/dist/cjs/handlebars.runtime.js":[function(require,module,exports){
 "use strict";
 /*globals Handlebars: true */
 var base = require("./handlebars/base");
@@ -1641,7 +1641,7 @@ var Handlebars = create();
 Handlebars.create = create;
 
 exports["default"] = Handlebars;
-},{"./handlebars/base":"/Users/jmej/pcs/capstone/capstone/node_modules/handlebars/dist/cjs/handlebars/base.js","./handlebars/exception":"/Users/jmej/pcs/capstone/capstone/node_modules/handlebars/dist/cjs/handlebars/exception.js","./handlebars/runtime":"/Users/jmej/pcs/capstone/capstone/node_modules/handlebars/dist/cjs/handlebars/runtime.js","./handlebars/safe-string":"/Users/jmej/pcs/capstone/capstone/node_modules/handlebars/dist/cjs/handlebars/safe-string.js","./handlebars/utils":"/Users/jmej/pcs/capstone/capstone/node_modules/handlebars/dist/cjs/handlebars/utils.js"}],"/Users/jmej/pcs/capstone/capstone/node_modules/handlebars/dist/cjs/handlebars/base.js":[function(require,module,exports){
+},{"./handlebars/base":"/Users/user1/Desktop/capstone/node_modules/handlebars/dist/cjs/handlebars/base.js","./handlebars/exception":"/Users/user1/Desktop/capstone/node_modules/handlebars/dist/cjs/handlebars/exception.js","./handlebars/runtime":"/Users/user1/Desktop/capstone/node_modules/handlebars/dist/cjs/handlebars/runtime.js","./handlebars/safe-string":"/Users/user1/Desktop/capstone/node_modules/handlebars/dist/cjs/handlebars/safe-string.js","./handlebars/utils":"/Users/user1/Desktop/capstone/node_modules/handlebars/dist/cjs/handlebars/utils.js"}],"/Users/user1/Desktop/capstone/node_modules/handlebars/dist/cjs/handlebars/base.js":[function(require,module,exports){
 "use strict";
 var Utils = require("./utils");
 var Exception = require("./exception")["default"];
@@ -1822,7 +1822,7 @@ exports.log = log;var createFrame = function(object) {
   return obj;
 };
 exports.createFrame = createFrame;
-},{"./exception":"/Users/jmej/pcs/capstone/capstone/node_modules/handlebars/dist/cjs/handlebars/exception.js","./utils":"/Users/jmej/pcs/capstone/capstone/node_modules/handlebars/dist/cjs/handlebars/utils.js"}],"/Users/jmej/pcs/capstone/capstone/node_modules/handlebars/dist/cjs/handlebars/exception.js":[function(require,module,exports){
+},{"./exception":"/Users/user1/Desktop/capstone/node_modules/handlebars/dist/cjs/handlebars/exception.js","./utils":"/Users/user1/Desktop/capstone/node_modules/handlebars/dist/cjs/handlebars/utils.js"}],"/Users/user1/Desktop/capstone/node_modules/handlebars/dist/cjs/handlebars/exception.js":[function(require,module,exports){
 "use strict";
 
 var errorProps = ['description', 'fileName', 'lineNumber', 'message', 'name', 'number', 'stack'];
@@ -1851,7 +1851,7 @@ function Exception(message, node) {
 Exception.prototype = new Error();
 
 exports["default"] = Exception;
-},{}],"/Users/jmej/pcs/capstone/capstone/node_modules/handlebars/dist/cjs/handlebars/runtime.js":[function(require,module,exports){
+},{}],"/Users/user1/Desktop/capstone/node_modules/handlebars/dist/cjs/handlebars/runtime.js":[function(require,module,exports){
 "use strict";
 var Utils = require("./utils");
 var Exception = require("./exception")["default"];
@@ -1989,7 +1989,7 @@ exports.program = program;function invokePartial(partial, name, context, helpers
 exports.invokePartial = invokePartial;function noop() { return ""; }
 
 exports.noop = noop;
-},{"./base":"/Users/jmej/pcs/capstone/capstone/node_modules/handlebars/dist/cjs/handlebars/base.js","./exception":"/Users/jmej/pcs/capstone/capstone/node_modules/handlebars/dist/cjs/handlebars/exception.js","./utils":"/Users/jmej/pcs/capstone/capstone/node_modules/handlebars/dist/cjs/handlebars/utils.js"}],"/Users/jmej/pcs/capstone/capstone/node_modules/handlebars/dist/cjs/handlebars/safe-string.js":[function(require,module,exports){
+},{"./base":"/Users/user1/Desktop/capstone/node_modules/handlebars/dist/cjs/handlebars/base.js","./exception":"/Users/user1/Desktop/capstone/node_modules/handlebars/dist/cjs/handlebars/exception.js","./utils":"/Users/user1/Desktop/capstone/node_modules/handlebars/dist/cjs/handlebars/utils.js"}],"/Users/user1/Desktop/capstone/node_modules/handlebars/dist/cjs/handlebars/safe-string.js":[function(require,module,exports){
 "use strict";
 // Build out our basic SafeString type
 function SafeString(string) {
@@ -2001,7 +2001,7 @@ SafeString.prototype.toString = function() {
 };
 
 exports["default"] = SafeString;
-},{}],"/Users/jmej/pcs/capstone/capstone/node_modules/handlebars/dist/cjs/handlebars/utils.js":[function(require,module,exports){
+},{}],"/Users/user1/Desktop/capstone/node_modules/handlebars/dist/cjs/handlebars/utils.js":[function(require,module,exports){
 "use strict";
 /*jshint -W004 */
 var SafeString = require("./safe-string")["default"];
@@ -2078,15 +2078,15 @@ exports.escapeExpression = escapeExpression;function isEmpty(value) {
 }
 
 exports.isEmpty = isEmpty;
-},{"./safe-string":"/Users/jmej/pcs/capstone/capstone/node_modules/handlebars/dist/cjs/handlebars/safe-string.js"}],"/Users/jmej/pcs/capstone/capstone/node_modules/handlebars/runtime.js":[function(require,module,exports){
+},{"./safe-string":"/Users/user1/Desktop/capstone/node_modules/handlebars/dist/cjs/handlebars/safe-string.js"}],"/Users/user1/Desktop/capstone/node_modules/handlebars/runtime.js":[function(require,module,exports){
 // Create a simple path alias to allow browserify to resolve
 // the runtime on a supported path.
 module.exports = require('./dist/cjs/handlebars.runtime');
 
-},{"./dist/cjs/handlebars.runtime":"/Users/jmej/pcs/capstone/capstone/node_modules/handlebars/dist/cjs/handlebars.runtime.js"}],"/Users/jmej/pcs/capstone/capstone/node_modules/hbsfy/runtime.js":[function(require,module,exports){
+},{"./dist/cjs/handlebars.runtime":"/Users/user1/Desktop/capstone/node_modules/handlebars/dist/cjs/handlebars.runtime.js"}],"/Users/user1/Desktop/capstone/node_modules/hbsfy/runtime.js":[function(require,module,exports){
 module.exports = require("handlebars/runtime")["default"];
 
-},{"handlebars/runtime":"/Users/jmej/pcs/capstone/capstone/node_modules/handlebars/runtime.js"}],"/Users/jmej/pcs/capstone/capstone/node_modules/request/index.js":[function(require,module,exports){
+},{"handlebars/runtime":"/Users/user1/Desktop/capstone/node_modules/handlebars/runtime.js"}],"/Users/user1/Desktop/capstone/node_modules/request/index.js":[function(require,module,exports){
 (function (process){
 // Copyright 2010-2012 Mikeal Rogers
 //
@@ -2256,7 +2256,7 @@ request.cookie = function (str) {
 }
 
 }).call(this,require('_process'))
-},{"./lib/cookies":"/Users/jmej/pcs/capstone/capstone/node_modules/request/lib/cookies.js","./lib/copy":"/Users/jmej/pcs/capstone/capstone/node_modules/request/lib/copy.js","./request":"/Users/jmej/pcs/capstone/capstone/node_modules/request/request.js","_process":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js","util":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/util/util.js"}],"/Users/jmej/pcs/capstone/capstone/node_modules/request/lib/cookies.js":[function(require,module,exports){
+},{"./lib/cookies":"/Users/user1/Desktop/capstone/node_modules/request/lib/cookies.js","./lib/copy":"/Users/user1/Desktop/capstone/node_modules/request/lib/copy.js","./request":"/Users/user1/Desktop/capstone/node_modules/request/request.js","_process":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js","util":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/util/util.js"}],"/Users/user1/Desktop/capstone/node_modules/request/lib/cookies.js":[function(require,module,exports){
 var optional = require('./optional')
   , tough = optional('tough-cookie')
   , Cookie = tough && tough.Cookie
@@ -2298,7 +2298,7 @@ exports.jar = function() {
   return new RequestJar();
 };
 
-},{"./optional":"/Users/jmej/pcs/capstone/capstone/node_modules/request/lib/optional.js"}],"/Users/jmej/pcs/capstone/capstone/node_modules/request/lib/copy.js":[function(require,module,exports){
+},{"./optional":"/Users/user1/Desktop/capstone/node_modules/request/lib/optional.js"}],"/Users/user1/Desktop/capstone/node_modules/request/lib/copy.js":[function(require,module,exports){
 module.exports =
 function copy (obj) {
   var o = {}
@@ -2307,7 +2307,7 @@ function copy (obj) {
   })
   return o
 }
-},{}],"/Users/jmej/pcs/capstone/capstone/node_modules/request/lib/debug.js":[function(require,module,exports){
+},{}],"/Users/user1/Desktop/capstone/node_modules/request/lib/debug.js":[function(require,module,exports){
 (function (process){
 var util = require('util')
 
@@ -2318,7 +2318,7 @@ function debug () {
 }
 
 }).call(this,require('_process'))
-},{"_process":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js","util":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/util/util.js"}],"/Users/jmej/pcs/capstone/capstone/node_modules/request/lib/getSafe.js":[function(require,module,exports){
+},{"_process":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js","util":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/util/util.js"}],"/Users/user1/Desktop/capstone/node_modules/request/lib/getSafe.js":[function(require,module,exports){
 // Safe toJSON
 module.exports =
 function getSafe (self, uuid) {
@@ -2353,14 +2353,14 @@ function getSafe (self, uuid) {
 
   return safe
 }
-},{}],"/Users/jmej/pcs/capstone/capstone/node_modules/request/lib/optional.js":[function(require,module,exports){
-module.exports = function(module) {
+},{}],"/Users/user1/Desktop/capstone/node_modules/request/lib/optional.js":[function(require,module,exports){
+module.exports = function(moduleName) {
   try {
-    return require(module);
+    return module.parent.require(moduleName);
   } catch (e) {}
 };
 
-},{}],"/Users/jmej/pcs/capstone/capstone/node_modules/request/node_modules/forever-agent/index.js":[function(require,module,exports){
+},{}],"/Users/user1/Desktop/capstone/node_modules/request/node_modules/forever-agent/index.js":[function(require,module,exports){
 module.exports = ForeverAgent
 ForeverAgent.SSL = ForeverAgentSSL
 
@@ -2481,7 +2481,7 @@ function createConnectionSSL (port, host, options) {
   return tls.connect(options);
 }
 
-},{"http":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/http-browserify/index.js","https":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/https-browserify/index.js","net":"/usr/local/lib/node_modules/watchify/node_modules/browserify/lib/_empty.js","tls":"/usr/local/lib/node_modules/watchify/node_modules/browserify/lib/_empty.js","util":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/util/util.js"}],"/Users/jmej/pcs/capstone/capstone/node_modules/request/node_modules/json-stringify-safe/stringify.js":[function(require,module,exports){
+},{"http":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/http-browserify/index.js","https":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/https-browserify/index.js","net":"/usr/local/lib/node_modules/watchify/node_modules/browserify/lib/_empty.js","tls":"/usr/local/lib/node_modules/watchify/node_modules/browserify/lib/_empty.js","util":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/util/util.js"}],"/Users/user1/Desktop/capstone/node_modules/request/node_modules/json-stringify-safe/stringify.js":[function(require,module,exports){
 module.exports = stringify;
 
 function getSerialize (fn, decycle) {
@@ -2522,8 +2522,8 @@ function stringify(obj, fn, spaces, decycle) {
 
 stringify.getSerialize = getSerialize;
 
-},{}],"/Users/jmej/pcs/capstone/capstone/node_modules/request/node_modules/mime-types/lib/custom.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
+},{}],"/Users/user1/Desktop/capstone/node_modules/request/node_modules/mime-types/lib/custom.json":[function(require,module,exports){
+module.exports={
   "text/jade": [
     "jade"
   ],
@@ -2551,7 +2551,7 @@ module.exports=module.exports=module.exports=module.exports=module.exports=modul
   ]
 }
 
-},{}],"/Users/jmej/pcs/capstone/capstone/node_modules/request/node_modules/mime-types/lib/index.js":[function(require,module,exports){
+},{}],"/Users/user1/Desktop/capstone/node_modules/request/node_modules/mime-types/lib/index.js":[function(require,module,exports){
 
 // types[extension] = type
 exports.types = Object.create(null)
@@ -2628,8 +2628,8 @@ function define(json) {
   })
 }
 
-},{"./custom.json":"/Users/jmej/pcs/capstone/capstone/node_modules/request/node_modules/mime-types/lib/custom.json","./mime.json":"/Users/jmej/pcs/capstone/capstone/node_modules/request/node_modules/mime-types/lib/mime.json","./node.json":"/Users/jmej/pcs/capstone/capstone/node_modules/request/node_modules/mime-types/lib/node.json"}],"/Users/jmej/pcs/capstone/capstone/node_modules/request/node_modules/mime-types/lib/mime.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
+},{"./custom.json":"/Users/user1/Desktop/capstone/node_modules/request/node_modules/mime-types/lib/custom.json","./mime.json":"/Users/user1/Desktop/capstone/node_modules/request/node_modules/mime-types/lib/mime.json","./node.json":"/Users/user1/Desktop/capstone/node_modules/request/node_modules/mime-types/lib/node.json"}],"/Users/user1/Desktop/capstone/node_modules/request/node_modules/mime-types/lib/mime.json":[function(require,module,exports){
+module.exports={
   "application/1d-interleaved-parityfec": [],
   "application/3gpp-ims+xml": [],
   "application/activemessage": [],
@@ -5947,8 +5947,8 @@ module.exports=module.exports=module.exports=module.exports=module.exports=modul
   ]
 }
 
-},{}],"/Users/jmej/pcs/capstone/capstone/node_modules/request/node_modules/mime-types/lib/node.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
+},{}],"/Users/user1/Desktop/capstone/node_modules/request/node_modules/mime-types/lib/node.json":[function(require,module,exports){
+module.exports={
   "text/vtt": [
     "vtt"
   ],
@@ -6004,7 +6004,7 @@ module.exports=module.exports=module.exports=module.exports=module.exports=modul
   ]
 }
 
-},{}],"/Users/jmej/pcs/capstone/capstone/node_modules/request/node_modules/node-uuid/uuid.js":[function(require,module,exports){
+},{}],"/Users/user1/Desktop/capstone/node_modules/request/node_modules/node-uuid/uuid.js":[function(require,module,exports){
 (function (Buffer){
 //     uuid.js
 //
@@ -6253,375 +6253,371 @@ module.exports=module.exports=module.exports=module.exports=module.exports=modul
 }).call(this);
 
 }).call(this,require("buffer").Buffer)
-},{"buffer":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/buffer/index.js","crypto":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/crypto-browserify/index.js"}],"/Users/jmej/pcs/capstone/capstone/node_modules/request/node_modules/qs/index.js":[function(require,module,exports){
-/**
- * Object#toString() ref for stringify().
- */
+},{"buffer":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/buffer/index.js","crypto":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/crypto-browserify/index.js"}],"/Users/user1/Desktop/capstone/node_modules/request/node_modules/qs/index.js":[function(require,module,exports){
+module.exports = require('./lib');
 
-var toString = Object.prototype.toString;
+},{"./lib":"/Users/user1/Desktop/capstone/node_modules/request/node_modules/qs/lib/index.js"}],"/Users/user1/Desktop/capstone/node_modules/request/node_modules/qs/lib/index.js":[function(require,module,exports){
+// Load modules
 
-/**
- * Object#hasOwnProperty ref
- */
+var Stringify = require('./stringify');
+var Parse = require('./parse');
 
-var hasOwnProperty = Object.prototype.hasOwnProperty;
 
-/**
- * Array#indexOf shim.
- */
+// Declare internals
 
-var indexOf = typeof Array.prototype.indexOf === 'function'
-  ? function(arr, el) { return arr.indexOf(el); }
-  : function(arr, el) {
-      for (var i = 0; i < arr.length; i++) {
-        if (arr[i] === el) return i;
-      }
-      return -1;
-    };
+var internals = {};
 
-/**
- * Array.isArray shim.
- */
 
-var isArray = Array.isArray || function(arr) {
-  return toString.call(arr) == '[object Array]';
+module.exports = {
+    stringify: Stringify,
+    parse: Parse
 };
 
-/**
- * Object.keys shim.
- */
+},{"./parse":"/Users/user1/Desktop/capstone/node_modules/request/node_modules/qs/lib/parse.js","./stringify":"/Users/user1/Desktop/capstone/node_modules/request/node_modules/qs/lib/stringify.js"}],"/Users/user1/Desktop/capstone/node_modules/request/node_modules/qs/lib/parse.js":[function(require,module,exports){
+// Load modules
 
-var objectKeys = Object.keys || function(obj) {
-  var ret = [];
-  for (var key in obj) {
-    if (obj.hasOwnProperty(key)) {
-      ret.push(key);
-    }
-  }
-  return ret;
+var Utils = require('./utils');
+
+
+// Declare internals
+
+var internals = {
+    depth: 5,
+    arrayLimit: 20,
+    parametersLimit: 1000
 };
 
-/**
- * Array#forEach shim.
- */
 
-var forEach = typeof Array.prototype.forEach === 'function'
-  ? function(arr, fn) { return arr.forEach(fn); }
-  : function(arr, fn) {
-      for (var i = 0; i < arr.length; i++) fn(arr[i]);
-    };
+internals.parseValues = function (str) {
 
-/**
- * Array#reduce shim.
- */
+    var obj = {};
+    var parts = str.split('&').slice(0, internals.parametersLimit);
 
-var reduce = function(arr, fn, initial) {
-  if (typeof arr.reduce === 'function') return arr.reduce(fn, initial);
-  var res = initial;
-  for (var i = 0; i < arr.length; i++) res = fn(res, arr[i]);
-  return res;
+    for (var i = 0, il = parts.length; i < il; ++i) {
+        var part = parts[i];
+        var pos = part.indexOf(']=') === -1 ? part.indexOf('=') : part.indexOf(']=') + 1;
+
+        if (pos === -1) {
+            obj[Utils.decode(part)] = '';
+        }
+        else {
+            var key = Utils.decode(part.slice(0, pos));
+            var val = Utils.decode(part.slice(pos + 1));
+
+            if (!obj[key]) {
+                obj[key] = val;
+            }
+            else {
+                obj[key] = [].concat(obj[key]).concat(val);
+            }
+        }
+    }
+
+    return obj;
 };
 
-/**
- * Cache non-integer test regexp.
- */
 
-var isint = /^[0-9]+$/;
+internals.parseObject = function (chain, val) {
 
-function promote(parent, key) {
-  if (parent[key].length == 0) return parent[key] = {}
-  var t = {};
-  for (var i in parent[key]) {
-    if (hasOwnProperty.call(parent[key], i)) {
-      t[i] = parent[key][i];
-    }
-  }
-  parent[key] = t;
-  return t;
-}
-
-function parse(parts, parent, key, val) {
-  var part = parts.shift();
-  
-  // illegal
-  if (Object.getOwnPropertyDescriptor(Object.prototype, key)) return;
-  
-  // end
-  if (!part) {
-    if (isArray(parent[key])) {
-      parent[key].push(val);
-    } else if ('object' == typeof parent[key]) {
-      parent[key] = val;
-    } else if ('undefined' == typeof parent[key]) {
-      parent[key] = val;
-    } else {
-      parent[key] = [parent[key], val];
-    }
-    // array
-  } else {
-    var obj = parent[key] = parent[key] || [];
-    if (']' == part) {
-      if (isArray(obj)) {
-        if ('' != val) obj.push(val);
-      } else if ('object' == typeof obj) {
-        obj[objectKeys(obj).length] = val;
-      } else {
-        obj = parent[key] = [parent[key], val];
-      }
-      // prop
-    } else if (~indexOf(part, ']')) {
-      part = part.substr(0, part.length - 1);
-      if (!isint.test(part) && isArray(obj)) obj = promote(parent, key);
-      parse(parts, obj, part, val);
-      // key
-    } else {
-      if (!isint.test(part) && isArray(obj)) obj = promote(parent, key);
-      parse(parts, obj, part, val);
-    }
-  }
-}
-
-/**
- * Merge parent key/val pair.
- */
-
-function merge(parent, key, val){
-  if (~indexOf(key, ']')) {
-    var parts = key.split('[')
-      , len = parts.length
-      , last = len - 1;
-    parse(parts, parent, 'base', val);
-    // optimize
-  } else {
-    if (!isint.test(key) && isArray(parent.base)) {
-      var t = {};
-      for (var k in parent.base) t[k] = parent.base[k];
-      parent.base = t;
-    }
-    set(parent.base, key, val);
-  }
-
-  return parent;
-}
-
-/**
- * Compact sparse arrays.
- */
-
-function compact(obj) {
-  if ('object' != typeof obj) return obj;
-
-  if (isArray(obj)) {
-    var ret = [];
-
-    for (var i in obj) {
-      if (hasOwnProperty.call(obj, i)) {
-        ret.push(obj[i]);
-      }
+    if (!chain.length) {
+        return val;
     }
 
-    return ret;
-  }
+    var root = chain.shift();
 
-  for (var key in obj) {
-    obj[key] = compact(obj[key]);
-  }
+    var obj = {};
+    if (root === '[]') {
+        obj = [];
+        obj = obj.concat(internals.parseObject(chain, val));
+    }
+    else {
+        var cleanRoot = root[0] === '[' && root[root.length - 1] === ']' ? root.slice(1, root.length - 1) : root;
+        var index = parseInt(cleanRoot, 10);
+        if (!isNaN(index) &&
+            root !== cleanRoot &&
+            index <= internals.arrayLimit) {
 
-  return obj;
-}
+            obj = [];
+            obj[index] = internals.parseObject(chain, val);
+        }
+        else {
+            obj[cleanRoot] = internals.parseObject(chain, val);
+        }
+    }
 
-/**
- * Parse the given obj.
- */
-
-function parseObject(obj){
-  var ret = { base: {} };
-
-  forEach(objectKeys(obj), function(name){
-    merge(ret, name, obj[name]);
-  });
-
-  return compact(ret.base);
-}
-
-/**
- * Parse the given str.
- */
-
-function parseString(str){
-  var ret = reduce(String(str).split('&'), function(ret, pair){
-    var eql = indexOf(pair, '=')
-      , brace = lastBraceInKey(pair)
-      , key = pair.substr(0, brace || eql)
-      , val = pair.substr(brace || eql, pair.length)
-      , val = val.substr(indexOf(val, '=') + 1, val.length);
-
-    // ?foo
-    if ('' == key) key = pair, val = '';
-    if ('' == key) return ret;
-
-    return merge(ret, decode(key), decode(val));
-  }, { base: {} }).base;
-
-  return compact(ret);
-}
-
-/**
- * Parse the given query `str` or `obj`, returning an object.
- *
- * @param {String} str | {Object} obj
- * @return {Object}
- * @api public
- */
-
-exports.parse = function(str){
-  if (null == str || '' == str) return {};
-  return 'object' == typeof str
-    ? parseObject(str)
-    : parseString(str);
+    return obj;
 };
 
-/**
- * Turn the given `obj` into a query string
- *
- * @param {Object} obj
- * @return {String}
- * @api public
- */
 
-var stringify = exports.stringify = function(obj, prefix) {
-  if (isArray(obj)) {
-    return stringifyArray(obj, prefix);
-  } else if ('[object Object]' == toString.call(obj)) {
-    return stringifyObject(obj, prefix);
-  } else if ('string' == typeof obj) {
-    return stringifyString(obj, prefix);
-  } else {
-    return prefix + '=' + encodeURIComponent(String(obj));
-  }
+internals.parseKeys = function (key, val, depth) {
+
+    if (!key) {
+        return;
+    }
+
+    depth = typeof depth === 'undefined' ? internals.depth : depth;
+
+    // The regex chunks
+
+    var parent = /^([^\[\]]*)/;
+    var child = /(\[[^\[\]]*\])/g;
+
+    // Get the parent
+
+    var segment = parent.exec(key);
+
+    // Don't allow them to overwrite object prototype properties
+
+    if (Object.prototype.hasOwnProperty(segment[1])) {
+        return;
+    }
+
+    // Stash the parent if it exists
+
+    var keys = [];
+    if (segment[1]) {
+        keys.push(segment[1]);
+    }
+
+    // Loop through children appending to the array until we hit depth
+
+    var i = 0;
+    while ((segment = child.exec(key)) !== null && i < depth) {
+
+        ++i;
+        if (!Object.prototype.hasOwnProperty(segment[1].replace(/\[|\]/g, ''))) {
+            keys.push(segment[1]);
+        }
+    }
+
+    // If there's a remainder, just add whatever is left
+
+    if (segment) {
+        keys.push('[' + key.slice(segment.index) + ']');
+    }
+
+    return internals.parseObject(keys, val);
 };
 
-/**
- * Stringify the given `str`.
- *
- * @param {String} str
- * @param {String} prefix
- * @return {String}
- * @api private
- */
 
-function stringifyString(str, prefix) {
-  if (!prefix) throw new TypeError('stringify expects an object');
-  return prefix + '=' + encodeURIComponent(str);
-}
+module.exports = function (str, depth) {
 
-/**
- * Stringify the given `arr`.
- *
- * @param {Array} arr
- * @param {String} prefix
- * @return {String}
- * @api private
- */
+    if (str === '' ||
+        str === null ||
+        typeof str === 'undefined') {
 
-function stringifyArray(arr, prefix) {
-  var ret = [];
-  if (!prefix) throw new TypeError('stringify expects an object');
-  for (var i = 0; i < arr.length; i++) {
-    ret.push(stringify(arr[i], prefix + '[' + i + ']'));
-  }
-  return ret.join('&');
-}
-
-/**
- * Stringify the given `obj`.
- *
- * @param {Object} obj
- * @param {String} prefix
- * @return {String}
- * @api private
- */
-
-function stringifyObject(obj, prefix) {
-  var ret = []
-    , keys = objectKeys(obj)
-    , key;
-
-  for (var i = 0, len = keys.length; i < len; ++i) {
-    key = keys[i];
-    if ('' == key) continue;
-    if (null == obj[key]) {
-      ret.push(encodeURIComponent(key) + '=');
-    } else {
-      ret.push(stringify(obj[key], prefix
-        ? prefix + '[' + encodeURIComponent(key) + ']'
-        : encodeURIComponent(key)));
+        return {};
     }
-  }
 
-  return ret.join('&');
-}
+    var tempObj = typeof str === 'string' ? internals.parseValues(str) : Utils.clone(str);
+    var obj = {};
 
-/**
- * Set `obj`'s `key` to `val` respecting
- * the weird and wonderful syntax of a qs,
- * where "foo=bar&foo=baz" becomes an array.
- *
- * @param {Object} obj
- * @param {String} key
- * @param {String} val
- * @api private
- */
+    // Iterate over the keys and setup the new object
 
-function set(obj, key, val) {
-  var v = obj[key];
-  if (Object.getOwnPropertyDescriptor(Object.prototype, key)) return;
-  if (undefined === v) {
-    obj[key] = val;
-  } else if (isArray(v)) {
-    v.push(val);
-  } else {
-    obj[key] = [v, val];
-  }
-}
+    for (var key in tempObj) {
+        if (tempObj.hasOwnProperty(key)) {
+            var newObj = internals.parseKeys(key, tempObj[key], depth);
+            obj = Utils.merge(obj, newObj);
+        }
+    }
 
-/**
- * Locate last brace in `str` within the key.
- *
- * @param {String} str
- * @return {Number}
- * @api private
- */
+    return Utils.compact(obj);
+};
 
-function lastBraceInKey(str) {
-  var len = str.length
-    , brace
-    , c;
-  for (var i = 0; i < len; ++i) {
-    c = str[i];
-    if (']' == c) brace = false;
-    if ('[' == c) brace = true;
-    if ('=' == c && !brace) return i;
-  }
-}
 
-/**
- * Decode `str`.
- *
- * @param {String} str
- * @return {String}
- * @api private
- */
 
-function decode(str) {
-  try {
-    return decodeURIComponent(str.replace(/\+/g, ' '));
-  } catch (err) {
-    return str;
-  }
-}
+},{"./utils":"/Users/user1/Desktop/capstone/node_modules/request/node_modules/qs/lib/utils.js"}],"/Users/user1/Desktop/capstone/node_modules/request/node_modules/qs/lib/stringify.js":[function(require,module,exports){
+(function (Buffer){
+// Load modules
 
-},{}],"/Users/jmej/pcs/capstone/capstone/node_modules/request/request.js":[function(require,module,exports){
+
+// Declare internals
+
+var internals = {};
+
+
+internals.stringify = function (obj, prefix) {
+
+    if (Buffer.isBuffer(obj)) {
+        obj = obj.toString();
+    }
+    else if (obj instanceof Date) {
+        obj = obj.toISOString();
+    }
+
+    if (typeof obj === 'string' ||
+        typeof obj === 'number' ||
+        typeof obj === 'boolean') {
+
+        return [prefix + '=' + encodeURIComponent(obj)];
+    }
+
+    if (obj === null) {
+        return [prefix];
+    }
+
+    var values = [];
+
+    for (var key in obj) {
+        if (obj.hasOwnProperty(key)) {
+            values = values.concat(internals.stringify(obj[key], prefix + '[' + encodeURIComponent(key) + ']'));
+        }
+    }
+
+    return values;
+};
+
+
+module.exports = function (obj) {
+
+    var keys = [];
+
+    for (var key in obj) {
+        if (obj.hasOwnProperty(key)) {
+            keys = keys.concat(internals.stringify(obj[key], encodeURIComponent(key)));
+        }
+    }
+
+    return keys.join('&');
+};
+
+}).call(this,require("buffer").Buffer)
+},{"buffer":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/buffer/index.js"}],"/Users/user1/Desktop/capstone/node_modules/request/node_modules/qs/lib/utils.js":[function(require,module,exports){
+(function (Buffer){
+// Load modules
+
+
+// Declare internals
+
+var internals = {};
+
+
+exports.arrayToObject = function (source) {
+
+    var obj = {};
+    for (var i = 0, il = source.length; i < il; ++i) {
+        if (source[i] !== undefined &&
+            source[i] !== null) {
+
+            obj[i] = source[i];
+        }
+    }
+
+    return obj;
+};
+
+
+exports.clone = function (source) {
+
+    if (typeof source !== 'object' ||
+        source === null) {
+
+        return source;
+    }
+
+    if (Buffer.isBuffer(source)) {
+        return source.toString();
+    }
+
+    var obj = Array.isArray(source) ? [] : {};
+    for (var i in source) {
+        if (source.hasOwnProperty(i)) {
+            obj[i] = exports.clone(source[i]);
+        }
+    }
+
+    return obj;
+};
+
+
+exports.merge = function (target, source) {
+
+    if (!source) {
+        return target;
+    }
+
+    var obj = exports.clone(target);
+
+    if (Array.isArray(source)) {
+        for (var i = 0, il = source.length; i < il; ++i) {
+            if (source[i] !== undefined) {
+                obj[i] = source[i];
+            }
+        }
+
+        return obj;
+    }
+
+    if (Array.isArray(obj)) {
+        obj = exports.arrayToObject(obj);
+    }
+
+    var keys = Object.keys(source);
+    for (var k = 0, kl = keys.length; k < kl; ++k) {
+        var key = keys[k];
+        var value = source[key];
+
+        if (value &&
+            typeof value === 'object') {
+
+            if (!obj[key]) {
+                obj[key] = exports.clone(value);
+            }
+            else {
+                obj[key] = exports.merge(obj[key], value);
+            }
+        }
+        else {
+            obj[key] = value;
+        }
+    }
+
+    return obj;
+};
+
+
+exports.decode = function (str) {
+
+    try {
+        return decodeURIComponent(str.replace(/\+/g, ' '));
+    } catch (e) {
+        return str;
+    }
+};
+
+
+exports.compact = function (obj) {
+
+    if (typeof obj !== 'object') {
+        return obj;
+    }
+
+    var compacted = {};
+
+    for (var key in obj) {
+        if (obj.hasOwnProperty(key)) {
+            if (Array.isArray(obj[key])) {
+                compacted[key] = [];
+
+                for (var i = 0, l = obj[key].length; i < l; i++) {
+                    if (obj[key].hasOwnProperty(i) &&
+                        obj[key][i]) {
+
+                        compacted[key].push(obj[key][i]);
+                    }
+                }
+            }
+            else {
+                compacted[key] = exports.compact(obj[key]);
+            }
+        }
+    }
+
+    return compacted;
+};
+
+}).call(this,require("buffer").Buffer)
+},{"buffer":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/buffer/index.js"}],"/Users/user1/Desktop/capstone/node_modules/request/request.js":[function(require,module,exports){
 (function (process,Buffer){
 var optional = require('./lib/optional')
   , http = require('http')
@@ -8053,7 +8049,7 @@ Request.prototype.toJSON = toJSON
 module.exports = Request
 
 }).call(this,require('_process'),require("buffer").Buffer)
-},{"./lib/cookies":"/Users/jmej/pcs/capstone/capstone/node_modules/request/lib/cookies.js","./lib/copy":"/Users/jmej/pcs/capstone/capstone/node_modules/request/lib/copy.js","./lib/debug":"/Users/jmej/pcs/capstone/capstone/node_modules/request/lib/debug.js","./lib/getSafe":"/Users/jmej/pcs/capstone/capstone/node_modules/request/lib/getSafe.js","./lib/optional":"/Users/jmej/pcs/capstone/capstone/node_modules/request/lib/optional.js","_process":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js","buffer":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/buffer/index.js","crypto":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/crypto-browserify/index.js","forever-agent":"/Users/jmej/pcs/capstone/capstone/node_modules/request/node_modules/forever-agent/index.js","http":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/http-browserify/index.js","json-stringify-safe":"/Users/jmej/pcs/capstone/capstone/node_modules/request/node_modules/json-stringify-safe/stringify.js","mime-types":"/Users/jmej/pcs/capstone/capstone/node_modules/request/node_modules/mime-types/lib/index.js","net":"/usr/local/lib/node_modules/watchify/node_modules/browserify/lib/_empty.js","node-uuid":"/Users/jmej/pcs/capstone/capstone/node_modules/request/node_modules/node-uuid/uuid.js","qs":"/Users/jmej/pcs/capstone/capstone/node_modules/request/node_modules/qs/index.js","querystring":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/querystring-es3/index.js","stream":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/stream-browserify/index.js","url":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/url/url.js","util":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/util/util.js","zlib":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/browserify-zlib/src/index.js"}],"/Users/jmej/pcs/capstone/capstone/node_modules/underscore/underscore.js":[function(require,module,exports){
+},{"./lib/cookies":"/Users/user1/Desktop/capstone/node_modules/request/lib/cookies.js","./lib/copy":"/Users/user1/Desktop/capstone/node_modules/request/lib/copy.js","./lib/debug":"/Users/user1/Desktop/capstone/node_modules/request/lib/debug.js","./lib/getSafe":"/Users/user1/Desktop/capstone/node_modules/request/lib/getSafe.js","./lib/optional":"/Users/user1/Desktop/capstone/node_modules/request/lib/optional.js","_process":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js","buffer":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/buffer/index.js","crypto":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/crypto-browserify/index.js","forever-agent":"/Users/user1/Desktop/capstone/node_modules/request/node_modules/forever-agent/index.js","http":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/http-browserify/index.js","json-stringify-safe":"/Users/user1/Desktop/capstone/node_modules/request/node_modules/json-stringify-safe/stringify.js","mime-types":"/Users/user1/Desktop/capstone/node_modules/request/node_modules/mime-types/lib/index.js","net":"/usr/local/lib/node_modules/watchify/node_modules/browserify/lib/_empty.js","node-uuid":"/Users/user1/Desktop/capstone/node_modules/request/node_modules/node-uuid/uuid.js","qs":"/Users/user1/Desktop/capstone/node_modules/request/node_modules/qs/index.js","querystring":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/querystring-es3/index.js","stream":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/stream-browserify/index.js","url":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/url/url.js","util":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/util/util.js","zlib":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/browserify-zlib/src/index.js"}],"/Users/user1/Desktop/capstone/node_modules/underscore/underscore.js":[function(require,module,exports){
 //     Underscore.js 1.6.0
 //     http://underscorejs.org
 //     (c) 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
@@ -9398,7 +9394,7 @@ module.exports = Request
   }
 }).call(this);
 
-},{}],"/Users/jmej/pcs/capstone/capstone/public/js/main.js":[function(require,module,exports){
+},{}],"/Users/user1/Desktop/capstone/public/js/main.js":[function(require,module,exports){
 var Backbone = require('backbone');
 Backbone.$ = $;
 
@@ -9430,7 +9426,7 @@ $(function () {
   window.app = new Router();
   Backbone.history.start();
 });
-},{"./views/main-view":"/Users/jmej/pcs/capstone/capstone/public/js/views/main-view.js","backbone":"/Users/jmej/pcs/capstone/capstone/node_modules/backbone/backbone.js"}],"/Users/jmej/pcs/capstone/capstone/public/js/views/main-view.js":[function(require,module,exports){
+},{"./views/main-view":"/Users/user1/Desktop/capstone/public/js/views/main-view.js","backbone":"/Users/user1/Desktop/capstone/node_modules/backbone/backbone.js"}],"/Users/user1/Desktop/capstone/public/js/views/main-view.js":[function(require,module,exports){
 var Backbone = require('backbone');
 var http = require('http');
 var url = require('url');
@@ -9566,7 +9562,7 @@ var MainView = Backbone.View.extend({
 
 
 module.exports = MainView;
-},{"../../templates/login.hbs":"/Users/jmej/pcs/capstone/capstone/public/templates/login.hbs","../../templates/main.hbs":"/Users/jmej/pcs/capstone/capstone/public/templates/main.hbs","backbone":"/Users/jmej/pcs/capstone/capstone/node_modules/backbone/backbone.js","http":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/http-browserify/index.js","request":"/Users/jmej/pcs/capstone/capstone/node_modules/request/index.js","url":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/url/url.js"}],"/Users/jmej/pcs/capstone/capstone/public/templates/login.hbs":[function(require,module,exports){
+},{"../../templates/login.hbs":"/Users/user1/Desktop/capstone/public/templates/login.hbs","../../templates/main.hbs":"/Users/user1/Desktop/capstone/public/templates/main.hbs","backbone":"/Users/user1/Desktop/capstone/node_modules/backbone/backbone.js","http":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/http-browserify/index.js","request":"/Users/user1/Desktop/capstone/node_modules/request/index.js","url":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/url/url.js"}],"/Users/user1/Desktop/capstone/public/templates/login.hbs":[function(require,module,exports){
 // hbsfy compiled Handlebars template
 var Handlebars = require('hbsfy/runtime');
 module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -9578,7 +9574,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   return "<section>      \n  <div class=\"row\" style=\"margin-bottom:2%;\">\n    <h1 class=\"text-center\">Record Pool</h1>\n  </div>\n\n  <div class=\"row rec-img\">\n    <img src=\"images/Record2.png\" alt=\"Record Image\">\n  </div>\n\n  <div class=\"row\"> \n    <div class=\"col-xs-12 col-md-12\">\n      <div class=\"username-form\">\n        <label for=\"user-id-input\">Your Discogs Username</label>\n        <input type=\"user-id\" id=\"username\" class=\"form-control\" placeholder=\"Enter Discogs Username\">\n        <input type=\"image\" id=\"username-submit\" src=\"images/cassette-btn.png\" alt=\"Submit\">\n        <br>\n        <label for=\"image\">&nbsp;Submit</label>\n      </div>  \n    </div>\n  </div>\n</section>\n\n\n<article class=\"gatekeeper\">\n  <div class=\"row\">\n    <div class=\"col-xs-12 col-md-12\">\n      <div id=\"status\">\n        This page renders the Discogs collections and wantlists of anyone who keeps those lists public.<br /><br />\n        In order to access these lists - type your own Discogs username into the box.<br /><br />\n        You will only get access if your own lists are public. This site is about sharing. <br /><br />\n        Please respect these intentions.<br /><br />\n        Share generously, dig deeply, these are everyone's jams.<br /><br />\n        <div class=\"link\"><a href=\"https://www.discogs.com/settings/privacy\">Visit Discogs to manage your privacy settings</a></div>\n      </div>\n    </div>\n  </div>\n</article>";
   });
 
-},{"hbsfy/runtime":"/Users/jmej/pcs/capstone/capstone/node_modules/hbsfy/runtime.js"}],"/Users/jmej/pcs/capstone/capstone/public/templates/main.hbs":[function(require,module,exports){
+},{"hbsfy/runtime":"/Users/user1/Desktop/capstone/node_modules/hbsfy/runtime.js"}],"/Users/user1/Desktop/capstone/public/templates/main.hbs":[function(require,module,exports){
 // hbsfy compiled Handlebars template
 var Handlebars = require('hbsfy/runtime');
 module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -9760,7 +9756,7 @@ function program7(depth0,data) {
   return buffer;
   });
 
-},{"hbsfy/runtime":"/Users/jmej/pcs/capstone/capstone/node_modules/hbsfy/runtime.js"}],"/usr/local/lib/node_modules/watchify/node_modules/browserify/lib/_empty.js":[function(require,module,exports){
+},{"hbsfy/runtime":"/Users/user1/Desktop/capstone/node_modules/hbsfy/runtime.js"}],"/usr/local/lib/node_modules/watchify/node_modules/browserify/lib/_empty.js":[function(require,module,exports){
 
 },{}],"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/assert/assert.js":[function(require,module,exports){
 // http://wiki.commonjs.org/wiki/Unit_Testing/1.0
@@ -24563,4 +24559,4 @@ function hasOwnProperty(obj, prop) {
 }
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./support/isBuffer":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/util/support/isBufferBrowser.js","_process":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js","inherits":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/inherits/inherits_browser.js"}]},{},["/Users/jmej/pcs/capstone/capstone/public/js/main.js"]);
+},{"./support/isBuffer":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/util/support/isBufferBrowser.js","_process":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js","inherits":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/inherits/inherits_browser.js"}]},{},["/Users/user1/Desktop/capstone/public/js/main.js"]);
