@@ -39,6 +39,32 @@ app.use(function(req, res, next) {
   next(err);
 });
 
+app.get('/api/discogsUsers', function (req, res) {
+  var rpUsers = [];
+  db.list('rpUsers')
+  .then(function (result) {
+    result.body.results.forEach(function (item){
+      rpUsers.push(item.value);
+    });
+    res.json(rpUsers);
+  })
+  .fail(function (err) {
+    console.error(err);
+  });
+});
+
+app.post('/api/discogsUsers', function (req, res){
+  req.accepts('application/json');
+  var rpUsers = req.body;
+  db.put('rpUsers', user.id, user, false)
+  .then(function (){
+    res.send(200, 'Welcome Discogs User');
+  })
+  .fail(function (err) {
+    console.error(err);
+  });
+});
+
 if (app.get('env') === 'development') {
     app.use(function(err, req, res, next) {
         res.status(err.status || 500);
@@ -60,6 +86,8 @@ app.use(function(err, req, res, next) {
 });
 
 app.set('port', process.env.PORT || 3000);
+
+
 
 app.listen(app.get('port'), function() {
   console.log('Express server listening on port # ' + app.get('port'));

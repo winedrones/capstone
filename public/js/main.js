@@ -1,6 +1,6 @@
 var Backbone = require('backbone');
 Backbone.$ = $;
-
+var DiscogsUsers = require('./collections/discogsUsers')
 var MainView = require('./views/main-view');
 
 var Router = Backbone.Router.extend({
@@ -8,7 +8,9 @@ var Router = Backbone.Router.extend({
     '': 'main'
   },
   main: function () {
-    this.mainView = new MainView();
+  	this.usersCollection = new DiscogsUsers();
+    this.mainView = new MainView({collection:this.usersCollection});
+
     //this.mainView.render(); 
   }
 });

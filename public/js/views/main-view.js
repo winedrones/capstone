@@ -18,7 +18,8 @@ var MainView = Backbone.View.extend({
     'click #username-submit': 'addUsername',
     'click #wantlist' : 'renderWants',
     'click #collection' : 'renderCollection',
-    'click #init-username-submit' : 'authenticate'
+    'click #init-username-submit' : 'addUsername'
+    //'click #init-username-submit' : 'authenticate'
   },
 
   renderWants: function(){
@@ -31,19 +32,30 @@ var MainView = Backbone.View.extend({
 
 
   addUsername: function () {
+    console.log("addusername.this=",this);
     var $usernameInput = $('.form-group').find('#add-username');
     this.records = {wants:[], collection:[]};
     this.userName = $usernameInput.val();
+    var usernameInput = $usernameInput.val();
     this.discogs(this.userName, 1);
     this.records.wants.username = this.userName;
     this.records.collection.username = this.userName;
+    
+    var date = Date.now();
+    var collectionFromInput = {
+      user: usernameInput,
+      creationDate: date,
+      id: 'user' + date
+    };
+    this.collection.create( collectionFromInput, {validate: true});
+    console.log(this.collection.models);
 },
 
   records: {wants:[], collection:[]},
 
   //testThing: {wants:[{discogs: 5719574, youtube: "QLnTRwpmCGs"}, {discogs: 4368235, youtube: "zH1VeQFBfW8"}]},
 
-  authenticate: function() {
+  //authenticate: function() {
       var self = this;
       var $user = $('.login-form').find('#username');
       this.userName = $user.val();
@@ -54,6 +66,15 @@ var MainView = Backbone.View.extend({
             self.discogs(self.userName, 1);
             self.records.wants.username = self.userName;
             self.records.collection.username = self.userName;
+
+          var date = Date.now();
+          var collectionFromInput = {
+            user: usernameInput,
+            creationDate: date,
+            id: 'user' + date
+    };
+    this.collection.create( collectionFromInput, {validate: true});
+    console.log(this.collection.models);
           }
         }).fail(function() {
           console.log("discogs username failed");
