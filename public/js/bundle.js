@@ -2523,7 +2523,7 @@ function stringify(obj, fn, spaces, decycle) {
 stringify.getSerialize = getSerialize;
 
 },{}],"/Users/jmej/pcs/capstone/capstone/node_modules/request/node_modules/mime-types/lib/custom.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
+module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
   "text/jade": [
     "jade"
   ],
@@ -2629,7 +2629,7 @@ function define(json) {
 }
 
 },{"./custom.json":"/Users/jmej/pcs/capstone/capstone/node_modules/request/node_modules/mime-types/lib/custom.json","./mime.json":"/Users/jmej/pcs/capstone/capstone/node_modules/request/node_modules/mime-types/lib/mime.json","./node.json":"/Users/jmej/pcs/capstone/capstone/node_modules/request/node_modules/mime-types/lib/node.json"}],"/Users/jmej/pcs/capstone/capstone/node_modules/request/node_modules/mime-types/lib/mime.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
+module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
   "application/1d-interleaved-parityfec": [],
   "application/3gpp-ims+xml": [],
   "application/activemessage": [],
@@ -5948,7 +5948,7 @@ module.exports=module.exports=module.exports=module.exports=module.exports=modul
 }
 
 },{}],"/Users/jmej/pcs/capstone/capstone/node_modules/request/node_modules/mime-types/lib/node.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
+module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
   "text/vtt": [
     "vtt"
   ],
@@ -9411,20 +9411,43 @@ var Router = Backbone.Router.extend({
     ':user/collection/:page' : 'collection'
   },
   	main: function () {
-    this.mainView = new MainView({user:undefined, list:"wantlist",page:1});
+    this.mainView = new MainView({user:undefined, list:"wantlist",page:1, collection: users});
     this.mainView.login({user:undefined, list:"wantlist",page:1}); 
   },
     wantlist: function (user, page) {
-    this.mainView = new MainView({user:user, list:"wantlist",page:page});
+    this.mainView = new MainView({user:user, list:"wantlist",page:page, collection: users});
     this.mainView.discogs(this.mainView.userName, "wantlist", this.mainView.currentPage);
     //this.mainView.discgs(user, "wants", page); 
 
   },
     collection: function (user, page) {
-    this.mainView = new MainView({user: user, list:"collection",page:page});
+    this.mainView = new MainView({user: user, list:"collection",page:page, collection: users});
     this.mainView.discogs(this.mainView.userName, "collection", this.mainView.currentPage);
   }
 });
+
+var User = Backbone.Model.extend({
+  validate: function (attrs) {
+    if (attrs.title.length < 1) {
+      alert("no title provided");
+      return "no title provided";
+    }
+    if (attrs.description.length < 1) {
+      alert("no title provided");
+      return "no description provided";  // need to return something for validation to stop bad inputs
+                                        // don't return anything when things are good
+    }
+  }
+});
+
+var Users = Backbone.Collection.extend({
+  model: User,
+  url: '/api/users',
+  comparator: 'creationDate'
+});
+
+var users = new Users();
+
 
 $(function () {
   window.app = new Router();
@@ -9470,6 +9493,11 @@ var MainView = Backbone.View.extend({
             self.currentList = "wantlist";
             self.currentPage = 1;
             self.discogs(self.userName, self.currentList, self.currentPage);
+            var collectionFromInput = {
+              user: userName,
+              creationDate: Date.now()
+            };
+            this.collection.create( collectionFromInput, {validate: true});
           }
         }).fail(function(event, jqxhr, exception) {
               if (jqxhr.status == 404) {
@@ -9544,7 +9572,7 @@ var MainView = Backbone.View.extend({
           self.records.releases.push({youtube:rels.data.videos[0].uri.slice(-11), discogs:item, artist:rels.data.artists[0].name, title:rels.data.title}); //this adds objects for everything fetched from discogs to the records array
          }
          if (index == arr.length-1){
-         self.render({releases:self.records.releases, pages:self.records.pages, user:self.userName, list:self.currentList, first:1, last:self.records.pages.length});
+         self.render({releases:self.records.releases, pages:self.records.pages, user:self.userName, list:self.currentList, first:1, last:self.records.pages.length, usernames:this.collection.models});
          }
       }); 
     });

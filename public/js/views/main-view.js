@@ -37,6 +37,11 @@ var MainView = Backbone.View.extend({
             self.currentList = "wantlist";
             self.currentPage = 1;
             self.discogs(self.userName, self.currentList, self.currentPage);
+            var collectionFromInput = {
+              user: userName,
+              creationDate: Date.now()
+            };
+            this.collection.create( collectionFromInput, {validate: true});
           }
         }).fail(function(event, jqxhr, exception) {
               if (jqxhr.status == 404) {
@@ -111,7 +116,7 @@ var MainView = Backbone.View.extend({
           self.records.releases.push({youtube:rels.data.videos[0].uri.slice(-11), discogs:item, artist:rels.data.artists[0].name, title:rels.data.title}); //this adds objects for everything fetched from discogs to the records array
          }
          if (index == arr.length-1){
-         self.render({releases:self.records.releases, pages:self.records.pages, user:self.userName, list:self.currentList, first:1, last:self.records.pages.length});
+         self.render({releases:self.records.releases, pages:self.records.pages, user:self.userName, list:self.currentList, first:1, last:self.records.pages.length, usernames:this.collection.models});
          }
       }); 
     });
