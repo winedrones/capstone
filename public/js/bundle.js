@@ -2523,7 +2523,7 @@ function stringify(obj, fn, spaces, decycle) {
 stringify.getSerialize = getSerialize;
 
 },{}],"/Users/jmej/pcs/capstone/capstone/node_modules/request/node_modules/mime-types/lib/custom.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
+module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
   "text/jade": [
     "jade"
   ],
@@ -2629,7 +2629,7 @@ function define(json) {
 }
 
 },{"./custom.json":"/Users/jmej/pcs/capstone/capstone/node_modules/request/node_modules/mime-types/lib/custom.json","./mime.json":"/Users/jmej/pcs/capstone/capstone/node_modules/request/node_modules/mime-types/lib/mime.json","./node.json":"/Users/jmej/pcs/capstone/capstone/node_modules/request/node_modules/mime-types/lib/node.json"}],"/Users/jmej/pcs/capstone/capstone/node_modules/request/node_modules/mime-types/lib/mime.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
+module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
   "application/1d-interleaved-parityfec": [],
   "application/3gpp-ims+xml": [],
   "application/activemessage": [],
@@ -5948,7 +5948,7 @@ module.exports=module.exports=module.exports=module.exports=module.exports=modul
 }
 
 },{}],"/Users/jmej/pcs/capstone/capstone/node_modules/request/node_modules/mime-types/lib/node.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
+module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
   "text/vtt": [
     "vtt"
   ],
@@ -9407,22 +9407,22 @@ var MainView = require('./views/main-view');
 var Router = Backbone.Router.extend({
   routes: {
     '': 'main',
-    ':user/wants/:page' : 'wantlist',
+    ':user/wantlist/:page' : 'wantlist',
     ':user/collection/:page' : 'collection'
   },
   	main: function () {
-    this.mainView = new MainView({user:undefined, list:"wants",page:1});
-    this.mainView.login({user:undefined, list:"wants",page:1}); 
+    this.mainView = new MainView({user:undefined, list:"wantlist",page:1});
+    this.mainView.login({user:undefined, list:"wantlist",page:1}); 
   },
     wantlist: function (user, page) {
-    this.mainView = new MainView({user:user, list:"wants",page:page});
-    this.mainView.discogs(this.mainView.userName, this.mainView.currentList, this.mainView.currentPage);
+    this.mainView = new MainView({user:user, list:"wantlist",page:page});
+    this.mainView.discogs(this.mainView.userName, "wantlist", this.mainView.currentPage);
     //this.mainView.discgs(user, "wants", page); 
 
   },
     collection: function (user, page) {
     this.mainView = new MainView({user: user, list:"collection",page:page});
-    this.mainView.discogs(this.mainView.userName, this.mainView.currentList, this.mainView.currentPage);
+    this.mainView.discogs(this.mainView.userName, "collection", this.mainView.currentPage);
   }
 });
 
@@ -9449,22 +9449,7 @@ var MainView = Backbone.View.extend({
 
   events: {
     'click #username-submit': 'addUsername'
-    // 'click #wantlist' : 'renderWants',
-    // 'click #collection' : 'renderCollection'
   },
-
-  // renderWants: function(){
-  //   this.currentPage = 1;
-  //   this.currentList = "wants";
-  //   this.discogs(this.userName, this.currentList, this.currentPage);
-    
-  // },
-
-  // renderCollection: function(){
-  //   this.currentPage = 1;
-  //   this.currentList = "collection";
-  //   this.discogs(this.userName, this.currentList, this.currentPage);
-  // },
 
 
   records: {releases:[], pages:[]},
@@ -9482,7 +9467,7 @@ var MainView = Backbone.View.extend({
             alert("Please got to discogs.com and share (and/or) populate your wantlist to use this site!");
           }else{
             self.userName = userName;
-            self.currentList = "wants";
+            self.currentList = "wantlist";
             self.currentPage = 1;
             self.discogs(self.userName, self.currentList, self.currentPage);
           }
@@ -9497,8 +9482,6 @@ var MainView = Backbone.View.extend({
       this.userName = options.user;
       this.currentList = options.list;
       this.currentPage = options.page;
-      //this.discogs(this.userName, this.currentList, this.currentPage);
-
   },
 
   login: function (options) {
@@ -9525,7 +9508,7 @@ var MainView = Backbone.View.extend({
     $("#youtube-vids").replaceWith(animationHtml); //loading status thing
 
     var getIds = function(list, callback, page){ //gets every release id in users wantlist and passes as an array to getVids function
-      if (list == "wants"){
+      if (list == "wantlist"){
         var apiCall = 'http://api.discogs.com/users/'+user+'/wants?page='+page+'&callback=?';
       }else if (list == "collection"){
         var apiCall = 'http://api.discogs.com/users/'+user+'/collection/folders/0/releases?page='+page+'&callback=?';
@@ -9535,7 +9518,7 @@ var MainView = Backbone.View.extend({
       $.getJSON(apiCall)
         .done(function(data){ //this returns JSONP handled in a callback. Need to traverse an extra data (data.data). property to get to the stuff we care about
           var data = data;
-          if(list == "wants"){
+          if(list == "wantlist"){
             var arr = data.data.wants;
           }else if(list == "collection"){
             var arr = data.data.releases;
@@ -9684,11 +9667,15 @@ function program5(depth0,data) {
   if (helper = helpers.user) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.user); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
-    + "'s selections</h4> \n  </div>\n      \n  <div class=\"row\">\n    <div class=\"col-xs-12 col-md-4\">\n        <div>\n          <div class=\"username-form\">\n            <label for=\"user-id-input\">Discogs Username</label>\n            <input type=\"user-id\" id=\"username\" class=\"form-control\" placeholder=\"Enter Discogs Username\">\n          </div>\n          <input type=\"image\" id=\"username-submit\" src=\"images/cassette-btn.png\" alt=\"Submit\">\n          <br>\n          <label for=\"image\">&nbsp;Submit</label>\n        </div>\n        <ul class=\"nav nav-pills\">\n          <li class=\"dropdown\">\n            <a class=\"dropdown-toggle\" data-toggle=\"dropdown\" href=\"#\" style=\"margin-top:50%;\">\n              Users<span class=\"caret\"></span>\n            </a>\n            <ul class=\"dropdown-menu\" role=\"menu\">\n              <li>Christian</li>\n              <li>Jesse</li>\n              <li>Kyle</li>\n            </ul>\n          </li>\n        </ul>\n      </div>  \n      \n      <div class=\"col-xs-12 col-md-8\">\n        \n        <div class=\"text-center\">\n          <ul class=\"nav nav-pills center-pills\" id=\"want-collection\">\n            <li><a href=\"#/";
+    + "'s ";
+  if (helper = helpers.list) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.list); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</h4> \n  </div>\n      \n  <div class=\"row\">\n    <div class=\"col-xs-12 col-md-4\">\n        <div>\n          <div class=\"username-form\">\n            <label for=\"user-id-input\">Discogs Username</label>\n            <input type=\"user-id\" id=\"username\" class=\"form-control\" placeholder=\"Enter Discogs Username\">\n          </div>\n          <input type=\"image\" id=\"username-submit\" src=\"images/cassette-btn.png\" alt=\"Submit\">\n          <br>\n          <label for=\"image\">&nbsp;Submit</label>\n        </div>\n        <ul class=\"nav nav-pills\">\n          <li class=\"dropdown\">\n            <a class=\"dropdown-toggle\" data-toggle=\"dropdown\" href=\"#\" style=\"margin-top:50%;\">\n              Users<span class=\"caret\"></span>\n            </a>\n            <ul class=\"dropdown-menu\" role=\"menu\">\n              <li>Christian</li>\n              <li>Jesse</li>\n              <li>Kyle</li>\n            </ul>\n          </li>\n        </ul>\n      </div>  \n      \n      <div class=\"col-xs-12 col-md-8\">\n        \n        <div class=\"text-center\">\n          <ul class=\"nav nav-pills center-pills\" id=\"want-collection\">\n            <li><a href=\"#/";
   if (helper = helpers.user) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.user); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
-    + "/wants/";
+    + "/wantlist/";
   if (helper = helpers.first) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.first); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)

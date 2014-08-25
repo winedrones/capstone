@@ -16,22 +16,7 @@ var MainView = Backbone.View.extend({
 
   events: {
     'click #username-submit': 'addUsername'
-    // 'click #wantlist' : 'renderWants',
-    // 'click #collection' : 'renderCollection'
   },
-
-  // renderWants: function(){
-  //   this.currentPage = 1;
-  //   this.currentList = "wants";
-  //   this.discogs(this.userName, this.currentList, this.currentPage);
-    
-  // },
-
-  // renderCollection: function(){
-  //   this.currentPage = 1;
-  //   this.currentList = "collection";
-  //   this.discogs(this.userName, this.currentList, this.currentPage);
-  // },
 
 
   records: {releases:[], pages:[]},
@@ -49,7 +34,7 @@ var MainView = Backbone.View.extend({
             alert("Please got to discogs.com and share (and/or) populate your wantlist to use this site!");
           }else{
             self.userName = userName;
-            self.currentList = "wants";
+            self.currentList = "wantlist";
             self.currentPage = 1;
             self.discogs(self.userName, self.currentList, self.currentPage);
           }
@@ -64,8 +49,6 @@ var MainView = Backbone.View.extend({
       this.userName = options.user;
       this.currentList = options.list;
       this.currentPage = options.page;
-      //this.discogs(this.userName, this.currentList, this.currentPage);
-
   },
 
   login: function (options) {
@@ -92,7 +75,7 @@ var MainView = Backbone.View.extend({
     $("#youtube-vids").replaceWith(animationHtml); //loading status thing
 
     var getIds = function(list, callback, page){ //gets every release id in users wantlist and passes as an array to getVids function
-      if (list == "wants"){
+      if (list == "wantlist"){
         var apiCall = 'http://api.discogs.com/users/'+user+'/wants?page='+page+'&callback=?';
       }else if (list == "collection"){
         var apiCall = 'http://api.discogs.com/users/'+user+'/collection/folders/0/releases?page='+page+'&callback=?';
@@ -102,7 +85,7 @@ var MainView = Backbone.View.extend({
       $.getJSON(apiCall)
         .done(function(data){ //this returns JSONP handled in a callback. Need to traverse an extra data (data.data). property to get to the stuff we care about
           var data = data;
-          if(list == "wants"){
+          if(list == "wantlist"){
             var arr = data.data.wants;
           }else if(list == "collection"){
             var arr = data.data.releases;
