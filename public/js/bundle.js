@@ -2523,7 +2523,7 @@ function stringify(obj, fn, spaces, decycle) {
 stringify.getSerialize = getSerialize;
 
 },{}],"/Users/jmej/pcs/capstone/capstone/node_modules/request/node_modules/mime-types/lib/custom.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
+module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
   "text/jade": [
     "jade"
   ],
@@ -2629,7 +2629,7 @@ function define(json) {
 }
 
 },{"./custom.json":"/Users/jmej/pcs/capstone/capstone/node_modules/request/node_modules/mime-types/lib/custom.json","./mime.json":"/Users/jmej/pcs/capstone/capstone/node_modules/request/node_modules/mime-types/lib/mime.json","./node.json":"/Users/jmej/pcs/capstone/capstone/node_modules/request/node_modules/mime-types/lib/node.json"}],"/Users/jmej/pcs/capstone/capstone/node_modules/request/node_modules/mime-types/lib/mime.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
+module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
   "application/1d-interleaved-parityfec": [],
   "application/3gpp-ims+xml": [],
   "application/activemessage": [],
@@ -5948,7 +5948,7 @@ module.exports=module.exports=module.exports=module.exports=module.exports=modul
 }
 
 },{}],"/Users/jmej/pcs/capstone/capstone/node_modules/request/node_modules/mime-types/lib/node.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
+module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
   "text/vtt": [
     "vtt"
   ],
@@ -9575,7 +9575,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   
 
 
-  return "<section>      \n  <div class=\"row\" style=\"margin-bottom:2%;\">\n    <h1 class=\"text-center\">Record Pool</h1>\n  </div>\n\n  <div class=\"row rec-img\">\n    <img src=\"images/Record2.png\" alt=\"Record Image\">\n  </div>\n\n  <div class=\"row\"> \n    <div class=\"col-xs-12 col-md-12\">\n      <div class=\"username-form\">\n        <label for=\"user-id-input\">Your Discogs Username</label>\n        <input type=\"user-id\" id=\"username\" class=\"form-control\" placeholder=\"Enter Discogs Username\">\n        <input type=\"image\" id=\"username-submit\" src=\"images/cassette-btn.png\" alt=\"Submit\">\n        <br>\n        <label for=\"image\">&nbsp;Submit</label>\n      </div>  \n    </div>\n  </div>\n</section>\n\n\n<article class=\"gatekeeper\">\n  <div class=\"row\">\n    <div class=\"col-xs-12 col-md-12\">\n      <div id=\"status\">\n        This page renders the Discogs collections and wantlists of anyone who keeps those lists public.<br /><br />\n        In order to access these lists - type your own Discogs username into the box on the left.<br /><br />\n        You will only get access if your own lists are public. This site is about sharing. <br /><br />\n        Please respect these intentions.<br /><br />\n        Share generously, dig deeply, these are everyone's jams.<br /><br />\n        <div class=\"link\"><a href=\"http://www.discogs.com/release/249504\"><3 Discogs</a></div>\n      </div>\n    </div>\n  </div>\n</article>";
+  return "<section>      \n  <div class=\"row\" style=\"margin-bottom:2%;\">\n    <h1 class=\"text-center\">Record Pool</h1>\n  </div>\n\n  <div class=\"row rec-img\">\n    <img src=\"images/Record2.png\" alt=\"Record Image\">\n  </div>\n\n  <div class=\"row\"> \n    <div class=\"col-xs-12 col-md-12\">\n      <div class=\"username-form\">\n        <label for=\"user-id-input\">Your Discogs Username</label>\n        <input type=\"user-id\" id=\"username\" class=\"form-control\" placeholder=\"Enter Discogs Username\">\n        <input type=\"image\" id=\"username-submit\" src=\"images/cassette-btn.png\" alt=\"Submit\">\n        <br>\n        <label for=\"image\">&nbsp;Submit</label>\n      </div>  \n    </div>\n  </div>\n</section>\n\n\n<article class=\"gatekeeper\">\n  <div class=\"row\">\n    <div class=\"col-xs-12 col-md-12\">\n      <div id=\"status\">\n        This page renders the Discogs collections and wantlists of anyone who keeps those lists public.<br /><br />\n        In order to access these lists - type your own Discogs username into the box.<br /><br />\n        You will only get access if your own lists are public. This site is about sharing. <br /><br />\n        Please respect these intentions.<br /><br />\n        Share generously, dig deeply, these are everyone's jams.<br /><br />\n        <div class=\"link\"><a href=\"https://www.discogs.com/settings/privacy\">Visit Discogs to manage your privacy settings</a></div>\n      </div>\n    </div>\n  </div>\n</article>";
   });
 
 },{"hbsfy/runtime":"/Users/jmej/pcs/capstone/capstone/node_modules/hbsfy/runtime.js"}],"/Users/jmej/pcs/capstone/capstone/public/templates/main.hbs":[function(require,module,exports){
@@ -9587,6 +9587,15 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   var buffer = "", stack1, helper, functionType="function", escapeExpression=this.escapeExpression, self=this;
 
 function program1(depth0,data) {
+  
+  var buffer = "";
+  buffer += "\n              <li role=\"presentation\"><a role=\"menuitem\" tabindex=\"-1\" href=\"#\">"
+    + escapeExpression((typeof depth0 === functionType ? depth0.apply(depth0) : depth0))
+    + "</a></li>\n              ";
+  return buffer;
+  }
+
+function program3(depth0,data) {
   
   var buffer = "", stack1, helper;
   buffer += "\n            <li><a href=\"#/";
@@ -9613,7 +9622,7 @@ function program1(depth0,data) {
   return buffer;
   }
 
-function program3(depth0,data) {
+function program5(depth0,data) {
   
   var buffer = "", stack1, helper;
   buffer += "\n            <div class=\"col-md-4\">\n              <div class=\"js-lazyYT\" data-youtube-id=";
@@ -9636,7 +9645,7 @@ function program3(depth0,data) {
   return buffer;
   }
 
-function program5(depth0,data) {
+function program7(depth0,data) {
   
   var buffer = "", stack1, helper;
   buffer += "\n              <li><a href=\"#/";
@@ -9671,7 +9680,10 @@ function program5(depth0,data) {
   if (helper = helpers.list) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.list); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
-    + "</h4> \n  </div>\n      \n  <div class=\"row\">\n    <div class=\"col-xs-12 col-md-4\">\n        <div>\n          <div class=\"username-form\">\n            <label for=\"user-id-input\">Discogs Username</label>\n            <input type=\"user-id\" id=\"username\" class=\"form-control\" placeholder=\"Enter Discogs Username\">\n          </div>\n          <input type=\"image\" id=\"username-submit\" src=\"images/cassette-btn.png\" alt=\"Submit\">\n          <br>\n          <label for=\"image\">&nbsp;Submit</label>\n        </div>\n        <ul class=\"nav nav-pills\">\n          <li class=\"dropdown\">\n            <a class=\"dropdown-toggle\" data-toggle=\"dropdown\" href=\"#\" style=\"margin-top:50%;\">\n              Users<span class=\"caret\"></span>\n            </a>\n            <ul class=\"dropdown-menu\" role=\"menu\">\n              <li>Christian</li>\n              <li>Jesse</li>\n              <li>Kyle</li>\n            </ul>\n          </li>\n        </ul>\n      </div>  \n      \n      <div class=\"col-xs-12 col-md-8\">\n        \n        <div class=\"text-center\">\n          <ul class=\"nav nav-pills center-pills\" id=\"want-collection\">\n            <li><a href=\"#/";
+    + "</h4> \n  </div>\n      \n  <div class=\"row\">\n    <div class=\"col-xs-12 col-md-4\">\n        <div>\n          <div class=\"username-form\">\n            <label for=\"user-id-input\">Discogs Username</label>\n            <input type=\"user-id\" id=\"username\" class=\"form-control\" placeholder=\"Enter Discogs Username\">\n          </div>\n          <input type=\"image\" id=\"username-submit\" src=\"images/cassette-btn.png\" alt=\"Submit\">\n          <br>\n          <label for=\"image\">&nbsp;Submit</label>\n        </div>\n        <ul class=\"nav nav-pills\">\n          <li class=\"dropdown\">\n            <a class=\"dropdown-toggle\" data-toggle=\"dropdown\" href=\"\" style=\"margin-top:50%;\">\n              Users<span class=\"caret\"></span>\n            </a>\n            <ul class=\"dropdown-menu\" role=\"menu\" aria-labelledby=\"dropdownMenu1\">\n              ";
+  stack1 = helpers.each.call(depth0, (depth0 && depth0.usernames), {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n            </ul>\n          </li>\n        </ul>\n      </div>  \n      \n      <div class=\"col-xs-12 col-md-8\">\n        \n        <div class=\"text-center\">\n          <ul class=\"nav nav-pills center-pills\" id=\"want-collection\">\n            <li><a href=\"#/";
   if (helper = helpers.user) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.user); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
@@ -9700,7 +9712,7 @@ function program5(depth0,data) {
   else { helper = (depth0 && depth0.first); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
     + "\">&laquo;</a></li>\n            ";
-  stack1 = helpers.each.call(depth0, (depth0 && depth0.pages), {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
+  stack1 = helpers.each.call(depth0, (depth0 && depth0.pages), {hash:{},inverse:self.noop,fn:self.program(3, program3, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n            <li><a href=\"#/";
   if (helper = helpers.user) { stack1 = helper.call(depth0, {hash:{},data:data}); }
@@ -9715,7 +9727,7 @@ function program5(depth0,data) {
   else { helper = (depth0 && depth0.last); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
     + "\">&raquo;</a></li>\n          </ul>\n        </div>\n\n        <div id=\"youtube-container\">\n          <div class=\"row\" id=\"youtube-vids\">\n            ";
-  stack1 = helpers.each.call(depth0, (depth0 && depth0.releases), {hash:{},inverse:self.noop,fn:self.program(3, program3, data),data:data});
+  stack1 = helpers.each.call(depth0, (depth0 && depth0.releases), {hash:{},inverse:self.noop,fn:self.program(5, program5, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n          </div>\n        </div>\n          <div>\n            <ul class=\"pagination\">\n              <li><a href=\"#/";
   if (helper = helpers.user) { stack1 = helper.call(depth0, {hash:{},data:data}); }
@@ -9730,7 +9742,7 @@ function program5(depth0,data) {
   else { helper = (depth0 && depth0.first); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
     + "\">&laquo;</a></li>\n              ";
-  stack1 = helpers.each.call(depth0, (depth0 && depth0.pages), {hash:{},inverse:self.noop,fn:self.program(5, program5, data),data:data});
+  stack1 = helpers.each.call(depth0, (depth0 && depth0.pages), {hash:{},inverse:self.noop,fn:self.program(7, program7, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n              <li><a href=\"#/";
   if (helper = helpers.user) { stack1 = helper.call(depth0, {hash:{},data:data}); }
