@@ -23,7 +23,7 @@
 .username-submit-main {
   width: 35%;
   max-width: 100px;
-  margin-top: 2%;
+  margin-top: 4%;
 }
 
 .username-submit-init:hover {
@@ -37,6 +37,10 @@
 #username-form-init {
   width: 50%;
   margin: auto;
+}
+
+#username-form-main {
+  margin-top: 280px;
 }
 
 .gatekeeper {
