@@ -33,11 +33,9 @@ app.get('/', function (req, res) {
   res.render('./index.html');
 });
 
-app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
-});
+app.get('/test', function (req, res){
+  res.send(200,'testing 1 2 3');
+})
 
 app.get('/api/discogsUsers', function (req, res) {
   var rpUsers = [];
@@ -47,9 +45,10 @@ app.get('/api/discogsUsers', function (req, res) {
       rpUsers.push(item.value);
     });
     res.json(rpUsers);
+    //res.send('hello, this is the discogsUsers route');
   })
   .fail(function (err) {
-    console.error(err);
+    console.error(err.body);
   });
 });
 
@@ -63,7 +62,7 @@ app.get('/api/discogsUsers/:id', function (req, res) {
     res.json(rpUsers);
   })
   .fail(function (err) {
-    console.error(err);
+    console.error(err.body);
   });
 });
 
@@ -75,46 +74,50 @@ app.post('/api/discogsUsers', function (req, res){
     res.send(200, 'Welcome Discogs User');
   })
   .fail(function (err) {
-    console.error(err);
+    console.error(err.body);
   });
 });
 
 app.put('/api/discogsUsers/:id', function (req, res){
   req.accepts('application/json');
-  var rpUsers = req.body;
-  db.put('rpUsers', rpUsers.id, rpUsers.user, false)
+  var rpUser = req.body;
+  console.log(rpUser);
+  db.put('rpUsers', req.params.id, rpUser, false)
   .then(function (){
     res.send(200, 'Welcome Discogs User');
   })
   .fail(function (err) {
-    res.send(err);
+    console.error(err.body);
   });
+});
+
+
+app.use(function(req, res, next) {
+  var err = new Error('Not Found');
+  err.status = 404;
+  next(err);
 });
 
 if (app.get('env') === 'development') {
     app.use(function(err, req, res, next) {
         res.status(err.status || 500);
-        // res.render('error', {
-        //     message: err.message,
-        //     error: err
-        // });
-    res.send(err);
+        res.render('error', {
+            message: err.message,
+            error: err
+        });
     });
 }
 
 app.use(function(err, req, res, next) {
     res.status(err.status || 500);
-    // res.render('error', {
-    //     message: err.message,
-    //     error: {}
-    // });
-    res.send(err);
+    res.render('error', {
+        message: err.message,
+        error: {}
+    });
 });
 
-app.set('port', process.env.PORT || 3000);
 
 
-
-app.listen(app.get('port'), function() {
-  console.log('Express server listening on port # ' + app.get('port'));
+app.listen(3000,'127.0.0.1', function() {
+  console.log('Express server listening on port #3000');
 });

@@ -8,9 +8,6 @@ Backbone.$ = $;
 var htmlTemplate = require('../../templates/main.hbs');
 var loginHTML = require('../../templates/login.hbs');
 
-
-
-
 var MainView = Backbone.View.extend({
   el: '#my-app',
 
@@ -41,7 +38,7 @@ var MainView = Backbone.View.extend({
       var $user = $('.username-form').find('#username');
       var userName = $user.val();
       $.getJSON('http://api.discogs.com/users/'+userName+'?callback=?')
-        .done(function(data){
+        .always(function(data){
          // console.log("success");
         if (data.data.num_wantlist == undefined){
             alert("Please got to discogs.com and share (and/or) populate your wantlist to use this site!");
@@ -52,14 +49,14 @@ var MainView = Backbone.View.extend({
             self.discogs(self.userName, self.currentList, self.currentPage);
             
 
-          var date = Date.now();
-          var collectionFromInput = {
-            user: userName,
-            creationDate: date,
-            id: 'user' + date
-          };
-          self.collection.create( collectionFromInput, {validate: true});
-          console.log(self.collection.models);
+            var date = Date.now();
+            var collectionFromInput = {
+              user: userName,
+              creationDate: date,
+              id: 'user' + date
+            };
+            self.collection.create( collectionFromInput);
+            console.log(self.collection.models);
           }
         }).fail(function(event, jqxhr, exception) {
               if (jqxhr.status == 404) {
