@@ -21,7 +21,6 @@ build/Release
 
 config.js
 
-bundle.js
 
 # Dependency directory
 # Deployed apps should consider commenting this line out:
