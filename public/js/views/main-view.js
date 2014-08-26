@@ -8,9 +8,6 @@ Backbone.$ = $;
 var htmlTemplate = require('../../templates/main.hbs');
 var loginHTML = require('../../templates/login.hbs');
 
-
-
-
 var MainView = Backbone.View.extend({
   el: '#my-app',
 
@@ -41,7 +38,7 @@ var MainView = Backbone.View.extend({
       var $user = $('.username-form').find('#username');
       var userName = $user.val();
       $.getJSON('http://api.discogs.com/users/'+userName+'?callback=?')
-        .done(function(data){
+        .always(function(data){
          // console.log("success");
         if (data.data.num_wantlist == undefined){
             alert("Please got to discogs.com and share (and/or) populate your wantlist to use this site!");
@@ -51,7 +48,6 @@ var MainView = Backbone.View.extend({
             self.currentPage = 1;
             self.discogs(self.userName, self.currentList, self.currentPage);
             
-
           var date = Date.now();
           var collectionFromInput = {
             user: userName,
@@ -60,9 +56,10 @@ var MainView = Backbone.View.extend({
           };
           self.collection.create( collectionFromInput );
           console.log(self.collection.models);
-          
+          console.log(userName)
         }
       }).fail(function(event, jqxhr, exception) {
+
               if (jqxhr.status == 404) {
               console.log("user doesn't exist");   
               }
@@ -72,6 +69,7 @@ var MainView = Backbone.View.extend({
   initialize: function (options) {
     //console.log("intialize function ran");
     this.collection = options.collection;
+    this.collection.fetch();
     if (options.user == undefined){
       $(this.el).html(loginHTML());
     }else{
@@ -152,9 +150,10 @@ var MainView = Backbone.View.extend({
   render: function (template) {
     $(this.el).html(htmlTemplate(template));
     $('.js-lazyYT').lazyYT(); 
-    this.collection.forEach(function(item){
-      var user = item.get(user);
-      var html = "<li>"+user+"</li>";
+    this.collection.each(function(item){
+      console.log(item.get("user"));
+      var Duser = item.get("user");
+      var html = "<li>"+Duser+"</li>";
       $(".dropdown-menu").append(html);
     })
    // $(this.el).html(myTemplate({entries:[{youtube: data, discogs: data},{...}]}))
