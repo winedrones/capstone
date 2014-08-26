@@ -2,10 +2,36 @@
   display: inline-block; 
 }*/
 
+* {
+  ms-box-sizing: border-box;
+  moz-box-sizing: border-box;
+  webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
 
-#username-submit {
-  width: 25%;
+#username {
   margin-top: 2%;
+}
+
+.username-submit-init {
+  width: 24%;
+  margin-top: 4%;
+  margin-left: 38%;
+  margin-right: 38%;
+}
+
+.username-submit-main {
+  width: 35%;
+  max-width: 100px;
+  margin-top: 2%;
+}
+
+.username-submit-init:hover {
+  opacity: .5;
+}
+
+.username-submit-main:hover {
+  opacity: .5;
 }
 
 .username-form {
@@ -21,13 +47,9 @@
 }
 
 .pagination {
-  margin-right: 53%;
-/*  margin-top: 2%;
+ /* margin-right: 53%;
+  margin-top: 2%;
   margin-bottom: 2%;*/
-}
-
-#want-collection {
-  margin-right: 53%;
 }
 
 .rec-img {
@@ -35,9 +57,9 @@
 }
 
 .rec-img img {
-  width: 16%;
-  margin-left: 42%;
-  margin-right: 42%;
+  width: 12%;
+  margin-left: 44%;
+  margin-right: 44%;
 }
 
 #userlist .dropdown-menu li {
@@ -46,12 +68,38 @@
 }
 
 #want-collection {
-  padding-top: 5%;
-  margin-bottom: 5%;
+  margin-left: center;
+  margin-right: center;
 }
 
-#youtube-vids {
-  padding-bottom: 4%;
+.vid-nav {
+  text-align: center;
+}
+
+#nav-select {
+  display: inline-block;
+  width: 51%;
+  /*border: 2px solid red;*/
+}
+
+.pag-wrapper {
+  display: inline-block;
+  width: 51%;
+  /*border: 2px solid green;*/
+}
+
+.lazy-wrapper{
+  height: 240px;
+}
+
+.pill-outer {
+  text-align: center;
+}
+
+.pill-wrap {
+  display: inline-block;
+  width: 75%;
+  padding-left: 15%;
 }
 
 .spinner {
