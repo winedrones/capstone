@@ -79,10 +79,10 @@ app.post('/api/discogsUsers', function (req, res){
 app.put('/api/discogsUsers/:id', function (req, response){
   req.accepts('application/json');
   var rpUser = req.body;
-  console.log(rpUser);
+  //console.log(rpUser);
   db.search('rpUsers', rpUser.user)
     .then(function (res) {
-      console.log("search response ",res.body);
+      //console.log("search response ",res.body);
     if (res.body.count == 0){
       db.put('rpUsers', req.params.id, rpUser, false)
       .then(function (){

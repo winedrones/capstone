@@ -12,22 +12,7 @@ var MainView = Backbone.View.extend({
   el: '#my-app',
 
   events: {
-    'click #username-submit': 'addUsername',
-    'click #wantlist' : 'renderWants',
-    'click #collection' : 'renderCollection'
-  },
-
-  renderWants: function(){
-    this.currentPage = 1;
-    this.currentList = "wants";
-    this.discogs(this.userName, this.currentList, this.currentPage);
-    
-  },
-
-  renderCollection: function(){
-    this.currentPage = 1;
-    this.currentList = "collection";
-    this.discogs(this.userName, this.currentList, this.currentPage);
+    'click #username-submit': 'addUsername'
   },
   records: {releases:[], pages:[]},
   
@@ -44,7 +29,7 @@ var MainView = Backbone.View.extend({
             alert("Please got to discogs.com and share (and/or) populate your wantlist to use this site!");
           }else{
             self.userName = userName;
-            self.currentList = "wants";
+            self.currentList = "wantlist";
             self.currentPage = 1;
             self.discogs(self.userName, self.currentList, self.currentPage);
             
@@ -68,9 +53,15 @@ var MainView = Backbone.View.extend({
   },
 
   initialize: function (options) {
-    //console.log("intialize function ran");
-    this.collection = options.collection;
-    this.collection.fetch();
+      this.userName = options.user;
+      this.currentList = options.list;
+      this.currentPage = options.page;
+      this.collection = options.collection;
+      this.collection.fetch();
+
+  },
+
+  login: function (options) {
     if (options.user == undefined){
       $(this.el).html(loginHTML());
     }else{
@@ -93,7 +84,7 @@ var MainView = Backbone.View.extend({
     $("#youtube-vids").replaceWith(animationHtml); //loading status thing
 
     var getIds = function(list, callback, page){ //gets every release id in users wantlist and passes as an array to getVids function
-      if (list == "wants"){
+      if (list == "wantlist"){
         var apiCall = 'http://api.discogs.com/users/'+user+'/wants?page='+page+'&callback=?';
       }else if (list == "collection"){
         var apiCall = 'http://api.discogs.com/users/'+user+'/collection/folders/0/releases?page='+page+'&callback=?';
@@ -103,7 +94,7 @@ var MainView = Backbone.View.extend({
       $.getJSON(apiCall)
         .done(function(data){ //this returns JSONP handled in a callback. Need to traverse an extra data (data.data). property to get to the stuff we care about
           var data = data;
-          if(list == "wants"){
+          if(list == "wantlist"){
             var arr = data.data.wants;
           }else if(list == "collection"){
             var arr = data.data.releases;
@@ -119,7 +110,7 @@ var MainView = Backbone.View.extend({
            
         }).fail(function() {
           console.log( "get page "+page+" of "+user+"'s "+list+" from discogs failed" );
-        });
+          });
     };
 
     var getVids = function(arr){  //grabs youtube video per release in wantArr from getIds fn
@@ -138,11 +129,9 @@ var MainView = Backbone.View.extend({
           last:self.records.pages.length
         });
          }
-      }); 
-    });
-  };
-
-
+        }); 
+      });
+    };
   getIds(list, getVids, page);
   },
 
@@ -154,7 +143,7 @@ var MainView = Backbone.View.extend({
     this.collection.each(function(item){
       console.log(item.get("user"));
       var Duser = item.get("user");
-      var html = "<li>"+Duser+"</li>";
+      var html = "<li role='presentation'><a role='menuitem' tabindex='-1' href='#/"+Duser+"/wantlist/1'>"+Duser+"</a></li>";
       $(".dropdown-menu").append(html);
     })
    // $(this.el).html(myTemplate({entries:[{youtube: data, discogs: data},{...}]}))
