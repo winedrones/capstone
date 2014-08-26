@@ -53,15 +53,41 @@ app.get('/api/discogsUsers', function (req, res) {
   });
 });
 
+app.get('/api/discogsUsers/:id', function (req, res) {
+  var rpUsers = [];
+  db.get('rpUsers', req.body.id, req.body)
+  .then(function (result) {
+    result.body.results.forEach(function (item){
+      rpUsers.push(item.value);
+    });
+    res.json(rpUsers);
+  })
+  .fail(function (err) {
+    console.error(err);
+  });
+});
+
 app.post('/api/discogsUsers', function (req, res){
   req.accepts('application/json');
   var rpUsers = req.body;
-  db.put('rpUsers', user.id, user, false)
+  db.put('rpUsers', rpUsers.id, rpUsers.user, false)
   .then(function (){
     res.send(200, 'Welcome Discogs User');
   })
   .fail(function (err) {
     console.error(err);
+  });
+});
+
+app.put('/api/discogsUsers/:id', function (req, res){
+  req.accepts('application/json');
+  var rpUsers = req.body;
+  db.put('rpUsers', rpUsers.id, rpUsers.user, false)
+  .then(function (){
+    res.send(200, 'Welcome Discogs User');
+  })
+  .fail(function (err) {
+    res.send(err);
   });
 });
 

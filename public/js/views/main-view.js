@@ -54,12 +54,12 @@ var MainView = Backbone.View.extend({
 
           var date = Date.now();
           var collectionFromInput = {
-            user: usernameInput,
+            user: userName,
             creationDate: date,
             id: 'user' + date
           };
-          this.collection.create( collectionFromInput, {validate: true});
-          console.log(this.collection.models);
+          self.collection.create( collectionFromInput, {validate: true});
+          console.log(self.collection.models);
           }
         }).fail(function(event, jqxhr, exception) {
               if (jqxhr.status == 404) {
@@ -69,7 +69,8 @@ var MainView = Backbone.View.extend({
   },
 
   initialize: function (options) {
-    console.log("intialize function ran");
+    //console.log("intialize function ran");
+    this.collection = options.collection;
     if (options.user == undefined){
       $(this.el).html(loginHTML());
     }else{

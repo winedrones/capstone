@@ -3,7 +3,7 @@ var DiscogsUser = require('../models/discogsUser');
 
 var DiscogsUsers = Backbone.Collection.extend({
   model: DiscogsUser,
-  url: '../api/discogsUsers',
+  url: '/api/discogsUsers',
   comparator: 'creationDate'
 });
 
