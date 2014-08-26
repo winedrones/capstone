@@ -81,7 +81,7 @@ var MainView = Backbone.View.extend({
     var pages = undefined;
     var relArr = [];
     var animationHtml = "<div class='spinner'></div>";
-    $("#youtube-vids").replaceWith(animationHtml); //loading status thing
+    $(".lazy-wrapper").replaceWith(animationHtml); //loading status thing
 
     var getIds = function(list, callback, page){ //gets every release id in users wantlist and passes as an array to getVids function
       if (list == "wantlist"){
