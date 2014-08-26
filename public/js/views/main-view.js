@@ -8,9 +8,6 @@ Backbone.$ = $;
 var htmlTemplate = require('../../templates/main.hbs');
 var loginHTML = require('../../templates/login.hbs');
 
-
-
-
 var MainView = Backbone.View.extend({
   el: '#my-app',
 
@@ -32,10 +29,8 @@ var MainView = Backbone.View.extend({
     this.currentList = "collection";
     this.discogs(this.userName, this.currentList, this.currentPage);
   },
-
-
   records: {releases:[], pages:[]},
-
+  
   //testThing: {wants:[{discogs: 5719574, youtube: "QLnTRwpmCGs"}, {discogs: 4368235, youtube: "zH1VeQFBfW8"}]},
 
   addUsername: function() {
@@ -43,25 +38,39 @@ var MainView = Backbone.View.extend({
       var $user = $('.username-form').find('#username');
       var userName = $user.val();
       $.getJSON('http://api.discogs.com/users/'+userName+'?callback=?')
-        .done(function(data){
-          //console.log("success");
-          if (data.data.num_wantlist == undefined){
+        .always(function(data){
+         // console.log("success");
+        if (data.data.num_wantlist == undefined){
             alert("Please got to discogs.com and share (and/or) populate your wantlist to use this site!");
           }else{
             self.userName = userName;
             self.currentList = "wants";
             self.currentPage = 1;
             self.discogs(self.userName, self.currentList, self.currentPage);
+            
+          var date = Date.now();
+          var collectionFromInput = {
+            user: userName,
+            creationDate: date,
+            id: 'user' + date
+          };
+          if (self.collection.where({user:userName}).length == 0){
+          self.collection.create( collectionFromInput );}
+          //console.log(self.collection.models);
+          //console.log(userName)
           }
-        }).fail(function(event, jqxhr, exception) {
+      }).fail(function(event, jqxhr, exception) {
+
               if (jqxhr.status == 404) {
               console.log("user doesn't exist");   
               }
-        });
+          });
   },
 
   initialize: function (options) {
-    console.log("intialize function ran");
+    //console.log("intialize function ran");
+    this.collection = options.collection;
+    this.collection.fetch();
     if (options.user == undefined){
       $(this.el).html(loginHTML());
     }else{
@@ -120,7 +129,14 @@ var MainView = Backbone.View.extend({
           self.records.releases.push({youtube:rels.data.videos[0].uri.slice(-11), discogs:item, artist:rels.data.artists[0].name, title:rels.data.title}); //this adds objects for everything fetched from discogs to the records array
          }
          if (index == arr.length-1){
-         self.render({releases:self.records.releases, pages:self.records.pages, user:self.userName, list:self.currentList, first:1, last:self.records.pages.length});
+         self.render({
+          releases:self.records.releases, 
+          pages:self.records.pages, 
+          user:self.userName, 
+          list:self.currentList, 
+          first:1, 
+          last:self.records.pages.length
+        });
          }
       }); 
     });
@@ -135,6 +151,12 @@ var MainView = Backbone.View.extend({
   render: function (template) {
     $(this.el).html(htmlTemplate(template));
     $('.js-lazyYT').lazyYT(); 
+    this.collection.each(function(item){
+      console.log(item.get("user"));
+      var Duser = item.get("user");
+      var html = "<li>"+Duser+"</li>";
+      $(".dropdown-menu").append(html);
+    })
    // $(this.el).html(myTemplate({entries:[{youtube: data, discogs: data},{...}]}))
   }
 
