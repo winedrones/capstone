@@ -76,18 +76,26 @@ app.post('/api/discogsUsers', function (req, res){
   });
 });
 
-app.put('/api/discogsUsers/:id', function (req, res){
+app.put('/api/discogsUsers/:id', function (req, response){
   req.accepts('application/json');
   var rpUser = req.body;
   console.log(rpUser);
-  db.put('rpUsers', req.params.id, rpUser, false)
-  .then(function (){
-    res.send(200, 'Welcome Discogs User');
-  })
-  .fail(function (err) {
-    console.error(err.body);
+  db.search('rpUsers', rpUser.user)
+    .then(function (res) {
+      console.log("search response ",res.body);
+    if (res.body.count == 0){
+      db.put('rpUsers', req.params.id, rpUser, false)
+      .then(function (){
+        response.send(200, 'Welcome Discogs User');
+      })
+      .fail(function (err) {
+        console.error(err.body);
+      });
+    }
+    }).fail(function (err) {});
+    console.log("put response: ",response.body);
   });
-});
+  
 
 
 app.use(function(req, res, next) {

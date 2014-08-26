@@ -54,10 +54,11 @@ var MainView = Backbone.View.extend({
             creationDate: date,
             id: 'user' + date
           };
-          self.collection.create( collectionFromInput );
-          console.log(self.collection.models);
-          console.log(userName)
-        }
+          if (self.collection.where({user:userName}).length == 0){
+          self.collection.create( collectionFromInput );}
+          //console.log(self.collection.models);
+          //console.log(userName)
+          }
       }).fail(function(event, jqxhr, exception) {
 
               if (jqxhr.status == 404) {
