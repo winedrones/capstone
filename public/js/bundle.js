@@ -11715,7 +11715,7 @@ function stringify(obj, fn, spaces, decycle) {
 stringify.getSerialize = getSerialize;
 
 },{}],"/Users/user1/Desktop/capstone/node_modules/request/node_modules/mime-types/lib/custom.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
+module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
   "text/jade": [
     "jade"
   ],
@@ -11821,7 +11821,7 @@ function define(json) {
 }
 
 },{"./custom.json":"/Users/user1/Desktop/capstone/node_modules/request/node_modules/mime-types/lib/custom.json","./mime.json":"/Users/user1/Desktop/capstone/node_modules/request/node_modules/mime-types/lib/mime.json","./node.json":"/Users/user1/Desktop/capstone/node_modules/request/node_modules/mime-types/lib/node.json"}],"/Users/user1/Desktop/capstone/node_modules/request/node_modules/mime-types/lib/mime.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
+module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
   "application/1d-interleaved-parityfec": [],
   "application/3gpp-ims+xml": [],
   "application/activemessage": [],
@@ -15140,7 +15140,7 @@ module.exports=module.exports=module.exports=module.exports=module.exports=modul
 }
 
 },{}],"/Users/user1/Desktop/capstone/node_modules/request/node_modules/mime-types/lib/node.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
+module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
   "text/vtt": [
     "vtt"
   ],
@@ -18887,10 +18887,10 @@ function program5(depth0,data) {
   return buffer;
   }
 
-  buffer += "\n<div class=\"col-xs-12 col-sm-3 col-md-3\" style=\"padding-top: 1.5%;\">\n  <div class=\"row\" style=\"margin-bottom:2%;\">\n    <h2 class=\"text-center\">Record Pool</h2>\n  </div>\n  \n  <div class=\"row rec-img\">\n    <img src=\"images/Record2.png\" alt=\"Record Image\">\n  </div>\n\n  <div>\n    <div class=\"username-form\" id=\"username-form-main\">\n      <label for=\"user-id-input\">Discogs Username</label>\n      <input type=\"user-id\" id=\"username\" class=\"form-control\">\n    </div>\n    <input type=\"image\" id=\"username-submit\" class=\"username-submit-main\" src=\"images/cassette-btn3.png\" alt=\"Submit\">\n  </div>\n  <ul class=\"nav nav-pills\">\n    <li class=\"dropdown\">\n      <a class=\"dropdown-toggle\" data-toggle=\"dropdown\" href=\"\" style=\"margin-top:50%;\">\n        Users<span class=\"caret\"></span>\n      </a>\n      <ul class=\"dropdown-menu\" role=\"menu\" aria-labelledby=\"dropdownMenu1\">\n        ";
+  buffer += "\n<div class=\"col-xs-12 col-sm-3 col-md-3\" style=\"padding-top: 1.5%;\">\n  <div class=\"row\" style=\"margin-bottom:2%;\">\n    <h2 class=\"text-center\">Record Pool</h2>\n  </div>\n  \n  <div class=\"row rec-img\">\n    <img src=\"images/Record2.png\" alt=\"Record Image\">\n  </div>\n\n  <div>\n    <div class=\"username-form\" id=\"username-form-main\">\n      <label for=\"user-id-input\">Discogs Username</label>\n      <input type=\"user-id\" id=\"username\" class=\"form-control\">\n    </div>\n    <input type=\"image\" id=\"username-submit\" class=\"username-submit-main\" src=\"images/cassette-btn3.png\" alt=\"Submit\">\n  </div>\n  \n  <article class = \"userdropdown\">\n  \n  <ul class=\"nav nav-pills\">\n    <li class=\"dropdown\">\n      <a class=\"dropdown-toggle\" data-toggle=\"dropdown\" href=\"\" style=\"margin-top:10%;\">\n        Users<span class=\"caret\"></span>\n      </a>\n      <ul class=\"dropdown-menu\" role=\"menu\" aria-labelledby=\"dropdownMenu1\">\n        ";
   stack1 = helpers.each.call(depth0, (depth0 && depth0.usernames), {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n      </ul>\n    </li>\n  </ul>\n</div>  \n  \n<div class=\"col-xs-12 col-sm-9 col-md-9\" id=\"vid-column\" style=\"padding-top: 2%;\">\n  <h4 class=\"text-center\">Viewing ";
+  buffer += "\n      </ul>\n    </li>\n  </ul>\n  \n  </article>\n\n</div>  \n  \n<div class=\"col-xs-12 col-sm-9 col-md-9\" id=\"vid-column\" style=\"padding-top: 2%;\">\n  <h4 class=\"text-center\">Viewing ";
   if (helper = helpers.user) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.user); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)

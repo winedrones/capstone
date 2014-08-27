@@ -40,9 +40,9 @@
 }
 
 .rec-img img {
-	width: 20%;
-	margin-left: 40%;
-	margin-right: 40%;
+	width: 24%;
+	margin-left: 38%;
+	margin-right: 38%;
 }
 
 .rec-img {
@@ -54,6 +54,12 @@
   width: 50%;
   margin: auto;
   text-align: center;
+}
+
+.userdropdown {
+	/*display: none;*/
+	margin-left: 38%;
+
 }
 
 }
