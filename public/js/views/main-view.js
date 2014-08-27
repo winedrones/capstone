@@ -101,6 +101,18 @@ var MainView = Backbone.View.extend({
             var arr = data.data.releases;
           } 
           pages = data.data.pagination.pages;
+                if (self.currentPage == 1){
+                    self.prevPage = 1;
+                    self.nextPage = 2;
+                  }
+                else if (self.currentPage == pages){
+                    self.prevPage = parseInt(self.currentPage)-1;
+                    self.nextPage = self.currentPage;
+                  }
+                else {
+                    self.nextPage = parseInt(self.currentPage)+1;
+                    self.prevPage = parseInt(self.currentPage)-1;
+                  };
           arr.forEach(function (item, index){ //this grabs the discogs id of every release in the array
             relArr.push(item.id);
           });
@@ -127,7 +139,9 @@ var MainView = Backbone.View.extend({
           user:self.userName, 
           list:self.currentList, 
           first:1, 
-          last:self.records.pages.length
+          last:self.records.pages.length,
+          prev:self.prevPage,
+          next:self.nextPage
         });
          }
         }); 
@@ -142,7 +156,7 @@ var MainView = Backbone.View.extend({
     $(this.el).html(htmlTemplate(template));
     $('.js-lazyYT').lazyYT(); 
     this.collection.each(function(item){
-      console.log(item.get("user"));
+      //console.log(item.get("user"));
       var Duser = item.get("user");
       var html = "<li role='presentation'><a role='menuitem' tabindex='-1' href='#/"+Duser+"/wantlist/1'>"+Duser+"</a></li>";
       $(".dropdown-menu").append(html);
