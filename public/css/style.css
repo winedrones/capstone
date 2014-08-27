@@ -1,7 +1,3 @@
-/*.center-pills { 
-  display: inline-block; 
-}*/
-
 * {
   ms-box-sizing: border-box;
   moz-box-sizing: border-box;
@@ -9,15 +5,22 @@
   box-sizing: border-box;
 }
 
+
+#vid-column {
+  border-left-style: outset;
+  min-height: 780px;
+}
+
 #username {
   margin-top: 2%;
 }
 
 .username-submit-init {
-  width: 24%;
+  width: 40%;
   margin-top: 4%;
-  margin-left: 38%;
-  margin-right: 38%;
+  margin-left: 30%;
+  margin-right: 30%;
+  max-width: 120px;
 }
 
 .username-submit-main {
@@ -39,10 +42,6 @@
   margin: auto;
 }
 
-#username-form-main {
-  margin-top: 265px;
-}
-
 .gatekeeper {
   width: 50%;
   margin: auto;
@@ -50,17 +49,21 @@
   margin-bottom: 2%;
 }
 
-.pagination {
- /* margin-right: 53%;
-  margin-top: 2%;
-  margin-bottom: 2%;*/
+.rec-img {
+  margin-bottom: 12%;
 }
 
-.rec-img {
+.rec-img-init {
   margin-bottom: 2%;
 }
 
 .rec-img img {
+  width: 40%;
+  margin-left: 30%;
+  margin-right: 30%;
+}
+
+.rec-img-init img {
   width: 14%;
   margin-left: 43%;
   margin-right: 43%;
@@ -71,25 +74,12 @@
   padding-bottom: 6%;
 }
 
-#want-collection {
-  margin-left: center;
-  margin-right: center;
-}
-
 .vid-nav {
   text-align: center;
 }
 
-#nav-select {
-  display: inline-block;
-  width: 51%;
-  /*border: 2px solid red;*/
-}
-
-.pag-wrapper {
-  display: inline-block;
-  width: 51%;
-  /*border: 2px solid green;*/
+#vid-link {
+  text-align: center;
 }
 
 .lazy-wrapper{
@@ -101,9 +91,8 @@
 }
 
 .pill-wrap {
-  display: inline-block;
-  width: 75%;
-  padding-left: 15%;
+  display: inline-block; 
+  float: center;
 }
 
 .spinner {
