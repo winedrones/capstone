@@ -1,4 +1,4 @@
-(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({"/Users/user1/Desktop/capstone/node_modules/backbone/backbone.js":[function(require,module,exports){
+(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({"/Users/ac/pcs/capstone/node_modules/backbone/backbone.js":[function(require,module,exports){
 //     Backbone.js 1.1.2
 
 //     (c) 2010-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
@@ -1608,7 +1608,7 @@
 
 }));
 
-},{"underscore":"/Users/user1/Desktop/capstone/node_modules/underscore/underscore.js"}],"/Users/user1/Desktop/capstone/node_modules/handlebars/dist/cjs/handlebars.runtime.js":[function(require,module,exports){
+},{"underscore":"/Users/ac/pcs/capstone/node_modules/underscore/underscore.js"}],"/Users/ac/pcs/capstone/node_modules/handlebars/dist/cjs/handlebars.runtime.js":[function(require,module,exports){
 "use strict";
 /*globals Handlebars: true */
 var base = require("./handlebars/base");
@@ -1641,7 +1641,7 @@ var Handlebars = create();
 Handlebars.create = create;
 
 exports["default"] = Handlebars;
-},{"./handlebars/base":"/Users/user1/Desktop/capstone/node_modules/handlebars/dist/cjs/handlebars/base.js","./handlebars/exception":"/Users/user1/Desktop/capstone/node_modules/handlebars/dist/cjs/handlebars/exception.js","./handlebars/runtime":"/Users/user1/Desktop/capstone/node_modules/handlebars/dist/cjs/handlebars/runtime.js","./handlebars/safe-string":"/Users/user1/Desktop/capstone/node_modules/handlebars/dist/cjs/handlebars/safe-string.js","./handlebars/utils":"/Users/user1/Desktop/capstone/node_modules/handlebars/dist/cjs/handlebars/utils.js"}],"/Users/user1/Desktop/capstone/node_modules/handlebars/dist/cjs/handlebars/base.js":[function(require,module,exports){
+},{"./handlebars/base":"/Users/ac/pcs/capstone/node_modules/handlebars/dist/cjs/handlebars/base.js","./handlebars/exception":"/Users/ac/pcs/capstone/node_modules/handlebars/dist/cjs/handlebars/exception.js","./handlebars/runtime":"/Users/ac/pcs/capstone/node_modules/handlebars/dist/cjs/handlebars/runtime.js","./handlebars/safe-string":"/Users/ac/pcs/capstone/node_modules/handlebars/dist/cjs/handlebars/safe-string.js","./handlebars/utils":"/Users/ac/pcs/capstone/node_modules/handlebars/dist/cjs/handlebars/utils.js"}],"/Users/ac/pcs/capstone/node_modules/handlebars/dist/cjs/handlebars/base.js":[function(require,module,exports){
 "use strict";
 var Utils = require("./utils");
 var Exception = require("./exception")["default"];
@@ -1822,7 +1822,7 @@ exports.log = log;var createFrame = function(object) {
   return obj;
 };
 exports.createFrame = createFrame;
-},{"./exception":"/Users/user1/Desktop/capstone/node_modules/handlebars/dist/cjs/handlebars/exception.js","./utils":"/Users/user1/Desktop/capstone/node_modules/handlebars/dist/cjs/handlebars/utils.js"}],"/Users/user1/Desktop/capstone/node_modules/handlebars/dist/cjs/handlebars/exception.js":[function(require,module,exports){
+},{"./exception":"/Users/ac/pcs/capstone/node_modules/handlebars/dist/cjs/handlebars/exception.js","./utils":"/Users/ac/pcs/capstone/node_modules/handlebars/dist/cjs/handlebars/utils.js"}],"/Users/ac/pcs/capstone/node_modules/handlebars/dist/cjs/handlebars/exception.js":[function(require,module,exports){
 "use strict";
 
 var errorProps = ['description', 'fileName', 'lineNumber', 'message', 'name', 'number', 'stack'];
@@ -1851,7 +1851,7 @@ function Exception(message, node) {
 Exception.prototype = new Error();
 
 exports["default"] = Exception;
-},{}],"/Users/user1/Desktop/capstone/node_modules/handlebars/dist/cjs/handlebars/runtime.js":[function(require,module,exports){
+},{}],"/Users/ac/pcs/capstone/node_modules/handlebars/dist/cjs/handlebars/runtime.js":[function(require,module,exports){
 "use strict";
 var Utils = require("./utils");
 var Exception = require("./exception")["default"];
@@ -1989,7 +1989,7 @@ exports.program = program;function invokePartial(partial, name, context, helpers
 exports.invokePartial = invokePartial;function noop() { return ""; }
 
 exports.noop = noop;
-},{"./base":"/Users/user1/Desktop/capstone/node_modules/handlebars/dist/cjs/handlebars/base.js","./exception":"/Users/user1/Desktop/capstone/node_modules/handlebars/dist/cjs/handlebars/exception.js","./utils":"/Users/user1/Desktop/capstone/node_modules/handlebars/dist/cjs/handlebars/utils.js"}],"/Users/user1/Desktop/capstone/node_modules/handlebars/dist/cjs/handlebars/safe-string.js":[function(require,module,exports){
+},{"./base":"/Users/ac/pcs/capstone/node_modules/handlebars/dist/cjs/handlebars/base.js","./exception":"/Users/ac/pcs/capstone/node_modules/handlebars/dist/cjs/handlebars/exception.js","./utils":"/Users/ac/pcs/capstone/node_modules/handlebars/dist/cjs/handlebars/utils.js"}],"/Users/ac/pcs/capstone/node_modules/handlebars/dist/cjs/handlebars/safe-string.js":[function(require,module,exports){
 "use strict";
 // Build out our basic SafeString type
 function SafeString(string) {
@@ -2001,7 +2001,7 @@ SafeString.prototype.toString = function() {
 };
 
 exports["default"] = SafeString;
-},{}],"/Users/user1/Desktop/capstone/node_modules/handlebars/dist/cjs/handlebars/utils.js":[function(require,module,exports){
+},{}],"/Users/ac/pcs/capstone/node_modules/handlebars/dist/cjs/handlebars/utils.js":[function(require,module,exports){
 "use strict";
 /*jshint -W004 */
 var SafeString = require("./safe-string")["default"];
@@ -2078,15 +2078,15 @@ exports.escapeExpression = escapeExpression;function isEmpty(value) {
 }
 
 exports.isEmpty = isEmpty;
-},{"./safe-string":"/Users/user1/Desktop/capstone/node_modules/handlebars/dist/cjs/handlebars/safe-string.js"}],"/Users/user1/Desktop/capstone/node_modules/handlebars/runtime.js":[function(require,module,exports){
+},{"./safe-string":"/Users/ac/pcs/capstone/node_modules/handlebars/dist/cjs/handlebars/safe-string.js"}],"/Users/ac/pcs/capstone/node_modules/handlebars/runtime.js":[function(require,module,exports){
 // Create a simple path alias to allow browserify to resolve
 // the runtime on a supported path.
 module.exports = require('./dist/cjs/handlebars.runtime');
 
-},{"./dist/cjs/handlebars.runtime":"/Users/user1/Desktop/capstone/node_modules/handlebars/dist/cjs/handlebars.runtime.js"}],"/Users/user1/Desktop/capstone/node_modules/hbsfy/runtime.js":[function(require,module,exports){
+},{"./dist/cjs/handlebars.runtime":"/Users/ac/pcs/capstone/node_modules/handlebars/dist/cjs/handlebars.runtime.js"}],"/Users/ac/pcs/capstone/node_modules/hbsfy/runtime.js":[function(require,module,exports){
 module.exports = require("handlebars/runtime")["default"];
 
-},{"handlebars/runtime":"/Users/user1/Desktop/capstone/node_modules/handlebars/runtime.js"}],"/Users/user1/Desktop/capstone/node_modules/jquery/dist/jquery.js":[function(require,module,exports){
+},{"handlebars/runtime":"/Users/ac/pcs/capstone/node_modules/handlebars/runtime.js"}],"/Users/ac/pcs/capstone/node_modules/jquery/dist/jquery.js":[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v2.1.1
  * http://jquery.com/
@@ -11278,7 +11278,7 @@ return jQuery;
 
 }));
 
-},{}],"/Users/user1/Desktop/capstone/node_modules/request/index.js":[function(require,module,exports){
+},{}],"/Users/ac/pcs/capstone/node_modules/request/index.js":[function(require,module,exports){
 (function (process){
 // Copyright 2010-2012 Mikeal Rogers
 //
@@ -11448,7 +11448,7 @@ request.cookie = function (str) {
 }
 
 }).call(this,require('_process'))
-},{"./lib/cookies":"/Users/user1/Desktop/capstone/node_modules/request/lib/cookies.js","./lib/copy":"/Users/user1/Desktop/capstone/node_modules/request/lib/copy.js","./request":"/Users/user1/Desktop/capstone/node_modules/request/request.js","_process":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js","util":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/util/util.js"}],"/Users/user1/Desktop/capstone/node_modules/request/lib/cookies.js":[function(require,module,exports){
+},{"./lib/cookies":"/Users/ac/pcs/capstone/node_modules/request/lib/cookies.js","./lib/copy":"/Users/ac/pcs/capstone/node_modules/request/lib/copy.js","./request":"/Users/ac/pcs/capstone/node_modules/request/request.js","_process":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js","util":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/util/util.js"}],"/Users/ac/pcs/capstone/node_modules/request/lib/cookies.js":[function(require,module,exports){
 var optional = require('./optional')
   , tough = optional('tough-cookie')
   , Cookie = tough && tough.Cookie
@@ -11490,7 +11490,7 @@ exports.jar = function() {
   return new RequestJar();
 };
 
-},{"./optional":"/Users/user1/Desktop/capstone/node_modules/request/lib/optional.js"}],"/Users/user1/Desktop/capstone/node_modules/request/lib/copy.js":[function(require,module,exports){
+},{"./optional":"/Users/ac/pcs/capstone/node_modules/request/lib/optional.js"}],"/Users/ac/pcs/capstone/node_modules/request/lib/copy.js":[function(require,module,exports){
 module.exports =
 function copy (obj) {
   var o = {}
@@ -11499,7 +11499,7 @@ function copy (obj) {
   })
   return o
 }
-},{}],"/Users/user1/Desktop/capstone/node_modules/request/lib/debug.js":[function(require,module,exports){
+},{}],"/Users/ac/pcs/capstone/node_modules/request/lib/debug.js":[function(require,module,exports){
 (function (process){
 var util = require('util')
 
@@ -11510,7 +11510,7 @@ function debug () {
 }
 
 }).call(this,require('_process'))
-},{"_process":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js","util":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/util/util.js"}],"/Users/user1/Desktop/capstone/node_modules/request/lib/getSafe.js":[function(require,module,exports){
+},{"_process":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js","util":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/util/util.js"}],"/Users/ac/pcs/capstone/node_modules/request/lib/getSafe.js":[function(require,module,exports){
 // Safe toJSON
 module.exports =
 function getSafe (self, uuid) {
@@ -11545,14 +11545,14 @@ function getSafe (self, uuid) {
 
   return safe
 }
-},{}],"/Users/user1/Desktop/capstone/node_modules/request/lib/optional.js":[function(require,module,exports){
+},{}],"/Users/ac/pcs/capstone/node_modules/request/lib/optional.js":[function(require,module,exports){
 module.exports = function(moduleName) {
   try {
     return module.parent.require(moduleName);
   } catch (e) {}
 };
 
-},{}],"/Users/user1/Desktop/capstone/node_modules/request/node_modules/forever-agent/index.js":[function(require,module,exports){
+},{}],"/Users/ac/pcs/capstone/node_modules/request/node_modules/forever-agent/index.js":[function(require,module,exports){
 module.exports = ForeverAgent
 ForeverAgent.SSL = ForeverAgentSSL
 
@@ -11673,7 +11673,7 @@ function createConnectionSSL (port, host, options) {
   return tls.connect(options);
 }
 
-},{"http":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/http-browserify/index.js","https":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/https-browserify/index.js","net":"/usr/local/lib/node_modules/watchify/node_modules/browserify/lib/_empty.js","tls":"/usr/local/lib/node_modules/watchify/node_modules/browserify/lib/_empty.js","util":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/util/util.js"}],"/Users/user1/Desktop/capstone/node_modules/request/node_modules/json-stringify-safe/stringify.js":[function(require,module,exports){
+},{"http":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/http-browserify/index.js","https":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/https-browserify/index.js","net":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/lib/_empty.js","tls":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/lib/_empty.js","util":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/util/util.js"}],"/Users/ac/pcs/capstone/node_modules/request/node_modules/json-stringify-safe/stringify.js":[function(require,module,exports){
 module.exports = stringify;
 
 function getSerialize (fn, decycle) {
@@ -11714,8 +11714,8 @@ function stringify(obj, fn, spaces, decycle) {
 
 stringify.getSerialize = getSerialize;
 
-},{}],"/Users/user1/Desktop/capstone/node_modules/request/node_modules/mime-types/lib/custom.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
+},{}],"/Users/ac/pcs/capstone/node_modules/request/node_modules/mime-types/lib/custom.json":[function(require,module,exports){
+module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
   "text/jade": [
     "jade"
   ],
@@ -11743,7 +11743,7 @@ module.exports=module.exports=module.exports=module.exports=module.exports=modul
   ]
 }
 
-},{}],"/Users/user1/Desktop/capstone/node_modules/request/node_modules/mime-types/lib/index.js":[function(require,module,exports){
+},{}],"/Users/ac/pcs/capstone/node_modules/request/node_modules/mime-types/lib/index.js":[function(require,module,exports){
 
 // types[extension] = type
 exports.types = Object.create(null)
@@ -11820,8 +11820,8 @@ function define(json) {
   })
 }
 
-},{"./custom.json":"/Users/user1/Desktop/capstone/node_modules/request/node_modules/mime-types/lib/custom.json","./mime.json":"/Users/user1/Desktop/capstone/node_modules/request/node_modules/mime-types/lib/mime.json","./node.json":"/Users/user1/Desktop/capstone/node_modules/request/node_modules/mime-types/lib/node.json"}],"/Users/user1/Desktop/capstone/node_modules/request/node_modules/mime-types/lib/mime.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
+},{"./custom.json":"/Users/ac/pcs/capstone/node_modules/request/node_modules/mime-types/lib/custom.json","./mime.json":"/Users/ac/pcs/capstone/node_modules/request/node_modules/mime-types/lib/mime.json","./node.json":"/Users/ac/pcs/capstone/node_modules/request/node_modules/mime-types/lib/node.json"}],"/Users/ac/pcs/capstone/node_modules/request/node_modules/mime-types/lib/mime.json":[function(require,module,exports){
+module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
   "application/1d-interleaved-parityfec": [],
   "application/3gpp-ims+xml": [],
   "application/activemessage": [],
@@ -15139,8 +15139,8 @@ module.exports=module.exports=module.exports=module.exports=module.exports=modul
   ]
 }
 
-},{}],"/Users/user1/Desktop/capstone/node_modules/request/node_modules/mime-types/lib/node.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
+},{}],"/Users/ac/pcs/capstone/node_modules/request/node_modules/mime-types/lib/node.json":[function(require,module,exports){
+module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
   "text/vtt": [
     "vtt"
   ],
@@ -15196,7 +15196,7 @@ module.exports=module.exports=module.exports=module.exports=module.exports=modul
   ]
 }
 
-},{}],"/Users/user1/Desktop/capstone/node_modules/request/node_modules/node-uuid/uuid.js":[function(require,module,exports){
+},{}],"/Users/ac/pcs/capstone/node_modules/request/node_modules/node-uuid/uuid.js":[function(require,module,exports){
 (function (Buffer){
 //     uuid.js
 //
@@ -15445,10 +15445,10 @@ module.exports=module.exports=module.exports=module.exports=module.exports=modul
 }).call(this);
 
 }).call(this,require("buffer").Buffer)
-},{"buffer":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/buffer/index.js","crypto":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/crypto-browserify/index.js"}],"/Users/user1/Desktop/capstone/node_modules/request/node_modules/qs/index.js":[function(require,module,exports){
+},{"buffer":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/buffer/index.js","crypto":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/crypto-browserify/index.js"}],"/Users/ac/pcs/capstone/node_modules/request/node_modules/qs/index.js":[function(require,module,exports){
 module.exports = require('./lib');
 
-},{"./lib":"/Users/user1/Desktop/capstone/node_modules/request/node_modules/qs/lib/index.js"}],"/Users/user1/Desktop/capstone/node_modules/request/node_modules/qs/lib/index.js":[function(require,module,exports){
+},{"./lib":"/Users/ac/pcs/capstone/node_modules/request/node_modules/qs/lib/index.js"}],"/Users/ac/pcs/capstone/node_modules/request/node_modules/qs/lib/index.js":[function(require,module,exports){
 // Load modules
 
 var Stringify = require('./stringify');
@@ -15465,7 +15465,7 @@ module.exports = {
     parse: Parse
 };
 
-},{"./parse":"/Users/user1/Desktop/capstone/node_modules/request/node_modules/qs/lib/parse.js","./stringify":"/Users/user1/Desktop/capstone/node_modules/request/node_modules/qs/lib/stringify.js"}],"/Users/user1/Desktop/capstone/node_modules/request/node_modules/qs/lib/parse.js":[function(require,module,exports){
+},{"./parse":"/Users/ac/pcs/capstone/node_modules/request/node_modules/qs/lib/parse.js","./stringify":"/Users/ac/pcs/capstone/node_modules/request/node_modules/qs/lib/stringify.js"}],"/Users/ac/pcs/capstone/node_modules/request/node_modules/qs/lib/parse.js":[function(require,module,exports){
 // Load modules
 
 var Utils = require('./utils');
@@ -15618,7 +15618,7 @@ module.exports = function (str, depth) {
 
 
 
-},{"./utils":"/Users/user1/Desktop/capstone/node_modules/request/node_modules/qs/lib/utils.js"}],"/Users/user1/Desktop/capstone/node_modules/request/node_modules/qs/lib/stringify.js":[function(require,module,exports){
+},{"./utils":"/Users/ac/pcs/capstone/node_modules/request/node_modules/qs/lib/utils.js"}],"/Users/ac/pcs/capstone/node_modules/request/node_modules/qs/lib/stringify.js":[function(require,module,exports){
 (function (Buffer){
 // Load modules
 
@@ -15674,7 +15674,7 @@ module.exports = function (obj) {
 };
 
 }).call(this,require("buffer").Buffer)
-},{"buffer":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/buffer/index.js"}],"/Users/user1/Desktop/capstone/node_modules/request/node_modules/qs/lib/utils.js":[function(require,module,exports){
+},{"buffer":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/buffer/index.js"}],"/Users/ac/pcs/capstone/node_modules/request/node_modules/qs/lib/utils.js":[function(require,module,exports){
 (function (Buffer){
 // Load modules
 
@@ -15809,7 +15809,7 @@ exports.compact = function (obj) {
 };
 
 }).call(this,require("buffer").Buffer)
-},{"buffer":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/buffer/index.js"}],"/Users/user1/Desktop/capstone/node_modules/request/request.js":[function(require,module,exports){
+},{"buffer":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/buffer/index.js"}],"/Users/ac/pcs/capstone/node_modules/request/request.js":[function(require,module,exports){
 (function (process,Buffer){
 var optional = require('./lib/optional')
   , http = require('http')
@@ -17241,7 +17241,7 @@ Request.prototype.toJSON = toJSON
 module.exports = Request
 
 }).call(this,require('_process'),require("buffer").Buffer)
-},{"./lib/cookies":"/Users/user1/Desktop/capstone/node_modules/request/lib/cookies.js","./lib/copy":"/Users/user1/Desktop/capstone/node_modules/request/lib/copy.js","./lib/debug":"/Users/user1/Desktop/capstone/node_modules/request/lib/debug.js","./lib/getSafe":"/Users/user1/Desktop/capstone/node_modules/request/lib/getSafe.js","./lib/optional":"/Users/user1/Desktop/capstone/node_modules/request/lib/optional.js","_process":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js","buffer":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/buffer/index.js","crypto":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/crypto-browserify/index.js","forever-agent":"/Users/user1/Desktop/capstone/node_modules/request/node_modules/forever-agent/index.js","http":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/http-browserify/index.js","json-stringify-safe":"/Users/user1/Desktop/capstone/node_modules/request/node_modules/json-stringify-safe/stringify.js","mime-types":"/Users/user1/Desktop/capstone/node_modules/request/node_modules/mime-types/lib/index.js","net":"/usr/local/lib/node_modules/watchify/node_modules/browserify/lib/_empty.js","node-uuid":"/Users/user1/Desktop/capstone/node_modules/request/node_modules/node-uuid/uuid.js","qs":"/Users/user1/Desktop/capstone/node_modules/request/node_modules/qs/index.js","querystring":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/querystring-es3/index.js","stream":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/stream-browserify/index.js","url":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/url/url.js","util":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/util/util.js","zlib":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/browserify-zlib/src/index.js"}],"/Users/user1/Desktop/capstone/node_modules/underscore/underscore.js":[function(require,module,exports){
+},{"./lib/cookies":"/Users/ac/pcs/capstone/node_modules/request/lib/cookies.js","./lib/copy":"/Users/ac/pcs/capstone/node_modules/request/lib/copy.js","./lib/debug":"/Users/ac/pcs/capstone/node_modules/request/lib/debug.js","./lib/getSafe":"/Users/ac/pcs/capstone/node_modules/request/lib/getSafe.js","./lib/optional":"/Users/ac/pcs/capstone/node_modules/request/lib/optional.js","_process":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js","buffer":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/buffer/index.js","crypto":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/crypto-browserify/index.js","forever-agent":"/Users/ac/pcs/capstone/node_modules/request/node_modules/forever-agent/index.js","http":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/http-browserify/index.js","json-stringify-safe":"/Users/ac/pcs/capstone/node_modules/request/node_modules/json-stringify-safe/stringify.js","mime-types":"/Users/ac/pcs/capstone/node_modules/request/node_modules/mime-types/lib/index.js","net":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/lib/_empty.js","node-uuid":"/Users/ac/pcs/capstone/node_modules/request/node_modules/node-uuid/uuid.js","qs":"/Users/ac/pcs/capstone/node_modules/request/node_modules/qs/index.js","querystring":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/querystring-es3/index.js","stream":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/stream-browserify/index.js","url":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/url/url.js","util":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/util/util.js","zlib":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/browserify-zlib/src/index.js"}],"/Users/ac/pcs/capstone/node_modules/underscore/underscore.js":[function(require,module,exports){
 //     Underscore.js 1.6.0
 //     http://underscorejs.org
 //     (c) 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
@@ -18586,398 +18586,9 @@ module.exports = Request
   }
 }).call(this);
 
-},{}],"/Users/user1/Desktop/capstone/public/js/collections/discogsUsers.js":[function(require,module,exports){
-var Backbone = require('backbone');
-var DiscogsUser = require('../models/discogsUser');
+},{}],"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/lib/_empty.js":[function(require,module,exports){
 
-var DiscogsUsers = Backbone.Collection.extend({
-  model: DiscogsUser,
-  url: '/api/discogsUsers',
-  comparator: 'creationDate'
-});
-
-module.exports = DiscogsUsers;
-
-
-},{"../models/discogsUser":"/Users/user1/Desktop/capstone/public/js/models/discogsUser.js","backbone":"/Users/user1/Desktop/capstone/node_modules/backbone/backbone.js"}],"/Users/user1/Desktop/capstone/public/js/main.js":[function(require,module,exports){
-var Backbone = require('backbone');
-Backbone.$ = $;
-var DiscogsUsers = require('./collections/discogsUsers')
-//added this:
-var usersCollection = new DiscogsUsers();
-
-var MainView = require('./views/main-view');
-
-var Router = Backbone.Router.extend({
-  routes: {
-    '': 'main',
-    ':user/wantlist/:page' : 'wantlist',
-    ':user/collection/:page' : 'collection'
-  },
-
-    main: function () {
-    this.mainView = new MainView({user:undefined, list:"wantlist",page:1, collection: usersCollection});
-    this.mainView.login({user:undefined, list:"wantlist",page:1}); 
-
-  },
-    wantlist: function (user, page) {
-    this.mainView = new MainView({user:user, list:"wantlist",page:page, collection: usersCollection});
-    this.mainView.discogs(this.mainView.userName, "wantlist", this.mainView.currentPage);
-    //this.mainView.discgs(user, "wants", page); 
-
-  },
-    collection: function (user, page) {
-
-    this.mainView = new MainView({user: user, list:"collection",page:page, collection: usersCollection})
-    this.mainView.discogs(this.mainView.userName, "collection", this.mainView.currentPage);
-
-  }
-});
-
-$(function () {
-  window.app = new Router();
-  Backbone.history.start();
-});
-},{"./collections/discogsUsers":"/Users/user1/Desktop/capstone/public/js/collections/discogsUsers.js","./views/main-view":"/Users/user1/Desktop/capstone/public/js/views/main-view.js","backbone":"/Users/user1/Desktop/capstone/node_modules/backbone/backbone.js"}],"/Users/user1/Desktop/capstone/public/js/models/discogsUser.js":[function(require,module,exports){
-var $ = require('jquery');
-var Backbone = require('backbone');
-Backbone.$ = $;
-
-var discogsUser = Backbone.Model.extend({
-  urlRoot: '/api/discogsUsers'
-});
-
-module.exports = discogsUser;
-
-
-},{"backbone":"/Users/user1/Desktop/capstone/node_modules/backbone/backbone.js","jquery":"/Users/user1/Desktop/capstone/node_modules/jquery/dist/jquery.js"}],"/Users/user1/Desktop/capstone/public/js/views/main-view.js":[function(require,module,exports){
-var Backbone = require('backbone');
-var http = require('http');
-var url = require('url');
-var request = require('request');
-
-Backbone.$ = $;
-
-var htmlTemplate = require('../../templates/main.hbs');
-var loginHTML = require('../../templates/login.hbs');
-
-var MainView = Backbone.View.extend({
-  el: '#my-app',
-
-  events: {
-    'click #username-submit': 'addUsername'
-  },
-  records: {releases:[], pages:[]},
-  
-  //testThing: {wants:[{discogs: 5719574, youtube: "QLnTRwpmCGs"}, {discogs: 4368235, youtube: "zH1VeQFBfW8"}]},
-
-  addUsername: function() {
-      var self = this;
-      var $user = $('.username-form').find('#username');
-      var userName = $user.val();
-      $.getJSON('http://api.discogs.com/users/'+userName+'?callback=?')
-        .always(function(data){
-         // console.log("success");
-        if (data.data.num_wantlist == undefined){
-            alert("Please got to discogs.com and share (and/or) populate your wantlist to use this site!");
-          }else{
-            self.userName = userName;
-            self.currentList = "wantlist";
-            self.currentPage = 1;
-            self.discogs(self.userName, self.currentList, self.currentPage);
-            
-          var date = Date.now();
-          var collectionFromInput = {
-            user: userName,
-            creationDate: date,
-            id: 'user' + date
-          };
-          if (self.collection.where({user:userName}).length == 0){
-          self.collection.create( collectionFromInput );}
-          //console.log(self.collection.models);
-          //console.log(userName)
-          }
-      }).fail(function(event, jqxhr, exception) {
-
-              if (jqxhr.status == 404) {
-              console.log("user doesn't exist");   
-              }
-          });
-  },
-
-  initialize: function (options) {
-      this.userName = options.user;
-      this.currentList = options.list;
-      this.currentPage = options.page;
-      this.collection = options.collection;
-      this.collection.fetch();
-
-  },
-
-  login: function (options) {
-    if (options.user == undefined){
-      $(this.el).html(loginHTML());
-    }else{
-      this.userName = options.user;
-      this.currentList = options.list;
-      this.currentPage = options.page;
-      this.discogs(this.userName, this.currentList, this.currentPage);
-    }
-
-  },
-
-  discogs: function(user, list, page){ //list needs to be "wants" or "collection"
-    this.records = {releases:[], pages:[]};
-    //console.log("from discogsfn top - list = "+list);
-    var self = this;
-    //var wantList = {};
-    var pages = undefined;
-    var relArr = [];
-    var animationHtml = "<div class='spinner'></div>";
-    $(".lazy-wrapper").replaceWith(animationHtml); //loading status thing
-    $("#status").replaceWith(animationHtml);
-
-    var getIds = function(list, callback, page){ //gets every release id in users wantlist and passes as an array to getVids function
-      if (list == "wantlist"){
-        var apiCall = 'http://api.discogs.com/users/'+user+'/wants?page='+page+'&callback=?';
-      }else if (list == "collection"){
-        var apiCall = 'http://api.discogs.com/users/'+user+'/collection/folders/0/releases?page='+page+'&callback=?';
-      }
-      self.currentPage = page;
-      //console.log("api call = "+apiCall);
-      $.getJSON(apiCall)
-        .done(function(data){ //this returns JSONP handled in a callback. Need to traverse an extra data (data.data). property to get to the stuff we care about
-          var data = data;
-          if(list == "wantlist"){
-            var arr = data.data.wants;
-          }else if(list == "collection"){
-            var arr = data.data.releases;
-          } 
-          pages = data.data.pagination.pages;
-          arr.forEach(function (item, index){ //this grabs the discogs id of every release in the array
-            relArr.push(item.id);
-          });
-          for (var i = 0; i<pages; i++){ //fills the pages array with the api returned pagination numbers
-            self.records.pages.push({page:i+1, user:user, list:list});
-          };           
-            callback(relArr);
-           
-        }).fail(function() {
-          console.log( "get page "+page+" of "+user+"'s "+list+" from discogs failed" );
-          });
-    };
-
-    var getVids = function(arr){  //grabs youtube video per release in wantArr from getIds fn
-      arr.forEach(function (item, index){
-        $.getJSON('http://api.discogs.com/releases/'+item+'?callback=?').done(function(rels){
-          if (rels.data.videos){
-          self.records.releases.push({youtube:rels.data.videos[0].uri.slice(-11), discogs:item, artist:rels.data.artists[0].name, title:rels.data.title}); //this adds objects for everything fetched from discogs to the records array
-         }
-         if (index == arr.length-1){
-         self.render({
-          releases:self.records.releases, 
-          pages:self.records.pages, 
-          user:self.userName, 
-          list:self.currentList, 
-          first:1, 
-          last:self.records.pages.length
-        });
-         }
-        }); 
-      });
-    };
-  getIds(list, getVids, page);
-  },
-
-    
-
-  render: function (template) {
-    $(this.el).html(htmlTemplate(template));
-    $('.js-lazyYT').lazyYT(); 
-    this.collection.each(function(item){
-      console.log(item.get("user"));
-      var Duser = item.get("user");
-      var html = "<li role='presentation'><a role='menuitem' tabindex='-1' href='#/"+Duser+"/wantlist/1'>"+Duser+"</a></li>";
-      $(".dropdown-menu").append(html);
-    })
-   // $(this.el).html(myTemplate({entries:[{youtube: data, discogs: data},{...}]}))
-  }
-
-});
-
-
-module.exports = MainView;
-
-},{"../../templates/login.hbs":"/Users/user1/Desktop/capstone/public/templates/login.hbs","../../templates/main.hbs":"/Users/user1/Desktop/capstone/public/templates/main.hbs","backbone":"/Users/user1/Desktop/capstone/node_modules/backbone/backbone.js","http":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/http-browserify/index.js","request":"/Users/user1/Desktop/capstone/node_modules/request/index.js","url":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/url/url.js"}],"/Users/user1/Desktop/capstone/public/templates/login.hbs":[function(require,module,exports){
-// hbsfy compiled Handlebars template
-var Handlebars = require('hbsfy/runtime');
-module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
-  this.compilerInfo = [4,'>= 1.0.0'];
-helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
-  
-
-
-  return "<div class=\"row\" style=\"margin-bottom:2%;\">\n  <h1 class=\"text-center\">Record Pool</h1>\n</div>\n\n<div class=\"row rec-img-init\">\n  <img src=\"images/Record3.png\" alt=\"Record Image\">\n</div>\n\n<div class=\"row\"> \n  <div class=\"col-xs-12 col-md-12\">\n    <div class=\"username-form\" id=\"username-form-init\" style=\"text-align:center\">\n      <label for=\"user-id-input\">Discogs Username</label>\n      <input type=\"user-id\" id=\"username\" class=\"form-control\" style=\"text-align:center\">\n      <input type=\"image\" id=\"username-submit\" class=\"username-submit-init\" src=\"images/cassette-btn3.png\" alt=\"Submit\">\n    </div>  \n  </div>\n</div>\n\n<article class=\"gatekeeper\">\n  <div class=\"row\">\n    <div class=\"col-xs-12 col-md-12\">\n      <div id=\"status\">\n        This page renders the Discogs collections and wantlists of anyone who keeps those lists public.<br /><br />\n        In order to access these lists - type your own Discogs username into the box.<br /><br />\n        You will only get access if your own lists are public. This site is about sharing. <br /><br />\n        Please respect these intentions.<br /><br />\n        Share generously, dig deeply, these are everyone's jams.<br /><br />\n        <div class=\"link\"><a href=\"https://www.discogs.com/settings/privacy\">Visit Discogs to manage your privacy settings</a></div>\n      </div>\n    </div>\n  </div>\n</article>\n";
-  });
-
-},{"hbsfy/runtime":"/Users/user1/Desktop/capstone/node_modules/hbsfy/runtime.js"}],"/Users/user1/Desktop/capstone/public/templates/main.hbs":[function(require,module,exports){
-// hbsfy compiled Handlebars template
-var Handlebars = require('hbsfy/runtime');
-module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
-  this.compilerInfo = [4,'>= 1.0.0'];
-helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
-  var buffer = "", stack1, helper, functionType="function", escapeExpression=this.escapeExpression, self=this;
-
-function program1(depth0,data) {
-  
-  var buffer = "";
-  buffer += "\n          <li role=\"presentation\"><a role=\"menuitem\" tabindex=\"-1\" href=\"#\">"
-    + escapeExpression((typeof depth0 === functionType ? depth0.apply(depth0) : depth0))
-    + "</a></li>\n          ";
-  return buffer;
-  }
-
-function program3(depth0,data) {
-  
-  var buffer = "", stack1, helper;
-  buffer += "\n        <li><a href=\"#/";
-  if (helper = helpers.user) { stack1 = helper.call(depth0, {hash:{},data:data}); }
-  else { helper = (depth0 && depth0.user); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
-  buffer += escapeExpression(stack1)
-    + "/";
-  if (helper = helpers.list) { stack1 = helper.call(depth0, {hash:{},data:data}); }
-  else { helper = (depth0 && depth0.list); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
-  buffer += escapeExpression(stack1)
-    + "/";
-  if (helper = helpers.page) { stack1 = helper.call(depth0, {hash:{},data:data}); }
-  else { helper = (depth0 && depth0.page); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
-  buffer += escapeExpression(stack1)
-    + "\" id=\"page ";
-  if (helper = helpers.page) { stack1 = helper.call(depth0, {hash:{},data:data}); }
-  else { helper = (depth0 && depth0.page); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
-  buffer += escapeExpression(stack1)
-    + "\">";
-  if (helper = helpers.page) { stack1 = helper.call(depth0, {hash:{},data:data}); }
-  else { helper = (depth0 && depth0.page); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
-  buffer += escapeExpression(stack1)
-    + "</a></li>\n        ";
-  return buffer;
-  }
-
-function program5(depth0,data) {
-  
-  var buffer = "", stack1, helper;
-  buffer += "\n    <div class=\"col-xs-12 col-sm-6 col-md-4\">\n      <section class=\"lazy-wrapper\">\n        <div class=\"js-lazyYT\" data-youtube-id=";
-  if (helper = helpers.youtube) { stack1 = helper.call(depth0, {hash:{},data:data}); }
-  else { helper = (depth0 && depth0.youtube); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
-  buffer += escapeExpression(stack1)
-    + " data-width=\"210\" data-height=\"157\"></div>\n        <div class=\"link\" id=\"vid-link\"><a href=\"http://www.discogs.com/release/";
-  if (helper = helpers.discogs) { stack1 = helper.call(depth0, {hash:{},data:data}); }
-  else { helper = (depth0 && depth0.discogs); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
-  buffer += escapeExpression(stack1)
-    + "\">";
-  if (helper = helpers.title) { stack1 = helper.call(depth0, {hash:{},data:data}); }
-  else { helper = (depth0 && depth0.title); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
-  buffer += escapeExpression(stack1)
-    + " by ";
-  if (helper = helpers.artist) { stack1 = helper.call(depth0, {hash:{},data:data}); }
-  else { helper = (depth0 && depth0.artist); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
-  buffer += escapeExpression(stack1)
-    + "</a></div>\n      </section>\n    </div>\n    ";
-  return buffer;
-  }
-
-  buffer += "\n<div class=\"col-xs-12 col-sm-3 col-md-3\" style=\"padding-top: 1.5%;\">\n  <div class=\"row\" style=\"margin-bottom:2%;\">\n    <h2 class=\"text-center\">Record Pool</h2>\n  </div>\n  \n  <div class=\"row rec-img\">\n    <img src=\"images/Record3.png\" alt=\"Record Image\">\n  </div>\n\n  <div>\n    <div class=\"username-form\" id=\"username-form-main\">\n      <label for=\"user-id-input\">Discogs Username</label>\n      <input type=\"user-id\" id=\"username\" class=\"form-control\">\n    </div>\n    <input type=\"image\" id=\"username-submit\" class=\"username-submit-main\" src=\"images/cassette-btn3.png\" alt=\"Submit\">\n  </div>\n  \n  <div class = \"userdropdown\">\n    <ul class=\"nav nav-pills\">\n      <li class=\"dropdown\">\n        <a class=\"dropdown-toggle\" data-toggle=\"dropdown\" href=\"\" style=\"margin-top:10%;\">\n          Users<span class=\"caret\"></span>\n        </a>\n        <ul class=\"dropdown-menu\" role=\"menu\" aria-labelledby=\"dropdownMenu1\">\n          ";
-  stack1 = helpers.each.call(depth0, (depth0 && depth0.usernames), {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
-  if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n        </ul>\n      </li>\n    </ul>\n  </div>\n\n</div>  \n  \n<div class=\"col-xs-12 col-sm-9 col-md-9\" id=\"vid-column\" style=\"padding-top: 2%;\">\n  <h4 class=\"text-center\">Viewing ";
-  if (helper = helpers.user) { stack1 = helper.call(depth0, {hash:{},data:data}); }
-  else { helper = (depth0 && depth0.user); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
-  buffer += escapeExpression(stack1)
-    + "'s ";
-  if (helper = helpers.list) { stack1 = helper.call(depth0, {hash:{},data:data}); }
-  else { helper = (depth0 && depth0.list); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
-  buffer += escapeExpression(stack1)
-    + "</h4>\n\n  <div class=\"row vid-nav\">  \n    <div id=\"nav-select\">\n      <div class=\"pill-wrap\">\n        <ul class=\"nav nav-pills center-pills\" id=\"want-collection\">\n          <li><a href=\"#/";
-  if (helper = helpers.user) { stack1 = helper.call(depth0, {hash:{},data:data}); }
-  else { helper = (depth0 && depth0.user); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
-  buffer += escapeExpression(stack1)
-    + "/wantlist/";
-  if (helper = helpers.first) { stack1 = helper.call(depth0, {hash:{},data:data}); }
-  else { helper = (depth0 && depth0.first); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
-  buffer += escapeExpression(stack1)
-    + "\" id=\"wantlist\">wantlist</a></li>\n          <li><a href=\"#/";
-  if (helper = helpers.user) { stack1 = helper.call(depth0, {hash:{},data:data}); }
-  else { helper = (depth0 && depth0.user); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
-  buffer += escapeExpression(stack1)
-    + "/collection/";
-  if (helper = helpers.first) { stack1 = helper.call(depth0, {hash:{},data:data}); }
-  else { helper = (depth0 && depth0.first); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
-  buffer += escapeExpression(stack1)
-    + "\" id=\"collection\">collection</a></li>\n        </ul>\n      </div>\n    </div>\n  </div>\n\n  <div class=\"row vid-nav\">\n    <div class=\"pag-wrapper\">\n      <ul class=\"pagination\">\n        <li><a href=\"#/";
-  if (helper = helpers.user) { stack1 = helper.call(depth0, {hash:{},data:data}); }
-  else { helper = (depth0 && depth0.user); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
-  buffer += escapeExpression(stack1)
-    + "/";
-  if (helper = helpers.list) { stack1 = helper.call(depth0, {hash:{},data:data}); }
-  else { helper = (depth0 && depth0.list); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
-  buffer += escapeExpression(stack1)
-    + "/";
-  if (helper = helpers.first) { stack1 = helper.call(depth0, {hash:{},data:data}); }
-  else { helper = (depth0 && depth0.first); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
-  buffer += escapeExpression(stack1)
-    + "\">&laquo;</a></li>\n        ";
-  stack1 = helpers.each.call(depth0, (depth0 && depth0.pages), {hash:{},inverse:self.noop,fn:self.program(3, program3, data),data:data});
-  if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n        <li><a href=\"#/";
-  if (helper = helpers.user) { stack1 = helper.call(depth0, {hash:{},data:data}); }
-  else { helper = (depth0 && depth0.user); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
-  buffer += escapeExpression(stack1)
-    + "/";
-  if (helper = helpers.list) { stack1 = helper.call(depth0, {hash:{},data:data}); }
-  else { helper = (depth0 && depth0.list); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
-  buffer += escapeExpression(stack1)
-    + "/";
-  if (helper = helpers.last) { stack1 = helper.call(depth0, {hash:{},data:data}); }
-  else { helper = (depth0 && depth0.last); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
-  buffer += escapeExpression(stack1)
-    + "\">&raquo;</a></li>\n      </ul>\n    </div>\n  </div>\n\n  <div class=\"row\">\n    ";
-  stack1 = helpers.each.call(depth0, (depth0 && depth0.releases), {hash:{},inverse:self.noop,fn:self.program(5, program5, data),data:data});
-  if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n  </div>\n  \n  <div class=\"row vid-nav\">\n    <div class=\"pag-wrapper\">\n      <ul class=\"pagination\">\n        <li><a href=\"#/";
-  if (helper = helpers.user) { stack1 = helper.call(depth0, {hash:{},data:data}); }
-  else { helper = (depth0 && depth0.user); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
-  buffer += escapeExpression(stack1)
-    + "/";
-  if (helper = helpers.list) { stack1 = helper.call(depth0, {hash:{},data:data}); }
-  else { helper = (depth0 && depth0.list); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
-  buffer += escapeExpression(stack1)
-    + "/";
-  if (helper = helpers.first) { stack1 = helper.call(depth0, {hash:{},data:data}); }
-  else { helper = (depth0 && depth0.first); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
-  buffer += escapeExpression(stack1)
-    + "\">&laquo;</a></li>\n        ";
-  stack1 = helpers.each.call(depth0, (depth0 && depth0.pages), {hash:{},inverse:self.noop,fn:self.program(3, program3, data),data:data});
-  if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n        <li><a href=\"#/";
-  if (helper = helpers.user) { stack1 = helper.call(depth0, {hash:{},data:data}); }
-  else { helper = (depth0 && depth0.user); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
-  buffer += escapeExpression(stack1)
-    + "/";
-  if (helper = helpers.list) { stack1 = helper.call(depth0, {hash:{},data:data}); }
-  else { helper = (depth0 && depth0.list); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
-  buffer += escapeExpression(stack1)
-    + "/";
-  if (helper = helpers.last) { stack1 = helper.call(depth0, {hash:{},data:data}); }
-  else { helper = (depth0 && depth0.last); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
-  buffer += escapeExpression(stack1)
-    + "\">&raquo;</a></li>\n      </ul>\n    </div>\n  </div>\n\n</div>\n";
-  return buffer;
-  });
-
-},{"hbsfy/runtime":"/Users/user1/Desktop/capstone/node_modules/hbsfy/runtime.js"}],"/usr/local/lib/node_modules/watchify/node_modules/browserify/lib/_empty.js":[function(require,module,exports){
-
-},{}],"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/assert/assert.js":[function(require,module,exports){
+},{}],"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/assert/assert.js":[function(require,module,exports){
 // http://wiki.commonjs.org/wiki/Unit_Testing/1.0
 //
 // THIS IS NOT TESTED NOR LIKELY TO WORK OUTSIDE V8!
@@ -19339,14 +18950,14 @@ var objectKeys = Object.keys || function (obj) {
   return keys;
 };
 
-},{"util/":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/assert/node_modules/util/util.js"}],"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/assert/node_modules/util/support/isBufferBrowser.js":[function(require,module,exports){
+},{"util/":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/assert/node_modules/util/util.js"}],"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/assert/node_modules/util/support/isBufferBrowser.js":[function(require,module,exports){
 module.exports = function isBuffer(arg) {
   return arg && typeof arg === 'object'
     && typeof arg.copy === 'function'
     && typeof arg.fill === 'function'
     && typeof arg.readUInt8 === 'function';
 }
-},{}],"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/assert/node_modules/util/util.js":[function(require,module,exports){
+},{}],"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/assert/node_modules/util/util.js":[function(require,module,exports){
 (function (process,global){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -19936,7 +19547,7 @@ function hasOwnProperty(obj, prop) {
 }
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./support/isBuffer":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/assert/node_modules/util/support/isBufferBrowser.js","_process":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js","inherits":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/inherits/inherits_browser.js"}],"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/browserify-zlib/node_modules/pako/lib/utils/common.js":[function(require,module,exports){
+},{"./support/isBuffer":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/assert/node_modules/util/support/isBufferBrowser.js","_process":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js","inherits":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/inherits/inherits_browser.js"}],"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/browserify-zlib/node_modules/pako/lib/utils/common.js":[function(require,module,exports){
 'use strict';
 
 
@@ -20039,7 +19650,7 @@ exports.setTyped = function (on) {
 };
 
 exports.setTyped(TYPED_OK);
-},{}],"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/browserify-zlib/node_modules/pako/lib/zlib/adler32.js":[function(require,module,exports){
+},{}],"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/browserify-zlib/node_modules/pako/lib/zlib/adler32.js":[function(require,module,exports){
 'use strict';
 
 // Note: adler32 takes 12% for level 0 and 2% for level 6.
@@ -20072,7 +19683,7 @@ function adler32(adler, buf, len, pos) {
 
 
 module.exports = adler32;
-},{}],"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/browserify-zlib/node_modules/pako/lib/zlib/constants.js":[function(require,module,exports){
+},{}],"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/browserify-zlib/node_modules/pako/lib/zlib/constants.js":[function(require,module,exports){
 module.exports = {
 
   /* Allowed flush values; see deflate() and inflate() below for details */
@@ -20120,7 +19731,7 @@ module.exports = {
   Z_DEFLATED:               8
   //Z_NULL:                 null // Use -1 or null inline, depending on var type
 };
-},{}],"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/browserify-zlib/node_modules/pako/lib/zlib/crc32.js":[function(require,module,exports){
+},{}],"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/browserify-zlib/node_modules/pako/lib/zlib/crc32.js":[function(require,module,exports){
 'use strict';
 
 // Note: we can't get significant speed boost here.
@@ -20162,7 +19773,7 @@ function crc32(crc, buf, len, pos) {
 
 
 module.exports = crc32;
-},{}],"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/browserify-zlib/node_modules/pako/lib/zlib/deflate.js":[function(require,module,exports){
+},{}],"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/browserify-zlib/node_modules/pako/lib/zlib/deflate.js":[function(require,module,exports){
 'use strict';
 
 var utils   = require('../utils/common');
@@ -21928,7 +21539,7 @@ exports.deflatePending = deflatePending;
 exports.deflatePrime = deflatePrime;
 exports.deflateTune = deflateTune;
 */
-},{"../utils/common":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/browserify-zlib/node_modules/pako/lib/utils/common.js","./adler32":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/browserify-zlib/node_modules/pako/lib/zlib/adler32.js","./crc32":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/browserify-zlib/node_modules/pako/lib/zlib/crc32.js","./messages":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/browserify-zlib/node_modules/pako/lib/zlib/messages.js","./trees":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/browserify-zlib/node_modules/pako/lib/zlib/trees.js"}],"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/browserify-zlib/node_modules/pako/lib/zlib/inffast.js":[function(require,module,exports){
+},{"../utils/common":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/browserify-zlib/node_modules/pako/lib/utils/common.js","./adler32":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/browserify-zlib/node_modules/pako/lib/zlib/adler32.js","./crc32":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/browserify-zlib/node_modules/pako/lib/zlib/crc32.js","./messages":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/browserify-zlib/node_modules/pako/lib/zlib/messages.js","./trees":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/browserify-zlib/node_modules/pako/lib/zlib/trees.js"}],"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/browserify-zlib/node_modules/pako/lib/zlib/inffast.js":[function(require,module,exports){
 'use strict';
 
 // See state defs from inflate.js
@@ -22255,7 +21866,7 @@ module.exports = function inflate_fast(strm, start) {
   return;
 };
 
-},{}],"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/browserify-zlib/node_modules/pako/lib/zlib/inflate.js":[function(require,module,exports){
+},{}],"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/browserify-zlib/node_modules/pako/lib/zlib/inflate.js":[function(require,module,exports){
 'use strict';
 
 
@@ -23759,7 +23370,7 @@ exports.inflateSync = inflateSync;
 exports.inflateSyncPoint = inflateSyncPoint;
 exports.inflateUndermine = inflateUndermine;
 */
-},{"../utils/common":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/browserify-zlib/node_modules/pako/lib/utils/common.js","./adler32":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/browserify-zlib/node_modules/pako/lib/zlib/adler32.js","./crc32":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/browserify-zlib/node_modules/pako/lib/zlib/crc32.js","./inffast":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/browserify-zlib/node_modules/pako/lib/zlib/inffast.js","./inftrees":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/browserify-zlib/node_modules/pako/lib/zlib/inftrees.js"}],"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/browserify-zlib/node_modules/pako/lib/zlib/inftrees.js":[function(require,module,exports){
+},{"../utils/common":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/browserify-zlib/node_modules/pako/lib/utils/common.js","./adler32":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/browserify-zlib/node_modules/pako/lib/zlib/adler32.js","./crc32":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/browserify-zlib/node_modules/pako/lib/zlib/crc32.js","./inffast":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/browserify-zlib/node_modules/pako/lib/zlib/inffast.js","./inftrees":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/browserify-zlib/node_modules/pako/lib/zlib/inftrees.js"}],"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/browserify-zlib/node_modules/pako/lib/zlib/inftrees.js":[function(require,module,exports){
 'use strict';
 
 
@@ -24086,7 +23697,7 @@ module.exports = function inflate_table(type, lens, lens_index, codes, table, ta
   return 0;
 };
 
-},{"../utils/common":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/browserify-zlib/node_modules/pako/lib/utils/common.js"}],"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/browserify-zlib/node_modules/pako/lib/zlib/messages.js":[function(require,module,exports){
+},{"../utils/common":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/browserify-zlib/node_modules/pako/lib/utils/common.js"}],"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/browserify-zlib/node_modules/pako/lib/zlib/messages.js":[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -24100,7 +23711,7 @@ module.exports = {
   '-5':   'buffer error',        /* Z_BUF_ERROR     (-5) */
   '-6':   'incompatible version' /* Z_VERSION_ERROR (-6) */
 };
-},{}],"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/browserify-zlib/node_modules/pako/lib/zlib/trees.js":[function(require,module,exports){
+},{}],"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/browserify-zlib/node_modules/pako/lib/zlib/trees.js":[function(require,module,exports){
 'use strict';
 
 
@@ -25300,7 +24911,7 @@ exports._tr_stored_block = _tr_stored_block;
 exports._tr_flush_block  = _tr_flush_block;
 exports._tr_tally = _tr_tally;
 exports._tr_align = _tr_align;
-},{"../utils/common":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/browserify-zlib/node_modules/pako/lib/utils/common.js"}],"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/browserify-zlib/node_modules/pako/lib/zlib/zstream.js":[function(require,module,exports){
+},{"../utils/common":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/browserify-zlib/node_modules/pako/lib/utils/common.js"}],"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/browserify-zlib/node_modules/pako/lib/zlib/zstream.js":[function(require,module,exports){
 'use strict';
 
 
@@ -25330,7 +24941,7 @@ function ZStream() {
 }
 
 module.exports = ZStream;
-},{}],"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/browserify-zlib/src/binding.js":[function(require,module,exports){
+},{}],"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/browserify-zlib/src/binding.js":[function(require,module,exports){
 (function (process,Buffer){
 var msg = require('pako/lib/zlib/messages');
 var zstream = require('pako/lib/zlib/zstream');
@@ -25570,7 +25181,7 @@ Zlib.prototype._error = function(status) {
 exports.Zlib = Zlib;
 
 }).call(this,require('_process'),require("buffer").Buffer)
-},{"_process":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js","buffer":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/buffer/index.js","pako/lib/zlib/constants":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/browserify-zlib/node_modules/pako/lib/zlib/constants.js","pako/lib/zlib/deflate.js":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/browserify-zlib/node_modules/pako/lib/zlib/deflate.js","pako/lib/zlib/inflate.js":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/browserify-zlib/node_modules/pako/lib/zlib/inflate.js","pako/lib/zlib/messages":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/browserify-zlib/node_modules/pako/lib/zlib/messages.js","pako/lib/zlib/zstream":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/browserify-zlib/node_modules/pako/lib/zlib/zstream.js"}],"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/browserify-zlib/src/index.js":[function(require,module,exports){
+},{"_process":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js","buffer":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/buffer/index.js","pako/lib/zlib/constants":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/browserify-zlib/node_modules/pako/lib/zlib/constants.js","pako/lib/zlib/deflate.js":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/browserify-zlib/node_modules/pako/lib/zlib/deflate.js","pako/lib/zlib/inflate.js":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/browserify-zlib/node_modules/pako/lib/zlib/inflate.js","pako/lib/zlib/messages":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/browserify-zlib/node_modules/pako/lib/zlib/messages.js","pako/lib/zlib/zstream":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/browserify-zlib/node_modules/pako/lib/zlib/zstream.js"}],"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/browserify-zlib/src/index.js":[function(require,module,exports){
 (function (process,Buffer){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -26184,7 +25795,7 @@ util.inherits(InflateRaw, Zlib);
 util.inherits(Unzip, Zlib);
 
 }).call(this,require('_process'),require("buffer").Buffer)
-},{"./binding":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/browserify-zlib/src/binding.js","_process":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js","_stream_transform":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/readable-stream/transform.js","assert":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/assert/assert.js","buffer":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/buffer/index.js","util":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/util/util.js"}],"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/buffer/index.js":[function(require,module,exports){
+},{"./binding":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/browserify-zlib/src/binding.js","_process":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js","_stream_transform":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/readable-stream/transform.js","assert":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/assert/assert.js","buffer":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/buffer/index.js","util":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/util/util.js"}],"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/buffer/index.js":[function(require,module,exports){
 /*!
  * The buffer module from node.js, for the browser.
  *
@@ -27355,7 +26966,7 @@ function assert (test, message) {
   if (!test) throw new Error(message || 'Failed assertion')
 }
 
-},{"base64-js":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/buffer/node_modules/base64-js/lib/b64.js","ieee754":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/buffer/node_modules/ieee754/index.js"}],"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/buffer/node_modules/base64-js/lib/b64.js":[function(require,module,exports){
+},{"base64-js":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/buffer/node_modules/base64-js/lib/b64.js","ieee754":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/buffer/node_modules/ieee754/index.js"}],"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/buffer/node_modules/base64-js/lib/b64.js":[function(require,module,exports){
 var lookup = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
 
 ;(function (exports) {
@@ -27477,7 +27088,7 @@ var lookup = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
 	exports.fromByteArray = uint8ToBase64
 }(typeof exports === 'undefined' ? (this.base64js = {}) : exports))
 
-},{}],"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/buffer/node_modules/ieee754/index.js":[function(require,module,exports){
+},{}],"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/buffer/node_modules/ieee754/index.js":[function(require,module,exports){
 exports.read = function(buffer, offset, isLE, mLen, nBytes) {
   var e, m,
       eLen = nBytes * 8 - mLen - 1,
@@ -27563,7 +27174,7 @@ exports.write = function(buffer, value, offset, isLE, mLen, nBytes) {
   buffer[offset + i - d] |= s * 128;
 };
 
-},{}],"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/crypto-browserify/create-hash.js":[function(require,module,exports){
+},{}],"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/crypto-browserify/create-hash.js":[function(require,module,exports){
 (function (Buffer){
 var createHash = require('sha.js')
 
@@ -27597,7 +27208,7 @@ module.exports = function (alg) {
 }
 
 }).call(this,require("buffer").Buffer)
-},{"./md5":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/crypto-browserify/md5.js","buffer":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/buffer/index.js","ripemd160":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/crypto-browserify/node_modules/ripemd160/lib/ripemd160.js","sha.js":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/crypto-browserify/node_modules/sha.js/index.js"}],"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/crypto-browserify/create-hmac.js":[function(require,module,exports){
+},{"./md5":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/crypto-browserify/md5.js","buffer":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/buffer/index.js","ripemd160":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/crypto-browserify/node_modules/ripemd160/lib/ripemd160.js","sha.js":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/crypto-browserify/node_modules/sha.js/index.js"}],"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/crypto-browserify/create-hmac.js":[function(require,module,exports){
 (function (Buffer){
 var createHash = require('./create-hash')
 
@@ -27642,7 +27253,7 @@ Hmac.prototype.digest = function (enc) {
 
 
 }).call(this,require("buffer").Buffer)
-},{"./create-hash":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/crypto-browserify/create-hash.js","buffer":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/buffer/index.js"}],"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/crypto-browserify/helpers.js":[function(require,module,exports){
+},{"./create-hash":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/crypto-browserify/create-hash.js","buffer":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/buffer/index.js"}],"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/crypto-browserify/helpers.js":[function(require,module,exports){
 (function (Buffer){
 var intSize = 4;
 var zeroBuffer = new Buffer(intSize); zeroBuffer.fill(0);
@@ -27680,7 +27291,7 @@ function hash(buf, fn, hashSize, bigEndian) {
 module.exports = { hash: hash };
 
 }).call(this,require("buffer").Buffer)
-},{"buffer":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/buffer/index.js"}],"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/crypto-browserify/index.js":[function(require,module,exports){
+},{"buffer":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/buffer/index.js"}],"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/crypto-browserify/index.js":[function(require,module,exports){
 (function (Buffer){
 var rng = require('./rng')
 
@@ -27738,7 +27349,7 @@ each(['createCredentials'
 })
 
 }).call(this,require("buffer").Buffer)
-},{"./create-hash":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/crypto-browserify/create-hash.js","./create-hmac":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/crypto-browserify/create-hmac.js","./pbkdf2":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/crypto-browserify/pbkdf2.js","./rng":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/crypto-browserify/rng.js","buffer":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/buffer/index.js"}],"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/crypto-browserify/md5.js":[function(require,module,exports){
+},{"./create-hash":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/crypto-browserify/create-hash.js","./create-hmac":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/crypto-browserify/create-hmac.js","./pbkdf2":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/crypto-browserify/pbkdf2.js","./rng":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/crypto-browserify/rng.js","buffer":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/buffer/index.js"}],"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/crypto-browserify/md5.js":[function(require,module,exports){
 /*
  * A JavaScript implementation of the RSA Data Security, Inc. MD5 Message
  * Digest Algorithm, as defined in RFC 1321.
@@ -27895,7 +27506,7 @@ module.exports = function md5(buf) {
   return helpers.hash(buf, core_md5, 16);
 };
 
-},{"./helpers":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/crypto-browserify/helpers.js"}],"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/crypto-browserify/node_modules/ripemd160/lib/ripemd160.js":[function(require,module,exports){
+},{"./helpers":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/crypto-browserify/helpers.js"}],"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/crypto-browserify/node_modules/ripemd160/lib/ripemd160.js":[function(require,module,exports){
 (function (Buffer){
 
 module.exports = ripemd160
@@ -28104,7 +27715,7 @@ function ripemd160(message) {
 
 
 }).call(this,require("buffer").Buffer)
-},{"buffer":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/buffer/index.js"}],"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/crypto-browserify/node_modules/sha.js/hash.js":[function(require,module,exports){
+},{"buffer":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/buffer/index.js"}],"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/crypto-browserify/node_modules/sha.js/hash.js":[function(require,module,exports){
 var u = require('./util')
 var write = u.write
 var fill = u.zeroFill
@@ -28204,7 +27815,7 @@ module.exports = function (Buffer) {
   return Hash
 }
 
-},{"./util":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/crypto-browserify/node_modules/sha.js/util.js"}],"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/crypto-browserify/node_modules/sha.js/index.js":[function(require,module,exports){
+},{"./util":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/crypto-browserify/node_modules/sha.js/util.js"}],"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/crypto-browserify/node_modules/sha.js/index.js":[function(require,module,exports){
 var exports = module.exports = function (alg) {
   var Alg = exports[alg]
   if(!Alg) throw new Error(alg + ' is not supported (we accept pull requests)')
@@ -28218,7 +27829,7 @@ exports.sha =
 exports.sha1 = require('./sha1')(Buffer, Hash)
 exports.sha256 = require('./sha256')(Buffer, Hash)
 
-},{"./hash":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/crypto-browserify/node_modules/sha.js/hash.js","./sha1":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/crypto-browserify/node_modules/sha.js/sha1.js","./sha256":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/crypto-browserify/node_modules/sha.js/sha256.js","buffer":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/buffer/index.js"}],"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/crypto-browserify/node_modules/sha.js/sha1.js":[function(require,module,exports){
+},{"./hash":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/crypto-browserify/node_modules/sha.js/hash.js","./sha1":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/crypto-browserify/node_modules/sha.js/sha1.js","./sha256":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/crypto-browserify/node_modules/sha.js/sha256.js","buffer":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/buffer/index.js"}],"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/crypto-browserify/node_modules/sha.js/sha1.js":[function(require,module,exports){
 /*
  * A JavaScript implementation of the Secure Hash Algorithm, SHA-1, as defined
  * in FIPS PUB 180-1
@@ -28379,7 +27990,7 @@ module.exports = function (Buffer, Hash) {
   return Sha1
 }
 
-},{"util":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/util/util.js"}],"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/crypto-browserify/node_modules/sha.js/sha256.js":[function(require,module,exports){
+},{"util":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/util/util.js"}],"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/crypto-browserify/node_modules/sha.js/sha256.js":[function(require,module,exports){
 
 /**
  * A JavaScript implementation of the Secure Hash Algorithm, SHA-256, as defined
@@ -28544,7 +28155,7 @@ module.exports = function (Buffer, Hash) {
 
 }
 
-},{"./util":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/crypto-browserify/node_modules/sha.js/util.js","util":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/util/util.js"}],"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/crypto-browserify/node_modules/sha.js/util.js":[function(require,module,exports){
+},{"./util":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/crypto-browserify/node_modules/sha.js/util.js","util":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/util/util.js"}],"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/crypto-browserify/node_modules/sha.js/util.js":[function(require,module,exports){
 exports.write = write
 exports.zeroFill = zeroFill
 
@@ -28582,7 +28193,7 @@ function zeroFill(buf, from) {
 }
 
 
-},{}],"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/crypto-browserify/pbkdf2.js":[function(require,module,exports){
+},{}],"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/crypto-browserify/pbkdf2.js":[function(require,module,exports){
 (function (Buffer){
 // JavaScript PBKDF2 Implementation
 // Based on http://git.io/qsv2zw
@@ -28668,7 +28279,7 @@ module.exports = function (createHmac, exports) {
 }
 
 }).call(this,require("buffer").Buffer)
-},{"buffer":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/buffer/index.js"}],"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/crypto-browserify/rng.js":[function(require,module,exports){
+},{"buffer":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/buffer/index.js"}],"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/crypto-browserify/rng.js":[function(require,module,exports){
 (function (Buffer){
 (function() {
   module.exports = function(size) {
@@ -28682,7 +28293,7 @@ module.exports = function (createHmac, exports) {
 }())
 
 }).call(this,require("buffer").Buffer)
-},{"buffer":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/buffer/index.js"}],"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/events/events.js":[function(require,module,exports){
+},{"buffer":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/buffer/index.js"}],"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/events/events.js":[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -28987,7 +28598,7 @@ function isUndefined(arg) {
   return arg === void 0;
 }
 
-},{}],"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/http-browserify/index.js":[function(require,module,exports){
+},{}],"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/http-browserify/index.js":[function(require,module,exports){
 var http = module.exports;
 var EventEmitter = require('events').EventEmitter;
 var Request = require('./lib/request');
@@ -29126,7 +28737,7 @@ http.STATUS_CODES = {
     510 : 'Not Extended',               // RFC 2774
     511 : 'Network Authentication Required' // RFC 6585
 };
-},{"./lib/request":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/http-browserify/lib/request.js","events":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/events/events.js","url":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/url/url.js"}],"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/http-browserify/lib/request.js":[function(require,module,exports){
+},{"./lib/request":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/http-browserify/lib/request.js","events":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/events/events.js","url":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/url/url.js"}],"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/http-browserify/lib/request.js":[function(require,module,exports){
 var Stream = require('stream');
 var Response = require('./response');
 var Base64 = require('Base64');
@@ -29320,7 +28931,7 @@ var indexOf = function (xs, x) {
     return -1;
 };
 
-},{"./response":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/http-browserify/lib/response.js","Base64":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/http-browserify/node_modules/Base64/base64.js","inherits":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/inherits/inherits_browser.js","stream":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/stream-browserify/index.js"}],"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/http-browserify/lib/response.js":[function(require,module,exports){
+},{"./response":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/http-browserify/lib/response.js","Base64":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/http-browserify/node_modules/Base64/base64.js","inherits":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/inherits/inherits_browser.js","stream":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/stream-browserify/index.js"}],"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/http-browserify/lib/response.js":[function(require,module,exports){
 var Stream = require('stream');
 var util = require('util');
 
@@ -29442,7 +29053,7 @@ var isArray = Array.isArray || function (xs) {
     return Object.prototype.toString.call(xs) === '[object Array]';
 };
 
-},{"stream":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/stream-browserify/index.js","util":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/util/util.js"}],"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/http-browserify/node_modules/Base64/base64.js":[function(require,module,exports){
+},{"stream":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/stream-browserify/index.js","util":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/util/util.js"}],"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/http-browserify/node_modules/Base64/base64.js":[function(require,module,exports){
 ;(function () {
 
   var object = typeof exports != 'undefined' ? exports : this; // #8: web workers
@@ -29504,7 +29115,7 @@ var isArray = Array.isArray || function (xs) {
 
 }());
 
-},{}],"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/https-browserify/index.js":[function(require,module,exports){
+},{}],"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/https-browserify/index.js":[function(require,module,exports){
 var http = require('http');
 
 var https = module.exports;
@@ -29519,7 +29130,7 @@ https.request = function (params, cb) {
     return http.request.call(this, params, cb);
 }
 
-},{"http":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/http-browserify/index.js"}],"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/inherits/inherits_browser.js":[function(require,module,exports){
+},{"http":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/http-browserify/index.js"}],"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/inherits/inherits_browser.js":[function(require,module,exports){
 if (typeof Object.create === 'function') {
   // implementation from standard node.js 'util' module
   module.exports = function inherits(ctor, superCtor) {
@@ -29544,12 +29155,12 @@ if (typeof Object.create === 'function') {
   }
 }
 
-},{}],"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/isarray/index.js":[function(require,module,exports){
+},{}],"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/isarray/index.js":[function(require,module,exports){
 module.exports = Array.isArray || function (arr) {
   return Object.prototype.toString.call(arr) == '[object Array]';
 };
 
-},{}],"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js":[function(require,module,exports){
+},{}],"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js":[function(require,module,exports){
 // shim for using process in browser
 
 var process = module.exports = {};
@@ -29614,7 +29225,7 @@ process.chdir = function (dir) {
     throw new Error('process.chdir is not supported');
 };
 
-},{}],"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/punycode/punycode.js":[function(require,module,exports){
+},{}],"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/punycode/punycode.js":[function(require,module,exports){
 (function (global){
 /*! http://mths.be/punycode v1.2.4 by @mathias */
 ;(function(root) {
@@ -30125,7 +29736,7 @@ process.chdir = function (dir) {
 }(this));
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/querystring-es3/decode.js":[function(require,module,exports){
+},{}],"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/querystring-es3/decode.js":[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -30211,7 +29822,7 @@ var isArray = Array.isArray || function (xs) {
   return Object.prototype.toString.call(xs) === '[object Array]';
 };
 
-},{}],"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/querystring-es3/encode.js":[function(require,module,exports){
+},{}],"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/querystring-es3/encode.js":[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -30298,16 +29909,16 @@ var objectKeys = Object.keys || function (obj) {
   return res;
 };
 
-},{}],"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/querystring-es3/index.js":[function(require,module,exports){
+},{}],"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/querystring-es3/index.js":[function(require,module,exports){
 'use strict';
 
 exports.decode = exports.parse = require('./decode');
 exports.encode = exports.stringify = require('./encode');
 
-},{"./decode":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/querystring-es3/decode.js","./encode":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/querystring-es3/encode.js"}],"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/readable-stream/duplex.js":[function(require,module,exports){
+},{"./decode":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/querystring-es3/decode.js","./encode":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/querystring-es3/encode.js"}],"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/readable-stream/duplex.js":[function(require,module,exports){
 module.exports = require("./lib/_stream_duplex.js")
 
-},{"./lib/_stream_duplex.js":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/readable-stream/lib/_stream_duplex.js"}],"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/readable-stream/lib/_stream_duplex.js":[function(require,module,exports){
+},{"./lib/_stream_duplex.js":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/readable-stream/lib/_stream_duplex.js"}],"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/readable-stream/lib/_stream_duplex.js":[function(require,module,exports){
 (function (process){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -30400,7 +30011,7 @@ function forEach (xs, f) {
 }
 
 }).call(this,require('_process'))
-},{"./_stream_readable":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/readable-stream/lib/_stream_readable.js","./_stream_writable":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/readable-stream/lib/_stream_writable.js","_process":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js","core-util-is":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/readable-stream/node_modules/core-util-is/lib/util.js","inherits":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/inherits/inherits_browser.js"}],"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/readable-stream/lib/_stream_passthrough.js":[function(require,module,exports){
+},{"./_stream_readable":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/readable-stream/lib/_stream_readable.js","./_stream_writable":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/readable-stream/lib/_stream_writable.js","_process":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js","core-util-is":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/readable-stream/node_modules/core-util-is/lib/util.js","inherits":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/inherits/inherits_browser.js"}],"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/readable-stream/lib/_stream_passthrough.js":[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -30448,7 +30059,7 @@ PassThrough.prototype._transform = function(chunk, encoding, cb) {
   cb(null, chunk);
 };
 
-},{"./_stream_transform":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/readable-stream/lib/_stream_transform.js","core-util-is":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/readable-stream/node_modules/core-util-is/lib/util.js","inherits":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/inherits/inherits_browser.js"}],"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/readable-stream/lib/_stream_readable.js":[function(require,module,exports){
+},{"./_stream_transform":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/readable-stream/lib/_stream_transform.js","core-util-is":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/readable-stream/node_modules/core-util-is/lib/util.js","inherits":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/inherits/inherits_browser.js"}],"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/readable-stream/lib/_stream_readable.js":[function(require,module,exports){
 (function (process){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -31411,7 +31022,7 @@ function indexOf (xs, x) {
 }
 
 }).call(this,require('_process'))
-},{"_process":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js","buffer":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/buffer/index.js","core-util-is":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/readable-stream/node_modules/core-util-is/lib/util.js","events":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/events/events.js","inherits":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/inherits/inherits_browser.js","isarray":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/isarray/index.js","stream":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/stream-browserify/index.js","string_decoder/":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/readable-stream/node_modules/string_decoder/index.js"}],"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/readable-stream/lib/_stream_transform.js":[function(require,module,exports){
+},{"_process":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js","buffer":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/buffer/index.js","core-util-is":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/readable-stream/node_modules/core-util-is/lib/util.js","events":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/events/events.js","inherits":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/inherits/inherits_browser.js","isarray":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/isarray/index.js","stream":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/stream-browserify/index.js","string_decoder/":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/readable-stream/node_modules/string_decoder/index.js"}],"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/readable-stream/lib/_stream_transform.js":[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -31623,7 +31234,7 @@ function done(stream, er) {
   return stream.push(null);
 }
 
-},{"./_stream_duplex":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/readable-stream/lib/_stream_duplex.js","core-util-is":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/readable-stream/node_modules/core-util-is/lib/util.js","inherits":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/inherits/inherits_browser.js"}],"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/readable-stream/lib/_stream_writable.js":[function(require,module,exports){
+},{"./_stream_duplex":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/readable-stream/lib/_stream_duplex.js","core-util-is":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/readable-stream/node_modules/core-util-is/lib/util.js","inherits":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/inherits/inherits_browser.js"}],"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/readable-stream/lib/_stream_writable.js":[function(require,module,exports){
 (function (process){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -32014,7 +31625,7 @@ function endWritable(stream, state, cb) {
 }
 
 }).call(this,require('_process'))
-},{"./_stream_duplex":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/readable-stream/lib/_stream_duplex.js","_process":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js","buffer":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/buffer/index.js","core-util-is":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/readable-stream/node_modules/core-util-is/lib/util.js","inherits":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/inherits/inherits_browser.js","stream":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/stream-browserify/index.js"}],"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/readable-stream/node_modules/core-util-is/lib/util.js":[function(require,module,exports){
+},{"./_stream_duplex":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/readable-stream/lib/_stream_duplex.js","_process":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js","buffer":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/buffer/index.js","core-util-is":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/readable-stream/node_modules/core-util-is/lib/util.js","inherits":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/inherits/inherits_browser.js","stream":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/stream-browserify/index.js"}],"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/readable-stream/node_modules/core-util-is/lib/util.js":[function(require,module,exports){
 (function (Buffer){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -32124,7 +31735,7 @@ function objectToString(o) {
   return Object.prototype.toString.call(o);
 }
 }).call(this,require("buffer").Buffer)
-},{"buffer":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/buffer/index.js"}],"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/readable-stream/node_modules/string_decoder/index.js":[function(require,module,exports){
+},{"buffer":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/buffer/index.js"}],"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/readable-stream/node_modules/string_decoder/index.js":[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -32326,10 +31937,10 @@ function base64DetectIncompleteChar(buffer) {
   return incomplete;
 }
 
-},{"buffer":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/buffer/index.js"}],"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/readable-stream/passthrough.js":[function(require,module,exports){
+},{"buffer":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/buffer/index.js"}],"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/readable-stream/passthrough.js":[function(require,module,exports){
 module.exports = require("./lib/_stream_passthrough.js")
 
-},{"./lib/_stream_passthrough.js":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/readable-stream/lib/_stream_passthrough.js"}],"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/readable-stream/readable.js":[function(require,module,exports){
+},{"./lib/_stream_passthrough.js":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/readable-stream/lib/_stream_passthrough.js"}],"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/readable-stream/readable.js":[function(require,module,exports){
 exports = module.exports = require('./lib/_stream_readable.js');
 exports.Readable = exports;
 exports.Writable = require('./lib/_stream_writable.js');
@@ -32337,13 +31948,13 @@ exports.Duplex = require('./lib/_stream_duplex.js');
 exports.Transform = require('./lib/_stream_transform.js');
 exports.PassThrough = require('./lib/_stream_passthrough.js');
 
-},{"./lib/_stream_duplex.js":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/readable-stream/lib/_stream_duplex.js","./lib/_stream_passthrough.js":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/readable-stream/lib/_stream_passthrough.js","./lib/_stream_readable.js":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/readable-stream/lib/_stream_readable.js","./lib/_stream_transform.js":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/readable-stream/lib/_stream_transform.js","./lib/_stream_writable.js":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/readable-stream/lib/_stream_writable.js"}],"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/readable-stream/transform.js":[function(require,module,exports){
+},{"./lib/_stream_duplex.js":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/readable-stream/lib/_stream_duplex.js","./lib/_stream_passthrough.js":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/readable-stream/lib/_stream_passthrough.js","./lib/_stream_readable.js":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/readable-stream/lib/_stream_readable.js","./lib/_stream_transform.js":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/readable-stream/lib/_stream_transform.js","./lib/_stream_writable.js":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/readable-stream/lib/_stream_writable.js"}],"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/readable-stream/transform.js":[function(require,module,exports){
 module.exports = require("./lib/_stream_transform.js")
 
-},{"./lib/_stream_transform.js":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/readable-stream/lib/_stream_transform.js"}],"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/readable-stream/writable.js":[function(require,module,exports){
+},{"./lib/_stream_transform.js":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/readable-stream/lib/_stream_transform.js"}],"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/readable-stream/writable.js":[function(require,module,exports){
 module.exports = require("./lib/_stream_writable.js")
 
-},{"./lib/_stream_writable.js":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/readable-stream/lib/_stream_writable.js"}],"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/stream-browserify/index.js":[function(require,module,exports){
+},{"./lib/_stream_writable.js":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/readable-stream/lib/_stream_writable.js"}],"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/stream-browserify/index.js":[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -32472,7 +32083,7 @@ Stream.prototype.pipe = function(dest, options) {
   return dest;
 };
 
-},{"events":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/events/events.js","inherits":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/inherits/inherits_browser.js","readable-stream/duplex.js":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/readable-stream/duplex.js","readable-stream/passthrough.js":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/readable-stream/passthrough.js","readable-stream/readable.js":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/readable-stream/readable.js","readable-stream/transform.js":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/readable-stream/transform.js","readable-stream/writable.js":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/readable-stream/writable.js"}],"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/url/url.js":[function(require,module,exports){
+},{"events":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/events/events.js","inherits":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/inherits/inherits_browser.js","readable-stream/duplex.js":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/readable-stream/duplex.js","readable-stream/passthrough.js":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/readable-stream/passthrough.js","readable-stream/readable.js":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/readable-stream/readable.js","readable-stream/transform.js":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/readable-stream/transform.js","readable-stream/writable.js":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/readable-stream/writable.js"}],"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/url/url.js":[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -33181,14 +32792,14 @@ function isNullOrUndefined(arg) {
   return  arg == null;
 }
 
-},{"punycode":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/punycode/punycode.js","querystring":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/querystring-es3/index.js"}],"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/util/support/isBufferBrowser.js":[function(require,module,exports){
+},{"punycode":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/punycode/punycode.js","querystring":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/querystring-es3/index.js"}],"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/util/support/isBufferBrowser.js":[function(require,module,exports){
 module.exports = function isBuffer(arg) {
   return arg && typeof arg === 'object'
     && typeof arg.copy === 'function'
     && typeof arg.fill === 'function'
     && typeof arg.readUInt8 === 'function';
 }
-},{}],"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/util/util.js":[function(require,module,exports){
+},{}],"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/util/util.js":[function(require,module,exports){
 (function (process,global){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -33778,4 +33389,407 @@ function hasOwnProperty(obj, prop) {
 }
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./support/isBuffer":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/util/support/isBufferBrowser.js","_process":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js","inherits":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/inherits/inherits_browser.js"}]},{},["/Users/user1/Desktop/capstone/public/js/main.js"]);
+},{"./support/isBuffer":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/util/support/isBufferBrowser.js","_process":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js","inherits":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/inherits/inherits_browser.js"}],"/Users/ac/pcs/capstone/public/js/collections/discogsUsers.js":[function(require,module,exports){
+var Backbone = require('backbone');
+var DiscogsUser = require('../models/discogsUser');
+
+var DiscogsUsers = Backbone.Collection.extend({
+  model: DiscogsUser,
+  url: '/api/discogsUsers',
+  comparator: 'creationDate'
+});
+
+module.exports = DiscogsUsers;
+
+
+},{"../models/discogsUser":"/Users/ac/pcs/capstone/public/js/models/discogsUser.js","backbone":"/Users/ac/pcs/capstone/node_modules/backbone/backbone.js"}],"/Users/ac/pcs/capstone/public/js/main.js":[function(require,module,exports){
+var Backbone = require('backbone');
+Backbone.$ = $;
+var DiscogsUsers = require('./collections/discogsUsers')
+//added this:
+var usersCollection = new DiscogsUsers();
+
+var MainView = require('./views/main-view');
+
+var Router = Backbone.Router.extend({
+  routes: {
+    '': 'main',
+    ':user/wantlist/:page' : 'wantlist',
+    ':user/collection/:page' : 'collection'
+  },
+
+    main: function () {
+    this.mainView = new MainView({user:undefined, list:"wantlist",page:1, collection: usersCollection});
+    this.mainView.login({user:undefined, list:"wantlist",page:1}); 
+
+  },
+    wantlist: function (user, page) {
+    this.mainView = new MainView({user:user, list:"wantlist",page:page, collection: usersCollection});
+    this.mainView.discogs(this.mainView.userName, "wantlist", this.mainView.currentPage);
+    //this.mainView.discgs(user, "wants", page); 
+
+  },
+    collection: function (user, page) {
+
+    this.mainView = new MainView({user: user, list:"collection",page:page, collection: usersCollection})
+    this.mainView.discogs(this.mainView.userName, "collection", this.mainView.currentPage);
+
+  }
+});
+
+$(function () {
+  window.app = new Router();
+  Backbone.history.start();
+});
+},{"./collections/discogsUsers":"/Users/ac/pcs/capstone/public/js/collections/discogsUsers.js","./views/main-view":"/Users/ac/pcs/capstone/public/js/views/main-view.js","backbone":"/Users/ac/pcs/capstone/node_modules/backbone/backbone.js"}],"/Users/ac/pcs/capstone/public/js/models/discogsUser.js":[function(require,module,exports){
+var $ = require('jquery');
+var Backbone = require('backbone');
+Backbone.$ = $;
+
+var discogsUser = Backbone.Model.extend({
+  urlRoot: '/api/discogsUsers'
+});
+
+module.exports = discogsUser;
+
+
+},{"backbone":"/Users/ac/pcs/capstone/node_modules/backbone/backbone.js","jquery":"/Users/ac/pcs/capstone/node_modules/jquery/dist/jquery.js"}],"/Users/ac/pcs/capstone/public/js/views/main-view.js":[function(require,module,exports){
+var Backbone = require('backbone');
+var http = require('http');
+var url = require('url');
+var request = require('request');
+
+Backbone.$ = $;
+
+var htmlTemplate = require('../../templates/main.hbs');
+var loginHTML = require('../../templates/login.hbs');
+
+var MainView = Backbone.View.extend({
+  el: '#my-app',
+
+  events: {
+    'click #username-submit': 'addUsername'
+  },
+  records: {releases:[], pages:[]},
+  
+  //testThing: {wants:[{discogs: 5719574, youtube: "QLnTRwpmCGs"}, {discogs: 4368235, youtube: "zH1VeQFBfW8"}]},
+
+  addUsername: function() {
+      var self = this;
+      var $user = $('.username-form').find('#username');
+      var userName = $user.val();
+      $.getJSON('http://api.discogs.com/users/'+userName+'?callback=?')
+        .always(function(data){
+         // console.log("success");
+        if (data.data.num_wantlist == undefined){
+            alert("Please got to discogs.com and share (and/or) populate your wantlist to use this site!");
+          }else{
+            self.userName = userName;
+            self.currentList = "wantlist";
+            self.currentPage = 1;
+            self.discogs(self.userName, self.currentList, self.currentPage);
+            
+          var date = Date.now();
+          var collectionFromInput = {
+            user: userName,
+            creationDate: date,
+            id: 'user' + date
+          };
+          if (self.collection.where({user:userName}).length == 0){
+          self.collection.create( collectionFromInput );}
+          //console.log(self.collection.models);
+          //console.log(userName)
+          }
+      }).fail(function(event, jqxhr, exception) {
+
+              if (jqxhr.status == 404) {
+              console.log("user doesn't exist");   
+              }
+          });
+  },
+
+  initialize: function (options) {
+      this.userName = options.user;
+      this.currentList = options.list;
+      this.currentPage = options.page;
+      this.collection = options.collection;
+      this.collection.fetch();
+
+  },
+
+  login: function (options) {
+    if (options.user == undefined){
+      $(this.el).html(loginHTML());
+    }else{
+      this.userName = options.user;
+      this.currentList = options.list;
+      this.currentPage = options.page;
+      this.discogs(this.userName, this.currentList, this.currentPage);
+    }
+
+  },
+
+  discogs: function(user, list, page){ //list needs to be "wants" or "collection"
+    this.records = {releases:[], pages:[]};
+    //console.log("from discogsfn top - list = "+list);
+    var self = this;
+    //var wantList = {};
+    var pages = undefined;
+    var relArr = [];
+    var animationHtml = "<div class='spinner'></div>";
+    $(".lazy-wrapper").replaceWith(animationHtml); //loading status thing
+    $("#status").replaceWith(animationHtml);
+
+    var getIds = function(list, callback, page){ //gets every release id in users wantlist and passes as an array to getVids function
+      if (list == "wantlist"){
+        var apiCall = 'http://api.discogs.com/users/'+user+'/wants?page='+page+'&callback=?';
+      }else if (list == "collection"){
+        var apiCall = 'http://api.discogs.com/users/'+user+'/collection/folders/0/releases?page='+page+'&callback=?';
+      }
+      self.currentPage = page;
+      //console.log("api call = "+apiCall);
+      $.getJSON(apiCall)
+        .done(function(data){ //this returns JSONP handled in a callback. Need to traverse an extra data (data.data). property to get to the stuff we care about
+          var data = data;
+          if(list == "wantlist"){
+            var arr = data.data.wants;
+          }else if(list == "collection"){
+            var arr = data.data.releases;
+          } 
+          pages = data.data.pagination.pages;
+                if (self.currentPage == 1){
+                    self.prevPage = 1;
+                    self.nextPage = 2;
+                  }
+                else if (self.currentPage == pages){
+                    self.prevPage = parseInt(self.currentPage)-1;
+                    self.nextPage = self.currentPage;
+                  }
+                else {
+                    self.nextPage = parseInt(self.currentPage)+1;
+                    self.prevPage = parseInt(self.currentPage)-1;
+                  };
+          arr.forEach(function (item, index){ //this grabs the discogs id of every release in the array
+            relArr.push(item.id);
+          });
+          for (var i = 0; i<pages; i++){ //fills the pages array with the api returned pagination numbers
+            self.records.pages.push({page:i+1, user:user, list:list});
+          };           
+            callback(relArr);
+           
+        }).fail(function() {
+          console.log( "get page "+page+" of "+user+"'s "+list+" from discogs failed" );
+          });
+    };
+
+    var getVids = function(arr){  //grabs youtube video per release in wantArr from getIds fn
+      arr.forEach(function (item, index){
+        $.getJSON('http://api.discogs.com/releases/'+item+'?callback=?').done(function(rels){
+          if (rels.data.videos){
+          self.records.releases.push({youtube:rels.data.videos[0].uri.slice(-11), discogs:item, artist:rels.data.artists[0].name, title:rels.data.title}); //this adds objects for everything fetched from discogs to the records array
+         }
+         if (index == arr.length-1){
+         self.render({
+          releases:self.records.releases, 
+          pages:self.records.pages, 
+          user:self.userName, 
+          list:self.currentList, 
+          first:1, 
+          last:self.records.pages.length,
+          prev:self.prevPage,
+          next:self.nextPage
+        });
+         }
+        }); 
+      });
+    };
+  getIds(list, getVids, page);
+  },
+
+    
+
+  render: function (template) {
+    $(this.el).html(htmlTemplate(template));
+    $('.js-lazyYT').lazyYT(); 
+    this.collection.each(function(item){
+      //console.log(item.get("user"));
+      var Duser = item.get("user");
+      var html = "<li role='presentation'><a role='menuitem' tabindex='-1' href='#/"+Duser+"/wantlist/1'>"+Duser+"</a></li>";
+      $(".dropdown-menu").append(html);
+    })
+   // $(this.el).html(myTemplate({entries:[{youtube: data, discogs: data},{...}]}))
+  }
+
+});
+
+
+module.exports = MainView;
+
+},{"../../templates/login.hbs":"/Users/ac/pcs/capstone/public/templates/login.hbs","../../templates/main.hbs":"/Users/ac/pcs/capstone/public/templates/main.hbs","backbone":"/Users/ac/pcs/capstone/node_modules/backbone/backbone.js","http":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/http-browserify/index.js","request":"/Users/ac/pcs/capstone/node_modules/request/index.js","url":"/Users/ac/pcs/capstone/node_modules/watchify/node_modules/browserify/node_modules/url/url.js"}],"/Users/ac/pcs/capstone/public/templates/login.hbs":[function(require,module,exports){
+// hbsfy compiled Handlebars template
+var Handlebars = require('hbsfy/runtime');
+module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  
+
+
+  return "<div class=\"row\" style=\"margin-bottom:2%;\">\n  <h1 class=\"text-center\">Record Pool</h1>\n</div>\n\n<div class=\"row rec-img-init\">\n  <img src=\"images/Record3.png\" alt=\"Record Image\">\n</div>\n\n<div class=\"row\"> \n  <div class=\"col-xs-12 col-md-12\">\n    <div class=\"username-form\" id=\"username-form-init\" style=\"text-align:center\">\n      <label for=\"user-id-input\">Discogs Username</label>\n      <input type=\"user-id\" id=\"username\" class=\"form-control\" style=\"text-align:center\">\n      <input type=\"image\" id=\"username-submit\" class=\"username-submit-init\" src=\"images/cassette-btn3.png\" alt=\"Submit\">\n    </div>  \n  </div>\n</div>\n\n<article class=\"gatekeeper\">\n  <div class=\"row\">\n    <div class=\"col-xs-12 col-md-12\">\n      <div id=\"status\">\n        This page renders the Discogs collections and wantlists of anyone who keeps those lists public.<br /><br />\n        In order to access these lists - type your own Discogs username into the box.<br /><br />\n        You will only get access if your own lists are public. This site is about sharing. <br /><br />\n        Please respect these intentions.<br /><br />\n        Share generously, dig deeply, these are everyone's jams.<br /><br />\n        <div class=\"link\"><a href=\"https://www.discogs.com/settings/privacy\">Visit Discogs to manage your privacy settings</a></div>\n      </div>\n    </div>\n  </div>\n</article>\n";
+  });
+
+},{"hbsfy/runtime":"/Users/ac/pcs/capstone/node_modules/hbsfy/runtime.js"}],"/Users/ac/pcs/capstone/public/templates/main.hbs":[function(require,module,exports){
+// hbsfy compiled Handlebars template
+var Handlebars = require('hbsfy/runtime');
+module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  var buffer = "", stack1, helper, functionType="function", escapeExpression=this.escapeExpression, self=this;
+
+function program1(depth0,data) {
+  
+  var buffer = "";
+  buffer += "\n          <li role=\"presentation\"><a role=\"menuitem\" tabindex=\"-1\" href=\"#\">"
+    + escapeExpression((typeof depth0 === functionType ? depth0.apply(depth0) : depth0))
+    + "</a></li>\n          ";
+  return buffer;
+  }
+
+function program3(depth0,data) {
+  
+  var buffer = "", stack1, helper;
+  buffer += "\n        <li><a href=\"#/";
+  if (helper = helpers.user) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.user); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "/";
+  if (helper = helpers.list) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.list); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "/";
+  if (helper = helpers.page) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.page); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "\" id=\"page ";
+  if (helper = helpers.page) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.page); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "\">";
+  if (helper = helpers.page) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.page); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</a></li>\n        ";
+  return buffer;
+  }
+
+function program5(depth0,data) {
+  
+  var buffer = "", stack1, helper;
+  buffer += "\n    <div class=\"col-xs-12 col-sm-6 col-md-4\">\n      <section class=\"lazy-wrapper\">\n        <div class=\"js-lazyYT\" data-youtube-id=";
+  if (helper = helpers.youtube) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.youtube); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + " data-width=\"210\" data-height=\"157\"></div>\n        <div class=\"link\" id=\"vid-link\"><a href=\"http://www.discogs.com/release/";
+  if (helper = helpers.discogs) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.discogs); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "\">";
+  if (helper = helpers.title) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.title); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + " by ";
+  if (helper = helpers.artist) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.artist); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</a></div>\n      </section>\n    </div>\n    ";
+  return buffer;
+  }
+
+  buffer += "\n<div class=\"col-xs-12 col-sm-3 col-md-3\" style=\"padding-top: 1.5%;\">\n  <div class=\"row\" style=\"margin-bottom:2%;\">\n    <h2 class=\"text-center\">Record Pool</h2>\n  </div>\n  \n  <div class=\"row rec-img\">\n    <img src=\"images/Record3.png\" alt=\"Record Image\">\n  </div>\n\n  <div>\n    <div class=\"username-form\" id=\"username-form-main\">\n      <label for=\"user-id-input\">Discogs Username</label>\n      <input type=\"user-id\" id=\"username\" class=\"form-control\">\n    </div>\n    <input type=\"image\" id=\"username-submit\" class=\"username-submit-main\" src=\"images/cassette-btn3.png\" alt=\"Submit\">\n  </div>\n  \n  <div class = \"userdropdown\">\n    <ul class=\"nav nav-pills\">\n      <li class=\"dropdown\">\n        <a class=\"dropdown-toggle\" data-toggle=\"dropdown\" href=\"\" style=\"margin-top:10%;\">\n          Users<span class=\"caret\"></span>\n        </a>\n        <ul class=\"dropdown-menu\" role=\"menu\" aria-labelledby=\"dropdownMenu1\">\n          ";
+  stack1 = helpers.each.call(depth0, (depth0 && depth0.usernames), {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n        </ul>\n      </li>\n    </ul>\n  </div>\n\n</div>  \n  \n<div class=\"col-xs-12 col-sm-9 col-md-9\" id=\"vid-column\" style=\"padding-top: 2%;\">\n  <h4 class=\"text-center\">Viewing ";
+  if (helper = helpers.user) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.user); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "'s ";
+  if (helper = helpers.list) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.list); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</h4>\n\n  <div class=\"row vid-nav\">  \n    <div id=\"nav-select\">\n      <div class=\"pill-wrap\">\n        <ul class=\"nav nav-pills center-pills\" id=\"want-collection\">\n          <li><a href=\"#/";
+  if (helper = helpers.user) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.user); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "/wantlist/";
+  if (helper = helpers.first) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.first); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "\" id=\"wantlist\">wantlist</a></li>\n          <li><a href=\"#/";
+  if (helper = helpers.user) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.user); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "/collection/";
+  if (helper = helpers.first) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.first); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "\" id=\"collection\">collection</a></li>\n        </ul>\n      </div>\n    </div>\n  </div>\n\n  <div class=\"row vid-nav\">\n    <div class=\"pag-wrapper\">\n      <ul class=\"pagination\">\n        <li><a href=\"#/";
+  if (helper = helpers.user) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.user); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "/";
+  if (helper = helpers.list) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.list); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "/";
+  if (helper = helpers.prev) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.prev); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "\">&laquo;</a></li>\n        ";
+  stack1 = helpers.each.call(depth0, (depth0 && depth0.pages), {hash:{},inverse:self.noop,fn:self.program(3, program3, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n        <li><a href=\"#/";
+  if (helper = helpers.user) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.user); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "/";
+  if (helper = helpers.list) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.list); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "/";
+  if (helper = helpers.next) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.next); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "\">&raquo;</a></li>\n      </ul>\n    </div>\n  </div>\n\n  <div class=\"row\">\n    ";
+  stack1 = helpers.each.call(depth0, (depth0 && depth0.releases), {hash:{},inverse:self.noop,fn:self.program(5, program5, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n  </div>\n  \n  <div class=\"row vid-nav\">\n    <div class=\"pag-wrapper\">\n      <ul class=\"pagination\">\n        <li><a href=\"#/";
+  if (helper = helpers.user) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.user); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "/";
+  if (helper = helpers.list) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.list); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "/";
+  if (helper = helpers.prev) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.prev); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "\">&laquo;</a></li>\n        ";
+  stack1 = helpers.each.call(depth0, (depth0 && depth0.pages), {hash:{},inverse:self.noop,fn:self.program(3, program3, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n        <li><a href=\"#/";
+  if (helper = helpers.user) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.user); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "/";
+  if (helper = helpers.list) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.list); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "/";
+  if (helper = helpers.next) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.next); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "\">&raquo;</a></li>\n      </ul>\n    </div>\n  </div>\n\n</div>\n";
+  return buffer;
+  });
+
+},{"hbsfy/runtime":"/Users/ac/pcs/capstone/node_modules/hbsfy/runtime.js"}]},{},["/Users/ac/pcs/capstone/public/js/main.js"]);
