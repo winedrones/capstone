@@ -5,7 +5,7 @@
   </div>
   
   <div class="row rec-img">
-    <img src="images/Record2.png" alt="Record Image">
+    <img src="images/Record3.png" alt="Record Image">
   </div>
 
   <div>
@@ -16,22 +16,20 @@
     <input type="image" id="username-submit" class="username-submit-main" src="images/cassette-btn3.png" alt="Submit">
   </div>
   
-  <article class = "userdropdown">
-  
-  <ul class="nav nav-pills">
-    <li class="dropdown">
-      <a class="dropdown-toggle" data-toggle="dropdown" href="" style="margin-top:10%;">
-        Users<span class="caret"></span>
-      </a>
-      <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-        {{#each usernames}}
-        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">{{.}}</a></li>
-        {{/each}}
-      </ul>
-    </li>
-  </ul>
-  
-  </article>
+  <div class = "userdropdown">
+    <ul class="nav nav-pills">
+      <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="" style="margin-top:10%;">
+          Users<span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+          {{#each usernames}}
+          <li role="presentation"><a role="menuitem" tabindex="-1" href="#">{{.}}</a></li>
+          {{/each}}
+        </ul>
+      </li>
+    </ul>
+  </div>
 
 </div>  
   
