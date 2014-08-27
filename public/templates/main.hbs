@@ -58,7 +58,7 @@
 
   <div class="row">
     {{#each releases}}
-    <div class="col-xs-12 col-md-4">
+    <div class="col-xs-12 col-sm-6 col-md-4">
       <section class="lazy-wrapper">
         <div class="js-lazyYT" data-youtube-id={{youtube}} data-width="210" data-height="157"></div>
         <div class="link" id="vid-link"><a href="http://www.discogs.com/release/{{discogs}}">{{title}} by {{artist}}</a></div>
@@ -67,14 +67,16 @@
     {{/each}}
   </div>
   
-  <div class="pag-wrapper">
-    <ul class="pagination">
-      <li><a href="#/{{user}}/{{list}}/{{first}}">&laquo;</a></li>
-      {{#each pages}}
-      <li><a href="#/{{user}}/{{list}}/{{page}}" id="page {{page}}">{{page}}</a></li>
-      {{/each}}
-      <li><a href="#/{{user}}/{{list}}/{{last}}">&raquo;</a></li>
-    </ul>
+  <div class="row vid-nav">
+    <div class="pag-wrapper">
+      <ul class="pagination">
+        <li><a href="#/{{user}}/{{list}}/{{first}}">&laquo;</a></li>
+        {{#each pages}}
+        <li><a href="#/{{user}}/{{list}}/{{page}}" id="page {{page}}">{{page}}</a></li>
+        {{/each}}
+        <li><a href="#/{{user}}/{{list}}/{{last}}">&raquo;</a></li>
+      </ul>
+    </div>
   </div>
 
 </div>
