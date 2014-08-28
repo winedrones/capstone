@@ -26,7 +26,9 @@ var MainView = Backbone.View.extend({
         .always(function(data){
          // console.log("success");
         if (data.data.num_wantlist == undefined){
-            alert("Please got to discogs.com and share (and/or) populate your wantlist to use this site!");
+            alert("Please go to discogs.com and share (and/or) populate your wantlist to use this site!");
+          }else if (data.data.num_wantlist == 0){
+            alert("Please go to discogs.com and put a record or two in your wantlist!");
           }else{
             self.userName = userName;
             self.currentList = "wantlist";
