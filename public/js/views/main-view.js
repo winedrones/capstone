@@ -129,23 +129,41 @@ var MainView = Backbone.View.extend({
     };
 
     var getVids = function(arr){  //grabs youtube video per release in wantArr from getIds fn
+      var getPrice = function(item, rels, callback){
+        console.log("getPrice called");
+        var market = $.getJSON("http://api.discogs.com/marketplace/search?release_id="+item).done(function(market){//fetches first market price
+          if (market[0] != undefined){
+            var price = market[0].price;
+            callback(item, price, rels); //this should call pushFn
+          }
+        });
+      }
+      var pushFn = function(item, price, rels){
+        self.records.releases.push({youtube:rels.data.videos[0].uri.slice(-11), discogs:item, artist:rels.data.artists[0].name, title:rels.data.title, price:price});
+      };
       arr.forEach(function (item, index){
         $.getJSON('http://api.discogs.com/releases/'+item+'?callback=?').done(function(rels){
           if (rels.data.videos){
-          self.records.releases.push({youtube:rels.data.videos[0].uri.slice(-11), discogs:item, artist:rels.data.artists[0].name, title:rels.data.title}); //this adds objects for everything fetched from discogs to the records array
-         }
-         if (index == arr.length-1){
-         self.render({
-          releases:self.records.releases, 
-          pages:self.records.pages, 
-          user:self.userName, 
-          list:self.currentList, 
-          first:1, 
-          last:self.records.pages.length,
-          prev:self.prevPage,
-          next:self.nextPage
-        });
-         }
+            getPrice(item, rels, pushFn); //this adds objects for everything fetched from discogs to the records array
+          }
+           if (index == arr.length-1){
+
+            var priceSort = function(a, b) {
+                return (a.price.slice(1) - b.price.slice(1))
+            };
+
+            var sortedReleases = self.records.releases.sort(priceSort);
+            self.render({
+              releases:sortedReleases, 
+              pages:self.records.pages, 
+              user:self.userName, 
+              list:self.currentList, 
+              first:1, 
+              last:self.records.pages.length,
+              prev:self.prevPage,
+              next:self.nextPage
+            });
+          }
         }); 
       });
     };
